@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/voroncov/Desktop/RN/ale-iphone/node_modules/react-native/ReactCommon/jsinspector/InspectorInterfaces.cpp \
-  /Users/voroncov/Desktop/RN/ale-iphone/node_modules/react-native/ReactCommon/jsinspector/InspectorInterfaces.h
+  /Users/voroncov/Desktop/ale-iphone/node_modules/react-native/ReactCommon/jsinspector/InspectorInterfaces.cpp \
+  /Users/voroncov/Desktop/ale-iphone/node_modules/react-native/ReactCommon/jsinspector/InspectorInterfaces.h

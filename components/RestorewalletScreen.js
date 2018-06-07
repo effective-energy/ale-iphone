@@ -2,9 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View, Alert, AppRegistry, Button, TextInput } from 'react-native';
 
 export default class RestorewalletScreen extends React.Component {
-    static navigationOptions = {
-        title: 'Restore wallet',
-    };
     constructor(props) {
         super(props);
         this.state = { privateKey: '' };
@@ -12,9 +9,12 @@ export default class RestorewalletScreen extends React.Component {
     restoreWallet() {
         Alert.alert('Invalid secret key')
     }
+    static navigationOptions = {
+        title: 'Restore wallet',
+    };
     render() {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffffff' }}>
                 <Text>RESTORE WALLET</Text>
                 <Text>Enter your private Key</Text>
                 <View style={{ width: '90%', height: 150, padding: 16, opacity: 1 }}>
