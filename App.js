@@ -2,7 +2,10 @@ import React from 'react';
 
 import { createStackNavigator } from 'react-navigation';
 
-import WelcomeScreen from './components/WelcomeScreen';
+// MobX
+import ListStore from './mobX/test/listStore';
+
+import LoginScreen from './components/LoginScreen';
 import NewwalletScreen from './components/NewwalletScreen';
 import RestorewalletScreen from './components/RestorewalletScreen';
 import GenerateSecretKeyScreen from './components/GenerateSecretKeyScreen';
@@ -12,7 +15,7 @@ import ReceiveTokensScreen from './components/ReceiveTokensScreen';
 import SettingsTokensScreen from './components/SettingsTokensScreen';
 
 const RootStack = createStackNavigator({
-    Welcome: WelcomeScreen,
+    Login: LoginScreen,
     Newwallet: NewwalletScreen,
     Restorewallet: RestorewalletScreen,
     GenerateSecretKey: GenerateSecretKeyScreen,
@@ -21,7 +24,7 @@ const RootStack = createStackNavigator({
     ReceiveTokens: ReceiveTokensScreen,
     SettingsTokens: SettingsTokensScreen
   }, {
-    initialRouteName: 'Welcome',
+    initialRouteName: 'Login',
 });
 
 export default class App extends React.Component {

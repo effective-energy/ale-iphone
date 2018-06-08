@@ -8,14 +8,6 @@ export default class WalletsSlider extends React.Component {
         super(props);
         this.state = {};
     }
-    
-    sendTokens() {
-
-    }
-
-    receiveTokens() {
-
-    }
 
 	render() {
 		return (
@@ -36,12 +28,44 @@ export default class WalletsSlider extends React.Component {
                                 <Text style={{ textAlign: 'center' }}>Wallet 1</Text>
                                 <Text style={{ textAlign: 'center' }}>9,999,999.1 ALE</Text>
                             </View>
+                            <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20, justifyContent: 'space-around', width: '100%' }}>
+                                <View style={{ width: '30%', backgroundColor: '#ffd24f', borderRadius: 2, height: 50, justifyContent: 'center', display: 'flex' }}>
+                                    <Button
+                                        title="Send"
+                                        onPress={this.sendTokens}
+                                        color="#34343e"
+                                    />
+                                </View>
+                                <View style={{ width: '30%', backgroundColor: '#ffd24f', borderRadius: 2, height: 50, justifyContent: 'center', display: 'flex' }}>
+                                    <Button
+                                        title="Receive"
+                                        onPress={this.receiveTokens}
+                                        color="#34343e"
+                                    />
+                                </View>
+                            </View>
                         </View>
 
                         <View style={styles.contentContainer}>
                             <View>
                                 <Text style={{ textAlign: 'center' }}>Wallet 2</Text>
                                 <Text style={{ textAlign: 'center' }}>9,999,999.1 ALE</Text>
+                            </View>
+                            <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20, justifyContent: 'space-around', width: '100%' }}>
+                                <View style={{ width: '30%', backgroundColor: '#ffd24f', borderRadius: 2, height: 50, justifyContent: 'center', display: 'flex' }}>
+                                    <Button
+                                        title="Send"
+                                        onPress={this.sendTokens}
+                                        color="#34343e"
+                                    />
+                                </View>
+                                <View style={{ width: '30%', backgroundColor: '#ffd24f', borderRadius: 2, height: 50, justifyContent: 'center', display: 'flex' }}>
+                                    <Button
+                                        title="Receive"
+                                        onPress={this.receiveTokens}
+                                        color="#34343e"
+                                    />
+                                </View>
                             </View>
                         </View>
 
@@ -50,6 +74,22 @@ export default class WalletsSlider extends React.Component {
                                 <Text style={{ textAlign: 'center' }}>Wallet 3</Text>
                                 <Text style={{ textAlign: 'center' }}>9,999,999.1 ALE</Text>
                             </View>
+                            <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20, justifyContent: 'space-around', width: '100%' }}>
+                                <View style={{ width: '30%', backgroundColor: '#ffd24f', borderRadius: 2, height: 50, justifyContent: 'center', display: 'flex' }}>
+                                    <Button
+                                        title="Send"
+                                        onPress={this.sendTokens}
+                                        color="#34343e"
+                                    />
+                                </View>
+                                <View style={{ width: '30%', backgroundColor: '#ffd24f', borderRadius: 2, height: 50, justifyContent: 'center', display: 'flex' }}>
+                                    <Button
+                                        title="Receive"
+                                        onPress={this.receiveTokens}
+                                        color="#34343e"
+                                    />
+                                </View>
+                            </View>
                         </View>
 
                     </Carousel>
@@ -57,6 +97,14 @@ export default class WalletsSlider extends React.Component {
             </View>
 		)
 	}
+
+    sendTokens() {
+
+    }
+
+    receiveTokens() {
+
+    }
 }
 
 const styles = StyleSheet.create({

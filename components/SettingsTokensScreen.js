@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 
 import BottomNavigator from './layouts/BottomNavigator';
 
@@ -7,6 +7,7 @@ export default class SettingsTokensScreen extends React.Component {
     constructor(props) {
         super(props);
 	    this.state = {};
+        this.logout = this.logout.bind(this);
     }
     
     static navigationOptions = {
@@ -16,6 +17,15 @@ export default class SettingsTokensScreen extends React.Component {
     render() {
         return (
             <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+                <View>
+                    <View style={styles.buttonContainer}>
+                        <Button
+                            title="Logout"
+                            onPress={this.logout}
+                            color="#34343e"
+                         />
+                    </View>
+                </View>
                 {/*<BottomNavigator activePage="sendTokens" />*/}
                 <View style={{ width: '100%', height: 60, position: 'absolute', 'bottom': 0, flexDirection: 'row', flex: 1 }}>
                     <Text
@@ -46,4 +56,18 @@ export default class SettingsTokensScreen extends React.Component {
             </View>
         );
     }
+
+    logout() {
+        return this.props.navigation.navigate('Login');
+    }
 }
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    backgroundColor: '#ffd24f',
+    borderRadius: 4,
+    padding: 10,
+    width: 300,
+    marginBottom: 20
+  }
+});
