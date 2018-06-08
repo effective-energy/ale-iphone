@@ -7,13 +7,19 @@ import NewwalletScreen from './components/NewwalletScreen';
 import RestorewalletScreen from './components/RestorewalletScreen';
 import GenerateSecretKeyScreen from './components/GenerateSecretKeyScreen';
 import WalletsScreen from './components/WalletsScreen';
+import SendTokensScreen from './components/SendTokensScreen';
+import ReceiveTokensScreen from './components/ReceiveTokensScreen';
+import SettingsTokensScreen from './components/SettingsTokensScreen';
 
 const RootStack = createStackNavigator({
     Welcome: WelcomeScreen,
     Newwallet: NewwalletScreen,
     Restorewallet: RestorewalletScreen,
     GenerateSecretKey: GenerateSecretKeyScreen,
-    Wallets: WalletsScreen
+    Wallets: WalletsScreen,
+    SendTokens: SendTokensScreen,
+    ReceiveTokens: ReceiveTokensScreen,
+    SettingsTokens: SettingsTokensScreen
   }, {
     initialRouteName: 'Welcome',
 });

@@ -5,9 +5,15 @@ export default class RestorewalletScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = { privateKey: '' };
+        this.restoreWallet = this.restoreWallet.bind(this);
     }
+    
     restoreWallet() {
-        Alert.alert('Invalid secret key')
+        if (this.state.privateKey.length === 0) {
+            return Alert.alert('Invalid secret key');
+        } else {
+            return this.props.navigation.navigate('Newwallet')
+        }
     }
     static navigationOptions = {
         title: 'Restore wallet',

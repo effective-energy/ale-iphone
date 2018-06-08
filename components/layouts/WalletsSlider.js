@@ -1,5 +1,7 @@
 import React from 'react';
-import { Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
+
+import Carousel from 'react-native-carousel-view';
 
 export default class WalletsSlider extends React.Component {
     constructor(props) {
@@ -17,31 +19,55 @@ export default class WalletsSlider extends React.Component {
 
 	render() {
 		return (
-			<View style={{ width: '100%', height: 150, backgroundColor: '#cccccc', alignItems: 'center', justifyContent: 'center', display: 'flex' }}>
-            	<View style={{ marginBottom: 20 }}>
-            		<Text style={{ textAlign: 'center', marginTop: 10 }}>My wallet 1</Text>
-            		<Text style={{ textAlign: 'center' }}>45,344.99912 ALE</Text>
-            	</View>
-            	<View style={{ flexDirection: 'row', flex: 1, justifyContent: 'center' }}>
+			<View>
+            	<View style={styles.container}>
+                    <Carousel
+                        width={400}
+                        height={200}
+                        delay={2000}
+                        indicatorAtBottom={true}
+                        indicatorSize={10}
+                        loop={true}
+                        animate={false}
+                        indicatorColor="red"
+                    >
+                        <View style={styles.contentContainer}>
+                            <View>
+                                <Text style={{ textAlign: 'center' }}>Wallet 1</Text>
+                                <Text style={{ textAlign: 'center' }}>9,999,999.1 ALE</Text>
+                            </View>
+                        </View>
 
-            		<View>
-            			<Button
-            				title="Send"
-                    		onPress={this.sendTokens}
-                    		color="#000000"
-                  		/>
-            		</View>
+                        <View style={styles.contentContainer}>
+                            <View>
+                                <Text style={{ textAlign: 'center' }}>Wallet 2</Text>
+                                <Text style={{ textAlign: 'center' }}>9,999,999.1 ALE</Text>
+                            </View>
+                        </View>
 
-            		<View>
-            			<Button
-            				title="Receive"
-                    		onPress={this.receiveTokens}
-                    		color="#000000"
-                  		/>
-            		</View>
+                        <View style={styles.contentContainer}>
+                            <View>
+                                <Text style={{ textAlign: 'center' }}>Wallet 3</Text>
+                                <Text style={{ textAlign: 'center' }}>9,999,999.1 ALE</Text>
+                            </View>
+                        </View>
 
-            	</View>
+                    </Carousel>
+                </View>
             </View>
 		)
 	}
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 0.5,
+    justifyContent: 'center'
+  },
+  contentContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#cccccc'
+  }
+});
