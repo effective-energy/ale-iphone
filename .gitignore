@@ -17,5 +17,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # App build
-/ios
-/android
+ios
+android
