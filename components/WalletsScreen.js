@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 
 import BottomNavigator from './layouts/BottomNavigator';
 import WalletsSlider from './layouts/WalletsSlider';
@@ -20,30 +20,54 @@ export default class WalletsScreen extends React.Component {
                 <WalletsSlider />
                 {/*<BottomNavigator activePage="walletsList" onClick={this.handleChildClick} />*/}
                 <View style={{ width: '100%', height: 60, position: 'absolute', 'bottom': 0, flexDirection: 'row', flex: 1 }}>
-                    <Text
-                        style={{ width: '25%', height: 60, backgroundColor: '#f8f8f8', color: '#000000', textAlign: 'center', lineHeight: 60 }}
-                        onPress={() => this.props.navigation.push('Wallets')}
-                    >
-                        Wallets
-                    </Text>
-                    <Text
-                        style={{ width: '25%', height: 60, backgroundColor: '#cccccc', color: '#000000', textAlign: 'center', lineHeight: 60 }}
-                        onPress={() => this.props.navigation.push('SendTokens')}
-                    >
-                        Send
-                    </Text>
-                    <Text
-                        style={{ width: '25%', height: 60, backgroundColor: '#cccccc', color: '#000000', textAlign: 'center', lineHeight: 60 }}
-                        onPress={() => this.props.navigation.push('ReceiveTokens')}
-                    >
-                        Receive
-                    </Text>
-                    <Text
-                         style={{ width: '25%', height: 60, backgroundColor: '#cccccc', color: '#000000', textAlign: 'center', lineHeight: 60 }}
-                         onPress={() => this.props.navigation.push('SettingsTokens')}
-                     >
-                        Settings
-                    </Text>
+                    <View style={{ width: '25%', height: 60, backgroundColor: '#f8f8f8', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
+                        <Image
+                            style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
+                            source={{uri: 'https://cdn3.iconfinder.com/data/icons/business/16/wallet-512.png'}}
+                        />
+                        <Text
+                            style={{ color: '#000000', textAlign: 'center' }}
+                            onPress={() => this.props.navigation.push('Wallets')}
+                        >
+                            Wallets
+                        </Text>
+                    </View>
+                    <View style={{ width: '25%', height: 60, backgroundColor: '#cccccc', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
+                        <Image
+                            style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
+                            source={{uri: 'https://cdn2.iconfinder.com/data/icons/inverticons-fill-vol-2/32/paper_plane_document_send_sent_mail-512.png'}}
+                        />
+                        <Text
+                            style={{ color: '#000000', textAlign: 'center' }}
+                            onPress={() => this.props.navigation.push('SendTokens')}
+                        >
+                            Send
+                        </Text>
+                    </View>
+                    <View style={{ width: '25%', height: 60, backgroundColor: '#cccccc', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
+                        <Image
+                            style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
+                            source={{uri: 'https://cdn2.iconfinder.com/data/icons/eldorado-mobile/40/inbox_receive-512.png'}}
+                        />
+                        <Text
+                            style={{ color: '#000000', textAlign: 'center' }}
+                            onPress={() => this.props.navigation.push('ReceiveTokens')}
+                        >
+                            Receive
+                        </Text>
+                    </View>
+                    <View style={{ width: '25%', height: 60, backgroundColor: '#cccccc', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
+                        <Image
+                            style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
+                            source={{uri: 'https://cdn1.iconfinder.com/data/icons/flat-web-browser/100/settings-512.png'}}
+                        />
+                        <Text
+                            style={{ color: '#000000', textAlign: 'center' }}
+                            onPress={() => this.props.navigation.push('Settings')}
+                        >
+                            Settings
+                        </Text>
+                    </View>
                 </View>
             </View>
         );

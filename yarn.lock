@@ -4541,6 +4541,13 @@ react-mixin@^3.0.5:
     object-assign "^4.0.1"
     smart-mixin "^2.0.0"
 
+react-native-camera@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-1.1.4.tgz#5a01be906507cc2f232405f903c52c9d99988dba"
+  dependencies:
+    lodash "^4.17.4"
+    prop-types "^15.5.10"
+
 react-native-carousel-view@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/react-native-carousel-view/-/react-native-carousel-view-0.5.1.tgz#2b0d64d32d71be09ff7555aa8c19b1dac98c5969"
@@ -4596,6 +4603,21 @@ react-native-keyboard-aware-scroll-view@0.5.0:
   dependencies:
     prop-types "^15.6.0"
     react-native-iphone-x-helper "^1.0.1"
+
+react-native-permissions@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-1.1.1.tgz#4876004681ff8556454613d85249b01baff9b35b"
+
+react-native-qrcode-scanner@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-qrcode-scanner/-/react-native-qrcode-scanner-1.0.1.tgz#96b18d8058f4b472bda4b34f8a08fddbc33d50eb"
+  dependencies:
+    prop-types "^15.5.10"
+    react-native-permissions "^1.1.1"
+
+react-native-remote-svg@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-remote-svg/-/react-native-remote-svg-1.2.0.tgz#0382d522913e01dc19025efe8e0f8b1a55692a55"
 
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"

@@ -9,94 +9,102 @@ export default class WalletsSlider extends React.Component {
         this.state = {};
     }
 
-	render() {
-		return (
-			<View>
-            	<View style={styles.container}>
-                    <Carousel
-                        width={400}
-                        height={200}
-                        delay={2000}
-                        indicatorAtBottom={true}
-                        indicatorSize={10}
-                        loop={true}
-                        animate={false}
-                        indicatorColor="red"
-                    >
-                        <View style={styles.contentContainer}>
-                            <View>
-                                <Text style={{ textAlign: 'center' }}>Wallet 1</Text>
-                                <Text style={{ textAlign: 'center' }}>9,999,999.1 ALE</Text>
-                            </View>
-                            <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20, justifyContent: 'space-around', width: '100%' }}>
-                                <View style={{ width: '30%', backgroundColor: '#ffd24f', borderRadius: 2, height: 50, justifyContent: 'center', display: 'flex' }}>
-                                    <Button
-                                        title="Send"
-                                        onPress={this.sendTokens}
-                                        color="#34343e"
+    render() {
+        return (
+            <Carousel
+                delay={2000}
+                indicatorAtBottom={true}
+                indicatorSize={10}
+                loop={true}
+                animate={false}
+                indicatorColor="red"
+            >
+                <View style={styles.container}>
+                    <View style={{ backgroundColor: '#cccccc', height: 170 }}>
+                        <View style={{ flex: 1, alignItems: 'center', marginTop: 20 }}>
+                            <Text style={{ fontSize: 20, marginBottom: 10 }}>Wallet 1</Text>
+                            <Text>9,999,999.1 ALE</Text>
+                        </View>
+
+                        <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
+                            <View style={{ width: '50%', height: 40, alignItems: 'center' }}>
+                                <View style={{ width: '80%', height: 40, backgroundColor: '#ffd24f', borderRadius: 4 }}>
+                                <Button
+                                    title="Send"
+                                    color="#34343e"
                                     />
                                 </View>
-                                <View style={{ width: '30%', backgroundColor: '#ffd24f', borderRadius: 2, height: 50, justifyContent: 'center', display: 'flex' }}>
+                            </View>
+                            <View style={{ width: '50%', height: 40, alignItems: 'center' }}>
+                                <View style={{ width: '80%', height: 40, backgroundColor: '#ffd24f', borderRadius: 4 }}>
                                     <Button
                                         title="Receive"
-                                        onPress={this.receiveTokens}
                                         color="#34343e"
                                     />
                                 </View>
                             </View>
                         </View>
-
-                        <View style={styles.contentContainer}>
-                            <View>
-                                <Text style={{ textAlign: 'center' }}>Wallet 2</Text>
-                                <Text style={{ textAlign: 'center' }}>9,999,999.1 ALE</Text>
-                            </View>
-                            <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20, justifyContent: 'space-around', width: '100%' }}>
-                                <View style={{ width: '30%', backgroundColor: '#ffd24f', borderRadius: 2, height: 50, justifyContent: 'center', display: 'flex' }}>
-                                    <Button
-                                        title="Send"
-                                        onPress={this.sendTokens}
-                                        color="#34343e"
-                                    />
-                                </View>
-                                <View style={{ width: '30%', backgroundColor: '#ffd24f', borderRadius: 2, height: 50, justifyContent: 'center', display: 'flex' }}>
-                                    <Button
-                                        title="Receive"
-                                        onPress={this.receiveTokens}
-                                        color="#34343e"
-                                    />
-                                </View>
-                            </View>
-                        </View>
-
-                        <View style={styles.contentContainer}>
-                            <View>
-                                <Text style={{ textAlign: 'center' }}>Wallet 3</Text>
-                                <Text style={{ textAlign: 'center' }}>9,999,999.1 ALE</Text>
-                            </View>
-                            <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20, justifyContent: 'space-around', width: '100%' }}>
-                                <View style={{ width: '30%', backgroundColor: '#ffd24f', borderRadius: 2, height: 50, justifyContent: 'center', display: 'flex' }}>
-                                    <Button
-                                        title="Send"
-                                        onPress={this.sendTokens}
-                                        color="#34343e"
-                                    />
-                                </View>
-                                <View style={{ width: '30%', backgroundColor: '#ffd24f', borderRadius: 2, height: 50, justifyContent: 'center', display: 'flex' }}>
-                                    <Button
-                                        title="Receive"
-                                        onPress={this.receiveTokens}
-                                        color="#34343e"
-                                    />
-                                </View>
-                            </View>
-                        </View>
-
-                    </Carousel>
+                    </View>
                 </View>
-            </View>
-		)
-	}
+
+                <View style={styles.container}>
+                    <View style={{ backgroundColor: '#cccccc', height: 170 }}>
+                        <View style={{ flex: 1, alignItems: 'center', marginTop: 20 }}>
+                            <Text style={{ fontSize: 20, marginBottom: 10 }}>Wallet 2</Text>
+                            <Text>500 ALE</Text>
+                        </View>
+
+                        <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
+                            <View style={{ width: '50%', height: 40, alignItems: 'center' }}>
+                                <View style={{ width: '80%', height: 40, backgroundColor: '#ffd24f', borderRadius: 4 }}>
+                                <Button
+                                    title="Send"
+                                    color="#34343e"
+                                    />
+                                </View>
+                            </View>
+                            <View style={{ width: '50%', height: 40, alignItems: 'center' }}>
+                                <View style={{ width: '80%', height: 40, backgroundColor: '#ffd24f', borderRadius: 4 }}>
+                                    <Button
+                                        title="Receive"
+                                        color="#34343e"
+                                    />
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+
+                <View style={styles.container}>
+                    <View style={{ backgroundColor: '#cccccc', height: 170 }}>
+                        <View style={{ flex: 1, alignItems: 'center', marginTop: 20 }}>
+                            <Text style={{ fontSize: 20, marginBottom: 10 }}>Wallet 3</Text>
+                            <Text>0 ALE</Text>
+                        </View>
+
+                        <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
+                            <View style={{ width: '50%', height: 40, alignItems: 'center' }}>
+                                <View style={{ width: '80%', height: 40, backgroundColor: '#ffd24f', borderRadius: 4 }}>
+                                <Button
+                                    title="Send"
+                                    color="#34343e"
+                                    />
+                                </View>
+                            </View>
+                            <View style={{ width: '50%', height: 40, alignItems: 'center' }}>
+                                <View style={{ width: '80%', height: 40, backgroundColor: '#ffd24f', borderRadius: 4 }}>
+                                    <Button
+                                        title="Receive"
+                                        color="#34343e"
+                                    />
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            </Carousel>
+        )
+    }
 
     sendTokens() {
 
@@ -109,8 +117,7 @@ export default class WalletsSlider extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.5,
-    justifyContent: 'center'
+    flex: 0.5
   },
   contentContainer: {
     flex: 1,

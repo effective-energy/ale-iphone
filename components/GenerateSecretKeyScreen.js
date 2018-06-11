@@ -13,15 +13,13 @@ export default class GenerateSecretKeyScreen extends React.Component {
     }
     
     static navigationOptions = {
-        title: 'Generate secret key',
+        title: 'Secret key',
     };
     render() {
         const { params } = this.props.navigation.state;
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffffff' }}>
-                <Text>Your wallet name: {params.walletName}</Text>
-                <Text>Your public key: 1M7NDg</Text>
-                <Text>Your private key (save this): rt1retM7Nwerwr</Text>
+                <Text style={{ textAlign: 'center'}}>Your private key rt1retM7Nwerwrsdf8340r43h5c8443c4354339t4jt034j30y6035689hj SAVE THIS!!!</Text>
 
                 <View style={styles.buttonContainer}>
                     <Button

@@ -7,24 +7,24 @@ import ListStore from './mobX/test/listStore';
 
 import LoginScreen from './components/LoginScreen';
 import NewwalletScreen from './components/NewwalletScreen';
-import RestorewalletScreen from './components/RestorewalletScreen';
+import ImportwalletScreen from './components/ImportwalletScreen';
 import GenerateSecretKeyScreen from './components/GenerateSecretKeyScreen';
 import WalletsScreen from './components/WalletsScreen';
 import SendTokensScreen from './components/SendTokensScreen';
 import ReceiveTokensScreen from './components/ReceiveTokensScreen';
-import SettingsTokensScreen from './components/SettingsTokensScreen';
+import SettingsScreen from './components/SettingsScreen';
 
 const RootStack = createStackNavigator({
     Login: LoginScreen,
     Newwallet: NewwalletScreen,
-    Restorewallet: RestorewalletScreen,
+    Importwallet: ImportwalletScreen,
     GenerateSecretKey: GenerateSecretKeyScreen,
     Wallets: WalletsScreen,
     SendTokens: SendTokensScreen,
     ReceiveTokens: ReceiveTokensScreen,
-    SettingsTokens: SettingsTokensScreen
+    Settings: SettingsScreen
   }, {
-    initialRouteName: 'Login',
+    initialRouteName: 'Login'
 });
 
 export default class App extends React.Component {

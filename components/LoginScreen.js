@@ -1,7 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import Image from 'react-native-remote-svg';
 
-import { observer } from 'mobx-react/native'
+import { observer } from 'mobx-react/native';
 
 @observer
 export default class LoginScreen extends React.Component {
@@ -10,7 +11,7 @@ export default class LoginScreen extends React.Component {
 		this.state = {};
 	}
 	static navigationOptions = {
-        title: 'ALE Wallet'
+        header: null
     };
 
     render() {
@@ -18,8 +19,8 @@ export default class LoginScreen extends React.Component {
     		<View style={styles.container}>
 				<View>
 					<Image
-						style={{width: 320, height: 66, resizeMode: 'contain' }}
-						source={require('../assets/logo/ale.png')}
+					  source={require('../assets/logo/logo.svg')}
+					  style={{width: 384, height: 80 }}
 					/>
 				</View>
 	            <View>
@@ -32,8 +33,8 @@ export default class LoginScreen extends React.Component {
 	              	</View>
 	              	<View style={styles.buttonContainer}>
 	                	<Button
-	                    	title="Restore wallet"
-	                    	onPress={() => this.props.navigation.navigate('Restorewallet')}
+	                    	title="Import wallet"
+	                    	onPress={() => this.props.navigation.navigate('Importwallet')}
 	                    	color="#34343e"
 	                 	 />
 	                </View>

@@ -1,40 +1,38 @@
 import React from 'react';
 import { StyleSheet, Text, View, Alert, AppRegistry, Button, TextInput } from 'react-native';
 
-export default class NewwalletScreen extends React.Component {
+export default class ImportwalletScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            walletName: ''
-        };
-        this.restoreWallet = this.restoreWallet.bind(this);
+        this.state = { privateKey: '' };
+        this.importWallet = this.importWallet.bind(this);
     }
-    restoreWallet() {
-        if (this.state.walletName.length === 0) {
-            return Alert.alert('Enter wallet name');
+    
+    importWallet() {
+        if (this.state.privateKey.length === 0) {
+            return Alert.alert('Invalid secret key');
         } else {
-            return this.props.navigation.navigate('GenerateSecretKey', { walletName: this.state.walletName })
+            return this.props.navigation.navigate('Newwallet')
         }
     }
     static navigationOptions = {
-        title: 'New wallet',
+        title: 'Import wallet',
     };
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffffff' }}>
-                <Text style={{fontSize: 20}}>Create new wallet</Text>
-                <Text>Enter wallet name</Text>
+                <Text>Enter your private Key</Text>
                 <View style={{ width: '90%', height: 150, padding: 16, opacity: 1 }}>
                     <TextInput
                         style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 300, marginBottom: 20, borderRadius: 2, padding: 6 }}
-                        onChangeText={(walletName) => this.setState({walletName})}
-                        value={this.state.walletName}
+                        onChangeText={(privateKey) => this.setState({privateKey})}
+                        value={this.state.privateKey}
                     />
 
                     <View style={styles.buttonContainer}>
                         <Button
-                            title="Next"
-                            onPress={this.restoreWallet}
+                            title="Import"
+                            onPress={this.importWallet}
                             color="#34343e"
                           />
                       </View>

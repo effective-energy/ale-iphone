@@ -1,31 +1,30 @@
 import React from 'react';
-import { View, Text, Button, Alert, Image } from 'react-native';
+import { View, Text, Button, StyleSheet, Image } from 'react-native';
 
 import BottomNavigator from './layouts/BottomNavigator';
 
-export default class SendTokensScreen extends React.Component {
+export default class SettingsScreen extends React.Component {
     constructor(props) {
         super(props);
 	    this.state = {};
+        this.logout = this.logout.bind(this);
     }
     
     static navigationOptions = {
-        title: 'Send tokens',
+        title: 'Settings',
         headerLeft: null
     };
-
-    scannerQR() {
-        Alert.alert('123213')
-    }
     render() {
         return (
             <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
-                <View>
-                    <Button
-                        title="QR scanner"
-                        onPress={this.scannerQR}
-                        color="#34343e"
-                    />
+                <View style={{ marginTop: 20, flex: 1, alignItems: 'center' }}>
+                    <View style={styles.buttonContainer}>
+                        <Button
+                            title="Logout"
+                            onPress={this.logout}
+                            color="#34343e"
+                         />
+                    </View>
                 </View>
                 {/*<BottomNavigator activePage="sendTokens" />*/}
                 <View style={{ width: '100%', height: 60, position: 'absolute', 'bottom': 0, flexDirection: 'row', flex: 1 }}>
@@ -41,7 +40,7 @@ export default class SendTokensScreen extends React.Component {
                             Wallets
                         </Text>
                     </View>
-                    <View style={{ width: '25%', height: 60, backgroundColor: '#f8f8f8', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
+                    <View style={{ width: '25%', height: 60, backgroundColor: '#cccccc', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
                         <Image
                             style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
                             source={{uri: 'https://cdn2.iconfinder.com/data/icons/inverticons-fill-vol-2/32/paper_plane_document_send_sent_mail-512.png'}}
@@ -65,7 +64,7 @@ export default class SendTokensScreen extends React.Component {
                             Receive
                         </Text>
                     </View>
-                    <View style={{ width: '25%', height: 60, backgroundColor: '#cccccc', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
+                    <View style={{ width: '25%', height: 60, backgroundColor: '#f8f8f8', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
                         <Image
                             style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
                             source={{uri: 'https://cdn1.iconfinder.com/data/icons/flat-web-browser/100/settings-512.png'}}
@@ -81,4 +80,18 @@ export default class SendTokensScreen extends React.Component {
             </View>
         );
     }
+
+    logout() {
+        return this.props.navigation.navigate('Login');
+    }
 }
+
+const styles = StyleSheet.create({
+  buttonContainer: {
+    backgroundColor: '#ffd24f',
+    borderRadius: 4,
+    padding: 10,
+    width: 300,
+    marginBottom: 20
+  }
+});
