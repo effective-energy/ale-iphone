@@ -27,7 +27,7 @@ export default class ReceiveTokensScreen extends React.Component {
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
-                            onPress={() => this.props.navigation.push('Wallets')}
+                            onPress={() => this.props.navigation.push('Wallets', { animation: null })}
                         >
                             Wallets
                         </Text>
@@ -39,7 +39,7 @@ export default class ReceiveTokensScreen extends React.Component {
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
-                            onPress={() => this.props.navigation.push('SendTokens')}
+                            onPress={() => this.props.navigation.push('SendTokens', { animation: null })}
                         >
                             Send
                         </Text>
@@ -51,7 +51,7 @@ export default class ReceiveTokensScreen extends React.Component {
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
-                            onPress={() => this.props.navigation.push('ReceiveTokens')}
+                            onPress={() => this.props.navigation.push('ReceiveTokens', { animation: null })}
                         >
                             Receive
                         </Text>
@@ -63,7 +63,7 @@ export default class ReceiveTokensScreen extends React.Component {
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
-                            onPress={() => this.props.navigation.push('Settings')}
+                            onPress={() => this.props.navigation.push('Settings', { animation: null })}
                         >
                             Settings
                         </Text>

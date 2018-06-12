@@ -30,6 +30,7 @@ export default class WalletsSlider extends React.Component {
                             <View style={{ width: '50%', height: 40, alignItems: 'center' }}>
                                 <View style={{ width: '80%', height: 40, backgroundColor: '#ffd24f', borderRadius: 4 }}>
                                 <Button
+                                    onPress={this.sendTokens}
                                     title="Send"
                                     color="#34343e"
                                     />
@@ -38,6 +39,7 @@ export default class WalletsSlider extends React.Component {
                             <View style={{ width: '50%', height: 40, alignItems: 'center' }}>
                                 <View style={{ width: '80%', height: 40, backgroundColor: '#ffd24f', borderRadius: 4 }}>
                                     <Button
+                                        onPress={this.receiveTokens}
                                         title="Receive"
                                         color="#34343e"
                                     />
@@ -58,6 +60,7 @@ export default class WalletsSlider extends React.Component {
                             <View style={{ width: '50%', height: 40, alignItems: 'center' }}>
                                 <View style={{ width: '80%', height: 40, backgroundColor: '#ffd24f', borderRadius: 4 }}>
                                 <Button
+                                    onPress={this.sendTokens}
                                     title="Send"
                                     color="#34343e"
                                     />
@@ -66,6 +69,7 @@ export default class WalletsSlider extends React.Component {
                             <View style={{ width: '50%', height: 40, alignItems: 'center' }}>
                                 <View style={{ width: '80%', height: 40, backgroundColor: '#ffd24f', borderRadius: 4 }}>
                                     <Button
+                                        onPress={this.receiveTokens}
                                         title="Receive"
                                         color="#34343e"
                                     />
@@ -86,6 +90,7 @@ export default class WalletsSlider extends React.Component {
                             <View style={{ width: '50%', height: 40, alignItems: 'center' }}>
                                 <View style={{ width: '80%', height: 40, backgroundColor: '#ffd24f', borderRadius: 4 }}>
                                 <Button
+                                    onPress={this.sendTokens}
                                     title="Send"
                                     color="#34343e"
                                     />
@@ -94,6 +99,7 @@ export default class WalletsSlider extends React.Component {
                             <View style={{ width: '50%', height: 40, alignItems: 'center' }}>
                                 <View style={{ width: '80%', height: 40, backgroundColor: '#ffd24f', borderRadius: 4 }}>
                                     <Button
+                                        onPress={this.receiveTokens}
                                         title="Receive"
                                         color="#34343e"
                                     />

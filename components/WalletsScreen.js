@@ -18,7 +18,7 @@ export default class WalletsScreen extends React.Component {
         return (
             <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
                 <WalletsSlider />
-                {/*<BottomNavigator activePage="walletsList" onClick={this.handleChildClick} />*/}
+                {/*<BottomNavigator />*/}
                 <View style={{ width: '100%', height: 60, position: 'absolute', 'bottom': 0, flexDirection: 'row', flex: 1 }}>
                     <View style={{ width: '25%', height: 60, backgroundColor: '#f8f8f8', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
                         <Image
@@ -27,7 +27,7 @@ export default class WalletsScreen extends React.Component {
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
-                            onPress={() => this.props.navigation.push('Wallets')}
+                            onPress={() => this.props.navigation.push('Wallets', { animation: null })}
                         >
                             Wallets
                         </Text>
@@ -39,7 +39,7 @@ export default class WalletsScreen extends React.Component {
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
-                            onPress={() => this.props.navigation.push('SendTokens')}
+                            onPress={() => this.props.navigation.push('SendTokens', { animation: null })}
                         >
                             Send
                         </Text>
@@ -51,7 +51,7 @@ export default class WalletsScreen extends React.Component {
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
-                            onPress={() => this.props.navigation.push('ReceiveTokens')}
+                            onPress={() => this.props.navigation.push('ReceiveTokens', { animation: null })}
                         >
                             Receive
                         </Text>
@@ -63,7 +63,7 @@ export default class WalletsScreen extends React.Component {
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
-                            onPress={() => this.props.navigation.push('Settings')}
+                            onPress={() => this.props.navigation.push('Settings', { animation: null })}
                         >
                             Settings
                         </Text>

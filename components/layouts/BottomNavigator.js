@@ -11,7 +11,7 @@ export default class BottomNavigator extends React.Component {
     render() {
     	return (
     		<View style={{ width: '100%', height: 60, position: 'absolute', 'bottom': 0, flexDirection: 'row', flex: 1 }}>
-                <View style={{ width: '25%', height: 60, backgroundColor: '#f8f8f8', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
+                <View style={{ width: '25%', height: 60, backgroundColor: '#cccccc', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
                     <Image
                         style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
                         source={{uri: 'https://cdn3.iconfinder.com/data/icons/business/16/wallet-512.png'}}

@@ -15,16 +15,20 @@ import ReceiveTokensScreen from './components/ReceiveTokensScreen';
 import SettingsScreen from './components/SettingsScreen';
 
 const RootStack = createStackNavigator({
-    Login: LoginScreen,
-    Newwallet: NewwalletScreen,
-    Importwallet: ImportwalletScreen,
-    GenerateSecretKey: GenerateSecretKeyScreen,
-    Wallets: WalletsScreen,
-    SendTokens: SendTokensScreen,
-    ReceiveTokens: ReceiveTokensScreen,
-    Settings: SettingsScreen
-  }, {
-    initialRouteName: 'Login'
+    Login: { screen: LoginScreen },
+    Newwallet: { screen: NewwalletScreen },
+    Importwallet: { screen: ImportwalletScreen },
+    GenerateSecretKey: { screen: GenerateSecretKeyScreen },
+    Wallets: { screen: WalletsScreen },
+    SendTokens: { screen: SendTokensScreen },
+    ReceiveTokens: { screen: ReceiveTokensScreen },
+    Settings: { screen: SettingsScreen }
+}, {
+    initialRouteName: 'Wallets'
+}, {
+    transitionConfig: () => ({
+        screenInterpolator: () => null
+    }),
 });
 
 export default class App extends React.Component {

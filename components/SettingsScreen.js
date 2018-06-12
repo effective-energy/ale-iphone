@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet, Image } from 'react-native';
 
+// I18n 
+import I18n from '../i18n/index';
+
 import BottomNavigator from './layouts/BottomNavigator';
 
 export default class SettingsScreen extends React.Component {
@@ -11,7 +14,7 @@ export default class SettingsScreen extends React.Component {
     }
     
     static navigationOptions = {
-        title: 'Settings',
+        title: I18n.t('settings.title'),
         headerLeft: null
     };
     render() {
@@ -20,7 +23,7 @@ export default class SettingsScreen extends React.Component {
                 <View style={{ marginTop: 20, flex: 1, alignItems: 'center' }}>
                     <View style={styles.buttonContainer}>
                         <Button
-                            title="Logout"
+                            title={I18n.t('settings.logout')}
                             onPress={this.logout}
                             color="#34343e"
                          />
@@ -35,9 +38,9 @@ export default class SettingsScreen extends React.Component {
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
-                            onPress={() => this.props.navigation.push('Wallets')}
+                            onPress={() => this.props.navigation.push('Wallets', { animation: null })}
                         >
-                            Wallets
+                            {I18n.t('bottomNavigator.walletsPage')}
                         </Text>
                     </View>
                     <View style={{ width: '25%', height: 60, backgroundColor: '#cccccc', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
@@ -47,9 +50,9 @@ export default class SettingsScreen extends React.Component {
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
-                            onPress={() => this.props.navigation.push('SendTokens')}
+                            onPress={() => this.props.navigation.push('SendTokens', { animation: null })}
                         >
-                            Send
+                            {I18n.t('bottomNavigator.sendTokensPage')}
                         </Text>
                     </View>
                     <View style={{ width: '25%', height: 60, backgroundColor: '#cccccc', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
@@ -59,9 +62,9 @@ export default class SettingsScreen extends React.Component {
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
-                            onPress={() => this.props.navigation.push('ReceiveTokens')}
+                            onPress={() => this.props.navigation.push('ReceiveTokens', { animation: null })}
                         >
-                            Receive
+                            {I18n.t('bottomNavigator.receiveTokensPage')}
                         </Text>
                     </View>
                     <View style={{ width: '25%', height: 60, backgroundColor: '#f8f8f8', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
@@ -71,9 +74,9 @@ export default class SettingsScreen extends React.Component {
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
-                            onPress={() => this.props.navigation.push('Settings')}
+                            onPress={() => this.props.navigation.push('Settings', { animation: null })}
                         >
-                            Settings
+                            {I18n.t('bottomNavigator.settingsPage')}
                         </Text>
                     </View>
                 </View>
