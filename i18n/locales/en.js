@@ -1,12 +1,27 @@
-export default {  
-	settings: {
+export default {
+	loginPage: {
+		btnBlock: {
+			newWallet: 'Create new wallet',
+			importWallet: 'Import wallet'
+		}
+	},
+	walletsPage: {
+		title: 'My wallets'
+	},
+	sendPage: {
+		title: 'Send'
+	},
+	receivePage: {
+		title: 'Receive'
+	},
+	settingsPage: {
 		title: 'Settings',
 		logout: 'Logout'
 	},
 	bottomNavigator: {
-		walletsPage: 'Wallets',
-		sendTokensPage: 'Send',
-		receiveTokensPage: 'Receive',
-		settingsPage: 'Settings'
+		wallets: 'Wallets',
+		send: 'Send',
+		receive: 'Receive',
+		settings: 'Settings'
 	}
 };

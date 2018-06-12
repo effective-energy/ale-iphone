@@ -29,7 +29,7 @@ export default class WalletsScreen extends React.Component {
                     >
                         <Image
                             style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
-                            source={{uri: 'https://cdn3.iconfinder.com/data/icons/business/16/wallet-512.png'}}
+                            source={require('../assets/images/navigation/bottom/wallet.png')}
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
@@ -44,7 +44,7 @@ export default class WalletsScreen extends React.Component {
                     >
                         <Image
                             style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
-                            source={{uri: 'https://cdn2.iconfinder.com/data/icons/inverticons-fill-vol-2/32/paper_plane_document_send_sent_mail-512.png'}}
+                            source={require('../assets/images/navigation/bottom/send.png')}
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
@@ -58,7 +58,7 @@ export default class WalletsScreen extends React.Component {
                     >
                         <Image
                             style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
-                            source={{uri: 'https://cdn2.iconfinder.com/data/icons/eldorado-mobile/40/inbox_receive-512.png'}}
+                            source={require('../assets/images/navigation/bottom/receive.png')}
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
@@ -72,7 +72,7 @@ export default class WalletsScreen extends React.Component {
                     >
                         <Image
                             style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
-                            source={{uri: 'https://cdn1.iconfinder.com/data/icons/flat-web-browser/100/settings-512.png'}}
+                            source={require('../assets/images/navigation/bottom/settings.png')}
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}

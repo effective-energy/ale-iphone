@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { createStackNavigator } from 'react-navigation';
+import { NavigatorIOS } from 'react-native';
 
 // MobX
 import ListStore from './mobX/test/listStore';
@@ -10,8 +11,8 @@ import NewwalletScreen from './components/NewwalletScreen';
 import ImportwalletScreen from './components/ImportwalletScreen';
 import GenerateSecretKeyScreen from './components/GenerateSecretKeyScreen';
 import WalletsScreen from './components/WalletsScreen';
-import SendTokensScreen from './components/SendTokensScreen';
-import ReceiveTokensScreen from './components/ReceiveTokensScreen';
+import SendScreen from './components/SendScreen';
+import ReceiveScreen from './components/ReceiveScreen';
 import SettingsScreen from './components/SettingsScreen';
 
 const RootStack = createStackNavigator({
@@ -20,8 +21,8 @@ const RootStack = createStackNavigator({
     Importwallet: { screen: ImportwalletScreen },
     GenerateSecretKey: { screen: GenerateSecretKeyScreen },
     Wallets: { screen: WalletsScreen },
-    SendTokens: { screen: SendTokensScreen },
-    ReceiveTokens: { screen: ReceiveTokensScreen },
+    SendTokens: { screen: SendScreen },
+    ReceiveTokens: { screen: ReceiveScreen },
     Settings: { screen: SettingsScreen }
 }, {
     initialRouteName: 'Wallets'
@@ -33,6 +34,8 @@ const RootStack = createStackNavigator({
 
 export default class App extends React.Component {
   render() {
-    return <RootStack />;
+    return (
+        <RootStack />
+    );
   }
 }

@@ -1,23 +1,32 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Button, Alert, Image, TouchableOpacity } from 'react-native';
 
 import BottomNavigator from './layouts/BottomNavigator';
-import WalletsSlider from './layouts/WalletsSlider';
 
-export default class ReceiveTokensScreen extends React.Component {
+export default class SendScreen extends React.Component {
     constructor(props) {
         super(props);
 	    this.state = {};
     }
     
     static navigationOptions = {
-        title: 'Receive tokens',
+        title: 'Send tokens',
         headerLeft: null
     };
+
+    scannerQR() {
+        Alert.alert('123213')
+    }
     render() {
         return (
             <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
-                <WalletsSlider />
+                <View>
+                    <Button
+                        title="QR scanner"
+                        onPress={this.scannerQR}
+                        color="#34343e"
+                    />
+                </View>
                 <View style={{ width: '100%', height: 60, position: 'absolute', 'bottom': 0, flexDirection: 'row', flex: 1 }}>
                     <TouchableOpacity
                         style={{ width: '25%', height: 60, backgroundColor: '#cccccc', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}
@@ -25,7 +34,7 @@ export default class ReceiveTokensScreen extends React.Component {
                     >
                         <Image
                             style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
-                            source={{uri: 'https://cdn3.iconfinder.com/data/icons/business/16/wallet-512.png'}}
+                            source={require('../assets/images/navigation/bottom/wallet.png')}
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
@@ -35,12 +44,12 @@ export default class ReceiveTokensScreen extends React.Component {
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={{ width: '25%', height: 60, backgroundColor: '#cccccc', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}
+                        style={{ width: '25%', height: 60, backgroundColor: '#f8f8f8', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}
                         onPress={() => this.props.navigation.push('SendTokens', { animation: null })}
                     >
                         <Image
                             style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
-                            source={{uri: 'https://cdn2.iconfinder.com/data/icons/inverticons-fill-vol-2/32/paper_plane_document_send_sent_mail-512.png'}}
+                            source={require('../assets/images/navigation/bottom/send.png')}
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
@@ -49,12 +58,12 @@ export default class ReceiveTokensScreen extends React.Component {
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={{ width: '25%', height: 60, backgroundColor: '#f8f8f8', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}
+                        style={{ width: '25%', height: 60, backgroundColor: '#cccccc', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}
                         onPress={() => this.props.navigation.push('ReceiveTokens', { animation: null })}
                     >
                         <Image
                             style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
-                            source={{uri: 'https://cdn2.iconfinder.com/data/icons/eldorado-mobile/40/inbox_receive-512.png'}}
+                            source={require('../assets/images/navigation/bottom/receive.png')}
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
@@ -68,7 +77,7 @@ export default class ReceiveTokensScreen extends React.Component {
                     >
                         <Image
                             style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
-                            source={{uri: 'https://cdn1.iconfinder.com/data/icons/flat-web-browser/100/settings-512.png'}}
+                            source={require('../assets/images/navigation/bottom/settings.png')}
                         />
                         <Text
                             style={{ color: '#000000', textAlign: 'center' }}
