@@ -21,23 +21,25 @@ export default class NewwalletScreen extends React.Component {
     };
     render() {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffffff' }}>
-                <Text style={{fontSize: 20}}>Create new wallet</Text>
-                <Text>Enter wallet name</Text>
-                <View style={{ width: '90%', height: 150, padding: 16, opacity: 1 }}>
-                    <TextInput
-                        style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 300, marginBottom: 20, borderRadius: 2, padding: 6 }}
-                        onChangeText={(walletName) => this.setState({walletName})}
-                        value={this.state.walletName}
-                    />
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: '#ffffff' }}>
+                <View style={{ marginTop: 20 }}>
+                    <Text style={{fontSize: 20, textAlign: 'center' }}>Create new wallet</Text>
+                    <Text style={{ textAlign: 'center' }}>Enter wallet name</Text>
+                    <View style={{ marginTop: 10 }}>
+                        <TextInput
+                            style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 300, marginBottom: 20, borderRadius: 2, padding: 6 }}
+                            onChangeText={(walletName) => this.setState({walletName})}
+                            value={this.state.walletName}
+                        />
 
-                    <View style={styles.buttonContainer}>
-                        <Button
-                            title="Next"
-                            onPress={this.restoreWallet}
-                            color="#34343e"
-                          />
-                      </View>
+                        <View style={styles.buttonContainer}>
+                            <Button
+                                title="Next"
+                                onPress={this.restoreWallet}
+                                color="#34343e"
+                              />
+                          </View>
+                    </View>
                 </View>
             </View>
         );

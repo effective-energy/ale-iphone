@@ -11,7 +11,8 @@ export default class SendScreen extends React.Component {
     
     static navigationOptions = {
         title: 'Send tokens',
-        headerLeft: null
+        headerLeft: null,
+        gesturesEnabled: false
     };
 
     scannerQR() {

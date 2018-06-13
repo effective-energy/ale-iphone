@@ -2,20 +2,30 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import Image from 'react-native-remote-svg';
 
+import userWallets from '../wallets/MyWallets.json';
+
 // I18n 
 import I18n from '../i18n/index';
 
-import { observer } from 'mobx-react/native';
-
-@observer
 export default class LoginScreen extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
 	}
+
 	static navigationOptions = {
         header: null
     };
+
+    componentDidMount() {
+    	this.initWallets();
+    }
+
+    initWallets() {
+    	if (userWallets.wallets.length !== 0) {
+    		this.props.navigation.push('Wallets', { animation: null })
+    	}
+    }
 
     render() {
     	return (

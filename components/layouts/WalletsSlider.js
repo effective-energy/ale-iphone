@@ -3,10 +3,14 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 
 import Carousel from 'react-native-carousel-view';
 
+import userWallets from '../../wallets/MyWallets.json';
+
 export default class WalletsSlider extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            wallets: userWallets.wallets
+        };
     }
 
     render() {

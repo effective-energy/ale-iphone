@@ -12,7 +12,8 @@ export default class ReceiveScreen extends React.Component {
     
     static navigationOptions = {
         title: 'Receive tokens',
-        headerLeft: null
+        headerLeft: null,
+        gesturesEnabled: false
     };
     render() {
         return (

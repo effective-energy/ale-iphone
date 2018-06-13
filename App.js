@@ -25,7 +25,7 @@ const RootStack = createStackNavigator({
     ReceiveTokens: { screen: ReceiveScreen },
     Settings: { screen: SettingsScreen }
 }, {
-    initialRouteName: 'Wallets'
+    initialRouteName: 'Login'
 }, {
     transitionConfig: () => ({
         screenInterpolator: () => null

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, Image, Alert, TouchableOpacity, Button, ScrollView} from 'react-native';
 
 import BottomNavigator from './layouts/BottomNavigator';
 import WalletsSlider from './layouts/WalletsSlider';
@@ -12,7 +12,8 @@ export default class WalletsScreen extends React.Component {
     
     static navigationOptions = {
         title: 'My wallets',
-        headerLeft: null
+        headerLeft: null,
+        gesturesEnabled: false
     };
 
     test() {

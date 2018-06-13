@@ -15,7 +15,8 @@ export default class SettingsScreen extends React.Component {
     
     static navigationOptions = {
         title: I18n.t('settingsPage.title'),
-        headerLeft: null
+        headerLeft: null,
+        gesturesEnabled: false
     };
     render() {
         return (

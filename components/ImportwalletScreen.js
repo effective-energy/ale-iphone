@@ -21,21 +21,23 @@ export default class ImportwalletScreen extends React.Component {
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffffff' }}>
-                <Text>Enter your private Key</Text>
-                <View style={{ width: '90%', height: 150, padding: 16, opacity: 1 }}>
-                    <TextInput
-                        style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 300, marginBottom: 20, borderRadius: 2, padding: 6 }}
-                        onChangeText={(privateKey) => this.setState({privateKey})}
-                        value={this.state.privateKey}
-                    />
+                <View style={{ marginTop: 20, flex: 1, alignItems: 'center' }}>
+                    <Text>Enter your private Key</Text>
+                    <View style={{ width: '90%', height: 150, padding: 16, opacity: 1 }}>
+                        <TextInput
+                            style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 300, marginBottom: 20, borderRadius: 2, padding: 6 }}
+                            onChangeText={(privateKey) => this.setState({privateKey})}
+                            value={this.state.privateKey}
+                        />
 
-                    <View style={styles.buttonContainer}>
-                        <Button
-                            title="Import"
-                            onPress={this.importWallet}
-                            color="#34343e"
-                          />
-                      </View>
+                        <View style={styles.buttonContainer}>
+                            <Button
+                                title="Import"
+                                onPress={this.importWallet}
+                                color="#34343e"
+                              />
+                          </View>
+                    </View>
                 </View>
             </View>
         );
