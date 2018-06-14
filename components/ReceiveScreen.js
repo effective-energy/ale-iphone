@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import BottomNavigator from './layouts/BottomNavigator';
 import WalletsSlider from './layouts/WalletsSlider';
@@ -23,10 +23,20 @@ export default class ReceiveScreen extends React.Component {
 
     render() {
         return (
-            <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+            <View style={styles.pageContainer}>
                 <WalletsSlider />
-                <BottomNavigator onPress={this.changePage} />
+                <BottomNavigator
+                    onPress={this.changePage}
+                    activePage="receive"
+                />
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    pageContainer: {
+        flex: 1,
+        backgroundColor: '#ffffff'
+    }
+});

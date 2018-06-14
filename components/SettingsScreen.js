@@ -30,7 +30,7 @@ export default class SettingsScreen extends React.Component {
 
     render() {
         return (
-            <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+            <View style={styles.pageContainer}>
                 <View style={{ marginTop: 20, flex: 1, alignItems: 'center' }}>
                     <View style={styles.buttonContainer}>
                         <Button
@@ -40,18 +40,25 @@ export default class SettingsScreen extends React.Component {
                          />
                     </View>
                 </View>
-                <BottomNavigator onPress={this.changePage} />
+                <BottomNavigator
+                    onPress={this.changePage}
+                    activePage="settings"
+                />
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    backgroundColor: '#ffd24f',
-    borderRadius: 4,
-    padding: 10,
-    width: 300,
-    marginBottom: 20
-  }
+    pageContainer: {
+        flex: 1,
+        backgroundColor: '#ffffff'
+    },
+    buttonContainer: {
+        backgroundColor: '#ffd24f',
+        borderRadius: 4,
+        padding: 10,
+        width: 300,
+        marginBottom: 20
+    }
 });

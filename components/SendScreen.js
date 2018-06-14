@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, Alert } from 'react-native';
+import { View, Button, Alert, StyleSheet } from 'react-native';
 
 import BottomNavigator from './layouts/BottomNavigator';
 
@@ -26,7 +26,7 @@ export default class SendScreen extends React.Component {
 
     render() {
         return (
-            <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+            <View style={styles.pageContainer}>
                 <View>
                     <Button
                         title="QR scanner"
@@ -34,8 +34,18 @@ export default class SendScreen extends React.Component {
                         color="#34343e"
                     />
                 </View>
-                <BottomNavigator onPress={this.changePage} />
+                <BottomNavigator
+                    onPress={this.changePage}
+                    activePage="send"
+                />
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    pageContainer: {
+        flex: 1,
+        backgroundColor: '#ffffff'
+    }
+});
