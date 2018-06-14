@@ -5,7 +5,8 @@ import { NavigatorIOS, YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 // MobX
-import ListStore from './mobX/test/listStore';
+import { Provider } from "mobx-react";
+import stores from "./mobX";
 
 import LoginScreen from './components/LoginScreen';
 import NewwalletScreen from './components/NewwalletScreen';
@@ -34,9 +35,15 @@ const RootStack = createStackNavigator({
 });
 
 export default class App extends React.Component {
-  render() {
-    return (
-        <RootStack />
-    );
-  }
+    constructor(props: Object) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <Provider {...stores}>
+            <RootStack />
+            </Provider>
+        );
+    }
 }

@@ -1,11 +1,15 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Button, Text } from 'react-native';
 
 import BottomNavigator from './layouts/BottomNavigator';
 import WalletsSlider from './layouts/WalletsSlider';
 
+import { observable } from "mobx";
+import { observer, inject } from "mobx-react";
+
+@inject("counterStore")
 export default class WalletsScreen extends React.Component {
-    constructor(props) {
+    constructor(props: Object) {
         super(props);
 	    this.state = {};
         this.changePage = this.changePage.bind(this);
@@ -25,6 +29,16 @@ export default class WalletsScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <WalletsSlider />
+                <View>
+                    <Counter />
+                </View>
+                <View>
+                    <Button
+                        onPress={() => this.props.counterStore.increment()}
+                        title="Increment Counter"
+                        color="#805841"
+                    />
+                </View>
                 <BottomNavigator
                     onPress={this.changePage}
                     activePage="wallets"
@@ -32,6 +46,14 @@ export default class WalletsScreen extends React.Component {
             </View>
         );
     }
+}
+
+@inject("counterStore")
+@observer
+class Counter extends React.Component {
+  render() {
+    return <Text>Count: {this.props.counterStore.count}</Text>;
+  }
 }
 
 const styles = StyleSheet.create({

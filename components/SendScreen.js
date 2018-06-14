@@ -1,8 +1,12 @@
 import React from 'react';
-import { View, Button, Alert, StyleSheet } from 'react-native';
+import { View, Button, Alert, StyleSheet, Text } from 'react-native';
 
 import BottomNavigator from './layouts/BottomNavigator';
 
+import { observable } from "mobx";
+import { observer, inject } from "mobx-react";
+
+@inject("counterStore")
 export default class SendScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -28,6 +32,9 @@ export default class SendScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <View>
+                    <Counter />
+                </View>
+                <View>
                     <Button
                         title="QR scanner"
                         onPress={this.scannerQR}
@@ -41,6 +48,14 @@ export default class SendScreen extends React.Component {
             </View>
         );
     }
+}
+
+@inject("counterStore")
+@observer
+class Counter extends React.Component {
+  render() {
+    return <Text>Count: {this.props.counterStore.count}</Text>;
+  }
 }
 
 const styles = StyleSheet.create({
