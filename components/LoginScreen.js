@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import Image from 'react-native-remote-svg';
+import Pageloader from './layouts/Pageloader';
 
 import userWallets from '../wallets/MyWallets.json';
 
@@ -10,7 +11,9 @@ import I18n from '../i18n/index';
 export default class LoginScreen extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			isPageLoader: false
+		};
 	}
 
 	static navigationOptions = {
@@ -18,7 +21,7 @@ export default class LoginScreen extends React.Component {
     };
 
     componentDidMount() {
-    	this.initWallets();
+    	//this.initWallets();
     }
 
     initWallets() {
@@ -28,12 +31,15 @@ export default class LoginScreen extends React.Component {
     }
 
     render() {
+    	if (this.state.isPageLoader) {
+    		return (<Pageloader />)
+    	}
     	return (
     		<View style={styles.container}>
 				<View>
 					<Image
 					  source={require('../assets/images/logo/logo.svg')}
-					  style={{width: 384, height: 80 }}
+					  style={styles.logo}
 					/>
 				</View>
 	            <View>
@@ -58,17 +64,21 @@ export default class LoginScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-  },
-  buttonContainer: {
-    backgroundColor: '#ffd24f',
-    borderRadius: 4,
-    padding: 10,
-    width: 300,
-    marginBottom: 20
-  }
+	container: {
+		flex: 1,
+		backgroundColor: '#ffffff',
+		alignItems: 'center',
+		justifyContent: 'space-around',
+	},
+	buttonContainer: {
+		backgroundColor: '#ffd24f',
+		borderRadius: 4,
+		padding: 10,
+		width: 300,
+		marginBottom: 20
+	},
+	logo: {
+		width: 384,
+		height: 80
+	}
 });

@@ -1,65 +1,103 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default class BottomNavigator extends React.Component {
 	constructor(props) {
         super(props);
 	    this.state = {};
     }
-
-
     render() {
     	return (
-    		<View style={{ width: '100%', height: 60, position: 'absolute', 'bottom': 0, flexDirection: 'row', flex: 1 }}>
-                <View style={{ width: '25%', height: 60, backgroundColor: '#cccccc', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
+    		<View
+                style={styles.navigationContainer}
+            >
+                <TouchableOpacity
+                    style={styles.navigationItem}
+                    onPress={e => this.props.onPress('Wallets')}
+                >
                     <Image
-                        style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
-                        source={{uri: 'https://cdn3.iconfinder.com/data/icons/business/16/wallet-512.png'}}
+                        style={styles.itemImage}
+                        source={require('../../assets/images/navigation/bottom/wallet.png')}
                     />
                     <Text
-                        style={{ color: '#000000', textAlign: 'center' }}
-                        onPress={() => this.props.navigation.push('Wallets')}
+                        style={styles.itemText}
                     >
                         Wallets
                     </Text>
-                </View>
-                <View style={{ width: '25%', height: 60, backgroundColor: '#cccccc', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.navigationItem}
+                    onPress={e => this.props.onPress('SendTokens')}
+                >
                     <Image
-                        style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
-                        source={{uri: 'https://cdn2.iconfinder.com/data/icons/inverticons-fill-vol-2/32/paper_plane_document_send_sent_mail-512.png'}}
+                        style={styles.itemImage}
+                        source={require('../../assets/images/navigation/bottom/send.png')}
                     />
                     <Text
-                        style={{ color: '#000000', textAlign: 'center' }}
-                        onPress={() => this.props.navigation.push('SendTokens')}
+                        style={styles.itemText}
                     >
                         Send
                     </Text>
-                </View>
-                <View style={{ width: '25%', height: 60, backgroundColor: '#cccccc', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.navigationItem}
+                    onPress={e => this.props.onPress('ReceiveTokens')}
+                >
                     <Image
-                        style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
-                        source={{uri: 'https://cdn2.iconfinder.com/data/icons/eldorado-mobile/40/inbox_receive-512.png'}}
+                        style={styles.itemImage}
+                        source={require('../../assets/images/navigation/bottom/receive.png')}
                     />
                     <Text
-                        style={{ color: '#000000', textAlign: 'center' }}
-                        onPress={() => this.props.navigation.push('ReceiveTokens')}
+                        style={styles.itemText}
                     >
                         Receive
                     </Text>
-                </View>
-                <View style={{ width: '25%', height: 60, backgroundColor: '#cccccc', flex: 1, flexDirection: 'column', maxHeight: 60, alignItems: 'center' }}>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.navigationItem}
+                    onPress={e => this.props.onPress('Settings')}
+                >
                     <Image
-                        style={{width: 25, height: 25, marginTop: 10, marginBottom: 5 }}
-                        source={{uri: 'https://cdn1.iconfinder.com/data/icons/flat-web-browser/100/settings-512.png'}}
+                        style={styles.itemImage}
+                        source={require('../../assets/images/navigation/bottom/settings.png')}
                     />
                     <Text
-                        style={{ color: '#000000', textAlign: 'center' }}
-                        onPress={() => this.props.navigation.push('Settings')}
+                        style={styles.itemText}
                     >
                         Settings
                     </Text>
-                </View>
+                </TouchableOpacity>
             </View>
     	)
     }
 }
+
+const styles = StyleSheet.create({
+    navigationContainer: {
+        width: '100%',
+        height: 60,
+        position: 'absolute',
+        bottom: 0,
+        flexDirection: 'row',
+        flex: 1
+    },
+    navigationItem: {
+        width: '25%',
+        height: 60,
+        backgroundColor: '#cccccc',
+        flex: 1,
+        flexDirection: 'column',
+        maxHeight: 60,
+        alignItems: 'center'
+    },
+    itemImage: {
+        width: 25,
+        height: 25,
+        marginTop: 10,
+        marginBottom: 5
+    },
+    itemText: {
+        color: '#000000',
+        textAlign: 'center'
+    }
+});
