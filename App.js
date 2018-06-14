@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { createStackNavigator } from 'react-navigation';
-import { NavigatorIOS } from 'react-native';
+import { NavigatorIOS, YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 // MobX
 import ListStore from './mobX/test/listStore';
@@ -25,7 +26,7 @@ const RootStack = createStackNavigator({
     ReceiveTokens: { screen: ReceiveScreen },
     Settings: { screen: SettingsScreen }
 }, {
-    initialRouteName: 'Login'
+    initialRouteName: 'Wallets'
 }, {
     transitionConfig: () => ({
         screenInterpolator: () => null
