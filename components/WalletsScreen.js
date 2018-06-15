@@ -3,6 +3,7 @@ import { View, StyleSheet, Button, Text } from 'react-native';
 
 import BottomNavigator from './layouts/BottomNavigator';
 import WalletsSlider from './layouts/WalletsSlider';
+import NewWalletBlock from './layouts/NewWalletBlock';
 
 import { observable } from "mobx";
 import { observer, inject } from "mobx-react";
@@ -16,9 +17,10 @@ export default class WalletsScreen extends React.Component {
     }
     
     static navigationOptions = {
-        title: 'My wallets',
+        header: null,
         headerLeft: null,
-        gesturesEnabled: false
+        gesturesEnabled: false,
+        statusBarBackgroundColor: '#ffffff'
     };
 
     changePage(e) {
@@ -29,7 +31,8 @@ export default class WalletsScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <WalletsSlider />
-                <View>
+                <NewWalletBlock />
+                {/*<View>
                     <Counter />
                 </View>
                 <View>
@@ -38,7 +41,7 @@ export default class WalletsScreen extends React.Component {
                         title="Increment Counter"
                         color="#805841"
                     />
-                </View>
+                </View>*/}
                 <BottomNavigator
                     onPress={this.changePage}
                     activePage="wallets"
@@ -59,6 +62,6 @@ class Counter extends React.Component {
 const styles = StyleSheet.create({
     pageContainer: {
         flex: 1,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#091430'
     }
 });

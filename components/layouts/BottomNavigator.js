@@ -64,10 +64,10 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     navigationItemActive: {
-        backgroundColor: '#f8f8f8',
+        backgroundColor: '#cccccc',
     },
     navigationItemDefault: {
-        backgroundColor: '#cccccc',
+        backgroundColor: '#ffffff',
     },
     itemImage: {
         width: 25,
