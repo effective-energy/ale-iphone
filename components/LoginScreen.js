@@ -98,12 +98,12 @@ export default class LoginScreen extends React.Component {
 				<View>
 					<View>
 						<TextInput
-                            style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 300, marginBottom: 20, borderRadius: 2, padding: 6, color: '#ffffff' }}
+                            style={{height: 40, borderColor: 'gray', borderWidth: 1, width: screenWidth, marginBottom: 20, borderRadius: 2, padding: 6, color: '#ffffff' }}
                             onChangeText={(userEmail) => this.setState({userEmail})}
                             value={this.state.userEmail}
                         />
                         <TextInput
-                            style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 300, marginBottom: 20, borderRadius: 2, padding: 6, color: '#ffffff' }}
+                            style={{height: 40, borderColor: 'gray', borderWidth: 1, width: screenWidth, marginBottom: 20, borderRadius: 2, padding: 6, color: '#ffffff' }}
                             onChangeText={(userPassword) => this.setState({userPassword})}
                             value={this.state.userPassword}
                         />
