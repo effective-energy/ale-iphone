@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Alert, Dimensions, TextInput, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, Dimensions, TextInput, StatusBar, TouchableOpacity } from 'react-native';
 import Image from 'react-native-remote-svg';
 
 import ls from 'react-native-local-storage';
@@ -82,6 +82,14 @@ export default class LoginScreen extends React.Component {
     	});
     }
 
+    recoverAccount() {
+    	Alert.alert('Recover');
+    }
+
+    createAccount() {
+    	Alert.alert('Create account');
+    }
+
     render() {
     	if (this.state.isLogginUser) {
     		return (<Pageloader />);
@@ -125,11 +133,21 @@ export default class LoginScreen extends React.Component {
 				<View>
 					<View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
 						<Text style={{ color: '#34476f' }}>Forgot your email or password?</Text>
-						<Text style={{ color: '#ffbb00', marginLeft: 10 }}>Recover account</Text>
+						<TouchableOpacity
+							onPress={this.recoverAccount}
+							style={{ marginLeft: 10 }}
+						>
+							<Text style={{ color: '#ffbb00' }}>Recover account</Text>
+						</TouchableOpacity>
 					</View>
 					<View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
 						<Text style={{ color: '#34476f' }}>Don't have an account?</Text>
-						<Text style={{ color: '#ffbb00', marginLeft: 10 }}>Create one</Text>
+						<TouchableOpacity
+							onPress={this.createAccount}
+							style={{ marginLeft: 10 }}
+						>
+							<Text style={{ color: '#ffbb00' }}>Create one</Text>
+						</TouchableOpacity>
 					</View>
 				</View>
 	        </View>
