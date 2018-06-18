@@ -20,12 +20,7 @@ const sliderWidth = viewportWidth;
 export default class WalletsSlider extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            wallets: [{
-                name: 'Wallet 1',
-                balance: '10'
-            }]
-        };
+        this.state = {};
     }
 
     sendTokens() {
@@ -69,13 +64,7 @@ export default class WalletsSlider extends React.Component {
                     layoutCardOffset={50}
                     hasParallaxImages={true}
                     containerCustomStyle={{ marginTop: 50, overflow: 'visible' }}
-                    data={[{
-                        title: 'Wallet 1',
-                        balance: '9.999,00'
-                    }, {
-                        title: 'Wallet 2',
-                        balance: '10.999,00'
-                    }]}
+                    data={this.props.walletsList}
                     renderItem={this._renderItem}
                     sliderWidth={sliderWidth}
                     itemWidth={itemWidth}

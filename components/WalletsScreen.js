@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, Button, Text, StatusBar, Image, Alert } from 'react-native';
 import SideMenu from 'react-native-side-menu';
+import ls from 'react-native-local-storage';
 
 import BottomNavigator from './layouts/BottomNavigator';
 import WalletsSlider from './layouts/WalletsSlider';
 import NewWalletBlock from './layouts/NewWalletBlock';
+import Pageloader from './layouts/Pageloader';
 
 import { observable } from "mobx";
 import { observer, inject } from "mobx-react";
@@ -14,7 +16,9 @@ export default class WalletsScreen extends React.Component {
     constructor(props: Object) {
         super(props);
 	    this.state = {
-            isOpenLeftMenu: false
+            isOpenLeftMenu: false,
+            walletsList: [],
+            isLoaderPage: false
         };
         this.changePage = this.changePage.bind(this);
     }
@@ -26,16 +30,56 @@ export default class WalletsScreen extends React.Component {
         statusBarBackgroundColor: '#ffffff'
     };
 
+    componentDidMount() {
+        this.initialUserWallets();
+    }
+
+    initialUserWallets() {
+        this.setState({ isLoaderPage: true });
+        ls.get('userToken').then((data) => {
+            return fetch('https://ale-demo-4550.nodechef.com/users/user-wallets', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': data
+                },
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    walletsList: responseJson,
+                    isLoaderPage: false
+                })
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
+    }
+
     changePage(e) {
         this.props.navigation.navigate(e, { animation: null });
     }
 
     render() {
+        if (this.state.isLoaderPage) {
+            return (<Pageloader title="Loading wallets..." />);
+        }
         return (
-            <SideMenu menu={<Leftmenu />} isOpen={this.state.isOpenLeftMenu}>
-                <View style={styles.pageContainer}>
-                    <StatusBar barStyle='light-content' />
-                    <WalletsSlider />
+            <SideMenu
+                menu={<Leftmenu />}
+                isOpen={this.state.isOpenLeftMenu}
+            >
+                <View
+                    style={styles.pageContainer}
+                >
+                    <StatusBar
+                        barStyle='light-content'
+                    />
+                    <WalletsSlider
+                        walletsList={this.state.walletsList}
+                    />
                     <NewWalletBlock />
                     {/*<View>
                         <Counter />
