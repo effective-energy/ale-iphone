@@ -1,9 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Dimensions, Platform, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Button, Dimensions, Platform } from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
-
-import userWallets from '../../wallets/MyWallets.json';
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
@@ -23,7 +21,10 @@ export default class WalletsSlider extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            wallets: userWallets.wallets
+            wallets: [{
+                name: 'Wallet 1',
+                balance: '10'
+            }]
         };
     }
 
@@ -39,7 +40,7 @@ export default class WalletsSlider extends React.Component {
         return (
             <View style={{ backgroundColor: '#e7ebee', padding: 20, borderRadius: 6, height: 150 }}>
                 <View style={{ marginBottom: 20 }}>
-                    <Text style={{ backgroundColor: 'transparent', color: '#091628', fontSize: 18, textAlign: 'left' }}>{ item.title }</Text>
+                    <Text style={{ backgroundColor: 'transparent', color: '#091628', fontSize: 18, textAlign: 'left' }}>{ item.name }</Text>
                     <Text style={{ textAlign: 'left', color: '#091628', fontSize: 24 }}>{item.balance} ALE</Text>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -61,11 +62,10 @@ export default class WalletsSlider extends React.Component {
     render() {
         return (
             <View>
-                <StatusBar barStyle='light-content' />
                 <Carousel
                     ref={c => this._slider1Ref = c}
                     layout={'default'}
-                    loop={true}
+                    loop={false}
                     layoutCardOffset={50}
                     hasParallaxImages={true}
                     containerCustomStyle={{ marginTop: 50, overflow: 'visible' }}

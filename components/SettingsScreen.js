@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Button, StyleSheet } from 'react-native';
 
+import ls from 'react-native-local-storage';
+
 // I18n 
 import I18n from '../i18n/index';
 
@@ -21,7 +23,9 @@ export default class SettingsScreen extends React.Component {
     };
 
     logout() {
-        return this.props.navigation.navigate('Login');
+        ls.remove('userToken').then(() => {
+            return this.props.navigation.navigate('Login');
+        })
     }
 
     changePage(e) {
@@ -52,7 +56,7 @@ export default class SettingsScreen extends React.Component {
 const styles = StyleSheet.create({
     pageContainer: {
         flex: 1,
-        backgroundColor: '#ffffff'
+        backgroundColor: '#091430'
     },
     buttonContainer: {
         backgroundColor: '#ffd24f',

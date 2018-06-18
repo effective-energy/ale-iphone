@@ -21,7 +21,7 @@ export default class BottomNavigator extends React.Component {
                 <TouchableOpacity
                     key={i}
                     style={[styles.navigationItem, this.state.activeClass === el.activeClass ? styles.navigationItemActive : styles.navigationItemDefault]}
-                    onPress={e => this.props.onPress(el.pageName)}
+                    onPress={e => this.props.changePage(el.pageName)}
                 >
                     <Image
                         style={styles.itemImage}

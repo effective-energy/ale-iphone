@@ -1,8 +1,10 @@
 import React from 'react';
 
 import { createStackNavigator } from 'react-navigation';
-import { NavigatorIOS, YellowBox } from 'react-native';
+import { NavigatorIOS, YellowBox, Alert } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+
+import ls from 'react-native-local-storage';
 
 // MobX
 import { Provider } from "mobx-react";
@@ -17,6 +19,16 @@ import SendScreen from './components/SendScreen';
 import ReceiveScreen from './components/ReceiveScreen';
 import SettingsScreen from './components/SettingsScreen';
 
+const initialRouteName = () => {
+    ls.get('userToken').then((data) => {
+        if (data !== null) {
+            return 'Wallets';
+        } else {
+            return 'Login';
+        }
+    });
+}
+
 const RootStack = createStackNavigator({
     Login: { screen: LoginScreen },
     Newwallet: { screen: NewwalletScreen },
@@ -27,7 +39,7 @@ const RootStack = createStackNavigator({
     ReceiveTokens: { screen: ReceiveScreen },
     Settings: { screen: SettingsScreen }
 }, {
-    initialRouteName: 'Wallets'
+    initialRouteName: initialRouteName()
 }, {
     transitionConfig: () => ({
         screenInterpolator: () => null
@@ -42,7 +54,7 @@ export default class App extends React.Component {
     render() {
         return (
             <Provider {...stores}>
-            <RootStack />
+                <RootStack />
             </Provider>
         );
     }
