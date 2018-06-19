@@ -26,6 +26,13 @@ export default class SendMoneyScreen extends React.Component {
         title: 'Send money'
     };
 
+    componentDidMount() {
+        this.setState({
+            amount: '',
+            destinationAddress: ''
+        })
+    }
+
     sendMoney() {
         if (this.state.amount === '') {
             return Alert.alert('Enter amount');
@@ -35,7 +42,7 @@ export default class SendMoneyScreen extends React.Component {
             return Alert.alert('Enter number amount');
         }
 
-        if (this.state.receiverAddress === '') {
+        if (this.state.destinationAddress === '') {
             return Alert.alert('Enter destination address')
         }
 
@@ -73,14 +80,16 @@ export default class SendMoneyScreen extends React.Component {
             	<StatusBar barStyle='dark-content' />
             	<View>
             		<View>
-                        <Text>Amount</Text>
                         <TextInput
+                            placeholder="Amount"
+                            placeholderTextColor="#000000"
                             style={{height: 40, borderColor: 'gray', borderWidth: 1, width: screenWidth, marginBottom: 20, borderRadius: 2, padding: 6, color: '#000000' }}
                             onChangeText={(amount) => this.setState({amount})}
                             value={this.state.amount}
                         />
-                        <Text>Address destination</Text>
                         <TextInput
+                            placeholder="Address destination"
+                            placeholderTextColor="#000000"
                             style={{height: 40, borderColor: 'gray', borderWidth: 1, width: screenWidth, marginBottom: 20, borderRadius: 2, padding: 6, color: '#000000' }}
                             onChangeText={(destinationAddress) => this.setState({destinationAddress})}
                             value={this.state.destinationAddress}
