@@ -21,6 +21,7 @@ import SettingsScreen from './components/SettingsScreen';
 
 //Modals
 import RequestMoneyScreen from './components/RequestMoneyScreen';
+import SendMoneyScreen from './components/SendMoneyScreen';
 
 const initialRouteName = () => {
     ls.get('userToken').then((data) => {
@@ -41,7 +42,8 @@ const RootStack = createStackNavigator({
     SendTokens: { screen: SendScreen },
     ReceiveTokens: { screen: ReceiveScreen },
     Settings: { screen: SettingsScreen },
-    RequestMoney: { screen: RequestMoneyScreen }
+    RequestMoney: { screen: RequestMoneyScreen },
+    SendMoney: { screen: SendMoneyScreen }
 }, {
     initialRouteName: initialRouteName()
 }, {

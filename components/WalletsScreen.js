@@ -68,8 +68,8 @@ export default class WalletsScreen extends React.Component {
         return this.props.navigation.navigate('RequestMoney', { animation: null, walletAddress: e });
     }
 
-    sendMoney() {
-        Alert.alert('Open is sendMoney modal page');
+    sendMoney(e) {
+        return this.props.navigation.navigate('SendMoney', { animation: null, walletAddress: e });
     }
 
     render() {

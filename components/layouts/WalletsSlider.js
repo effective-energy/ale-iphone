@@ -33,7 +33,11 @@ export default class WalletsSlider extends React.Component {
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={{ width: '45%' }}>
                         <View style={{ backgroundColor: '#091628', borderRadius: 10 }}>
-                            <Button title="Send" color="#ffffff" onPress={this.props.sendMoney} />
+                            <Button
+                                title="Send"
+                                color="#ffffff"
+                                onPress={e => this.props.sendMoney(item.address)}
+                            />
                         </View>
                     </View>
                     <View style={{ width: '45%' }}>

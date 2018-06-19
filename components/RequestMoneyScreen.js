@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, Platform, Image, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Platform, Image, StatusBar, Clipboard, Button, Alert } from 'react-native';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -12,15 +12,21 @@ let screenWidth = wp(80);
 export default class RequestMoneyScreen extends React.Component {
     constructor(props) {
         super(props);
-	    this.state = {};
+	    this.state = {
+	    	receiverAddress: this.props.navigation.state.params.walletAddress
+	    };
     }
     
     static navigationOptions = {
         title: 'Request money'
     };
 
+    copyToClipboard = async () => {
+    	await Clipboard.setString(this.state.receiverAddress);
+    	return Alert.alert('Copied to Clipboard!');
+    };
+
     render() {
-    	const { params } = this.props.navigation.state;
         return (
             <View style={styles.pageContainer}>
             	<StatusBar barStyle='dark-content' />
@@ -33,8 +39,15 @@ export default class RequestMoneyScreen extends React.Component {
 					</View>
 					<View>
 						<Text style={{ fontSize: 24, marginBottom: 10, textAlign: 'center' }}>RECEIVER ADDRESS:</Text>
-						<Text style={{ textAlign: 'center' }}>{params.walletAddress}</Text>
+						<Text style={{ textAlign: 'center' }}>{this.state.receiverAddress}</Text>
 					</View>
+					<View style={{ backgroundColor: '#d1d8dd', width: wp(70), padding: 5, borderRadius: 5, marginTop: 20 }}>
+                        <Button
+                            title="Copy to clipboard"
+                            onPress={this.copyToClipboard}
+                            color="#000000"
+                        />
+                    </View>
             	</View>
             </View>
         );
