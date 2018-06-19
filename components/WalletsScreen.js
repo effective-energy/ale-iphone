@@ -65,11 +65,11 @@ export default class WalletsScreen extends React.Component {
     }
 
     requestMoney(e) {
-        return this.props.navigation.navigate('RequestMoney', { animation: null, walletAddress: e });
+        this.props.navigation.navigate('RequestMoney', { animation: null, walletAddress: e });
     }
 
     sendMoney(e) {
-        return this.props.navigation.navigate('SendMoney', { animation: null, walletAddress: e });
+        this.props.navigation.navigate('SendMoney', { animation: null, walletAddress: e });
     }
 
     render() {
@@ -80,6 +80,7 @@ export default class WalletsScreen extends React.Component {
             <SideMenu
                 menu={<Leftmenu />}
                 isOpen={this.state.isOpenLeftMenu}
+                userName="vadik"
             >
                 <View
                     style={styles.pageContainer}
@@ -117,7 +118,11 @@ class Leftmenu extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            userEmail: '',
+            userName: '',
+            userAvatar: ''
+        };
 
         this.signOut = this.signOut.bind(this);
     }
@@ -127,6 +132,38 @@ class Leftmenu extends React.Component {
         AsyncStorage.getItem('userToken').then((value) => {
             return Alert.alert(value)
         })
+    }
+
+    getUserAvatar() {
+        return `https://ale-demo-4550.nodechef.com/${this.state.userAvatar}`;
+    }
+
+    componentDidMount() {
+        this.getUserData();
+    }
+
+    getUserData() {
+        ls.get('userToken').then((data) => {
+            return fetch('https://ale-demo-4550.nodechef.com/users/get-user-data', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': data
+                },
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    userEmail: responseJson.email,
+                    userName: responseJson.name,
+                    userAvatar: responseJson.avatar
+                })
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
     }
 
     render() {
@@ -140,12 +177,12 @@ class Leftmenu extends React.Component {
                         <View style={{ marginRight: 10 }}>
                             <Image
                                 style={{width: 50, height: 50}}
-                                source={{uri: 'https://pbs.twimg.com/profile_images/984770070571175936/aHxPljnr_bigger.jpg'}}
+                                source={{uri: this.getUserAvatar()}}
                             />
                         </View>
                         <View style={{ display: 'flex', justifyContent: 'center' }}>
-                            <Text style={{ color: '#ffffff', fontSize: 18 }}>User name</Text>
-                            <Text style={{ color: '#ffffff', fontSize: 16 }}>username@alehub.io</Text>
+                            <Text style={{ color: '#ffffff', fontSize: 18 }}>{this.state.userName}</Text>
+                            <Text style={{ color: '#ffffff', fontSize: 16 }}>{this.state.userEmail}</Text>
                         </View>
                     </View>
                 </View>
