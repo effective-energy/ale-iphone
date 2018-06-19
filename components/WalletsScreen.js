@@ -83,7 +83,7 @@ export default class WalletsScreen extends React.Component {
                     userData: {
                         userEmail: responseJson.email,
                         userName: responseJson.name,
-                        userData: responseJson.avatar
+                        userAvatar: responseJson.avatar
                     },
                     isLoaderPage: !this.state.isLoaderPage
                 })

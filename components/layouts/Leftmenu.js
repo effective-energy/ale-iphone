@@ -5,43 +5,11 @@ import ls from 'react-native-local-storage';
 export default class LeftMenu extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            userEmail: '',
-            userName: '',
-            userAvatar: ''
-        };
-    }
-
-    componentDidMount() {
-      //  this.getUserData();
+        this.state = {};
     }
 
     getUserAvatar() {
         return `https://ale-demo-4550.nodechef.com/${this.props.userData.userAvatar}`;
-    }
-
-    getUserData() {
-        ls.get('userToken').then((data) => {
-            return fetch('https://ale-demo-4550.nodechef.com/users/get-user-data', {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data
-                },
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    userEmail: responseJson.email,
-                    userName: responseJson.name,
-                    userAvatar: responseJson.avatar
-                })
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        });
     }
 
     render() {
