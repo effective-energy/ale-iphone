@@ -20,6 +20,7 @@ import ReceiveScreen from './components/ReceiveScreen';
 import SettingsScreen from './components/SettingsScreen';
 import CreateAccountScreen from './components/CreateAccountScreen';
 import RecoverAccountScreen from './components/RecoverAccountScreen';
+import SuccessPaymentScreen from './components/SuccessPaymentScreen';
 
 //Modals
 import RequestMoneyScreen from './components/RequestMoneyScreen';
@@ -47,7 +48,8 @@ const RootStack = createStackNavigator({
     RequestMoney: { screen: RequestMoneyScreen },
     SendMoney: { screen: SendMoneyScreen },
     CreateAccount: { screen: CreateAccountScreen },
-    RecoverAccount: { screen: RecoverAccountScreen }
+    RecoverAccount: { screen: RecoverAccountScreen },
+    SuccessPayment: { screen: SuccessPaymentScreen }
 }, {
     initialRouteName: initialRouteName()
 }, {
