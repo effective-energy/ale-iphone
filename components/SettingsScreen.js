@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, Button, StyleSheet, StatusBar } from 'react-native';
 
 import ls from 'react-native-local-storage';
 
@@ -38,6 +38,7 @@ export default class SettingsScreen extends React.Component {
     render() {
         return (
             <View style={styles.pageContainer}>
+                <StatusBar barStyle='dark-content' />
                 <View style={{ marginTop: 20, flex: 1, alignItems: 'center' }}>
                     <View style={styles.buttonContainer}>
                         <Button

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Dimensions, Platform, Alert, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, Dimensions, Platform, Alert, Image, TouchableHighlight } from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
 
@@ -21,6 +21,12 @@ export default class WalletsSlider extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+
+        this.editWalletName = this.editWalletName.bind(this);
+    }
+
+    editWalletName() {
+        Alert.alert('Edit wallet event');
     }
 
     _renderItem ({item}) {
@@ -32,10 +38,12 @@ export default class WalletsSlider extends React.Component {
                         <Text style={{ textAlign: 'left', color: '#091628', fontSize: 24 }}>{item.balance} ALE</Text>
                     </View>
                     <View>
-                        <Image
-                            style={{width: 30, height: 30}}
-                            source={{uri: 'https://cdn0.iconfinder.com/data/icons/back-to-school/90/circle-school-learn-study-subject-math-pencil-edit-512.png'}}
-                        />
+                        <TouchableHighlight onPress={this.editWalletName}>
+                            <Image
+                                style={{width: 30, height: 30}}
+                                source={{uri: 'https://cdn0.iconfinder.com/data/icons/back-to-school/90/circle-school-learn-study-subject-math-pencil-edit-512.png'}}
+                            />
+                        </TouchableHighlight>
                     </View>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>

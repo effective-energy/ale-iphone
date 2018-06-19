@@ -13,11 +13,11 @@ export default class LeftMenu extends React.Component {
     }
 
     componentDidMount() {
-        this.getUserData();
+      //  this.getUserData();
     }
 
     getUserAvatar() {
-        return `https://ale-demo-4550.nodechef.com/${this.state.userAvatar}`;
+        return `https://ale-demo-4550.nodechef.com/${this.props.userData.userAvatar}`;
     }
 
     getUserData() {
@@ -59,8 +59,8 @@ export default class LeftMenu extends React.Component {
                             />
                         </View>
                         <View style={{ display: 'flex', justifyContent: 'center' }}>
-                            <Text style={{ color: '#ffffff', fontSize: 18 }}>{this.state.userName}</Text>
-                            <Text style={{ color: '#ffffff', fontSize: 16 }}>{this.state.userEmail}</Text>
+                            <Text style={{ color: '#ffffff', fontSize: 18 }}>{this.props.userData.userName}</Text>
+                            <Text style={{ color: '#ffffff', fontSize: 16 }}>{this.props.userData.userEmail}</Text>
                         </View>
                     </View>
                 </View>
