@@ -30,7 +30,6 @@ export default class WalletsScreen extends React.Component {
         this.requestMoney = this.requestMoney.bind(this);
         this.sendMoney = this.sendMoney.bind(this);
         this.signOut = this.signOut.bind(this);
-        this.sp = this.sp.bind(this);
     }
     
     static navigationOptions = {
@@ -113,10 +112,6 @@ export default class WalletsScreen extends React.Component {
         })
     }
 
-    sp() {
-        this.props.navigation.navigate('SuccessPayment', { animation: null });
-    }
-
     render() {
         if (this.state.isLoaderPage) {
             return (<Pageloader title="Loading wallets..." />);
@@ -143,13 +138,6 @@ export default class WalletsScreen extends React.Component {
                         sendMoney={this.sendMoney}
                     />
                     <NewWalletBlock />
-                    <View>
-                        <Button
-                            title="Test"
-                            color="#ffffff"
-                            onPress={this.sp}
-                        />
-                    </View>
                     {/*<View>
                         <Counter />
                     </View>
