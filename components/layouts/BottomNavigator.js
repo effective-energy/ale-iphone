@@ -4,69 +4,43 @@ import { Text, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 export default class BottomNavigator extends React.Component {
 	constructor(props) {
         super(props);
-	    this.state = {};
+	    this.state = {
+            activeClass: this.props.activePage,
+            tabs: [
+                { title: 'Wallet', image: require('../../assets/images/navigation/bottom/wallet.png'), pageName: 'Wallets', activeClass: 'wallets' },
+                { title: 'History', image: require('../../assets/images/navigation/bottom/send.png'), pageName: 'Wallets', activeClass: 'send' },
+                { title: 'Notifications', image: require('../../assets/images/navigation/bottom/receive.png'), pageName: 'Wallets', activeClass: 'receive' },
+                { title: 'Settings', image: require('../../assets/images/navigation/bottom/settings.png'), pageName: 'Settings', activeClass: 'settings' }
+            ]
+        };
     }
+
     render() {
+        let navigations = this.state.tabs.map(function (el, i) {
+            return (
+                <TouchableOpacity
+                    key={i}
+                    style={[styles.navigationItem, this.state.activeClass === el.activeClass ? styles.navigationItemActive : styles.navigationItemDefault]}
+                    onPress={e => this.props.changePage(el.pageName)}
+                >
+                    <Image
+                        style={styles.itemImage}
+                        source={el.image}
+                    />
+                    <Text
+                        style={styles.itemText}
+                    >
+                        {el.title}
+                    </Text>
+                </TouchableOpacity>
+            )
+        }, this);
+
     	return (
     		<View
                 style={styles.navigationContainer}
             >
-                <TouchableOpacity
-                    style={styles.navigationItem}
-                    onPress={e => this.props.onPress('Wallets')}
-                >
-                    <Image
-                        style={styles.itemImage}
-                        source={require('../../assets/images/navigation/bottom/wallet.png')}
-                    />
-                    <Text
-                        style={styles.itemText}
-                    >
-                        Wallets
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.navigationItem}
-                    onPress={e => this.props.onPress('SendTokens')}
-                >
-                    <Image
-                        style={styles.itemImage}
-                        source={require('../../assets/images/navigation/bottom/send.png')}
-                    />
-                    <Text
-                        style={styles.itemText}
-                    >
-                        Send
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.navigationItem}
-                    onPress={e => this.props.onPress('ReceiveTokens')}
-                >
-                    <Image
-                        style={styles.itemImage}
-                        source={require('../../assets/images/navigation/bottom/receive.png')}
-                    />
-                    <Text
-                        style={styles.itemText}
-                    >
-                        Receive
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.navigationItem}
-                    onPress={e => this.props.onPress('Settings')}
-                >
-                    <Image
-                        style={styles.itemImage}
-                        source={require('../../assets/images/navigation/bottom/settings.png')}
-                    />
-                    <Text
-                        style={styles.itemText}
-                    >
-                        Settings
-                    </Text>
-                </TouchableOpacity>
+                {navigations}
             </View>
     	)
     }
@@ -84,11 +58,16 @@ const styles = StyleSheet.create({
     navigationItem: {
         width: '25%',
         height: 60,
-        backgroundColor: '#cccccc',
         flex: 1,
         flexDirection: 'column',
         maxHeight: 60,
         alignItems: 'center'
+    },
+    navigationItemActive: {
+        backgroundColor: '#cccccc',
+    },
+    navigationItemDefault: {
+        backgroundColor: '#ffffff',
     },
     itemImage: {
         width: 25,

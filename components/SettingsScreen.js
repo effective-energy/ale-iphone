@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, Button, StyleSheet, StatusBar } from 'react-native';
+
+import ls from 'react-native-local-storage';
 
 // I18n 
 import I18n from '../i18n/index';
@@ -17,11 +19,16 @@ export default class SettingsScreen extends React.Component {
     static navigationOptions = {
         title: I18n.t('settingsPage.title'),
         headerLeft: null,
-        gesturesEnabled: false
+        gesturesEnabled: false,
+        headerStyle: {
+            backgroundColor: '#e8ebee',
+      },
     };
 
     logout() {
-        return this.props.navigation.navigate('Login');
+        ls.remove('userToken').then(() => {
+            return this.props.navigation.navigate('Login');
+        })
     }
 
     changePage(e) {
@@ -30,7 +37,8 @@ export default class SettingsScreen extends React.Component {
 
     render() {
         return (
-            <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+            <View style={styles.pageContainer}>
+                <StatusBar barStyle='dark-content' />
                 <View style={{ marginTop: 20, flex: 1, alignItems: 'center' }}>
                     <View style={styles.buttonContainer}>
                         <Button
@@ -40,18 +48,25 @@ export default class SettingsScreen extends React.Component {
                          />
                     </View>
                 </View>
-                <BottomNavigator onPress={this.changePage} />
+                <BottomNavigator
+                    changePage={this.changePage}
+                    activePage="settings"
+                />
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    backgroundColor: '#ffd24f',
-    borderRadius: 4,
-    padding: 10,
-    width: 300,
-    marginBottom: 20
-  }
+    pageContainer: {
+        flex: 1,
+        backgroundColor: '#e8ebee'
+    },
+    buttonContainer: {
+        backgroundColor: '#ffd24f',
+        borderRadius: 4,
+        padding: 10,
+        width: 300,
+        marginBottom: 20
+    }
 });

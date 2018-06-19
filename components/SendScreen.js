@@ -1,8 +1,12 @@
 import React from 'react';
-import { View, Button, Alert } from 'react-native';
+import { View, Button, Alert, StyleSheet, Text } from 'react-native';
 
 import BottomNavigator from './layouts/BottomNavigator';
 
+import { observable } from "mobx";
+import { observer, inject } from "mobx-react";
+
+@inject("counterStore")
 export default class SendScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -26,7 +30,10 @@ export default class SendScreen extends React.Component {
 
     render() {
         return (
-            <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+            <View style={styles.pageContainer}>
+                <View>
+                    <Counter />
+                </View>
                 <View>
                     <Button
                         title="QR scanner"
@@ -34,8 +41,26 @@ export default class SendScreen extends React.Component {
                         color="#34343e"
                     />
                 </View>
-                <BottomNavigator onPress={this.changePage} />
+                <BottomNavigator
+                    changePage={this.changePage}
+                    activePage="send"
+                />
             </View>
         );
     }
 }
+
+@inject("counterStore")
+@observer
+class Counter extends React.Component {
+  render() {
+    return <Text>Count: {this.props.counterStore.count}</Text>;
+  }
+}
+
+const styles = StyleSheet.create({
+    pageContainer: {
+        flex: 1,
+        backgroundColor: '#ffffff'
+    }
+});

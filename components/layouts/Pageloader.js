@@ -7,11 +7,10 @@ export default class Pageloader extends React.Component {
 	    this.state = {};
     }
 
-
     render() {
     	return (
     		<View style={styles.loading}>
-                <Text style={styles.loadingTitle}>Loading...</Text>
+                <Text style={styles.loadingTitle}>{this.props.title}</Text>
             </View>
     	)
     }

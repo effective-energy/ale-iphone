@@ -1,11 +1,14 @@
 import React from 'react';
 
 import { createStackNavigator } from 'react-navigation';
-import { NavigatorIOS, YellowBox } from 'react-native';
+import { NavigatorIOS, YellowBox, Alert } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
+import ls from 'react-native-local-storage';
+
 // MobX
-import ListStore from './mobX/test/listStore';
+import { Provider } from "mobx-react";
+import stores from "./mobX";
 
 import LoginScreen from './components/LoginScreen';
 import NewwalletScreen from './components/NewwalletScreen';
@@ -15,6 +18,22 @@ import WalletsScreen from './components/WalletsScreen';
 import SendScreen from './components/SendScreen';
 import ReceiveScreen from './components/ReceiveScreen';
 import SettingsScreen from './components/SettingsScreen';
+import CreateAccountScreen from './components/CreateAccountScreen';
+import RecoverAccountScreen from './components/RecoverAccountScreen';
+
+//Modals
+import RequestMoneyScreen from './components/RequestMoneyScreen';
+import SendMoneyScreen from './components/SendMoneyScreen';
+
+const initialRouteName = () => {
+    ls.get('userToken').then((data) => {
+        if (data !== null) {
+            return 'Wallets';
+        } else {
+            return 'Login';
+        }
+    });
+}
 
 const RootStack = createStackNavigator({
     Login: { screen: LoginScreen },
@@ -24,9 +43,13 @@ const RootStack = createStackNavigator({
     Wallets: { screen: WalletsScreen },
     SendTokens: { screen: SendScreen },
     ReceiveTokens: { screen: ReceiveScreen },
-    Settings: { screen: SettingsScreen }
+    Settings: { screen: SettingsScreen },
+    RequestMoney: { screen: RequestMoneyScreen },
+    SendMoney: { screen: SendMoneyScreen },
+    CreateAccount: { screen: CreateAccountScreen },
+    RecoverAccount: { screen: RecoverAccountScreen }
 }, {
-    initialRouteName: 'Wallets'
+    initialRouteName: initialRouteName()
 }, {
     transitionConfig: () => ({
         screenInterpolator: () => null
@@ -34,9 +57,15 @@ const RootStack = createStackNavigator({
 });
 
 export default class App extends React.Component {
-  render() {
-    return (
-        <RootStack />
-    );
-  }
+    constructor(props: Object) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <Provider {...stores}>
+                <RootStack />
+            </Provider>
+        );
+    }
 }
