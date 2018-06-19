@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Dimensions, Platform, Alert } from 'react-native';
+import { StyleSheet, Text, View, Button, Dimensions, Platform, Alert, Image } from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
 
@@ -26,9 +26,17 @@ export default class WalletsSlider extends React.Component {
     _renderItem ({item}) {
         return (
             <View style={{ backgroundColor: '#e7ebee', padding: 20, borderRadius: 6, height: 150 }}>
-                <View style={{ marginBottom: 20 }}>
-                    <Text style={{ backgroundColor: 'transparent', color: '#091628', fontSize: 18, textAlign: 'left' }}>{ item.name }</Text>
-                    <Text style={{ textAlign: 'left', color: '#091628', fontSize: 24 }}>{item.balance} ALE</Text>
+                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <View style={{ marginBottom: 20 }}>
+                        <Text style={{ backgroundColor: 'transparent', color: '#091628', fontSize: 18, textAlign: 'left' }}>{ item.name }</Text>
+                        <Text style={{ textAlign: 'left', color: '#091628', fontSize: 24 }}>{item.balance} ALE</Text>
+                    </View>
+                    <View>
+                        <Image
+                            style={{width: 30, height: 30}}
+                            source={{uri: 'https://cdn0.iconfinder.com/data/icons/back-to-school/90/circle-school-learn-study-subject-math-pencil-edit-512.png'}}
+                        />
+                    </View>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={{ width: '45%' }}>

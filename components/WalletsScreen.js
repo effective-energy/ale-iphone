@@ -7,6 +7,7 @@ import BottomNavigator from './layouts/BottomNavigator';
 import WalletsSlider from './layouts/WalletsSlider';
 import NewWalletBlock from './layouts/NewWalletBlock';
 import Pageloader from './layouts/Pageloader';
+import Leftmenu from './layouts/Leftmenu';
 
 import { observable } from "mobx";
 import { observer, inject } from "mobx-react";
@@ -23,6 +24,7 @@ export default class WalletsScreen extends React.Component {
         this.changePage = this.changePage.bind(this);
         this.requestMoney = this.requestMoney.bind(this);
         this.sendMoney = this.sendMoney.bind(this);
+        this.signOut = this.signOut.bind(this);
     }
     
     static navigationOptions = {
@@ -72,15 +74,25 @@ export default class WalletsScreen extends React.Component {
         this.props.navigation.navigate('SendMoney', { animation: null, walletAddress: e });
     }
 
+    signOut() {
+        ls.remove('userToken').then(() => {
+            return this.props.navigation.navigate('Login');
+        })
+    }
+
     render() {
         if (this.state.isLoaderPage) {
             return (<Pageloader title="Loading wallets..." />);
         }
         return (
             <SideMenu
-                menu={<Leftmenu />}
+                menu={
+                    <Leftmenu
+                        signOut={this.signOut}
+                        huy="huy"
+                    />
+                }
                 isOpen={this.state.isOpenLeftMenu}
-                userName="vadik"
             >
                 <View
                     style={styles.pageContainer}
@@ -114,94 +126,84 @@ export default class WalletsScreen extends React.Component {
     }
 }
 
-class Leftmenu extends React.Component {
+// class Leftmenu extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            userEmail: '',
-            userName: '',
-            userAvatar: ''
-        };
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         userEmail: '',
+    //         userName: '',
+    //         userAvatar: ''
+    //     };
+    // }
 
-        this.signOut = this.signOut.bind(this);
-    }
+//     getUserAvatar() {
+//         return `https://ale-demo-4550.nodechef.com/${this.state.userAvatar}`;
+//     }
 
-    signOut() {
-        return this.props.navigation.navigate('Login', { animation: null });
-        AsyncStorage.getItem('userToken').then((value) => {
-            return Alert.alert(value)
-        })
-    }
+//     componentDidMount() {
+//         this.getUserData();
+//     }
 
-    getUserAvatar() {
-        return `https://ale-demo-4550.nodechef.com/${this.state.userAvatar}`;
-    }
+    // getUserData() {
+    //     ls.get('userToken').then((data) => {
+    //         return fetch('https://ale-demo-4550.nodechef.com/users/get-user-data', {
+    //             method: 'GET',
+    //             headers: {
+    //                 'Accept': 'application/json',
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': data
+    //             },
+    //         })
+    //         .then((response) => response.json())
+    //         .then((responseJson) => {
+    //             this.setState({
+    //                 userEmail: responseJson.email,
+    //                 userName: responseJson.name,
+    //                 userAvatar: responseJson.avatar
+    //             })
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    //     });
+    // }
 
-    componentDidMount() {
-        this.getUserData();
-    }
-
-    getUserData() {
-        ls.get('userToken').then((data) => {
-            return fetch('https://ale-demo-4550.nodechef.com/users/get-user-data', {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data
-                },
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    userEmail: responseJson.email,
-                    userName: responseJson.name,
-                    userAvatar: responseJson.avatar
-                })
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        });
-    }
-
-    render() {
-        return (
-            <View style={{ flex: 1, backgroundColor: '#091529', paddingTop: 50, paddingLeft: 20 }}>
-                <View>
-                    <View>
-                        <Text style={{ color: '#ffffff', fontSize: 18 }}>Account</Text>
-                    </View>
-                    <View style={{ marginTop: 20, display: 'flex', flexDirection: 'row' }}>
-                        <View style={{ marginRight: 10 }}>
-                            <Image
-                                style={{width: 50, height: 50}}
-                                source={{uri: this.getUserAvatar()}}
-                            />
-                        </View>
-                        <View style={{ display: 'flex', justifyContent: 'center' }}>
-                            <Text style={{ color: '#ffffff', fontSize: 18 }}>{this.state.userName}</Text>
-                            <Text style={{ color: '#ffffff', fontSize: 16 }}>{this.state.userEmail}</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={{ marginRight: 10, marginTop: 20 }}>
-                    <View style={{ backgroundColor: '#ffbb00', width: 200 }}>
-                        <Button
-                            title="Sign out"
-                            color="#000000"
-                            onPress={this.signOut}
-                        />
-                    </View>
-                    <View>
-                        <Text>2.0.1</Text>
-                    </View>
-                </View>
-            </View>
-        );
-    }
-}
+//     render() {
+//         return (
+//             <View style={{ flex: 1, backgroundColor: '#091529', paddingTop: 50, paddingLeft: 20 }}>
+//                 <View>
+//                     <View>
+//                         <Text style={{ color: '#ffffff', fontSize: 18 }}>Account</Text>
+//                     </View>
+//                     <View style={{ marginTop: 20, display: 'flex', flexDirection: 'row' }}>
+//                         <View style={{ marginRight: 10 }}>
+//                             <Image
+//                                 style={{width: 50, height: 50}}
+//                                 source={{uri: this.getUserAvatar()}}
+//                             />
+//                         </View>
+//                         <View style={{ display: 'flex', justifyContent: 'center' }}>
+//                             <Text style={{ color: '#ffffff', fontSize: 18 }}>{this.state.userName}</Text>
+//                             <Text style={{ color: '#ffffff', fontSize: 16 }}>{this.state.userEmail}</Text>
+//                         </View>
+//                     </View>
+//                 </View>
+//                 <View style={{ marginRight: 10, marginTop: 20 }}>
+//                     <View style={{ backgroundColor: '#ffbb00', width: 200 }}>
+//                         <Button
+//                             title="Sign out"
+//                             color="#000000"
+//                         />
+//                     </View>
+//                     <View>
+//                         <Text>2.0.1</Text>
+//                     </View>
+//                 </View>
+//             </View>
+//         );
+//     }
+// }
 
 @inject("counterStore")
 @observer
