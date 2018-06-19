@@ -26,7 +26,7 @@ export default class ReceiveScreen extends React.Component {
             <View style={styles.pageContainer}>
                 <WalletsSlider />
                 <BottomNavigator
-                    onPress={this.changePage}
+                    changePage={this.changePage}
                     activePage="receive"
                 />
             </View>

@@ -21,6 +21,8 @@ export default class WalletsScreen extends React.Component {
             isLoaderPage: false
         };
         this.changePage = this.changePage.bind(this);
+        this.requestMoney = this.requestMoney.bind(this);
+        this.sendMoney = this.sendMoney.bind(this);
     }
     
     static navigationOptions = {
@@ -35,7 +37,7 @@ export default class WalletsScreen extends React.Component {
     }
 
     initialUserWallets() {
-        this.setState({ isLoaderPage: true });
+        this.setState({ isLoaderPage: !this.state.isLoaderPage });
         ls.get('userToken').then((data) => {
             return fetch('https://ale-demo-4550.nodechef.com/users/user-wallets', {
                 method: 'GET',
@@ -49,7 +51,7 @@ export default class WalletsScreen extends React.Component {
             .then((responseJson) => {
                 this.setState({
                     walletsList: responseJson,
-                    isLoaderPage: false
+                    isLoaderPage: !this.state.isLoaderPage
                 })
             })
             .catch((error) => {
@@ -60,6 +62,14 @@ export default class WalletsScreen extends React.Component {
 
     changePage(e) {
         this.props.navigation.navigate(e, { animation: null });
+    }
+
+    requestMoney(e) {
+        return this.props.navigation.navigate('RequestMoney', { animation: null, walletAddress: e });
+    }
+
+    sendMoney() {
+        Alert.alert('Open is sendMoney modal page');
     }
 
     render() {
@@ -79,6 +89,8 @@ export default class WalletsScreen extends React.Component {
                     />
                     <WalletsSlider
                         walletsList={this.state.walletsList}
+                        requestMoney={this.requestMoney}
+                        sendMoney={this.sendMoney}
                     />
                     <NewWalletBlock />
                     {/*<View>

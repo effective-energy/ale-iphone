@@ -19,6 +19,9 @@ import SendScreen from './components/SendScreen';
 import ReceiveScreen from './components/ReceiveScreen';
 import SettingsScreen from './components/SettingsScreen';
 
+//Modals
+import RequestMoneyScreen from './components/RequestMoneyScreen';
+
 const initialRouteName = () => {
     ls.get('userToken').then((data) => {
         if (data !== null) {
@@ -37,7 +40,8 @@ const RootStack = createStackNavigator({
     Wallets: { screen: WalletsScreen },
     SendTokens: { screen: SendScreen },
     ReceiveTokens: { screen: ReceiveScreen },
-    Settings: { screen: SettingsScreen }
+    Settings: { screen: SettingsScreen },
+    RequestMoney: { screen: RequestMoneyScreen }
 }, {
     initialRouteName: initialRouteName()
 }, {

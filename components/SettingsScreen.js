@@ -19,7 +19,10 @@ export default class SettingsScreen extends React.Component {
     static navigationOptions = {
         title: I18n.t('settingsPage.title'),
         headerLeft: null,
-        gesturesEnabled: false
+        gesturesEnabled: false,
+        headerStyle: {
+            backgroundColor: '#e8ebee',
+      },
     };
 
     logout() {
@@ -45,7 +48,7 @@ export default class SettingsScreen extends React.Component {
                     </View>
                 </View>
                 <BottomNavigator
-                    onPress={this.changePage}
+                    changePage={this.changePage}
                     activePage="settings"
                 />
             </View>
@@ -56,7 +59,7 @@ export default class SettingsScreen extends React.Component {
 const styles = StyleSheet.create({
     pageContainer: {
         flex: 1,
-        backgroundColor: '#091430'
+        backgroundColor: '#e8ebee'
     },
     buttonContainer: {
         backgroundColor: '#ffd24f',

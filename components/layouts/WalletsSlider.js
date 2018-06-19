@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Dimensions, Platform } from 'react-native';
+import { StyleSheet, Text, View, Button, Dimensions, Platform, Alert } from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
 
@@ -23,14 +23,6 @@ export default class WalletsSlider extends React.Component {
         this.state = {};
     }
 
-    sendTokens() {
-
-    }
-
-    receiveTokens() {
-
-    }
-
     _renderItem ({item}) {
         return (
             <View style={{ backgroundColor: '#e7ebee', padding: 20, borderRadius: 6, height: 150 }}>
@@ -41,12 +33,16 @@ export default class WalletsSlider extends React.Component {
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={{ width: '45%' }}>
                         <View style={{ backgroundColor: '#091628', borderRadius: 10 }}>
-                            <Button title="Send" color="#ffffff" onPress={this.sendTokens} />
+                            <Button title="Send" color="#ffffff" onPress={this.props.sendMoney} />
                         </View>
                     </View>
                     <View style={{ width: '45%' }}>
                         <View style={{ backgroundColor: '#091628', borderRadius: 10 }}>
-                            <Button title="Receive" color="#ffffff" onPress={this.receiveTokens} />
+                            <Button
+                                title="Request"
+                                color="#ffffff"
+                                onPress={e => this.props.requestMoney(item.address)}
+                            />
                         </View>
                     </View>
                 </View>
@@ -65,7 +61,7 @@ export default class WalletsSlider extends React.Component {
                     hasParallaxImages={true}
                     containerCustomStyle={{ marginTop: 50, overflow: 'visible' }}
                     data={this.props.walletsList}
-                    renderItem={this._renderItem}
+                    renderItem={item => this._renderItem(item)}
                     sliderWidth={sliderWidth}
                     itemWidth={itemWidth}
                 />

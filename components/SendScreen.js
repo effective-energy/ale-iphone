@@ -42,7 +42,7 @@ export default class SendScreen extends React.Component {
                     />
                 </View>
                 <BottomNavigator
-                    onPress={this.changePage}
+                    changePage={this.changePage}
                     activePage="send"
                 />
             </View>
