@@ -18,6 +18,8 @@ import WalletsScreen from './components/WalletsScreen';
 import SendScreen from './components/SendScreen';
 import ReceiveScreen from './components/ReceiveScreen';
 import SettingsScreen from './components/SettingsScreen';
+import CreateAccountScreen from './components/CreateAccountScreen';
+import RecoverAccountScreen from './components/RecoverAccountScreen';
 
 //Modals
 import RequestMoneyScreen from './components/RequestMoneyScreen';
@@ -43,7 +45,9 @@ const RootStack = createStackNavigator({
     ReceiveTokens: { screen: ReceiveScreen },
     Settings: { screen: SettingsScreen },
     RequestMoney: { screen: RequestMoneyScreen },
-    SendMoney: { screen: SendMoneyScreen }
+    SendMoney: { screen: SendMoneyScreen },
+    CreateAccount: { screen: CreateAccountScreen },
+    RecoverAccount: { screen: RecoverAccountScreen }
 }, {
     initialRouteName: initialRouteName()
 }, {

@@ -28,6 +28,8 @@ export default class LoginScreen extends React.Component {
 		};
 
 		this.loginToWallet = this.loginToWallet.bind(this);
+		this.createAccount = this.createAccount.bind(this);
+		this.recoverAccount = this.recoverAccount.bind(this);
 	}
 
 	static navigationOptions = {
@@ -82,12 +84,12 @@ export default class LoginScreen extends React.Component {
     	});
     }
 
-    recoverAccount() {
-    	Alert.alert('Recover');
+    createAccount() {
+    	this.props.navigation.navigate('CreateAccount', { animation: null });
     }
 
-    createAccount() {
-    	Alert.alert('Create account');
+    recoverAccount() {
+    	this.props.navigation.navigate('RecoverAccount', { animation: null });
     }
 
     render() {
