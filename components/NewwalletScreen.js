@@ -21,7 +21,7 @@ export default class NewWalletScreen extends React.Component {
     };
 
     restoreWallet() {
-        Alert.alert('Restore wallet event');
+        this.props.navigation.navigate('RestoreWallet', { animation: null });
     }
 
     render() {

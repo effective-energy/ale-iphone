@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/voroncov/Desktop/RN/ale-iphone/node_modules/react-native/React/Views/RCTActivityIndicatorView.m \
-  /Users/voroncov/Desktop/RN/ale-iphone/node_modules/react-native/React/Views/RCTActivityIndicatorView.h
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Views/RCTActivityIndicatorView.m \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Views/RCTActivityIndicatorView.h

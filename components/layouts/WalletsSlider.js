@@ -49,7 +49,7 @@ export default class WalletsSlider extends React.Component {
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={{ width: '45%' }}>
-                        <View style={{ backgroundColor: '#091628', borderRadius: 10, display: 'flex', flexDirection: 'row' }}>
+                        <View style={{ backgroundColor: '#091628', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                             <SVGImage
                                 style={{width: 20, height: 20, marginTop: 5, marginLeft: 5 }}
                                 source={require('../../assets/images/icons/icon_send.svg')}
@@ -62,7 +62,7 @@ export default class WalletsSlider extends React.Component {
                         </View>
                     </View>
                     <View style={{ width: '45%' }}>
-                        <View style={{ backgroundColor: '#FFBB00', borderRadius: 10, display: 'flex', flexDirection: 'row' }}>
+                        <View style={{ backgroundColor: '#FFBB00', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                             <SVGImage
                                 style={{width: 20, height: 20, marginTop: 5, marginLeft: 5 }}
                                 source={require('../../assets/images/icons/icon_request.svg')}

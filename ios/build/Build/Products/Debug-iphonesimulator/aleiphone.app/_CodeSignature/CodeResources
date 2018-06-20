@@ -4,9 +4,17 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>AppIcon60x60@2x.png</key>
+		<data>
+		5vf7ExW59Y4N0PAVZ12N8Y7Yjqs=
+		</data>
+		<key>Assets.car</key>
+		<data>
+		vocHWAts+NLsBlW//44ZHA/as4E=
+		</data>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<data>
-		11F/CF9be4HaOwQR/9MRqiLQEv8=
+		WjhZ/uHF59PlovHzT4wbq5jYX4Y=
 		</data>
 		<key>Frameworks/IDEBundleInjection.framework/IDEBundleInjection</key>
 		<data>
@@ -51,7 +59,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		BUQeEeQk7all5NAqr8Zm8enqAVg=
+		G8kwAxU9aI3L9btnAH8pVNBGOAg=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -75,20 +83,42 @@
 		</data>
 		<key>PlugIns/aleiphoneTests.xctest/aleiphoneTests</key>
 		<data>
-		i1T5WyxzvFwP9CCvKy1WtbU1I4w=
+		hKTzve6DLTD+euHLEwaJulRSUjs=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>AppIcon60x60@2x.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			5vf7ExW59Y4N0PAVZ12N8Y7Yjqs=
+			</data>
+			<key>hash2</key>
+			<data>
+			b+NJwgcO9CD0mH9N1V5/3SIixGVIenUTEzWfKngfy2c=
+			</data>
+		</dict>
+		<key>Assets.car</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			vocHWAts+NLsBlW//44ZHA/as4E=
+			</data>
+			<key>hash2</key>
+			<data>
+			IFfUlKUf26E9B43Im3YFFcDBktyCLHOXCWjECgaueUQ=
+			</data>
+		</dict>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			11F/CF9be4HaOwQR/9MRqiLQEv8=
+			WjhZ/uHF59PlovHzT4wbq5jYX4Y=
 			</data>
 			<key>hash2</key>
 			<data>
-			NFqPGaeNDuIk/y5531ANeT0TLfGod8ipELW/geNz4tw=
+			JeO/1KHDgaU7xOtRPf4rTJ4P/vb4d2QehpNYMaVSX28=
 			</data>
 		</dict>
 		<key>Frameworks/IDEBundleInjection.framework/IDEBundleInjection</key>
@@ -240,11 +270,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			i1T5WyxzvFwP9CCvKy1WtbU1I4w=
+			hKTzve6DLTD+euHLEwaJulRSUjs=
 			</data>
 			<key>hash2</key>
 			<data>
-			Wcnk8MZtTqd9XeMKx8L7/A7p//6Q0WfuzyXThbWmrw8=
+			343vJJ/x/FfdG6Eq4jwUikYhqe5NzJk+6ilO3w1Q1SY=
 			</data>
 		</dict>
 	</dict>
