@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import Image from 'react-native-remote-svg';
 
 export default class NewWalletBlock extends React.Component {
 	constructor(props) {
@@ -17,6 +18,10 @@ export default class NewWalletBlock extends React.Component {
                 style={styles.blockContainer}
                 onPress={this.createNewWallet}
             >
+                <Image
+                    style={{width: 25, height: 25, marginRight: 10}}
+                    source={require('../../assets/images/icons/icon_new-wallet.svg')}
+                />
                 <Text
                     style={styles.blockText}
                 >
@@ -34,7 +39,11 @@ const styles = StyleSheet.create({
         marginTop: 30,
         borderRadius: 10,
         padding: 15,
-        marginLeft: 40
+        marginLeft: 40,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     blockText: {
         color: '#f0b721',
