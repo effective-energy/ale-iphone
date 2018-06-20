@@ -8,15 +8,11 @@ export default class NewWalletBlock extends React.Component {
 	    this.state = {};
     }
 
-    createNewWallet() {
-        Alert.alert('Loading...')
-    }
-
     render() {
     	return (
     		<TouchableOpacity
                 style={styles.blockContainer}
-                onPress={this.createNewWallet}
+                onPress={this.props.createNewWallet}
             >
                 <Image
                     style={{width: 25, height: 25, marginRight: 10}}

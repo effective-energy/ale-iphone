@@ -51,7 +51,7 @@ export default class LoginScreen extends React.Component {
 
     loginToWallet() {
     	if (this.state.userEmail.length === 0) {
-    		return Alert.alert('Enter your login');
+    		return Alert.alert('Enter your E-mail');
     	}
 
     	if (this.state.userPassword.length === 0) {

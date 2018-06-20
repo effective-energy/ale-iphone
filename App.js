@@ -11,7 +11,7 @@ import { Provider } from "mobx-react";
 import stores from "./mobX";
 
 import LoginScreen from './components/LoginScreen';
-import NewwalletScreen from './components/NewwalletScreen';
+import NewWalletScreen from './components/NewWalletScreen';
 import ImportwalletScreen from './components/ImportwalletScreen';
 import GenerateSecretKeyScreen from './components/GenerateSecretKeyScreen';
 import WalletsScreen from './components/WalletsScreen';
@@ -38,7 +38,7 @@ const initialRouteName = () => {
 
 const RootStack = createStackNavigator({
     Login: { screen: LoginScreen },
-    Newwallet: { screen: NewwalletScreen },
+    NewWallet: { screen: NewWalletScreen },
     Importwallet: { screen: ImportwalletScreen },
     GenerateSecretKey: { screen: GenerateSecretKeyScreen },
     Wallets: { screen: WalletsScreen },

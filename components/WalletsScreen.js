@@ -30,6 +30,7 @@ export default class WalletsScreen extends React.Component {
         this.requestMoney = this.requestMoney.bind(this);
         this.sendMoney = this.sendMoney.bind(this);
         this.signOut = this.signOut.bind(this);
+        this.createNewWallet = this.createNewWallet.bind(this);
     }
     
     static navigationOptions = {
@@ -112,6 +113,10 @@ export default class WalletsScreen extends React.Component {
         })
     }
 
+    createNewWallet() {
+        this.props.navigation.navigate('NewWallet', { animation: null });
+    }
+
     render() {
         if (this.state.isLoaderPage) {
             return (<Pageloader title="Loading wallets..." />);
@@ -137,7 +142,9 @@ export default class WalletsScreen extends React.Component {
                         requestMoney={this.requestMoney}
                         sendMoney={this.sendMoney}
                     />
-                    <NewWalletBlock />
+                    <NewWalletBlock
+                        createNewWallet={this.createNewWallet}
+                    />
                     {/*<View>
                         <Counter />
                     </View>

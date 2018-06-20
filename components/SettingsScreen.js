@@ -42,7 +42,7 @@ export default class SettingsScreen extends React.Component {
                 <View style={{ marginTop: 20, flex: 1, alignItems: 'center' }}>
                     <View style={styles.buttonContainer}>
                         <Button
-                            title={I18n.t('settingsPage.logout')}
+                            title="Sign out"
                             onPress={this.logout}
                             color="#34343e"
                          />
