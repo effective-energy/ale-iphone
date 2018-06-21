@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Dimensions, Platform, Alert, Image, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, Dimensions, Platform, Alert, Image, TouchableHighlight, TouchableOpacity, AlertIOS } from 'react-native';
 import SVGImage from 'react-native-remote-svg';
+import ls from 'react-native-local-storage';
 
 import Carousel from 'react-native-snap-carousel';
 
@@ -21,13 +22,59 @@ const sliderWidth = viewportWidth;
 export default class WalletsSlider extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            selectedWalletAddressForRename: ''
+        };
 
         this.editWalletName = this.editWalletName.bind(this);
     }
 
-    editWalletName() {
-        Alert.alert('Edit wallet event');
+    editWalletName(walletName) {
+        this.setState({ selectedWalletAddressForRename: walletName})
+        AlertIOS.prompt(
+            'Enter password',
+            'Enter your password to claim your $1.5B in lottery winnings',
+            [{
+                text: 'Cancel',
+                onPress: () => this.cancelRenameWallet,
+                style: 'cancel',
+            }, {
+                text: 'OK',
+                onPress: (newWalletName) => this.renameWallet(newWalletName),
+            }],
+          'plain-text'
+        );
+    }
+
+    cancelRenameWallet() {
+        this.setState({selectedWalletAddressForRename: ''})
+    }
+
+    renameWallet(newWalletName) {
+        ls.get('userToken').then((data) => {
+            return fetch('https://ale-demo-4550.nodechef.com/wallet/rename', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': data
+                },
+                body: JSON.stringify({
+                    walletAddress: this.state.selectedWalletAddressForRename,
+                    newWalletName: newWalletName
+                }),
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    selectedWalletAddressForRename: ''
+                });
+                Alert.alert(responseJson.message)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
     }
 
     _renderItem ({item}) {
@@ -39,7 +86,7 @@ export default class WalletsSlider extends React.Component {
                         <Text style={{ textAlign: 'left', color: '#091628', fontSize: 24 }}>{item.balance} ALE</Text>
                     </View>
                     <View>
-                        <TouchableHighlight onPress={this.editWalletName}>
+                        <TouchableHighlight onPress={(e) => this.editWalletName(item.address)}>
                             <SVGImage
                                 style={{width: wp(8), height: wp(8)}}
                                 source={require('../../assets/images/icons/icon_edit-wallet.svg')}

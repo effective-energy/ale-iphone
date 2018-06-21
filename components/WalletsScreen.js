@@ -45,7 +45,7 @@ export default class WalletsScreen extends React.Component {
     }
 
     initialUserWallets() {
-        this.setState({ isLoaderPage: !this.state.isLoaderPage });
+        this.setState({ isLoaderPage: true });
         ls.get('userToken').then((data) => {
             return fetch('https://ale-demo-4550.nodechef.com/users/user-wallets', {
                 method: 'GET',
@@ -58,7 +58,8 @@ export default class WalletsScreen extends React.Component {
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
-                    walletsList: responseJson
+                    walletsList: responseJson,
+                    isLoaderPage: false
                 });
                 return this.getUserData();
             })
@@ -69,6 +70,7 @@ export default class WalletsScreen extends React.Component {
     }
 
     getUserData() {
+        this.setState({ isLoaderPage: true });
         ls.get('userToken').then((data) => {
             return fetch('https://ale-demo-4550.nodechef.com/users/get-user-data', {
                 method: 'GET',
@@ -80,14 +82,14 @@ export default class WalletsScreen extends React.Component {
             })
             .then((response) => response.json())
             .then((responseJson) => {
-                this.setState({
+                return this.setState({
                     userData: {
                         userEmail: responseJson.email,
                         userName: responseJson.name,
                         userAvatar: responseJson.avatar
                     },
-                    isLoaderPage: !this.state.isLoaderPage
-                })
+                    isLoaderPage: false
+                });
             })
             .catch((error) => {
                 console.error(error);
