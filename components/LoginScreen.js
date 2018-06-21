@@ -122,13 +122,13 @@ export default class LoginScreen extends React.Component {
                             value={this.state.userPassword}
                         />
 					</View>
-					<View style={{ backgroundColor: '#152038', width: screenWidth, padding: 5, borderRadius: 15 }}>
-						<Button
-							title="Login to wallet"
-							onPress={this.loginToWallet}
-							color="#ffbb00"
-						/>
-					</View>
+					<TouchableOpacity style={{ backgroundColor: '#152038', width: screenWidth, padding: 10, borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }} onPress={this.loginToWallet}>
+						<Image
+                            source={require('../assets/images/icons/icon_login-icon.svg')}
+                            style={{width: 16, height: 16, marginRight: 10 }}
+                        />
+						<Text style={{ color: '#ffbb00', textAlign: 'center' }}>Login to wallet</Text>
+					</TouchableOpacity>
 					{this.state.isPageLoader === true ? <View style={{ marginTop: 20 }}>
 							<Image
 			                    style={{ width: 44, height: 44 }}
@@ -136,7 +136,7 @@ export default class LoginScreen extends React.Component {
 			                />
 						</View>: null}
 				</View>
-				<View>
+				<View style={{ maxWidth: wp(80), width: wp(80) }}>
 					<View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
 						<Text style={{ color: '#34476f' }}>Forgot your email or password?</Text>
 						<TouchableOpacity
