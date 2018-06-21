@@ -4577,12 +4577,9 @@ react-mixin@^3.0.5:
     object-assign "^4.0.1"
     smart-mixin "^2.0.0"
 
-react-native-camera@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-1.1.4.tgz#5a01be906507cc2f232405f903c52c9d99988dba"
-  dependencies:
-    lodash "^4.17.4"
-    prop-types "^15.5.10"
+react-native-camera@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-0.6.0.tgz#dd2760b7857d660761c78f2da575b494fdc8dcb5"
 
 react-native-carousel-view@^0.5.1:
   version "0.5.1"
@@ -4649,17 +4646,6 @@ react-native-keyboard-aware-scroll-view@0.5.0:
 react-native-local-storage@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/react-native-local-storage/-/react-native-local-storage-1.5.2.tgz#82d4d76549ab21d6529aec7b3d42a2dcd41a9993"
-
-react-native-permissions@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-1.1.1.tgz#4876004681ff8556454613d85249b01baff9b35b"
-
-react-native-qrcode-scanner@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/react-native-qrcode-scanner/-/react-native-qrcode-scanner-1.0.1.tgz#96b18d8058f4b472bda4b34f8a08fddbc33d50eb"
-  dependencies:
-    prop-types "^15.5.10"
-    react-native-permissions "^1.1.1"
 
 react-native-remote-svg@^1.2.0:
   version "1.2.0"
