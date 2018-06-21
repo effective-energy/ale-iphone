@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Dimensions, Platform, Alert, Image, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Button, Dimensions, Platform, Alert, Image, TouchableHighlight, TouchableOpacity } from 'react-native';
 import SVGImage from 'react-native-remote-svg';
 
 import Carousel from 'react-native-snap-carousel';
@@ -41,7 +41,7 @@ export default class WalletsSlider extends React.Component {
                     <View>
                         <TouchableHighlight onPress={this.editWalletName}>
                             <SVGImage
-                                style={{width: 30, height: 30}}
+                                style={{width: wp(8), height: wp(8)}}
                                 source={require('../../assets/images/icons/icon_edit-wallet.svg')}
                             />
                         </TouchableHighlight>
@@ -49,30 +49,28 @@ export default class WalletsSlider extends React.Component {
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={{ width: '45%' }}>
-                        <View style={{ backgroundColor: '#091628', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                        <TouchableOpacity
+                            style={{ backgroundColor: '#091628', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', padding: 5, alignItems: 'center' }}
+                            onPress={e => this.props.sendMoney(item.address)}
+                        >
                             <SVGImage
-                                style={{width: 20, height: 20, marginTop: 5, marginLeft: 5 }}
+                                style={{width: wp(5), height: wp(5), marginRight: 10 }}
                                 source={require('../../assets/images/icons/icon_send.svg')}
                             />
-                            <Button
-                                title="Send"
-                                color="#ffffff"
-                                onPress={e => this.props.sendMoney(item.address)}
-                            />
-                        </View>
+                            <Text style={{ color: '#ffffff', fontSize: wp(5) }}>Send</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{ width: '45%' }}>
-                        <View style={{ backgroundColor: '#FFBB00', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                        <TouchableOpacity
+                            style={{ backgroundColor: '#FFBB00', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', padding: 5, alignItems: 'center' }}
+                            onPress={e => this.props.requestMoney(item.address)}
+                        >
                             <SVGImage
-                                style={{width: 20, height: 20, marginTop: 5, marginLeft: 5 }}
+                                style={{width: wp(5), height: wp(5), marginRight: 5 }}
                                 source={require('../../assets/images/icons/icon_request.svg')}
                             />
-                            <Button
-                                title="Request"
-                                color="#000000"
-                                onPress={e => this.props.requestMoney(item.address)}
-                            />
-                        </View>
+                            <Text style={{ color: '#000000', fontSize: wp(5) }}>Request</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
