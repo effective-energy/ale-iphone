@@ -1,13 +1,22 @@
 import React from 'react';
-import { View, StyleSheet, Button, Text, StatusBar, Image, Alert } from 'react-native';
+import { View, StyleSheet, Button, Text, StatusBar, Image, Alert, Dimensions, TouchableOpacity } from 'react-native';
 import SideMenu from 'react-native-side-menu';
 import ls from 'react-native-local-storage';
+import SVGImage from 'react-native-remote-svg';
 
 import BottomNavigator from './layouts/BottomNavigator';
 import WalletsSlider from './layouts/WalletsSlider';
 import NewWalletBlock from './layouts/NewWalletBlock';
 import Pageloader from './layouts/Pageloader';
 import Leftmenu from './layouts/Leftmenu';
+
+function wp (percentage) {
+    const value = (percentage * viewportWidth) / 100;
+    return Math.round(value);
+}
+
+const { width: viewportWidth } = Dimensions.get('window');
+let screenWidth = wp(80);
 
 import { observable } from "mobx";
 import { observer, inject } from "mobx-react";
@@ -31,6 +40,7 @@ export default class WalletsScreen extends React.Component {
         this.sendMoney = this.sendMoney.bind(this);
         this.signOut = this.signOut.bind(this);
         this.createNewWallet = this.createNewWallet.bind(this);
+        this.toggleLeftMenu = this.toggleLeftMenu.bind(this);
     }
     
     static navigationOptions = {
@@ -42,6 +52,10 @@ export default class WalletsScreen extends React.Component {
 
     componentDidMount() {
         this.initialUserWallets();
+    }
+
+    toggleLeftMenu() {
+        this.setState({isOpenLeftMenu: true});
     }
 
     initialUserWallets() {
@@ -139,6 +153,20 @@ export default class WalletsScreen extends React.Component {
                     <StatusBar
                         barStyle='light-content'
                     />
+                    <View style={{ width: wp(100), height: 50, marginTop: 50, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: wp(10), paddingRight: wp(10) }}>
+                        <TouchableOpacity
+                            onPress={this.toggleLeftMenu}
+                        >
+                            <SVGImage
+                                source={require('../assets/images/icons/icon_login-icon.svg')}
+                                style={{width: 30, height: 30 }}
+                            />
+                        </TouchableOpacity>
+                        <SVGImage
+                            source={require('../assets/images/icons/icon_login-icon.svg')}
+                            style={{width: 30, height: 30 }}
+                        />
+                    </View>
                     <WalletsSlider
                         walletsList={this.state.walletsList}
                         requestMoney={this.requestMoney}

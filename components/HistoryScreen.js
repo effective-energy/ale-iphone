@@ -14,7 +14,7 @@ export default class SettingsScreen extends React.Component {
     }
     
     static navigationOptions = {
-        title: "History"
+        title: "Operations history"
     };
 
     changePage(e) {
@@ -25,7 +25,7 @@ export default class SettingsScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
-               <Text>History page</Text>
+                <Text>History page</Text>
                 <BottomNavigator
                     changePage={this.changePage}
                     activePage="history"

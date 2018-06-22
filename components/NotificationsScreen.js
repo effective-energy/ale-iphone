@@ -25,7 +25,7 @@ export default class NotificationsScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
-               <Text>Notifications page</Text>
+                <Text style={{ fontSize: 20 }}>You do not have{'\n'}any notifications</Text>
                 <BottomNavigator
                     changePage={this.changePage}
                     activePage="notifications"
@@ -38,6 +38,8 @@ export default class NotificationsScreen extends React.Component {
 const styles = StyleSheet.create({
     pageContainer: {
         flex: 1,
-        backgroundColor: '#e8ebee'
+        backgroundColor: '#e8ebee',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });

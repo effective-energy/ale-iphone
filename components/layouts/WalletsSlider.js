@@ -133,7 +133,7 @@ export default class WalletsSlider extends React.Component {
                     loop={false}
                     layoutCardOffset={50}
                     hasParallaxImages={true}
-                    containerCustomStyle={{ marginTop: 50, overflow: 'visible' }}
+                    containerCustomStyle={{ marginTop: 20, overflow: 'visible' }}
                     data={this.props.walletsList}
                     renderItem={item => this._renderItem(item)}
                     sliderWidth={sliderWidth}
