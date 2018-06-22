@@ -7,6 +7,7 @@ import ls from 'react-native-local-storage';
 import I18n from '../i18n/index';
 
 import BottomNavigator from './layouts/BottomNavigator';
+import Pageloader from './layouts/Pageloader';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -19,7 +20,8 @@ export default class SettingsScreen extends React.Component {
     constructor(props) {
         super(props);
 	    this.state = {
-            isActive: false
+            isTwoAuthActive: false,
+            isLoaderPage: false
         };
         this.logout = this.logout.bind(this);
         this.changePage = this.changePage.bind(this);
@@ -33,6 +35,34 @@ export default class SettingsScreen extends React.Component {
         gesturesEnabled: false,
     };
 
+    componentDidMount() {
+        this.getUserData();
+    }
+
+    getUserData() {
+        this.setState({ isLoaderPage: true });
+        ls.get('userToken').then((data) => {
+            return fetch('https://ale-demo-4550.nodechef.com/users/get-user-data', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': data
+                },
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                return this.setState({
+                    isTwoAuthActive: responseJson.isTwoAuth,
+                    isLoaderPage: false
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
+    }
+
     logout() {
         ls.remove('userToken').then(() => {
             return this.props.navigation.navigate('Login');
@@ -45,18 +75,25 @@ export default class SettingsScreen extends React.Component {
 
     onValueChange() {
         this.setState({
-            isActive: !this.state.isActive
+            isTwoAuthActive: !this.state.isTwoAuthActive
         })
     }
 
     render() {
+        if (this.state.isLoaderPage) {
+            return (<Pageloader title="Loading user data" />);
+        }
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
-                <View style={{ marginTop: 20, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp(100), backgroundColor: '#ffffff', padding: 10 }}>
-                    <Text style={{ fontSize: wp(5) }}>Enable 2fa</Text>
-                    <Switch value={this.state.isActive} tintColor="#cccccc" onValueChange={this.onValueChange} />
+                <View style={{ marginTop: 20, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp(100), backgroundColor: '#ffffff', padding: 10, borderBottomColor: '#cccccc', borderBottomWidth: 1 }}>
+                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>Enable 2fa</Text>
+                    <Switch value={this.state.isTwoAuthActive} tintColor="#cccccc" onValueChange={this.onValueChange} />
                 </View>
+                <TouchableOpacity style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), padding: 15 }}>
+                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>Select language</Text>
+                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>ENG</Text>
+                </TouchableOpacity>
                 <View style={{ marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.buttonContainer} onPress={this.logout}>
                         <Text style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}>Sign out</Text>

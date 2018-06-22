@@ -127,7 +127,7 @@ export default class LoginScreen extends React.Component {
                             source={require('../assets/images/icons/icon_login-icon.svg')}
                             style={{width: 16, height: 16, marginRight: 10 }}
                         />
-						<Text style={{ color: '#ffbb00', textAlign: 'center' }}>Login to wallet</Text>
+						<Text style={{ color: '#ffbb00', textAlign: 'center', fontSize: wp(5) }}>Login to wallet</Text>
 					</TouchableOpacity>
 					{this.state.isPageLoader === true ? <View style={{ marginTop: 20 }}>
 							<Image
