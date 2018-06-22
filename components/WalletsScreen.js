@@ -51,6 +51,7 @@ export default class WalletsScreen extends React.Component {
     };
 
     componentDidMount() {
+        this.setState({ isOpenLeftMenu: false });
         this.initialUserWallets();
     }
 
