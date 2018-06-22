@@ -32,8 +32,8 @@ export default class WalletsSlider extends React.Component {
     editWalletName(walletName) {
         this.setState({ selectedWalletAddressForRename: walletName})
         AlertIOS.prompt(
-            'Enter password',
-            'Enter your password to claim your $1.5B in lottery winnings',
+            'Change wallet name',
+            'Enter new name for wallet',
             [{
                 text: 'Cancel',
                 onPress: () => this.cancelRenameWallet,
@@ -83,7 +83,13 @@ export default class WalletsSlider extends React.Component {
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={{ marginBottom: 20 }}>
                         <Text style={{ backgroundColor: 'transparent', color: '#091628', fontSize: 18, textAlign: 'left' }}>{ item.name }</Text>
-                        <Text style={{ textAlign: 'left', color: '#091628', fontSize: 24 }}>{item.balance} ALE</Text>
+                        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
+                            <Text style={{ color: '#091628', fontSize: 24 }}>{item.balance}</Text>
+                            <SVGImage
+                                style={{width: wp(5), height: wp(5), paddingLeft: 5 }}
+                                source={require('../../assets/images/icons/icon_ale-icon.svg')}
+                            />
+                        </View>
                     </View>
                     <View>
                         <TouchableHighlight onPress={(e) => this.editWalletName(item.address)}>

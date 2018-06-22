@@ -25,7 +25,7 @@ export default class LeftMenu extends React.Component {
                     <View>
                         <Text style={{ color: '#ffffff', fontSize: 18 }}>Account</Text>
                     </View>
-                    <View style={{ marginTop: 20, display: 'flex', flexDirection: 'row' }}>
+                    <View style={{ marginTop: 20, display: 'flex', flexDirection: 'row', borderBottomColor: '#47315a', borderBottomWidth: 3, paddingBottom: 10 }}>
                         <View style={{ marginRight: 10 }}>
                             <Image
                                 style={{width: 50, height: 50}}
@@ -33,9 +33,13 @@ export default class LeftMenu extends React.Component {
                             />
                         </View>
                         <View style={{ display: 'flex', justifyContent: 'center' }}>
-                            <Text style={{ color: '#ffffff', fontSize: 18 }}>{this.props.userData.userName}</Text>
-                            <Text style={{ color: '#ffffff', fontSize: 16 }}>{this.props.userData.userEmail}</Text>
+                            <Text style={{ color: '#ffffff', fontSize: 20, maxWidth: wp(45) }}>{this.props.userData.userName}</Text>
+                            <Text style={{ color: '#ffffff', fontSize: 16, maxWidth: wp(45) }}>{this.props.userData.userEmail}</Text>
                         </View>
+                    </View>
+                    <View style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
+                        <Text style={{ color: '#ffffff', fontSize: 20 }}>Total balance</Text>
+                        <Text style={{ color: '#ffffff', fontSize: 26 }}>1 999 900 990</Text>
                     </View>
                 </View>
                 <View style={{ marginRight: 10, marginBottom: 25, display: 'flex', alignItems: 'center' }}>

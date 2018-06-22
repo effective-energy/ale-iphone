@@ -31,9 +31,6 @@ export default class SettingsScreen extends React.Component {
         title: I18n.t('settingsPage.title'),
         headerLeft: null,
         gesturesEnabled: false,
-        headerStyle: {
-            backgroundColor: '#e8ebee',
-      },
     };
 
     logout() {
