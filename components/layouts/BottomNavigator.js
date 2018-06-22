@@ -16,8 +16,8 @@ export default class BottomNavigator extends React.Component {
             activeClass: this.props.activePage,
             tabs: [
                 { title: 'Wallet', image: require('../../assets/images/navigation/bottom/icon_wallet-passive.svg'), pageName: 'Wallets', activeClass: 'wallets' },
-                { title: 'History', image: require('../../assets/images/navigation/bottom/icon_history-passive.svg'), pageName: 'Wallets', activeClass: 'send' },
-                { title: 'Notifications', image: require('../../assets/images/navigation/bottom/icon_notifications-passive.svg'), pageName: 'Wallets', activeClass: 'receive' },
+                { title: 'History', image: require('../../assets/images/navigation/bottom/icon_history-passive.svg'), pageName: 'History', activeClass: 'history' },
+                { title: 'Notifications', image: require('../../assets/images/navigation/bottom/icon_notifications-passive.svg'), pageName: 'Notifications', activeClass: 'notifications' },
                 { title: 'Settings', image: require('../../assets/images/navigation/bottom/icon_settings-passive.svg'), pageName: 'Settings', activeClass: 'settings' }
             ]
         };
