@@ -26,6 +26,13 @@ export default class SendMoneyScreen extends React.Component {
         title: 'Send money'
     };
 
+    componentDidMount() {
+        this.setState({
+            amount: '',
+            destinationAddress: ''
+        })
+    }
+
     sendMoney() {
         if (this.state.amount === '') {
             return Alert.alert('Enter amount');
@@ -35,7 +42,7 @@ export default class SendMoneyScreen extends React.Component {
             return Alert.alert('Enter number amount');
         }
 
-        if (this.state.receiverAddress === '') {
+        if (this.state.destinationAddress === '') {
             return Alert.alert('Enter destination address')
         }
 
@@ -55,12 +62,20 @@ export default class SendMoneyScreen extends React.Component {
             })
             .then((response) => response.json())
             .then((responseJson) => {
-                return Alert.alert(responseJson.message)
+                if (responseJson.message === 'Success send') {
+                    return this.props.navigation.navigate('SuccessPayment', { animation: null });
+                } else {
+                    return Alert.alert(responseJson.message);
+                }
             })
             .catch((error) => {
                 console.error(error);
             });
         });
+    }
+
+    qrScanner() {
+
     }
 
     render() {
@@ -69,14 +84,16 @@ export default class SendMoneyScreen extends React.Component {
             	<StatusBar barStyle='dark-content' />
             	<View>
             		<View>
-                        <Text>Amount</Text>
                         <TextInput
+                            placeholder="Amount"
+                            placeholderTextColor="#000000"
                             style={{height: 40, borderColor: 'gray', borderWidth: 1, width: screenWidth, marginBottom: 20, borderRadius: 2, padding: 6, color: '#000000' }}
                             onChangeText={(amount) => this.setState({amount})}
                             value={this.state.amount}
                         />
-                        <Text>Address destination</Text>
                         <TextInput
+                            placeholder="Address destination"
+                            placeholderTextColor="#000000"
                             style={{height: 40, borderColor: 'gray', borderWidth: 1, width: screenWidth, marginBottom: 20, borderRadius: 2, padding: 6, color: '#000000' }}
                             onChangeText={(destinationAddress) => this.setState({destinationAddress})}
                             value={this.state.destinationAddress}
@@ -86,6 +103,13 @@ export default class SendMoneyScreen extends React.Component {
                         <Button
                             title="Send money"
                             onPress={this.sendMoney}
+                            color="#000000"
+                        />
+                    </View>
+                    <View style={{ backgroundColor: '#d1d8dd', width: screenWidth, padding: 5, borderRadius: 5 }}>
+                        <Button
+                            title="QR scannet"
+                            onPress={this.qrScanner}
                             color="#000000"
                         />
                     </View>
@@ -101,5 +125,24 @@ const styles = StyleSheet.create({
         backgroundColor: '#e8ebee',
         alignItems: 'center',
         paddingTop: 50
-    }
+    },
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: 'black'
+      },
+      preview: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'center'
+      },
+      capture: {
+        flex: 0,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        padding: 15,
+        paddingHorizontal: 20,
+        alignSelf: 'center',
+        margin: 20
+      }
 });

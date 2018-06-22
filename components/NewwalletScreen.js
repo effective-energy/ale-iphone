@@ -1,57 +1,58 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert, AppRegistry, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, StatusBar, TouchableOpacity, Alert } from 'react-native';
+import Image from 'react-native-remote-svg';
 
-export default class NewwalletScreen extends React.Component {
+function wp (percentage) {
+    const value = (percentage * viewportWidth) / 100;
+    return Math.round(value);
+}
+const { width: viewportWidth } = Dimensions.get('window');
+
+export default class NewWalletScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            walletName: ''
-        };
+        this.state = {};
+
         this.restoreWallet = this.restoreWallet.bind(this);
     }
-    restoreWallet() {
-        if (this.state.walletName.length === 0) {
-            return Alert.alert('Enter wallet name');
-        } else {
-            return this.props.navigation.navigate('GenerateSecretKey', { walletName: this.state.walletName })
-        }
-    }
+
     static navigationOptions = {
-        title: 'New wallet',
+        title: 'Add new wallet',
     };
+
+    restoreWallet() {
+        this.props.navigation.navigate('RestoreWallet', { animation: null });
+    }
+
     render() {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: '#ffffff' }}>
-                <View style={{ marginTop: 20 }}>
-                    <Text style={{fontSize: 20, textAlign: 'center' }}>Create new wallet</Text>
-                    <Text style={{ textAlign: 'center' }}>Enter wallet name</Text>
-                    <View style={{ marginTop: 10 }}>
-                        <TextInput
-                            style={{height: 40, borderColor: 'gray', borderWidth: 1, width: 300, marginBottom: 20, borderRadius: 2, padding: 6 }}
-                            onChangeText={(walletName) => this.setState({walletName})}
-                            value={this.state.walletName}
-                        />
+            <View
+                style={{ flex: 1, backgroundColor: '#08142F', alignItems: 'center', justifyContent: 'space-between', paddingTop: 30, paddingBottom: 30 }}
+            >
+                <StatusBar barStyle='dark-content' />
+                <View>
+                    <Text>123</Text>
+                </View>
 
-                        <View style={styles.buttonContainer}>
-                            <Button
-                                title="Next"
-                                onPress={this.restoreWallet}
-                                color="#34343e"
-                              />
-                          </View>
-                    </View>
+                <View>
+                    <TouchableOpacity
+                        onPress={this.restoreWallet}
+                        style={{ backgroundColor: '#ffbb00', width: wp(80), padding: 5, borderRadius: 15, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
+                    >
+                        <Image
+                            source={require('../assets/images/icons/icon_restore-wallet.svg')}
+                            style={{width: 30, height: 30, marginRight: 10 }}
+                        />
+                        <Text
+                            style={{ color: '#000000', fontSize: 18}}
+                        >
+                            Restore wallet
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
     }
 }
 
-const styles = StyleSheet.create({
-  buttonContainer: {
-    backgroundColor: '#ffd24f',
-    borderRadius: 4,
-    padding: 10,
-    width: 300,
-    marginBottom: 20
-  }
-});
+const styles = StyleSheet.create({});

@@ -1,5 +1,14 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Dimensions } from 'react-native';
+import Image from 'react-native-remote-svg';
+
+function wp (percentage) {
+    const value = (percentage * viewportWidth) / 100;
+    return Math.round(value);
+}
+
+const { width: viewportWidth } = Dimensions.get('window');
+let screenWidth = wp(80);
 
 export default class NewWalletBlock extends React.Component {
 	constructor(props) {
@@ -7,22 +16,24 @@ export default class NewWalletBlock extends React.Component {
 	    this.state = {};
     }
 
-    createNewWallet() {
-        Alert.alert('Loading...')
-    }
-
     render() {
     	return (
-    		<TouchableOpacity
-                style={styles.blockContainer}
-                onPress={this.createNewWallet}
-            >
-                <Text
-                    style={styles.blockText}
+            <View style={{ display: 'flex', alignItems: 'center' }}>
+        		<TouchableOpacity
+                    style={styles.blockContainer}
+                    onPress={this.props.createNewWallet}
                 >
-                    Create or restore wallet
-                </Text>
-            </TouchableOpacity>
+                    <Image
+                        style={{width: wp(7), height: wp(7), marginRight: 10}}
+                        source={require('../../assets/images/icons/icon_new-wallet.svg')}
+                    />
+                    <Text
+                        style={styles.blockText}
+                    >
+                        Create or restore wallet
+                    </Text>
+                </TouchableOpacity>
+            </View>
     	)
     }
 }
@@ -30,15 +41,18 @@ export default class NewWalletBlock extends React.Component {
 const styles = StyleSheet.create({
     blockContainer: {
         backgroundColor: '#16203a',
-        width: 300,
+        width: screenWidth,
         marginTop: 30,
         borderRadius: 10,
-        padding: 15,
-        marginLeft: 40
+        padding: 12,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     blockText: {
         color: '#f0b721',
-        fontSize: 18,
+        fontSize: wp(5),
         fontWeight: 'bold',
         textAlign: 'center'
     }

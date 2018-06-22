@@ -1,10 +1,10 @@
 dependencies: \
-  /Users/voroncov/Desktop/RN/ale-iphone/node_modules/react-native/Libraries/Network/RCTNetworkTask.m \
-  /Users/voroncov/Desktop/RN/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
-  /Users/voroncov/Desktop/RN/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
-  /Users/voroncov/Desktop/RN/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
-  /Users/voroncov/Desktop/RN/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h \
-  /Users/voroncov/Desktop/RN/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTNetworkTask.h \
-  /Users/voroncov/Desktop/RN/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTURLRequestDelegate.h \
-  /Users/voroncov/Desktop/RN/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTURLRequestHandler.h \
-  /Users/voroncov/Desktop/RN/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/Libraries/Network/RCTNetworkTask.m \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTNetworkTask.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTURLRequestDelegate.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTURLRequestHandler.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h

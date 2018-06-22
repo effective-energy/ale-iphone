@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Dimensions, Platform, Alert, Image, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Button, Dimensions, Platform, Alert, Image, TouchableHighlight, TouchableOpacity, AlertIOS } from 'react-native';
+import SVGImage from 'react-native-remote-svg';
+import ls from 'react-native-local-storage';
 
 import Carousel from 'react-native-snap-carousel';
 
@@ -20,13 +22,59 @@ const sliderWidth = viewportWidth;
 export default class WalletsSlider extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            selectedWalletAddressForRename: ''
+        };
 
         this.editWalletName = this.editWalletName.bind(this);
     }
 
-    editWalletName() {
-        Alert.alert('Edit wallet event');
+    editWalletName(walletName) {
+        this.setState({ selectedWalletAddressForRename: walletName})
+        AlertIOS.prompt(
+            'Change wallet name',
+            'Enter new name for wallet',
+            [{
+                text: 'Cancel',
+                onPress: () => this.cancelRenameWallet,
+                style: 'cancel',
+            }, {
+                text: 'OK',
+                onPress: (newWalletName) => this.renameWallet(newWalletName),
+            }],
+          'plain-text'
+        );
+    }
+
+    cancelRenameWallet() {
+        this.setState({selectedWalletAddressForRename: ''})
+    }
+
+    renameWallet(newWalletName) {
+        ls.get('userToken').then((data) => {
+            return fetch('https://ale-demo-4550.nodechef.com/wallet/rename', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': data
+                },
+                body: JSON.stringify({
+                    walletAddress: this.state.selectedWalletAddressForRename,
+                    newWalletName: newWalletName
+                }),
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    selectedWalletAddressForRename: ''
+                });
+                Alert.alert(responseJson.message)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
     }
 
     _renderItem ({item}) {
@@ -35,35 +83,47 @@ export default class WalletsSlider extends React.Component {
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={{ marginBottom: 20 }}>
                         <Text style={{ backgroundColor: 'transparent', color: '#091628', fontSize: 18, textAlign: 'left' }}>{ item.name }</Text>
-                        <Text style={{ textAlign: 'left', color: '#091628', fontSize: 24 }}>{item.balance} ALE</Text>
+                        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
+                            <Text style={{ color: '#091628', fontSize: 24 }}>{item.balance}</Text>
+                            <SVGImage
+                                style={{width: wp(5), height: wp(5), paddingLeft: 5 }}
+                                source={require('../../assets/images/icons/icon_ale-icon.svg')}
+                            />
+                        </View>
                     </View>
                     <View>
-                        <TouchableHighlight onPress={this.editWalletName}>
-                            <Image
-                                style={{width: 30, height: 30}}
-                                source={{uri: 'https://cdn0.iconfinder.com/data/icons/back-to-school/90/circle-school-learn-study-subject-math-pencil-edit-512.png'}}
+                        <TouchableHighlight onPress={(e) => this.editWalletName(item.address)}>
+                            <SVGImage
+                                style={{width: wp(8), height: wp(8)}}
+                                source={require('../../assets/images/icons/icon_edit-wallet.svg')}
                             />
                         </TouchableHighlight>
                     </View>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={{ width: '45%' }}>
-                        <View style={{ backgroundColor: '#091628', borderRadius: 10 }}>
-                            <Button
-                                title="Send"
-                                color="#ffffff"
-                                onPress={e => this.props.sendMoney(item.address)}
+                        <TouchableOpacity
+                            style={{ backgroundColor: '#091628', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', padding: 5, alignItems: 'center' }}
+                            onPress={e => this.props.sendMoney(item.address)}
+                        >
+                            <SVGImage
+                                style={{width: wp(5), height: wp(5), marginRight: 10 }}
+                                source={require('../../assets/images/icons/icon_send.svg')}
                             />
-                        </View>
+                            <Text style={{ color: '#ffffff', fontSize: wp(5) }}>Send</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={{ width: '45%' }}>
-                        <View style={{ backgroundColor: '#091628', borderRadius: 10 }}>
-                            <Button
-                                title="Request"
-                                color="#ffffff"
-                                onPress={e => this.props.requestMoney(item.address)}
+                        <TouchableOpacity
+                            style={{ backgroundColor: '#FFBB00', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', padding: 5, alignItems: 'center' }}
+                            onPress={e => this.props.requestMoney(item.address)}
+                        >
+                            <SVGImage
+                                style={{width: wp(5), height: wp(5), marginRight: 5 }}
+                                source={require('../../assets/images/icons/icon_request.svg')}
                             />
-                        </View>
+                            <Text style={{ color: '#000000', fontSize: wp(5) }}>Request</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -79,7 +139,7 @@ export default class WalletsSlider extends React.Component {
                     loop={false}
                     layoutCardOffset={50}
                     hasParallaxImages={true}
-                    containerCustomStyle={{ marginTop: 50, overflow: 'visible' }}
+                    containerCustomStyle={{ marginTop: 20, overflow: 'visible' }}
                     data={this.props.walletsList}
                     renderItem={item => this._renderItem(item)}
                     sliderWidth={sliderWidth}

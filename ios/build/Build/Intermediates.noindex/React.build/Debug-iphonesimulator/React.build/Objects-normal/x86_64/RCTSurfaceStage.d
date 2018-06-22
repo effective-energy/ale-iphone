@@ -1,4 +1,4 @@
 dependencies: \
-  /Users/voroncov/Desktop/RN/ale-iphone/node_modules/react-native/React/Base/Surface/RCTSurfaceStage.m \
-  /Users/voroncov/Desktop/RN/ale-iphone/node_modules/react-native/React/Base/Surface/RCTSurfaceStage.h \
-  /Users/voroncov/Desktop/RN/ale-iphone/node_modules/react-native/React/Base/RCTDefines.h
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/Surface/RCTSurfaceStage.m \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/Surface/RCTSurfaceStage.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTDefines.h

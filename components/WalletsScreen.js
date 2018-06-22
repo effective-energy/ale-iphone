@@ -1,13 +1,22 @@
 import React from 'react';
-import { View, StyleSheet, Button, Text, StatusBar, Image, Alert } from 'react-native';
+import { View, StyleSheet, Button, Text, StatusBar, Image, Alert, Dimensions, TouchableOpacity } from 'react-native';
 import SideMenu from 'react-native-side-menu';
 import ls from 'react-native-local-storage';
+import SVGImage from 'react-native-remote-svg';
 
 import BottomNavigator from './layouts/BottomNavigator';
 import WalletsSlider from './layouts/WalletsSlider';
 import NewWalletBlock from './layouts/NewWalletBlock';
 import Pageloader from './layouts/Pageloader';
 import Leftmenu from './layouts/Leftmenu';
+
+function wp (percentage) {
+    const value = (percentage * viewportWidth) / 100;
+    return Math.round(value);
+}
+
+const { width: viewportWidth } = Dimensions.get('window');
+let screenWidth = wp(80);
 
 import { observable } from "mobx";
 import { observer, inject } from "mobx-react";
@@ -30,6 +39,8 @@ export default class WalletsScreen extends React.Component {
         this.requestMoney = this.requestMoney.bind(this);
         this.sendMoney = this.sendMoney.bind(this);
         this.signOut = this.signOut.bind(this);
+        this.createNewWallet = this.createNewWallet.bind(this);
+        this.toggleLeftMenu = this.toggleLeftMenu.bind(this);
     }
     
     static navigationOptions = {
@@ -40,11 +51,16 @@ export default class WalletsScreen extends React.Component {
     };
 
     componentDidMount() {
+        this.setState({ isOpenLeftMenu: false });
         this.initialUserWallets();
     }
 
+    toggleLeftMenu() {
+        this.setState({isOpenLeftMenu: true});
+    }
+
     initialUserWallets() {
-        this.setState({ isLoaderPage: !this.state.isLoaderPage });
+        this.setState({ isLoaderPage: true });
         ls.get('userToken').then((data) => {
             return fetch('https://ale-demo-4550.nodechef.com/users/user-wallets', {
                 method: 'GET',
@@ -57,7 +73,8 @@ export default class WalletsScreen extends React.Component {
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
-                    walletsList: responseJson
+                    walletsList: responseJson,
+                    isLoaderPage: false
                 });
                 return this.getUserData();
             })
@@ -68,6 +85,7 @@ export default class WalletsScreen extends React.Component {
     }
 
     getUserData() {
+        this.setState({ isLoaderPage: true });
         ls.get('userToken').then((data) => {
             return fetch('https://ale-demo-4550.nodechef.com/users/get-user-data', {
                 method: 'GET',
@@ -79,14 +97,14 @@ export default class WalletsScreen extends React.Component {
             })
             .then((response) => response.json())
             .then((responseJson) => {
-                this.setState({
+                return this.setState({
                     userData: {
                         userEmail: responseJson.email,
                         userName: responseJson.name,
                         userAvatar: responseJson.avatar
                     },
-                    isLoaderPage: !this.state.isLoaderPage
-                })
+                    isLoaderPage: false
+                });
             })
             .catch((error) => {
                 console.error(error);
@@ -112,6 +130,10 @@ export default class WalletsScreen extends React.Component {
         })
     }
 
+    createNewWallet() {
+        this.props.navigation.navigate('NewWallet', { animation: null });
+    }
+
     render() {
         if (this.state.isLoaderPage) {
             return (<Pageloader title="Loading wallets..." />);
@@ -132,12 +154,28 @@ export default class WalletsScreen extends React.Component {
                     <StatusBar
                         barStyle='light-content'
                     />
+                    <View style={{ width: wp(100), height: 50, marginTop: 50, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: wp(10), paddingRight: wp(10) }}>
+                        <TouchableOpacity
+                            onPress={this.toggleLeftMenu}
+                        >
+                            <SVGImage
+                                source={require('../assets/images/icons/icon_login-icon.svg')}
+                                style={{width: 30, height: 30 }}
+                            />
+                        </TouchableOpacity>
+                        <SVGImage
+                            source={require('../assets/images/icons/icon_login-icon.svg')}
+                            style={{width: 30, height: 30 }}
+                        />
+                    </View>
                     <WalletsSlider
                         walletsList={this.state.walletsList}
                         requestMoney={this.requestMoney}
                         sendMoney={this.sendMoney}
                     />
-                    <NewWalletBlock />
+                    <NewWalletBlock
+                        createNewWallet={this.createNewWallet}
+                    />
                     {/*<View>
                         <Counter />
                     </View>

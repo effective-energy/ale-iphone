@@ -11,15 +11,18 @@ import { Provider } from "mobx-react";
 import stores from "./mobX";
 
 import LoginScreen from './components/LoginScreen';
-import NewwalletScreen from './components/NewwalletScreen';
+import NewWalletScreen from './components/NewWalletScreen';
 import ImportwalletScreen from './components/ImportwalletScreen';
-import GenerateSecretKeyScreen from './components/GenerateSecretKeyScreen';
 import WalletsScreen from './components/WalletsScreen';
 import SendScreen from './components/SendScreen';
 import ReceiveScreen from './components/ReceiveScreen';
 import SettingsScreen from './components/SettingsScreen';
 import CreateAccountScreen from './components/CreateAccountScreen';
 import RecoverAccountScreen from './components/RecoverAccountScreen';
+import SuccessPaymentScreen from './components/SuccessPaymentScreen';
+import RestoreWalletScreen from './components/RestoreWalletScreen';
+import HistoryScreen from './components/HistoryScreen';
+import NotificationsScreen from './components/NotificationsScreen';
 
 //Modals
 import RequestMoneyScreen from './components/RequestMoneyScreen';
@@ -37,9 +40,8 @@ const initialRouteName = () => {
 
 const RootStack = createStackNavigator({
     Login: { screen: LoginScreen },
-    Newwallet: { screen: NewwalletScreen },
+    NewWallet: { screen: NewWalletScreen },
     Importwallet: { screen: ImportwalletScreen },
-    GenerateSecretKey: { screen: GenerateSecretKeyScreen },
     Wallets: { screen: WalletsScreen },
     SendTokens: { screen: SendScreen },
     ReceiveTokens: { screen: ReceiveScreen },
@@ -47,7 +49,11 @@ const RootStack = createStackNavigator({
     RequestMoney: { screen: RequestMoneyScreen },
     SendMoney: { screen: SendMoneyScreen },
     CreateAccount: { screen: CreateAccountScreen },
-    RecoverAccount: { screen: RecoverAccountScreen }
+    RecoverAccount: { screen: RecoverAccountScreen },
+    SuccessPayment: { screen: SuccessPaymentScreen },
+    RestoreWallet: { screen: RestoreWalletScreen },
+    History: { screen: HistoryScreen },
+    Notifications: { screen: NotificationsScreen }
 }, {
     initialRouteName: initialRouteName()
 }, {
