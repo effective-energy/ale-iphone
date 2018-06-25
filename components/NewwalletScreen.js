@@ -18,6 +18,13 @@ export default class NewWalletScreen extends React.Component {
 
     static navigationOptions = {
         title: 'Add new wallet',
+        headerTitleStyle: {
+            color: '#ffbb00'
+        },
+        headerStyle: {
+            backgroundColor: '#08142F'
+        },
+        headerTintColor: '#ffbb00',
     };
 
     restoreWallet() {
@@ -29,7 +36,7 @@ export default class NewWalletScreen extends React.Component {
             <View
                 style={{ flex: 1, backgroundColor: '#08142F', alignItems: 'center', justifyContent: 'space-between', paddingTop: 30, paddingBottom: 30 }}
             >
-                <StatusBar barStyle='dark-content' />
+                <StatusBar barStyle='light-content' />
                 <View>
                     <Text>123</Text>
                 </View>
