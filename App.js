@@ -23,6 +23,7 @@ import SuccessPaymentScreen from './components/SuccessPaymentScreen';
 import RestoreWalletScreen from './components/RestoreWalletScreen';
 import HistoryScreen from './components/HistoryScreen';
 import NotificationsScreen from './components/NotificationsScreen';
+import ChangeLanguageScreen from './components/ChangeLanguageScreen';
 
 //Modals
 import RequestMoneyScreen from './components/RequestMoneyScreen';
@@ -53,7 +54,8 @@ const RootStack = createStackNavigator({
     SuccessPayment: { screen: SuccessPaymentScreen },
     RestoreWallet: { screen: RestoreWalletScreen },
     History: { screen: HistoryScreen },
-    Notifications: { screen: NotificationsScreen }
+    Notifications: { screen: NotificationsScreen },
+    ChangeLanguage: { screen: ChangeLanguageScreen }
 }, {
     initialRouteName: initialRouteName()
 }, {

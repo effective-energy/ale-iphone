@@ -25,7 +25,7 @@ export default class SettingsScreen extends React.Component {
         };
         this.logout = this.logout.bind(this);
         this.changePage = this.changePage.bind(this);
-
+        this.changeLanguage = this.changeLanguage.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
     }
     
@@ -79,6 +79,10 @@ export default class SettingsScreen extends React.Component {
         })
     }
 
+    changeLanguage() {
+        this.props.navigation.navigate('ChangeLanguage', { animation: null });
+    }
+
     render() {
         if (this.state.isLoaderPage) {
             return (<Pageloader title="Loading user data" />);
@@ -86,11 +90,14 @@ export default class SettingsScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
-                <View style={{ marginTop: 20, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp(100), backgroundColor: '#ffffff', padding: 10, borderBottomColor: '#cccccc', borderBottomWidth: 1 }}>
+                <View style={{ marginTop: 20, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp(100), backgroundColor: '#ffffff', paddingRight: 15, paddingLeft: 15, paddingTop: 12, paddingBottom: 12, borderBottomColor: '#cccccc', borderBottomWidth: 1 }}>
                     <Text style={{ fontSize: wp(5), color: '#34343e' }}>Enable 2fa</Text>
                     <Switch value={this.state.isTwoAuthActive} tintColor="#cccccc" onValueChange={this.onValueChange} />
                 </View>
-                <TouchableOpacity style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), padding: 15 }}>
+                <TouchableOpacity
+                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15 }}
+                    onPress={this.changeLanguage}
+                >
                     <Text style={{ fontSize: wp(5), color: '#34343e' }}>Select language</Text>
                     <Text style={{ fontSize: wp(5), color: '#34343e' }}>ENG</Text>
                 </TouchableOpacity>
