@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, Platform, Image, StatusBar, TextInput, Button, Alert } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Platform, Image, StatusBar, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 import ls from 'react-native-local-storage';
 
 function wp (percentage) {
@@ -23,7 +23,14 @@ export default class SendMoneyScreen extends React.Component {
     }
     
     static navigationOptions = {
-        title: 'Send money'
+        title: 'Send money',
+        headerTitleStyle: {
+            color: '#000000'
+        },
+        headerStyle: {
+            backgroundColor: '#e7ebee'
+        },
+        headerTintColor: '#ffbb00',
     };
 
     componentDidMount() {
@@ -83,7 +90,7 @@ export default class SendMoneyScreen extends React.Component {
                         <TextInput
                             placeholder="Amount"
                             placeholderTextColor="#000000"
-                            style={{height: 40, borderColor: 'gray', borderWidth: 1, width: screenWidth, marginBottom: 20, borderRadius: 2, padding: 6, color: '#000000' }}
+                            style={{height: 40, width: screenWidth, marginBottom: 20, padding: 6, color: '#000000', borderBottomColor: '#000000', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
                             onChangeText={(amount) => this.setState({amount})}
                             value={this.state.amount}
                             keyboardType = 'numeric'
@@ -91,18 +98,17 @@ export default class SendMoneyScreen extends React.Component {
                         <TextInput
                             placeholder="Address destination"
                             placeholderTextColor="#000000"
-                            style={{height: 40, borderColor: 'gray', borderWidth: 1, width: screenWidth, marginBottom: 20, borderRadius: 2, padding: 6, color: '#000000' }}
+                            style={{height: 40, width: screenWidth, marginBottom: 20, padding: 6, color: '#000000', borderBottomColor: '#000000', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
                             onChangeText={(destinationAddress) => this.setState({destinationAddress})}
                             value={this.state.destinationAddress}
                         />
                     </View>
-                    <View style={{ backgroundColor: '#d1d8dd', width: screenWidth, padding: 5, borderRadius: 5 }}>
-                        <Button
-                            title="Send money"
-                            onPress={this.sendMoney}
-                            color="#000000"
-                        />
-                    </View>
+                    <TouchableOpacity
+                        onPress={this.sendMoney}
+                        style={{ backgroundColor: '#cfd8de', width: screenWidth, padding: 5, padding: 10, borderRadius: 15 }}
+                    >
+                        <Text style={{ color: '#000000', textAlign: 'center', fontSize: 16 }}>Send</Text>
+                    </TouchableOpacity>
             	</View>
             </View>
         );
@@ -112,7 +118,7 @@ export default class SendMoneyScreen extends React.Component {
 const styles = StyleSheet.create({
     pageContainer: {
         flex: 1,
-        backgroundColor: '#e8ebee',
+        backgroundColor: '#e7ebee',
         alignItems: 'center',
         paddingTop: 50
     },

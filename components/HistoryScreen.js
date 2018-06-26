@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert } from 'react-native';
+import { View, StyleSheet, StatusBar } from 'react-native';
 
 import BottomNavigator from './layouts/BottomNavigator';
+import TransactionBlock from './layouts/TransactionBlock';
 
 export default class SettingsScreen extends React.Component {
     constructor(props) {
@@ -25,7 +26,9 @@ export default class SettingsScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
-                <Text>History page</Text>
+                <View style={{ marginTop: 20 }}>
+                    <TransactionBlock />
+                </View>
                 <BottomNavigator
                     changePage={this.changePage}
                     activePage="history"
@@ -38,6 +41,7 @@ export default class SettingsScreen extends React.Component {
 const styles = StyleSheet.create({
     pageContainer: {
         flex: 1,
-        backgroundColor: '#e8ebee'
+        backgroundColor: '#e8ebee',
+        alignItems: 'center'
     }
 });
