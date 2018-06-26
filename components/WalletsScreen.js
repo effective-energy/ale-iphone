@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Button, Text, StatusBar, Image, Alert, Dimensions, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Button, Text, StatusBar, Image, Alert, Dimensions, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
 import SideMenu from 'react-native-side-menu';
 import ls from 'react-native-local-storage';
 import SVGImage from 'react-native-remote-svg';
@@ -147,32 +147,27 @@ export default class WalletsScreen extends React.Component {
                     <StatusBar
                         barStyle='light-content'
                     />
-                    {/*<View style={{ width: wp(100), height: 50, marginTop: 50, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: wp(10), paddingRight: wp(10) }}>
-                        <TouchableOpacity
-                            onPress={this.toggleLeftMenu}
-                        >
-                            <SVGImage
-                                source={require('../assets/images/icons/icon_login-icon.svg')}
-                                style={{width: 30, height: 30 }}
+                    <ScrollView
+                        contentInset={{bottom:80}}
+                        automaticallyAdjustContentInsets={false}
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={false}
+                                tintColor="#FFFFFF"
+                                colors={['#ff0000', '#00ff00', '#0000ff']}
+                                progressBackgroundColor="#EBEBEB"
                             />
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={this.openSearchPanel}
-                        >
-                            <SVGImage
-                                source={require('../assets/images/icons/icon_search.svg')}
-                                style={{width: 30, height: 30 }}
-                            />
-                        </TouchableOpacity>
-                    </View>*/}
-                    <WalletsSlider
-                        walletsList={this.state.walletsList}
-                        requestMoney={this.requestMoney}
-                        sendMoney={this.sendMoney}
-                    />
-                    <NewWalletBlock
-                        createNewWallet={this.createNewWallet}
-                    />
+                        }
+                    >
+                        <WalletsSlider
+                            walletsList={this.state.walletsList}
+                            requestMoney={this.requestMoney}
+                            sendMoney={this.sendMoney}
+                        />
+                        <NewWalletBlock
+                            createNewWallet={this.createNewWallet}
+                        />
+                    </ScrollView>
                     {/*<View>
                         <Counter />
                     </View>

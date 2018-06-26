@@ -28,7 +28,7 @@ export default class SettingsScreen extends React.Component {
                 <StatusBar barStyle='dark-content' />
                 
                 <ScrollView
-                    contentInset={{bottom:49}}
+                    contentInset={{bottom:80}}
                     automaticallyAdjustContentInsets={false}
                     refreshControl={
                         <RefreshControl
