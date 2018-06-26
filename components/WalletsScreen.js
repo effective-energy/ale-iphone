@@ -26,7 +26,6 @@ export default class WalletsScreen extends React.Component {
     constructor(props: Object) {
         super(props);
 	    this.state = {
-            isOpenLeftMenu: false,
             walletsList: [],
             isLoaderPage: false,
             userData: {
@@ -40,7 +39,6 @@ export default class WalletsScreen extends React.Component {
         this.sendMoney = this.sendMoney.bind(this);
         this.signOut = this.signOut.bind(this);
         this.createNewWallet = this.createNewWallet.bind(this);
-        this.toggleLeftMenu = this.toggleLeftMenu.bind(this);
     }
     
     static navigationOptions = {
@@ -53,10 +51,6 @@ export default class WalletsScreen extends React.Component {
     componentDidMount() {
         this.setState({ isOpenLeftMenu: false });
         this.initialUserWallets();
-    }
-
-    toggleLeftMenu() {
-        this.setState({isOpenLeftMenu: true});
     }
 
     initialUserWallets() {
@@ -146,7 +140,6 @@ export default class WalletsScreen extends React.Component {
                         userData={this.state.userData}
                     />
                 }
-                isOpen={this.state.isOpenLeftMenu}
             >
                 <View
                     style={styles.pageContainer}
@@ -154,7 +147,7 @@ export default class WalletsScreen extends React.Component {
                     <StatusBar
                         barStyle='light-content'
                     />
-                    <View style={{ width: wp(100), height: 50, marginTop: 50, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: wp(10), paddingRight: wp(10) }}>
+                    {/*<View style={{ width: wp(100), height: 50, marginTop: 50, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: wp(10), paddingRight: wp(10) }}>
                         <TouchableOpacity
                             onPress={this.toggleLeftMenu}
                         >
@@ -163,11 +156,15 @@ export default class WalletsScreen extends React.Component {
                                 style={{width: 30, height: 30 }}
                             />
                         </TouchableOpacity>
-                        <SVGImage
-                            source={require('../assets/images/icons/icon_login-icon.svg')}
-                            style={{width: 30, height: 30 }}
-                        />
-                    </View>
+                        <TouchableOpacity
+                            onPress={this.openSearchPanel}
+                        >
+                            <SVGImage
+                                source={require('../assets/images/icons/icon_search.svg')}
+                                style={{width: 30, height: 30 }}
+                            />
+                        </TouchableOpacity>
+                    </View>*/}
                     <WalletsSlider
                         walletsList={this.state.walletsList}
                         requestMoney={this.requestMoney}

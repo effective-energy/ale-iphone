@@ -67,7 +67,7 @@ export default class NewWalletScreen extends React.Component {
                         <Text
                             style={{color: '#f0b721', fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}
                         >
-                            Create or restore wallet
+                            Create wallet
                         </Text>
                     </TouchableOpacity>
                 </View>

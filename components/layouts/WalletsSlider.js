@@ -97,7 +97,7 @@ export default class WalletsSlider extends React.Component {
                         <TouchableHighlight onPress={(e) => this.editWalletName(item.address, item.name)}>
                             <SVGImage
                                 style={{width: wp(8), height: wp(8)}}
-                                source={require('../../assets/images/icons/icon_edit-wallet.svg')}
+                                source={require('../../assets/images/icons/icon_wallet-menu.svg')}
                             />
                         </TouchableHighlight>
                     </View>
@@ -141,7 +141,7 @@ export default class WalletsSlider extends React.Component {
                     loop={false}
                     layoutCardOffset={50}
                     hasParallaxImages={true}
-                    containerCustomStyle={{ marginTop: 20, overflow: 'visible' }}
+                    containerCustomStyle={{ marginTop: 50, overflow: 'visible' }}
                     data={this.props.walletsList}
                     renderItem={item => this._renderItem(item)}
                     sliderWidth={sliderWidth}

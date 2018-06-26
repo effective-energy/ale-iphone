@@ -36,7 +36,7 @@ export default class BottomNavigator extends React.Component {
                 }, {
                     title: 'Settings',
                     icon: require('../../assets/images/navigation/bottom/icon_settings-passive.svg'),
-                    activeIcon: require('../../assets/images/navigation/bottom/icon_settings-passive.svg'),
+                    activeIcon: require('../../assets/images/navigation/bottom/icon_settings-active.svg'),
                     pageName: 'Settings',
                     activeClass: 'settings'
                 }

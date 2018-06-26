@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, StatusBar } from 'react-native';
 
 export default class Pageloader extends React.Component {
 	constructor(props) {
@@ -10,6 +10,7 @@ export default class Pageloader extends React.Component {
     render() {
     	return (
     		<View style={styles.loading}>
+                <StatusBar barStyle='dark-content' />
                 <Text style={styles.loadingTitle}>{this.props.title}</Text>
             </View>
     	)
