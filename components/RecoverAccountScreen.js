@@ -71,8 +71,8 @@ export default class RecoverAccountScreen extends React.Component {
                     <View>
                         <TextInput
                             placeholder="Enter your email"
-                            placeholderTextColor="#ffffff"
-                            style={{height: 40, borderColor: 'gray', borderWidth: 1, width: screenWidth, marginBottom: 20, borderRadius: 2, padding: 6, color: '#ffffff' }}
+                            placeholderTextColor="#455578"
+                            style={{height: 40, borderColor: 'gray', borderWidth: 1, width: screenWidth, marginBottom: 20, borderRadius: 2, padding: 6, color: '#455578', borderBottomColor: '#455578', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
                             onChangeText={(recoverEmail) => this.setState({recoverEmail})}
                             value={this.state.recoverEmail}
                         />

@@ -23,7 +23,7 @@ export default class RecoveryPhraseScreen extends React.Component {
     };
 
     generateMnemonicPhrase() {
-
+        
     }
 
     render() {
@@ -34,15 +34,12 @@ export default class RecoveryPhraseScreen extends React.Component {
                     <Text style={{ textAlign: 'center' }}>
                     	On the following screen, you will see a set of X random words. This is your wallet backup phrase. It can be entered in any version of ALE application in order to back up or restore your wallet’s funds and private key.
                     </Text>
-                    <View
-                    	style={{ backgroundColor: '#d1d8dd', width: wp(80), padding: 5, borderRadius: 5, display: 'flex', alignItems: 'center', marginTop: 20 }}
+                    <TouchableOpacity
+                        onPress={this.generateMnemonicPhrase}
+                        style={{ backgroundColor: '#d1d8dd', padding: 5, borderRadius: 5, display: 'flex', alignItems: 'center', marginTop: 20, padding: 15 }}
                     >
-                        <Button
-                        	onPress={this.generateMnemonicPhrase}
-                            title="Continue"
-                            color="#000000"
-                        />
-                    </View>
+                        <Text style={{ color: '#000000', fontSize: 18 }}>Continue</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
@@ -55,6 +52,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#e8ebee',
         alignItems: 'center',
         width: wp(100),
-        padding: 20
+        padding: 20,
+
     }
 });

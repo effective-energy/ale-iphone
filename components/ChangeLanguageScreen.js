@@ -54,7 +54,8 @@ export default class ChangeLanguageScreen extends React.Component {
         }
         ls.save('systemLanguage', code).then(() => {
             this.setState({systemLanguage: code});
-            return Alert.alert('Language successfully changed');
+            Alert.alert('Language successfully changed');
+            return this.props.navigation.navigate('Settings', { animation: null });
         });
     }
 

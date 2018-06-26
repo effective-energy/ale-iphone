@@ -118,20 +118,23 @@ export default class LoginScreen extends React.Component {
 					<View>
 						<TextInput
 							placeholder="Enter your email"
-							placeholderTextColor="#ffffff"
-                            style={{height: 40, borderWidth: 1, width: screenWidth, marginBottom: 20, padding: 6, color: '#ffffff', borderBottomColor: '#ffffff', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', fontSize: 16 }}
+							placeholderTextColor="#455578"
+                            style={{height: 40, borderWidth: 1, width: screenWidth, marginBottom: 20, padding: 6, color: '#455578', borderBottomColor: '#455578', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', fontSize: 16 }}
                             onChangeText={(userEmail) => this.setState({userEmail})}
                             value={this.state.userEmail}
                         />
                         <TextInput
                         	placeholder="Enter your password"
-                        	placeholderTextColor="#ffffff"
-                            style={{height: 40, borderWidth: 1, width: screenWidth, marginBottom: 20, padding: 6, color: '#ffffff', borderBottomColor: '#ffffff', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', fontSize: 16 }}
+                        	placeholderTextColor="#455578"
+                            style={{height: 40, borderWidth: 1, width: screenWidth, marginBottom: 25, padding: 6, color: '#455578', borderBottomColor: '#455578', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', fontSize: 16 }}
                             onChangeText={(userPassword) => this.setState({userPassword})}
                             value={this.state.userPassword}
                         />
 					</View>
-					<TouchableOpacity style={{ backgroundColor: '#152038', width: screenWidth, padding: 10, borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }} onPress={this.loginToWallet}>
+					<TouchableOpacity
+						style={{ backgroundColor: '#152038', width: screenWidth, padding: 15, borderRadius: 20, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
+						onPress={this.loginToWallet}
+					>
 						<Image
                             source={require('../assets/images/icons/icon_login-icon.svg')}
                             style={{width: 16, height: 16, marginRight: 10 }}
@@ -173,7 +176,7 @@ export default class LoginScreen extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#08142F',
+		backgroundColor: '#07132f',
 		alignItems: 'center',
 		justifyContent: 'space-around'
 	},
