@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, StatusBar, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, StatusBar, TouchableOpacity, Alert, TextInput } from 'react-native';
 import Image from 'react-native-remote-svg';
 
 function wp (percentage) {
@@ -11,9 +11,12 @@ const { width: viewportWidth } = Dimensions.get('window');
 export default class NewWalletScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            newWalletName: ''
+        };
 
         this.restoreWallet = this.restoreWallet.bind(this);
+        this.createNewWallet = this.createNewWallet.bind(this);
     }
 
     static navigationOptions = {
@@ -31,6 +34,12 @@ export default class NewWalletScreen extends React.Component {
         this.props.navigation.navigate('RestoreWallet', { animation: null });
     }
 
+    createNewWallet() {
+        if (this.state.newWalletName === '') {
+            return Alert.alert('Enter wallet name');
+        }
+    }
+
     render() {
         return (
             <View
@@ -38,7 +47,27 @@ export default class NewWalletScreen extends React.Component {
             >
                 <StatusBar barStyle='light-content' />
                 <View>
-                    <Text>123</Text>
+                    <TextInput
+                        placeholder="Wallet name"
+                        placeholderTextColor="#ffffff"
+                        style={{height: 40, borderWidth: 1, width: wp(80), marginBottom: 20, borderRadius: 2, padding: 6, color: '#ffffff', borderBottomColor: '#ffffff', borderBottomWidth: 1, fontSize: 18 }}
+                        onChangeText={(newWalletName) => this.setState({newWalletName})}
+                        value={this.state.newWalletName}
+                    />
+                    <TouchableOpacity
+                        onPress={this.createNewWallet}
+                        style={{backgroundColor: '#16203a', width: wp(80), borderRadius: 10, padding: 12, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}
+                    >
+                        <Image
+                            style={{width: wp(7), height: wp(7), marginRight: 10}}
+                            source={require('../assets/images/icons/icon_new-wallet.svg')}
+                        />
+                        <Text
+                            style={{color: '#f0b721', fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}
+                        >
+                            Create or restore wallet
+                        </Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View>

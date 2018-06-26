@@ -70,13 +70,12 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         maxHeight: 60,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         backgroundColor: '#ffffff',
     },
     itemImage: {
-        width: wp(10),
-        height: wp(10),
-        marginBottom: 2
+        width: wp(8),
+        height: wp(8)
     },
     itemText: {
         color: '#000000',

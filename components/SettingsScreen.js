@@ -98,7 +98,7 @@ export default class SettingsScreen extends React.Component {
                     style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15 }}
                     onPress={this.changeLanguage}
                 >
-                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>Select language</Text>
+                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>Language</Text>
                     <Text style={{ fontSize: wp(5), color: '#34343e' }}>ENG</Text>
                 </TouchableOpacity>
                 <View style={{ marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

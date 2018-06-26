@@ -25,6 +25,10 @@ export default class RestoreWalletScreen extends React.Component {
     };
 
     restoreWallet() {
+        if (this.state.mnemonicPhrase === '') {
+            return Alert.alert('Enter mnemonic phrase');
+        }
+        
         let mnemonicPhrase = this.state.mnemonicPhrase.split(' ');
         ls.get('userToken').then((data) => {
             return fetch('https://ale-demo-4550.nodechef.com/wallet/redemption-wallet', {

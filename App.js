@@ -14,8 +14,6 @@ import LoginScreen from './components/LoginScreen';
 import NewWalletScreen from './components/NewWalletScreen';
 import ImportwalletScreen from './components/ImportwalletScreen';
 import WalletsScreen from './components/WalletsScreen';
-import SendScreen from './components/SendScreen';
-import ReceiveScreen from './components/ReceiveScreen';
 import SettingsScreen from './components/SettingsScreen';
 import CreateAccountScreen from './components/CreateAccountScreen';
 import RecoverAccountScreen from './components/RecoverAccountScreen';
@@ -24,6 +22,7 @@ import RestoreWalletScreen from './components/RestoreWalletScreen';
 import HistoryScreen from './components/HistoryScreen';
 import NotificationsScreen from './components/NotificationsScreen';
 import ChangeLanguageScreen from './components/ChangeLanguageScreen';
+import RecoveryPhraseScreen from './components/RecoveryPhraseScreen';
 
 //Modals
 import RequestMoneyScreen from './components/RequestMoneyScreen';
@@ -44,8 +43,6 @@ const RootStack = createStackNavigator({
     NewWallet: { screen: NewWalletScreen },
     Importwallet: { screen: ImportwalletScreen },
     Wallets: { screen: WalletsScreen },
-    SendTokens: { screen: SendScreen },
-    ReceiveTokens: { screen: ReceiveScreen },
     Settings: { screen: SettingsScreen },
     RequestMoney: { screen: RequestMoneyScreen },
     SendMoney: { screen: SendMoneyScreen },
@@ -55,7 +52,8 @@ const RootStack = createStackNavigator({
     RestoreWallet: { screen: RestoreWalletScreen },
     History: { screen: HistoryScreen },
     Notifications: { screen: NotificationsScreen },
-    ChangeLanguage: { screen: ChangeLanguageScreen }
+    ChangeLanguage: { screen: ChangeLanguageScreen },
+    RecoveryPhrase: { screen: RecoveryPhraseScreen }
 }, {
     initialRouteName: initialRouteName()
 }, {
