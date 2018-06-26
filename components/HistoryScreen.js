@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar } from 'react-native';
+import { View, StyleSheet, StatusBar, ScrollView, RefreshControl } from 'react-native';
 
 import BottomNavigator from './layouts/BottomNavigator';
 import TransactionBlock from './layouts/TransactionBlock';
@@ -26,9 +26,23 @@ export default class SettingsScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
-                <View style={{ marginTop: 20 }}>
-                    <TransactionBlock />
-                </View>
+                
+                <ScrollView
+                    contentInset={{bottom:49}}
+                    automaticallyAdjustContentInsets={false}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={false}
+                            tintColor="#000000"
+                            colors={['#ff0000', '#00ff00', '#0000ff']}
+                            progressBackgroundColor="#EBEBEB"
+                        />
+                    }
+                >
+                    <View style={{ marginTop: 20 }}>
+                        <TransactionBlock />
+                    </View>
+                </ScrollView>
                 <BottomNavigator
                     changePage={this.changePage}
                     activePage="history"

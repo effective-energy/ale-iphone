@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, ScrollView, FlatList } from 'react-native';
+import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, ScrollView, FlatList, RefreshControl } from 'react-native';
 import ls from 'react-native-local-storage';
 import Markdown from 'react-native-simple-markdown';
 
@@ -77,7 +77,19 @@ export default class NotificationsScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
-                <ScrollView>
+                <ScrollView
+                    contentInset={{bottom:49}}
+                    automaticallyAdjustContentInsets={false}
+                    refreshControl={
+                        <RefreshControl
+                            onRefresh={() => this.getNotifications()}
+                            refreshing={false}
+                            tintColor="#000000"
+                            colors={['#ff0000', '#00ff00', '#0000ff']}
+                            progressBackgroundColor="#EBEBEB"
+                        />
+                    }
+                >
                     {notifications}
                 </ScrollView>
                 <BottomNavigator
