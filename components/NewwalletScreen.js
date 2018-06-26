@@ -37,6 +37,8 @@ export default class NewWalletScreen extends React.Component {
     createNewWallet() {
         if (this.state.newWalletName === '') {
             return Alert.alert('Enter wallet name');
+        } else {
+            return this.props.navigation.navigate('RecoveryPhrase', { animation: null, walletName: this.state.newWalletName });
         }
     }
 

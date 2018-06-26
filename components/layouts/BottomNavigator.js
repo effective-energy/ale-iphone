@@ -15,16 +15,38 @@ export default class BottomNavigator extends React.Component {
 	    this.state = {
             activeClass: this.props.activePage,
             tabs: [
-                { title: 'Wallet', image: require('../../assets/images/navigation/bottom/icon_wallet-passive.svg'), pageName: 'Wallets', activeClass: 'wallets' },
-                { title: 'History', image: require('../../assets/images/navigation/bottom/icon_history-passive.svg'), pageName: 'History', activeClass: 'history' },
-                { title: 'Notifications', image: require('../../assets/images/navigation/bottom/icon_notifications-passive.svg'), pageName: 'Notifications', activeClass: 'notifications' },
-                { title: 'Settings', image: require('../../assets/images/navigation/bottom/icon_settings-passive.svg'), pageName: 'Settings', activeClass: 'settings' }
+                {
+                    title: 'Wallet',
+                    icon: require('../../assets/images/navigation/bottom/icon_wallet-passive.svg'),
+                    activeIcon: require('../../assets/images/navigation/bottom/icon_wallet-active.svg'),
+                    pageName: 'Wallets',
+                    activeClass: 'wallets'
+                }, {
+                    title: 'History',
+                    icon: require('../../assets/images/navigation/bottom/icon_history-passive.svg'),
+                    activeIcon: require('../../assets/images/navigation/bottom/icon_history-active.svg'),
+                    pageName: 'History',
+                    activeClass: 'history'
+                }, {
+                    title: 'Notifications',
+                    icon: require('../../assets/images/navigation/bottom/icon_notifications-passive.svg'),
+                    activeIcon: require('../../assets/images/navigation/bottom/icon_notifications-active.svg'),
+                    pageName: 'Notifications',
+                    activeClass: 'notifications'
+                }, {
+                    title: 'Settings',
+                    icon: require('../../assets/images/navigation/bottom/icon_settings-passive.svg'),
+                    activeIcon: require('../../assets/images/navigation/bottom/icon_settings-passive.svg'),
+                    pageName: 'Settings',
+                    activeClass: 'settings'
+                }
             ]
         };
     }
 
     render() {
         let navigations = this.state.tabs.map(function (el, i) {
+            let icon = this.state.activeClass === el.activeClass ? el.activeIcon : el.icon;
             return (
                 <TouchableOpacity
                     key={i}
@@ -33,10 +55,10 @@ export default class BottomNavigator extends React.Component {
                 >
                     <Image
                         style={styles.itemImage}
-                        source={el.image}
+                        source={icon}
                     />
                     <Text
-                        style={styles.itemText}
+                        style={[styles.itemTitle, this.state.activeClass === el.activeClass ? styles.itemTitleActive : styles.itemTitleDefault]}
                     >
                         {el.title}
                     </Text>
@@ -77,11 +99,16 @@ const styles = StyleSheet.create({
         width: wp(8),
         height: wp(8)
     },
-    itemText: {
-        color: '#000000',
+    itemTitle: {
         textAlign: 'center',
         position: 'relative',
         bottom: 2,
         fontSize: wp(4)
+    },
+    itemTitleActive: {
+        color: '#FFBB00'
+    },
+    itemTitleDefault: {
+        color: '#000000'
     }
 });
