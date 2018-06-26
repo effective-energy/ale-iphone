@@ -14,6 +14,11 @@ function wp (percentage) {
     return Math.round(value);
 }
 
+function validateEmail(email) {
+    let re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+
 const { width: viewportWidth } = Dimensions.get('window');
 let screenWidth = wp(80);
 
@@ -52,6 +57,10 @@ export default class LoginScreen extends React.Component {
     loginToWallet() {
     	if (this.state.userEmail.length === 0) {
     		return Alert.alert('Enter your E-mail');
+    	}
+
+    	if (!validateEmail(this.state.userEmail)) {
+    		return Alert.alert('Enter valid E-mail');
     	}
 
     	if (this.state.userPassword.length === 0) {
@@ -110,14 +119,14 @@ export default class LoginScreen extends React.Component {
 						<TextInput
 							placeholder="Enter your email"
 							placeholderTextColor="#ffffff"
-                            style={{height: 40, borderColor: 'gray', borderWidth: 1, width: screenWidth, marginBottom: 20, borderRadius: 2, padding: 6, color: '#ffffff' }}
+                            style={{height: 40, borderWidth: 1, width: screenWidth, marginBottom: 20, padding: 6, color: '#ffffff', borderBottomColor: '#ffffff', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', fontSize: 16 }}
                             onChangeText={(userEmail) => this.setState({userEmail})}
                             value={this.state.userEmail}
                         />
                         <TextInput
                         	placeholder="Enter your password"
                         	placeholderTextColor="#ffffff"
-                            style={{height: 40, borderColor: 'gray', borderWidth: 1, width: screenWidth, marginBottom: 20, borderRadius: 2, padding: 6, color: '#ffffff' }}
+                            style={{height: 40, borderWidth: 1, width: screenWidth, marginBottom: 20, padding: 6, color: '#ffffff', borderBottomColor: '#ffffff', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', fontSize: 16 }}
                             onChangeText={(userPassword) => this.setState({userPassword})}
                             value={this.state.userPassword}
                         />
@@ -127,7 +136,7 @@ export default class LoginScreen extends React.Component {
                             source={require('../assets/images/icons/icon_login-icon.svg')}
                             style={{width: 16, height: 16, marginRight: 10 }}
                         />
-						<Text style={{ color: '#ffbb00', textAlign: 'center', fontSize: wp(5) }}>Login to wallet</Text>
+						<Text style={{ color: '#ffbb00', textAlign: 'center', fontSize: 16 }}>Login to wallet</Text>
 					</TouchableOpacity>
 					{this.state.isPageLoader === true ? <View style={{ marginTop: 20 }}>
 							<Image

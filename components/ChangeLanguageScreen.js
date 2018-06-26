@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, Platform, Image, StatusBar, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, StatusBar, TouchableOpacity, Alert } from 'react-native';
 import ls from 'react-native-local-storage';
+import Image from 'react-native-remote-svg';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -13,29 +14,73 @@ let screenWidth = wp(80);
 export default class ChangeLanguageScreen extends React.Component {
     constructor(props) {
         super(props);
-	    this.state = {};
+	    this.state = {
+            languagesList: [{
+                name: 'English',
+                code: 'eng'
+            }, {
+                name: 'Russian',
+                code: 'rus'
+            }],
+            systemLanguage: ''
+        };
+
+        this.changeLanguage = this.changeLanguage.bind(this);
     }
     
     static navigationOptions = {
         title: 'Change language'
     };
 
+    componentDidMount() {
+        this.getSystemLanguage();
+    }
+
+    getSystemLanguage() {
+        ls.get('systemLanguage').then((result) => {
+            if (result === null) {
+                ls.save('systemLanguage', 'eng').then(() => {
+                    return this.setState({systemLanguage: result});
+                });
+            } else {
+                return this.setState({systemLanguage: result});
+            }
+        });
+    }
+
+    changeLanguage(code) {
+        if (code === this.state.systemLanguage) {
+            return false;
+        }
+        ls.save('systemLanguage', code).then(() => {
+            this.setState({systemLanguage: code});
+            return Alert.alert('Language successfully changed');
+        });
+    }
+
     render() {
+        let languagesList = this.state.languagesList.map(function (el, i) {
+            let isActiveLanguage = this.state.systemLanguage === el.code ? require('../assets/images/icons/check-small.svg') : null;
+            return (
+                <TouchableOpacity
+                    onPress={() => this.changeLanguage(el.code)}
+                    key={i}
+                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 1 }}
+                >
+                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>{el.name}</Text>
+                    <Image
+                        source={isActiveLanguage}
+                        style={{ width: 20, height: 20 }}
+                    />
+                </TouchableOpacity>
+            )
+        }, this);
+
         return (
             <View style={styles.pageContainer}>
             	<StatusBar barStyle='dark-content' />
-            	<View>
-                    <TouchableOpacity
-                        style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 20 }}
-                    >
-                        <Text style={{ fontSize: wp(5), color: '#34343e' }}>English</Text>
-                        <Text style={{ fontSize: wp(5), color: '#34343e' }}>(current)</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 20 }}
-                    >
-                        <Text style={{ fontSize: wp(5), color: '#34343e' }}>Russian</Text>
-                    </TouchableOpacity>
+            	<View style={{ marginTop: 20 }}>
+                    {languagesList}
                 </View>
             </View>
         );

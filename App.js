@@ -23,6 +23,7 @@ import HistoryScreen from './components/HistoryScreen';
 import NotificationsScreen from './components/NotificationsScreen';
 import ChangeLanguageScreen from './components/ChangeLanguageScreen';
 import RecoveryPhraseScreen from './components/RecoveryPhraseScreen';
+import TwoFactorAuthScreen from './components/TwoFactorAuthScreen';
 
 //Modals
 import RequestMoneyScreen from './components/RequestMoneyScreen';
@@ -53,7 +54,8 @@ const RootStack = createStackNavigator({
     History: { screen: HistoryScreen },
     Notifications: { screen: NotificationsScreen },
     ChangeLanguage: { screen: ChangeLanguageScreen },
-    RecoveryPhrase: { screen: RecoveryPhraseScreen }
+    RecoveryPhrase: { screen: RecoveryPhraseScreen },
+    TwoFactorAuth: { screen: TwoFactorAuthScreen }
 }, {
     initialRouteName: initialRouteName()
 }, {

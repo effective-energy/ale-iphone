@@ -21,7 +21,8 @@ export default class SettingsScreen extends React.Component {
         super(props);
 	    this.state = {
             isTwoAuthActive: false,
-            isLoaderPage: false
+            isLoaderPage: false,
+            systemLanguage: ''
         };
         this.logout = this.logout.bind(this);
         this.changePage = this.changePage.bind(this);
@@ -36,7 +37,14 @@ export default class SettingsScreen extends React.Component {
     };
 
     componentDidMount() {
-        this.getUserData();
+        this.getSystemLanguage();
+    }
+
+    getSystemLanguage() {
+        ls.get('systemLanguage').then((result) => {
+            this.setState({systemLanguage: result});
+            return this.getUserData();
+        });
     }
 
     getUserData() {
@@ -74,9 +82,11 @@ export default class SettingsScreen extends React.Component {
     }
 
     onValueChange() {
-        this.setState({
-            isTwoAuthActive: !this.state.isTwoAuthActive
-        })
+        if (this.state.isTwoAuthActive) {
+            return this.props.navigation.navigate('TwoFactorAuth', { animation: null, type: 'disable'});
+        } else {
+            return this.props.navigation.navigate('TwoFactorAuth', { animation: null, type: 'enable'});
+        }
     }
 
     changeLanguage() {
@@ -99,7 +109,7 @@ export default class SettingsScreen extends React.Component {
                     onPress={this.changeLanguage}
                 >
                     <Text style={{ fontSize: wp(5), color: '#34343e' }}>Language</Text>
-                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>ENG</Text>
+                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>{this.state.systemLanguage}</Text>
                 </TouchableOpacity>
                 <View style={{ marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.buttonContainer} onPress={this.logout}>
