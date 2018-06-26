@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, ScrollView } from 'react-native';
+import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, ScrollView, FlatList } from 'react-native';
 import ls from 'react-native-local-storage';
 import Markdown from 'react-native-simple-markdown';
 
@@ -19,7 +19,8 @@ export default class NotificationsScreen extends React.Component {
 	    this.state = {
             isActive: false,
             isLoaderPage: false,
-            notificationsList: []
+            notificationsList: [],
+            checked: true
         };
 
         this.changePage = this.changePage.bind(this);

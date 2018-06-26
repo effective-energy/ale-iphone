@@ -74,10 +74,6 @@ export default class SendMoneyScreen extends React.Component {
         });
     }
 
-    qrScanner() {
-
-    }
-
     render() {
         return (
             <View style={styles.pageContainer}>
@@ -90,6 +86,7 @@ export default class SendMoneyScreen extends React.Component {
                             style={{height: 40, borderColor: 'gray', borderWidth: 1, width: screenWidth, marginBottom: 20, borderRadius: 2, padding: 6, color: '#000000' }}
                             onChangeText={(amount) => this.setState({amount})}
                             value={this.state.amount}
+                            keyboardType = 'numeric'
                         />
                         <TextInput
                             placeholder="Address destination"
@@ -103,13 +100,6 @@ export default class SendMoneyScreen extends React.Component {
                         <Button
                             title="Send money"
                             onPress={this.sendMoney}
-                            color="#000000"
-                        />
-                    </View>
-                    <View style={{ backgroundColor: '#d1d8dd', width: screenWidth, padding: 5, borderRadius: 5 }}>
-                        <Button
-                            title="QR scannet"
-                            onPress={this.qrScanner}
                             color="#000000"
                         />
                     </View>

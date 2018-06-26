@@ -29,8 +29,9 @@ export default class WalletsSlider extends React.Component {
         this.editWalletName = this.editWalletName.bind(this);
     }
 
-    editWalletName(walletName) {
-        this.setState({ selectedWalletAddressForRename: walletName})
+    editWalletName(walletAddress, walletName) {
+        this.setState({ selectedWalletAddressForRename: walletAddress});
+
         AlertIOS.prompt(
             'Change wallet name',
             'Enter new name for wallet',
@@ -42,7 +43,8 @@ export default class WalletsSlider extends React.Component {
                 text: 'OK',
                 onPress: (newWalletName) => this.renameWallet(newWalletName),
             }],
-          'plain-text'
+          'plain-text',
+          walletName
         );
     }
 
@@ -92,7 +94,7 @@ export default class WalletsSlider extends React.Component {
                         </View>
                     </View>
                     <View>
-                        <TouchableHighlight onPress={(e) => this.editWalletName(item.address)}>
+                        <TouchableHighlight onPress={(e) => this.editWalletName(item.address, item.name)}>
                             <SVGImage
                                 style={{width: wp(8), height: wp(8)}}
                                 source={require('../../assets/images/icons/icon_edit-wallet.svg')}
