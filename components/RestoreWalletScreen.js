@@ -22,6 +22,13 @@ export default class RestoreWalletScreen extends React.Component {
 
     static navigationOptions = {
         title: 'Restore wallet',
+        headerTitleStyle: {
+            color: '#ffbb00'
+        },
+        headerStyle: {
+            backgroundColor: '#08142F'
+        },
+        headerTintColor: '#ffbb00',
     };
 
     restoreWallet() {
@@ -30,6 +37,9 @@ export default class RestoreWalletScreen extends React.Component {
         }
         
         let mnemonicPhrase = this.state.mnemonicPhrase.split(' ');
+        if (mnemonicPhrase.length !== 12) {
+            return Alert.alert('Enter 12 words');
+        }
         ls.get('userToken').then((data) => {
             return fetch('https://ale-demo-4550.nodechef.com/wallet/redemption-wallet', {
                 method: 'POST',
@@ -44,8 +54,8 @@ export default class RestoreWalletScreen extends React.Component {
             })
             .then((response) => response.json())
             .then((responseJson) => {
-                if (responseJson.message === 'Incorrect mnemonic!') {
-                    return Alert.alert('Incorrect mnemonic')
+                if (responseJson.message !== 'Wallet successfully restored!') {
+                    return Alert.alert(responseJson.message)
                 } else {
                     Alert.alert('Wallet successfully restored!');
                     return this.props.navigation.navigate('Wallets', { animation: null });
@@ -62,7 +72,7 @@ export default class RestoreWalletScreen extends React.Component {
             <View
                 style={{ flex: 1, backgroundColor: '#08142F', alignItems: 'center', justifyContent: 'space-between', paddingTop: 30, paddingBottom: 30 }}
             >
-                <StatusBar barStyle='dark-content' />
+                <StatusBar barStyle='light-content' />
                 <View>
                     <Text style={{ color: '#ffffff', marginBottom: 10 }}>Enter your mnemonic phrase</Text>
                     <TextInput
