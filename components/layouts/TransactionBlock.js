@@ -14,21 +14,29 @@ export default class TransactionBlock extends React.Component {
     }
 
     render() {
-    	return (
-    		<View style={styles.transactionBlockContainer}>
-                <View style={styles.transactionBlockRow}>
-                    <View style={styles.transactionBlockType}></View>
-                    <View style={styles.transactionBlockInfo}>
-                        <Text>Satoshi Nakamoto</Text>
-                        <Text>17.03.18 7:25 PM</Text>
+        let transactions = this.props.data.map(function (el, i) {
+            return (
+                <View style={styles.transactionBlockContainer} key={i}>
+                    <View style={styles.transactionBlockRow}>
+                        <View style={styles.transactionBlockType}></View>
+                        <View style={styles.transactionBlockInfo}>
+                            <Text>{el.sender}</Text>
+                            <Text>{el.date} {el.time}</Text>
+                        </View>
+                    </View>
+                    <View>
+                        <Text style={styles.transactionBlockAmount}>-999 ALE</Text>
+                        <Text style={styles.transactionBlockDescription}>Money send</Text>
                     </View>
                 </View>
-                <View>
-                    <Text style={styles.transactionBlockAmount}>-999 ALE</Text>
-                    <Text style={styles.transactionBlockDescription}>Money send</Text>
-                </View>
+            )
+        }, this);
+
+        return (
+            <View>
+                {transactions}
             </View>
-    	)
+        );
     }
 }
 

@@ -1,14 +1,23 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar, ScrollView, RefreshControl } from 'react-native';
+import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Text } from 'react-native';
 
 import BottomNavigator from './layouts/BottomNavigator';
 import TransactionBlock from './layouts/TransactionBlock';
+
+import DropdownMenu from 'react-native-dropdown-menu';
 
 export default class SettingsScreen extends React.Component {
     constructor(props) {
         super(props);
 	    this.state = {
-            isActive: false
+            isActive: false,
+            transactionsData: [{
+                date: '17.03.18',
+                time: '7:25 PM',
+                amount: 999,
+                sender: 'Satoshi Nakamoto',
+                type: 'send'
+            }]
         };
 
         this.changePage = this.changePage.bind(this);
@@ -24,6 +33,7 @@ export default class SettingsScreen extends React.Component {
     }
 
     render() {
+        var data = [["Wallet 1", "Wallet 2", "Wallet 3", "Wallet 4"]];
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
@@ -41,8 +51,23 @@ export default class SettingsScreen extends React.Component {
                     }
                 >
                     <View style={{ marginTop: 20 }}>
-                        <TransactionBlock />
+                        <DropdownMenu
+                            style={{flex: 1}}
+                            bgColor={'white'}
+                            tintColor={'#666666'}
+                            activityTintColor={'#666666'}
+                            handler={(selection, row) => this.setState({text: data[selection][row]})}
+                            data={data}
+                        >
+                            <View style={{flex: 1, marginTop: 10}}>
+                                <TransactionBlock data={this.state.transactionsData} />
+                                <Text>
+                                    {this.state.text}
+                                </Text>
+                            </View>
+                        </DropdownMenu>
                     </View>
+
                 </ScrollView>
                 <BottomNavigator
                     changePage={this.changePage}
