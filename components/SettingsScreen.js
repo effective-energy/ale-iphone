@@ -25,22 +25,30 @@ export default class SettingsScreen extends React.Component {
             isLoaderPage: false,
             systemLanguage: '',
             fullName: '',
-            userEmail: ''
+            userEmail: '',
         };
         this.logout = this.logout.bind(this);
         this.changePage = this.changePage.bind(this);
         this.changeLanguage = this.changeLanguage.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
     }
-    
-    static navigationOptions = {
-        title: I18n.t('settingsPage.title'),
-        headerLeft: null,
-        gesturesEnabled: false,
+
+    static navigationOptions = ({navigation}) => {
+        const {params = {}} = navigation.state;
+        return {
+            title: I18n.t('pages.settings.title', {locale: params.currentLanguageCode}),
+            headerLeft: null,
+            gesturesEnabled: false,
+        };
     };
 
     componentDidMount() {
-        this.getSystemLanguage();
+        ls.get('systemLanguage').then((result) => {
+            this.props.navigation.setParams({
+                currentLanguageCode: result
+            });
+            return this.getSystemLanguage();
+        });
     }
 
     getSystemLanguage() {

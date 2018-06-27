@@ -1,7 +1,7 @@
 export default {
 	pages: {
 		settings: {
-			title: 'Settings'
+			title: 'Настройки'
 		}
 	}
 };

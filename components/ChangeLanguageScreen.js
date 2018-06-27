@@ -11,16 +11,19 @@ function wp (percentage) {
 const { width: viewportWidth } = Dimensions.get('window');
 let screenWidth = wp(80);
 
+// I18n 
+import I18n from '../i18n/index';
+
 export default class ChangeLanguageScreen extends React.Component {
     constructor(props) {
         super(props);
 	    this.state = {
             languagesList: [{
                 name: 'English',
-                code: 'eng'
+                code: 'en'
             }, {
                 name: 'Russian',
-                code: 'rus'
+                code: 'ru'
             }],
             systemLanguage: ''
         };
