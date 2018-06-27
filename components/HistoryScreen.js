@@ -3,8 +3,7 @@ import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Text } from 'r
 
 import BottomNavigator from './layouts/BottomNavigator';
 import TransactionBlock from './layouts/TransactionBlock';
-
-import DropdownMenu from 'react-native-dropdown-menu';
+import WalletsDropdownMenu from './layouts/WalletsDropdownMenu';
 
 export default class SettingsScreen extends React.Component {
     constructor(props) {
@@ -17,6 +16,15 @@ export default class SettingsScreen extends React.Component {
                 amount: 999,
                 sender: 'Satoshi Nakamoto',
                 type: 'send'
+            }],
+            walletsList: [{
+                id: 1,
+                name: 'Wallet 1',
+                balance: 1000
+            }, {
+                id: 2,
+                name: 'Wallet 2',
+                balance: 2000
             }]
         };
 
@@ -33,7 +41,6 @@ export default class SettingsScreen extends React.Component {
     }
 
     render() {
-        var data = [["Wallet 1", "Wallet 2", "Wallet 3", "Wallet 4"]];
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
@@ -50,22 +57,9 @@ export default class SettingsScreen extends React.Component {
                         />
                     }
                 >
-                    <View style={{ marginTop: 20 }}>
-                        <DropdownMenu
-                            style={{flex: 1}}
-                            bgColor={'white'}
-                            tintColor={'#666666'}
-                            activityTintColor={'#666666'}
-                            handler={(selection, row) => this.setState({text: data[selection][row]})}
-                            data={data}
-                        >
-                            <View style={{flex: 1, marginTop: 10}}>
-                                <TransactionBlock data={this.state.transactionsData} />
-                                <Text>
-                                    {this.state.text}
-                                </Text>
-                            </View>
-                        </DropdownMenu>
+                    <View>
+                        <WalletsDropdownMenu walletsList={this.state.walletsList} />
+                        {/*<TransactionBlock data={this.state.transactionsData} />*/}
                     </View>
 
                 </ScrollView>
