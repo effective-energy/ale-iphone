@@ -107,7 +107,7 @@ export default class WalletsScreen extends React.Component {
     }
 
     changePage(e) {
-        this.props.navigation.navigate(e, { animation: null });
+        this.props.navigation.navigate(e, { transition: 'vertical' });
     }
 
     requestMoney(e) {

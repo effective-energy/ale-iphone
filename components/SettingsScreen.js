@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert } from 'react-native';
+import Image from 'react-native-remote-svg';
 
 import ls from 'react-native-local-storage';
 
@@ -22,7 +23,9 @@ export default class SettingsScreen extends React.Component {
 	    this.state = {
             isTwoAuthActive: false,
             isLoaderPage: false,
-            systemLanguage: ''
+            systemLanguage: '',
+            fullName: '',
+            userEmail: ''
         };
         this.logout = this.logout.bind(this);
         this.changePage = this.changePage.bind(this);
@@ -62,7 +65,9 @@ export default class SettingsScreen extends React.Component {
             .then((responseJson) => {
                 return this.setState({
                     isTwoAuthActive: responseJson.isTwoAuth,
-                    isLoaderPage: false
+                    isLoaderPage: false,
+                    fullName: responseJson.name,
+                    userEmail: responseJson.email
                 });
             })
             .catch((error) => {
@@ -100,22 +105,48 @@ export default class SettingsScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
-                <View style={{ marginTop: 20, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp(100), backgroundColor: '#ffffff', paddingRight: 15, paddingLeft: 15, paddingTop: 12, paddingBottom: 12, borderBottomColor: '#cccccc', borderBottomWidth: 1 }}>
+                <View style={{ marginTop: 20, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp(100), backgroundColor: '#ffffff', paddingRight: 15, paddingLeft: 15, paddingTop: 12, paddingBottom: 12 }}>
                     <Text style={{ fontSize: wp(5), color: '#34343e' }}>Enable 2fa</Text>
                     <Switch value={this.state.isTwoAuthActive} tintColor="#cccccc" onValueChange={this.onValueChange} />
                 </View>
+
                 <TouchableOpacity
-                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15 }}
+                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 2 }}
                     onPress={this.changeLanguage}
                 >
                     <Text style={{ fontSize: wp(5), color: '#34343e' }}>Language</Text>
-                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>{this.state.systemLanguage}</Text>
+                    <Image
+                        source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                        style={{width: 20, height: 20}}
+                    />
                 </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 2 }}
+                >
+                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>Full name</Text>
+                    <Image
+                        source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                        style={{width: 20, height: 20}}
+                    />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 2 }}
+                >
+                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>E-mail</Text>
+                    <Image
+                        source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                        style={{width: 20, height: 20}}
+                    />
+                </TouchableOpacity>
+
                 <View style={{ marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.buttonContainer} onPress={this.logout}>
                         <Text style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}>Sign out</Text>
                     </TouchableOpacity>
                 </View>
+
                 <BottomNavigator
                     changePage={this.changePage}
                     activePage="settings"

@@ -15,7 +15,8 @@ export default class SettingsScreen extends React.Component {
     }
     
     static navigationOptions = {
-        title: "Operations history"
+        title: "Operations history",
+        headerLeft: null,
     };
 
     changePage(e) {

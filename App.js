@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { createStackNavigator } from 'react-navigation';
-import { NavigatorIOS, YellowBox, Alert } from 'react-native';
+import { NavigatorIOS, YellowBox, Alert, Easing, Animated } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 import ls from 'react-native-local-storage';
@@ -39,6 +39,14 @@ const initialRouteName = () => {
     });
 }
 
+const transitionConfig = () => {
+  return {
+    transitionSpec: {
+      duration: 0
+    }
+  }
+}
+
 const RootStack = createStackNavigator({
     Login: { screen: LoginScreen },
     NewWallet: { screen: NewWalletScreen },
@@ -57,11 +65,8 @@ const RootStack = createStackNavigator({
     RecoveryPhrase: { screen: RecoveryPhraseScreen },
     TwoFactorAuth: { screen: TwoFactorAuthScreen }
 }, {
-    initialRouteName: initialRouteName()
-}, {
-    transitionConfig: () => ({
-        screenInterpolator: () => null
-    }),
+    initialRouteName: initialRouteName(),
+    transitionConfig,
 });
 
 export default class App extends React.Component {

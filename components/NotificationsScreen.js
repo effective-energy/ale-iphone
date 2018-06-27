@@ -27,7 +27,8 @@ export default class NotificationsScreen extends React.Component {
     }
     
     static navigationOptions = {
-        title: "Notifications"
+        title: "Notifications",
+        headerLeft: null,
     };
 
     componentDidMount() {
