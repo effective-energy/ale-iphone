@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        zIndex: 1
     },
     transactionBlockRow: {
         display: 'flex',

@@ -9,11 +9,14 @@ function wp (percentage) {
 const { width: viewportWidth } = Dimensions.get('window');
 let screenWidth = wp(80);
 
+import QRCode from 'react-native-qrcode';
+
 export default class RequestMoneyScreen extends React.Component {
     constructor(props) {
         super(props);
 	    this.state = {
-	    	receiverAddress: this.props.navigation.state.params.walletAddress
+	    	receiverAddress: this.props.navigation.state.params.walletAddress,
+            text: 'http://facebook.github.io/react-native/',
 	    };
     }
     
@@ -32,6 +35,12 @@ export default class RequestMoneyScreen extends React.Component {
             	<StatusBar barStyle='dark-content' />
             	<View style={styles.qrCodeContainer}>
             		<View style={{ marginBottom: 20 }}>
+                        <QRCode
+                            value={this.state.text}
+                            size={200}
+                            bgColor='purple'
+                            fgColor='white'
+                        />
             			<Image
 	            			source={{uri: 'https://internationalbarcodes.net/wp-content/uploads/2017/04/QR%20code%20example.jpg'}}
 	            			style={{ width: wp(70), height: wp(70), margin: 0, padding: 0 }}

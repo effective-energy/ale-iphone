@@ -59,7 +59,7 @@ export default class SettingsScreen extends React.Component {
                 >
                     <View>
                         <WalletsDropdownMenu walletsList={this.state.walletsList} />
-                        {/*<TransactionBlock data={this.state.transactionsData} />*/}
+                        <TransactionBlock data={this.state.transactionsData} />
                     </View>
 
                 </ScrollView>

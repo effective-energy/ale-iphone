@@ -63,13 +63,13 @@ export default class WalletsDropdownMenu extends React.Component {
 
         return (
             <TouchableOpacity
-                style={{ width: wp(90), height: 50, marginTop: 20, justifyContent: 'space-between', paddingLeft: 10, paddingRight: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', borderBottomColor: '#cccccc', borderBottomWidth: 2, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
+                style={{ width: wp(90), height: 50, marginTop: 20, justifyContent: 'space-between', paddingLeft: 10, paddingRight: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', borderBottomColor: '#cccccc', borderBottomWidth: 2, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', zIndex: 0 }}
                 onPress={this.toggleMenu}
             >
                 {
                     this.state.isMenuOpen &&
                     <View
-                        style={{ width: wp(90), backgroundColor: '#FFFFFF', zIndex: 1, position: 'absolute', top: 5 }}
+                        style={{ width: wp(90), backgroundColor: '#FFFFFF', zIndex: 0, position: 'absolute', top: 5 }}
                     >
                         {wallets}
                     </View>

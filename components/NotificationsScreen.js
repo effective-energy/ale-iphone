@@ -20,7 +20,8 @@ export default class NotificationsScreen extends React.Component {
             isActive: false,
             isLoaderPage: false,
             notificationsList: [],
-            checked: true
+            checked: true,
+            isRefreshShow: false
         };
 
         this.changePage = this.changePage.bind(this);
@@ -32,15 +33,25 @@ export default class NotificationsScreen extends React.Component {
     };
 
     componentDidMount() {
-        this.getNotifications();
+        this.getNotifications(false);
     }
 
     changePage(e) {
         this.props.navigation.navigate(e, { animation: null });
     }
 
-    getNotifications() {
-        this.setState({isLoaderPage: true});
+    getNotifications(isRefresh) {
+        if (isRefresh) {
+            this.setState({
+                isRefreshShow: true,
+                isLoaderPage: false
+            });
+        } else {
+            this.setState({
+                isRefreshShow: false,
+                isLoaderPage: true
+            });
+        }
         ls.get('userToken').then((data) => {
             return fetch('https://ale-demo-4550.nodechef.com/notifications', {
                 method: 'GET',
@@ -54,7 +65,8 @@ export default class NotificationsScreen extends React.Component {
             .then((responseJson) => {
                 return this.setState({
                     notificationsList: responseJson,
-                    isLoaderPage: false
+                    isLoaderPage: false,
+                    isRefreshShow: false
                 });
             })
             .catch((error) => {
@@ -69,7 +81,7 @@ export default class NotificationsScreen extends React.Component {
         }
         let notifications = this.state.notificationsList.map(function (el, i) {
             return (
-                <View key={i} style={{ paddingLeft: wp(10), paddingRight: wp(10), marginTop: 20 }}>
+                <View key={i} style={{ marginTop: 20, backgroundColor: '#FFFFFF', padding: 10, width: wp(90), borderRadius: 10 }}>
                     <Markdown>{el.title}</Markdown>
                 </View>
             )
@@ -83,15 +95,17 @@ export default class NotificationsScreen extends React.Component {
                     automaticallyAdjustContentInsets={false}
                     refreshControl={
                         <RefreshControl
-                            onRefresh={() => this.getNotifications()}
-                            refreshing={false}
+                            onRefresh={() => this.getNotifications(true)}
+                            refreshing={this.state.isRefreshShow}
                             tintColor="#000000"
                             colors={['#ff0000', '#00ff00', '#0000ff']}
                             progressBackgroundColor="#EBEBEB"
                         />
                     }
                 >
-                    {notifications}
+                    <View style={{ width: wp(100), display: 'flex', alignItems: 'center' }}>
+                        {notifications}
+                    </View>
                 </ScrollView>
                 <BottomNavigator
                     changePage={this.changePage}
