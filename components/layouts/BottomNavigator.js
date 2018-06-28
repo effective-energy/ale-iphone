@@ -9,6 +9,9 @@ function wp (percentage) {
 
 const { width: viewportWidth } = Dimensions.get('window');
 
+// I18n 
+import I18n from '../../i18n/index';
+
 export default class BottomNavigator extends React.Component {
 	constructor(props) {
         super(props);
@@ -16,25 +19,25 @@ export default class BottomNavigator extends React.Component {
             activeClass: this.props.activePage,
             tabs: [
                 {
-                    title: 'Wallet',
+                    title: I18n.t('bottom_navigation.wallet'),
                     icon: require('../../assets/images/navigation/bottom/icon_wallet-passive.svg'),
                     activeIcon: require('../../assets/images/navigation/bottom/icon_wallet-active.svg'),
                     pageName: 'Wallets',
                     activeClass: 'wallets'
                 }, {
-                    title: 'History',
+                    title: I18n.t('bottom_navigation.history'),
                     icon: require('../../assets/images/navigation/bottom/icon_history-passive.svg'),
                     activeIcon: require('../../assets/images/navigation/bottom/icon_history-active.svg'),
                     pageName: 'History',
                     activeClass: 'history'
                 }, {
-                    title: 'Notifications',
+                    title: I18n.t('bottom_navigation.notifications'),
                     icon: require('../../assets/images/navigation/bottom/icon_notifications-passive.svg'),
                     activeIcon: require('../../assets/images/navigation/bottom/icon_notifications-active.svg'),
                     pageName: 'Notifications',
                     activeClass: 'notifications'
                 }, {
-                    title: 'Settings',
+                    title: I18n.t('bottom_navigation.settings'),
                     icon: require('../../assets/images/navigation/bottom/icon_settings-passive.svg'),
                     activeIcon: require('../../assets/images/navigation/bottom/icon_settings-active.svg'),
                     pageName: 'Settings',
@@ -103,7 +106,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         position: 'relative',
         bottom: 2,
-        fontSize: wp(4)
+        fontSize: 14
     },
     itemTitleActive: {
         color: '#FFBB00'

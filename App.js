@@ -10,6 +10,9 @@ import ls from 'react-native-local-storage';
 import { Provider } from "mobx-react";
 import stores from "./mobX";
 
+// I18n 
+import I18n from './i18n/index';
+
 import LoginScreen from './components/LoginScreen';
 import NewWalletScreen from './components/NewWalletScreen';
 import ImportwalletScreen from './components/ImportwalletScreen';
@@ -72,6 +75,20 @@ const RootStack = createStackNavigator({
 export default class App extends React.Component {
     constructor(props: Object) {
         super(props);
+    }
+
+    componentDidMount() {
+        this.getSystemLanguage();
+    }
+
+    getSystemLanguage() {
+        ls.get('systemLanguage').then((result) => {
+            if (result === null) {
+                I18n.locale = 'en';
+            } else {
+                I18n.locale = result;
+            }
+        });
     }
 
     render() {

@@ -11,5 +11,11 @@ export default {
 			email: 'E-mail',
 			signOut: 'Выход'
 		}
+	},
+	bottom_navigation: {
+		wallet: 'Кошелек',
+		history: 'История',
+		notifications: 'Уведомления',
+		settings: 'Настройки'
 	}
 };
