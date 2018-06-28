@@ -36,19 +36,14 @@ export default class SettingsScreen extends React.Component {
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
         return {
-            title: I18n.t('pages.settings.title', {locale: params.currentLanguageCode}),
+            title: I18n.t('pages.settings.title'),
             headerLeft: null,
             gesturesEnabled: false,
         };
     };
 
     componentDidMount() {
-        ls.get('systemLanguage').then((result) => {
-            this.props.navigation.setParams({
-                currentLanguageCode: result
-            });
-            return this.getSystemLanguage();
-        });
+        return this.getSystemLanguage();
     }
 
     getSystemLanguage() {
@@ -114,7 +109,7 @@ export default class SettingsScreen extends React.Component {
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
                 <View style={{ marginTop: 20, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp(100), backgroundColor: '#ffffff', paddingRight: 15, paddingLeft: 15, paddingTop: 12, paddingBottom: 12 }}>
-                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>Enable 2fa</Text>
+                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>{I18n.t('pages.settings.two_auth.enable')}</Text>
                     <Switch value={this.state.isTwoAuthActive} tintColor="#cccccc" onValueChange={this.onValueChange} />
                 </View>
 
@@ -122,7 +117,7 @@ export default class SettingsScreen extends React.Component {
                     style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 2 }}
                     onPress={this.changeLanguage}
                 >
-                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>Language</Text>
+                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>{I18n.t('pages.settings.language')}</Text>
                     <Image
                         source={require('../assets/images/icons/icon_small-arrow-right.svg')}
                         style={{width: 20, height: 20}}
@@ -132,7 +127,7 @@ export default class SettingsScreen extends React.Component {
                 <TouchableOpacity
                     style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 2 }}
                 >
-                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>Full name</Text>
+                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>{I18n.t('pages.settings.fullName')}</Text>
                     <Image
                         source={require('../assets/images/icons/icon_small-arrow-right.svg')}
                         style={{width: 20, height: 20}}
@@ -142,7 +137,7 @@ export default class SettingsScreen extends React.Component {
                 <TouchableOpacity
                     style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 2 }}
                 >
-                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>E-mail</Text>
+                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>{I18n.t('pages.settings.email')}</Text>
                     <Image
                         source={require('../assets/images/icons/icon_small-arrow-right.svg')}
                         style={{width: 20, height: 20}}
@@ -151,7 +146,7 @@ export default class SettingsScreen extends React.Component {
 
                 <View style={{ marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.buttonContainer} onPress={this.logout}>
-                        <Text style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}>Sign out</Text>
+                        <Text style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}>{I18n.t('pages.settings.signOut')}</Text>
                     </TouchableOpacity>
                 </View>
 
