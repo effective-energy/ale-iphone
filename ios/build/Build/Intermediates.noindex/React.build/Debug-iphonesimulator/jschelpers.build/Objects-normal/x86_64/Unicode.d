@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/voroncov/Desktop/jago/ale-iphone/node_modules/react-native/ReactCommon/jschelpers/Unicode.cpp \
-  /Users/voroncov/Desktop/jago/ale-iphone/node_modules/react-native/ReactCommon/jschelpers/Unicode.h
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/ReactCommon/jschelpers/Unicode.cpp \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/ReactCommon/jschelpers/Unicode.h
