@@ -84,7 +84,9 @@ export default class App extends React.Component {
     getSystemLanguage() {
         ls.get('systemLanguage').then((result) => {
             if (result === null) {
-                I18n.locale = 'en';
+                ls.save('systemLanguage', 'en').then(() => {
+                    I18n.locale = 'en';
+                });
             } else {
                 I18n.locale = result;
             }

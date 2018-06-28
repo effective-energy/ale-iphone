@@ -1,0 +1,19 @@
+dependencies: \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native-camera-kit/ios/lib/ReactNativeCameraKit/CKGalleryCollectionViewCell.m \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAnimationType.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAssert.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUtils.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTPointerEvents.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTTextDecorationLineType.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native-camera-kit/ios/lib/ReactNativeCameraKit/CKGalleryCollectionViewCell.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native-camera-kit/ios/lib/ReactNativeCameraKit/SelectionGesture.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native-camera-kit/ios/lib/ReactNativeCameraKit/GalleryData.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native-camera-kit/ios/lib/ReactNativeCameraKit/M13ProgressViewPie.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native-camera-kit/ios/lib/ReactNativeCameraKit/M13ProgressView.h

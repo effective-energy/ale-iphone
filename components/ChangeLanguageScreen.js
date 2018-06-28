@@ -41,13 +41,7 @@ export default class ChangeLanguageScreen extends React.Component {
 
     getSystemLanguage() {
         ls.get('systemLanguage').then((result) => {
-            if (result === null) {
-                ls.save('systemLanguage', 'eng').then(() => {
-                    return this.setState({systemLanguage: result});
-                });
-            } else {
-                return this.setState({systemLanguage: result});
-            }
+            return this.setState({systemLanguage: result});
         });
     }
 
