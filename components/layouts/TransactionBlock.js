@@ -20,12 +20,12 @@ export default class TransactionBlock extends React.Component {
                     <View style={styles.transactionBlockRow}>
                         <View style={styles.transactionBlockType}></View>
                         <View style={styles.transactionBlockInfo}>
-                            <Text>{el.sender}</Text>
-                            <Text>{el.date} {el.time}</Text>
+                            <Text>Sender</Text>
+                            <Text>Date</Text>
                         </View>
                     </View>
                     <View>
-                        <Text style={styles.transactionBlockAmount}>-999 ALE</Text>
+                        <Text style={styles.transactionBlockAmount}>{el.count} ALE</Text>
                         <Text style={styles.transactionBlockDescription}>Money send</Text>
                     </View>
                 </View>
@@ -33,7 +33,7 @@ export default class TransactionBlock extends React.Component {
         }, this);
 
         return (
-            <View>
+            <View style={{ display: 'flex', alignItems: 'center', marginTop: 20 }}>
                 {transactions}
             </View>
         );
@@ -44,13 +44,14 @@ const styles = StyleSheet.create({
     transactionBlockContainer: {
         padding: 10,
         backgroundColor: '#cccccc',
-        width: wp(90),
+        width: wp(80),
         borderRadius: 5,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        zIndex: 1
+        zIndex: 1,
+        marginBottom: 20
     },
     transactionBlockRow: {
         display: 'flex',

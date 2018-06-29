@@ -144,6 +144,16 @@ export default class SettingsScreen extends React.Component {
                     />
                 </TouchableOpacity>
 
+                <TouchableOpacity
+                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 2 }}
+                >
+                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>Password</Text>
+                    <Image
+                        source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                        style={{width: 20, height: 20}}
+                    />
+                </TouchableOpacity>
+
                 <View style={{ marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <TouchableOpacity style={styles.buttonContainer} onPress={this.logout}>
                         <Text style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}>{I18n.t('pages.settings.signOut')}</Text>

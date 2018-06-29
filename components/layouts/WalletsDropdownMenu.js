@@ -36,7 +36,8 @@ export default class WalletsDropdownMenu extends React.Component {
         this.setState({
             selectedWallet: this.props.walletsList[index],
             isMenuOpen: false,
-        })
+        });
+        return this.props.changeWallet(this.props.walletsList[index].address);
     }
 
     render() {
@@ -44,7 +45,7 @@ export default class WalletsDropdownMenu extends React.Component {
             return (
                 <TouchableOpacity
                     key={i}
-                    style={{ width: wp(90), height: 50, backgroundColor: '#cccccc', paddingLeft: 10, paddingRight: 10 }}
+                    style={{ width: wp(90), height: 50, backgroundColor: '#cccccc', paddingLeft: 10, paddingRight: 10, zIndex: 1 }}
                     onPress={() => this.selectWallet(i)}
                 >
                     <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
@@ -61,9 +62,10 @@ export default class WalletsDropdownMenu extends React.Component {
             )
         }, this);
 
+        let isMenuOpen = this.state.isMenuOpen === true ? 0 : 1;
         return (
             <TouchableOpacity
-                style={{ width: wp(90), height: 50, marginTop: 20, justifyContent: 'space-between', paddingLeft: 10, paddingRight: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', borderBottomColor: '#cccccc', borderBottomWidth: 2, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', zIndex: 0 }}
+                style={{ width: wp(90), height: 50, marginTop: 20, justifyContent: 'space-between', paddingLeft: 10, paddingRight: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', borderBottomColor: '#cccccc', borderBottomWidth: 2, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', zIndex: 1 }}
                 onPress={this.toggleMenu}
             >
                 {
@@ -74,7 +76,7 @@ export default class WalletsDropdownMenu extends React.Component {
                         {wallets}
                     </View>
                 }
-                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', opacity: isMenuOpen }}>
                     <Image
                         source={require('../../assets/images/navigation/bottom/icon_wallet-passive.svg')}
                         style={{width: 40, height: 40, marginRight: 10 }}
