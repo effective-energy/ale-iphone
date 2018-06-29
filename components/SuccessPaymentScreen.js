@@ -40,7 +40,7 @@ export default class SuccessPaymentScreen extends React.Component {
                 </View>
                 <View style={{ backgroundColor: '#152038', width: screenWidth, padding: 5, borderRadius: 15, marginTop: 50 }}>
                     <Button
-                        title="Login to wallet"
+                        title="Back to wallets"
                         onPress={this.backToWalletsList}
                         color="#ffbb00"
                     />
