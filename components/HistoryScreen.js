@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Text } from 'react-native';
-import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Text, Alert } from 'react-native';
 import ls from 'react-native-local-storage';
 
 import BottomNavigator from './layouts/BottomNavigator';
