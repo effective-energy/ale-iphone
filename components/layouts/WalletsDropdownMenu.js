@@ -42,11 +42,11 @@ export default class WalletsDropdownMenu extends React.Component {
 
     render() {
         let wallets = this.props.walletsList.map(function (el, i) {
-            let isActiveWallet = this.props.activeWalletIndex === i ? 'red' : '#CCCCCC';
+            let isActiveWallet = this.props.activeWalletIndex === i ? '#cccccc' : '#c1c4cb';
             return (
                 <TouchableOpacity
                     key={i}
-                    style={{ width: wp(80), height: 50, backgroundColor: isActiveWallet, paddingLeft: 10, paddingRight: 10, zIndex: 1 }}
+                    style={{ width: wp(80), height: 50, backgroundColor: isActiveWallet, paddingLeft: 10, paddingRight: 10, zIndex: 1, padding: 10 }}
                     onPress={() => this.selectWallet(i)}
                 >
                     <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
