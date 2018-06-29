@@ -1,5 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, Dimensions } from 'react-native';
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -15,18 +17,18 @@ export default class TransactionBlock extends React.Component {
 
     render() {
         let transactions = this.props.data.map(function (el, i) {
+            let transactionType = this.props.activeWalletAddress === el.walletAddress ? 'SENT' : 'RECIEVED';
             return (
                 <View style={styles.transactionBlockContainer} key={i}>
                     <View style={styles.transactionBlockRow}>
                         <View style={styles.transactionBlockType}></View>
                         <View style={styles.transactionBlockInfo}>
-                            <Text>Sender</Text>
-                            <Text>Date</Text>
+                            <Text>{transactionType}</Text>
+                            <Moment element={Text} format="YYYY MM DD HH:mm">{el.timestamp}</Moment>
                         </View>
                     </View>
                     <View>
                         <Text style={styles.transactionBlockAmount}>{el.count} ALE</Text>
-                        <Text style={styles.transactionBlockDescription}>Money send</Text>
                     </View>
                 </View>
             )
@@ -59,8 +61,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     transactionBlockType: {
-        width: 50,
-        height: 50,
+        width: 40,
+        height: 40,
         backgroundColor: '#091629',
         borderRadius: 5
     },

@@ -545,6 +545,7 @@
 				2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */,
 				D06285D6AD404ED5B7B716A0 /* libRNSVG-tvOS.a in Frameworks */,
 				4CD251595F94484093CF2E70 /* libRNI18n-tvOS.a in Frameworks */,
+				441178CD9789438B86B79C66 /* libRNVersionNumber-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

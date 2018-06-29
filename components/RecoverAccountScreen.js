@@ -27,6 +27,13 @@ export default class RecoverAccountScreen extends React.Component {
     
     static navigationOptions = {
         title: 'Recover account',
+        headerTitleStyle: {
+            color: '#ffbb00'
+        },
+        headerStyle: {
+            backgroundColor: '#07132f'
+        },
+        headerTintColor: '#ffbb00',
     };
 
     loginToAccount() {
@@ -66,7 +73,7 @@ export default class RecoverAccountScreen extends React.Component {
             <View
                 style={{ flex: 1, backgroundColor: '#08142F', alignItems: 'center', justifyContent: 'space-between', paddingTop: 30, paddingBottom: 30 }}
             >
-                <StatusBar barStyle='dark-content' />
+                <StatusBar barStyle='light-content' />
                 <View>
                     <View>
                         <TextInput

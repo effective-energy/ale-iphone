@@ -37,15 +37,16 @@ export default class WalletsDropdownMenu extends React.Component {
             selectedWallet: this.props.walletsList[index],
             isMenuOpen: false,
         });
-        return this.props.changeWallet(this.props.walletsList[index].address);
+        return this.props.changeWallet(index);
     }
 
     render() {
         let wallets = this.props.walletsList.map(function (el, i) {
+            let isActiveWallet = this.props.activeWalletIndex === i ? 'red' : '#CCCCCC';
             return (
                 <TouchableOpacity
                     key={i}
-                    style={{ width: wp(90), height: 50, backgroundColor: '#cccccc', paddingLeft: 10, paddingRight: 10, zIndex: 1 }}
+                    style={{ width: wp(80), height: 50, backgroundColor: isActiveWallet, paddingLeft: 10, paddingRight: 10, zIndex: 1 }}
                     onPress={() => this.selectWallet(i)}
                 >
                     <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
@@ -65,7 +66,7 @@ export default class WalletsDropdownMenu extends React.Component {
         let isMenuOpen = this.state.isMenuOpen === true ? 0 : 1;
         return (
             <TouchableOpacity
-                style={{ width: wp(90), height: 50, marginTop: 20, justifyContent: 'space-between', paddingLeft: 10, paddingRight: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', borderBottomColor: '#cccccc', borderBottomWidth: 2, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', zIndex: 1 }}
+                style={{ width: wp(80), height: 50, marginTop: 20, justifyContent: 'space-between', paddingLeft: 10, paddingRight: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', borderBottomColor: '#cccccc', borderBottomWidth: 2, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', zIndex: 1 }}
                 onPress={this.toggleMenu}
             >
                 {

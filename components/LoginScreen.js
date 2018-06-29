@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Alert, Dimensions, TextInput, StatusBar, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, Dimensions, TextInput, StatusBar, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Image from 'react-native-remote-svg';
 
 import ls from 'react-native-local-storage';
@@ -29,7 +29,6 @@ export default class LoginScreen extends React.Component {
 			isPageLoader: false,
 			userEmail: '',
 			userPassword: '',
-			isLogginUser: false
 		};
 
 		this.loginToWallet = this.loginToWallet.bind(this);
@@ -67,6 +66,8 @@ export default class LoginScreen extends React.Component {
     		return Alert.alert('Enter your password');
     	}
 
+    	this.setState({isPageLoader: true});
+
     	return fetch('https://ale-demo-4550.nodechef.com/users/login', {
     		method: 'POST',
     		headers: {
@@ -82,9 +83,11 @@ export default class LoginScreen extends React.Component {
     	.then((responseJson) => {
     		if (responseJson.message === 'Auth success') {
     			ls.save('userToken', responseJson.user_token).then(() => {
+    				this.setState({isPageLoader: false});
     				return this.props.navigation.push('Wallets', { animation: null });
     			})
     		} else {
+    			this.setState({isPageLoader: false});
     			Alert.alert(responseJson.message)
     		}
     	})
@@ -102,9 +105,6 @@ export default class LoginScreen extends React.Component {
     }
 
     render() {
-    	if (this.state.isLogginUser) {
-    		return (<Pageloader />);
-    	}
     	return (
     		<View style={styles.container}>
     			<StatusBar barStyle='light-content' />
@@ -137,16 +137,16 @@ export default class LoginScreen extends React.Component {
 					>
 						<Image
                             source={require('../assets/images/icons/icon_login-icon.svg')}
-                            style={{width: 16, height: 16, marginRight: 10 }}
+                            style={{width: 20, height: 20, marginRight: 10 }}
                         />
-						<Text style={{ color: '#ffbb00', textAlign: 'center', fontSize: 16 }}>Login to wallet</Text>
+						<Text style={{ color: '#ffbb00', textAlign: 'center', fontSize: 18 }}>Login to wallet</Text>
 					</TouchableOpacity>
-					{this.state.isPageLoader === true ? <View style={{ marginTop: 20 }}>
-							<Image
-			                    style={{ width: 44, height: 44 }}
-			                    source={require('../assets/images/icons/spinner.svg')}
-			                />
-						</View>: null}
+
+					{
+						this.state.isPageLoader === true ?
+							<ActivityIndicator size="large" color="#CCCCCC" style={{marginTop: 20}} />
+							: null
+					}
 				</View>
 				<View style={{ maxWidth: wp(80), width: wp(80) }}>
 					<View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>

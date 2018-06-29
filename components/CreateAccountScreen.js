@@ -17,6 +17,8 @@ export default class CreateAccountScreen extends React.Component {
             password: '',
             repeatPassword: ''
         };
+
+        this.backToLoginPage = this.backToLoginPage.bind(this);
     }
     
     static navigationOptions = {
@@ -29,6 +31,10 @@ export default class CreateAccountScreen extends React.Component {
         },
         headerTintColor: '#ffbb00',
     };
+
+    backToLoginPage() {
+        this.props.navigation.navigate('Login', { animation: null });
+    }
 
     render() {
         const { params } = this.props.navigation.state;
@@ -76,6 +82,7 @@ export default class CreateAccountScreen extends React.Component {
                     <Text style={{ color: '#34476f' }}>Already have an account?</Text>
                     <TouchableOpacity
                         style={{ marginLeft: 10 }}
+                        onPress={this.backToLoginPage}
                     >
                         <Text style={{ color: '#ffbb00' }}>Log in</Text>
                     </TouchableOpacity>

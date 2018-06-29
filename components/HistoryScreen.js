@@ -1,11 +1,18 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Text } from 'react-native';
+import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Text, Dimensions } from 'react-native';
 import ls from 'react-native-local-storage';
 
 import BottomNavigator from './layouts/BottomNavigator';
 import TransactionBlock from './layouts/TransactionBlock';
 import WalletsDropdownMenu from './layouts/WalletsDropdownMenu';
 import Pageloader from './layouts/Pageloader';
+
+function wp (percentage) {
+    const value = (percentage * viewportWidth) / 100;
+    return Math.round(value);
+}
+
+const { width: viewportWidth } = Dimensions.get('window');
 
 export default class SettingsScreen extends React.Component {
     constructor(props) {
@@ -14,7 +21,9 @@ export default class SettingsScreen extends React.Component {
             isActive: false,
             transactionsData: [],
             walletsList: [],
-            isLoaderPage: false
+            isLoaderPage: false,
+            activeWalletIndex: 0,
+            activeWalletAddress: ''
         };
 
         this.changePage = this.changePage.bind(this);
@@ -47,7 +56,8 @@ export default class SettingsScreen extends React.Component {
             .then((responseJson) => {
                 this.setState({
                     walletsList: responseJson,
-                    isLoaderPage: false
+                    isLoaderPage: false,
+                    activeWalletAddress: responseJson[0].address
                 });
                 return this.getTransaction(this.state.walletsList[0].address);
             })
@@ -86,12 +96,16 @@ export default class SettingsScreen extends React.Component {
     }
 
     changeWallet(e) {
-        this.getTransaction(e);
+        this.setState({
+            activeWalletIndex: e,
+            activeWalletAddress: this.state.walletsList[e].address
+        });
+        this.getTransaction(this.state.walletsList[e].address);
     }
 
     render() {
         if (this.state.isLoaderPage) {
-            return (<Pageloader title="Loading wallets..." />);
+            return (<Pageloader title="Loading transactions..." />);
         }
         return (
             <View style={styles.pageContainer}>
@@ -109,9 +123,16 @@ export default class SettingsScreen extends React.Component {
                         />
                     }
                 >
-                    <View>
-                        <WalletsDropdownMenu walletsList={this.state.walletsList} changeWallet={this.changeWallet} />
-                        <TransactionBlock data={this.state.transactionsData} />
+                    <View style={{ width: wp(100), display: 'flex', alignItems: 'center' }}>
+                        <WalletsDropdownMenu 
+                            activeWalletIndex={this.state.activeWalletIndex}
+                            walletsList={this.state.walletsList}
+                            changeWallet={this.changeWallet}
+                        />
+                        <TransactionBlock
+                            activeWalletAddress={this.state.activeWalletAddress}
+                            data={this.state.transactionsData}
+                        />
                     </View>
 
                 </ScrollView>
@@ -128,6 +149,6 @@ const styles = StyleSheet.create({
     pageContainer: {
         flex: 1,
         backgroundColor: '#e8ebee',
-        alignItems: 'center'
+        alignItems: 'center',
     }
 });

@@ -81,7 +81,7 @@ export default class NotificationsScreen extends React.Component {
         }
         let notifications = this.state.notificationsList.map(function (el, i) {
             return (
-                <View key={i} style={{ marginTop: 20, backgroundColor: '#FFFFFF', padding: 10, width: wp(90), borderRadius: 10 }}>
+                <View key={i} style={{ marginTop: 20, backgroundColor: '#FFFFFF', padding: 10, width: wp(80) }}>
                     <Markdown>{el.title}</Markdown>
                 </View>
             )
