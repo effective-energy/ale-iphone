@@ -126,8 +126,8 @@ export default class WalletsScreen extends React.Component {
         })
     }
 
-    openWalletDetailsScreen() {
-        this.props.navigation.navigate('WalletDetails')
+    openWalletDetailsScreen(walletData) {
+        this.props.navigation.navigate('WalletDetails', { walletData: walletData })
     }
 
     createNewWallet() {

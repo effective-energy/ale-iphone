@@ -22,61 +22,7 @@ const sliderWidth = viewportWidth;
 export default class WalletsSlider extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            selectedWalletAddressForRename: ''
-        };
-
-        this.editWalletName = this.editWalletName.bind(this);
-    }
-
-    editWalletName(walletAddress, walletName) {
-        this.setState({ selectedWalletAddressForRename: walletAddress});
-
-        AlertIOS.prompt(
-            'Change wallet name',
-            'Enter new name for wallet',
-            [{
-                text: 'Cancel',
-                onPress: () => this.cancelRenameWallet,
-                style: 'cancel',
-            }, {
-                text: 'OK',
-                onPress: (newWalletName) => this.renameWallet(newWalletName),
-            }],
-          'plain-text',
-          walletName
-        );
-    }
-
-    cancelRenameWallet() {
-        this.setState({selectedWalletAddressForRename: ''})
-    }
-
-    renameWallet(newWalletName) {
-        ls.get('userToken').then((data) => {
-            return fetch('https://ale-demo-4550.nodechef.com/wallet/rename', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data
-                },
-                body: JSON.stringify({
-                    walletAddress: this.state.selectedWalletAddressForRename,
-                    newWalletName: newWalletName
-                }),
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    selectedWalletAddressForRename: ''
-                });
-                Alert.alert(responseJson.message)
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        });
+        this.state = {};
     }
 
     _renderItem ({item}) {
@@ -95,7 +41,7 @@ export default class WalletsSlider extends React.Component {
                     </View>
                     <View>
                         <TouchableHighlight
-                            onPress={this.props.openWalletDetailsScreen}
+                            onPress={() => this.props.openWalletDetailsScreen(item)}
                         >
                             <SVGImage
                                 style={{width: wp(8), height: wp(8)}}
