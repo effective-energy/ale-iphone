@@ -69,18 +69,16 @@ export default class RestoreWalletScreen extends React.Component {
 
     render() {
         return (
-            <View
-                style={{ flex: 1, backgroundColor: '#08142F', alignItems: 'center', justifyContent: 'space-between', paddingTop: 30, paddingBottom: 30 }}
-            >
+            <View style={styles.pageContainer}>
                 <StatusBar barStyle='light-content' />
-                <View>
-                    <Text style={{ color: '#ffffff', marginBottom: 10 }}>Enter your mnemonic phrase</Text>
+                <View style={{ marginTop: 30 }}>
                     <TextInput
                         placeholder="Enter your mnemonic phrase"
                         placeholderTextColor="#ffffff"
-                        style={{height: 40, borderColor: 'gray', borderWidth: 1, width: screenWidth, marginBottom: 20, borderRadius: 2, padding: 6, color: '#ffffff' }}
+                        style={{height: 40, borderBottomColor: '#ffffff', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', width: screenWidth, marginBottom: 20, borderRadius: 2, color: '#ffffff', fontSize: 18 }}
                         onChangeText={(mnemonicPhrase) => this.setState({mnemonicPhrase})}
                         value={this.state.mnemonicPhrase}
+                        
                     />
                     <TouchableOpacity
                         onPress={this.restoreWallet}
@@ -99,4 +97,10 @@ export default class RestoreWalletScreen extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    pageContainer: {
+        flex: 1,
+        backgroundColor: '#08142F',
+        alignItems: 'center'
+    }
+});
