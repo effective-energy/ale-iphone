@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Alert } from 'react-native';
-import CheckBox from 'react-native-check-box';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -13,11 +12,10 @@ export default class RecoveryPhraseScreen extends React.Component {
     constructor(props) {
         super(props);
 	    this.state = {
-	    	isChecked: false
-	    };
+            isShowMnemonicPhrase: false
+        };
 
 	    this.generateMnemonicPhrase = this.generateMnemonicPhrase.bind(this);
-        this.toggleCheckBox = this.toggleCheckBox.bind(this);
     }
     
     static navigationOptions = {
@@ -25,15 +23,9 @@ export default class RecoveryPhraseScreen extends React.Component {
     };
 
     generateMnemonicPhrase() {
-        if (this.state.isChecked === false) {
-            return Alert.alert('Press on checkbox');
-        } else {
-            return Alert.alert('Next..')
-        }
-    }
-
-    toggleCheckBox() {
-        this.setState({isChecked: !this.state.isChecked})
+        this.setState({
+            isShowMnemonicPhrase: true
+        })
     }
 
     render() {
@@ -44,12 +36,6 @@ export default class RecoveryPhraseScreen extends React.Component {
                     <Text style={styles.mnemonicGenerateDescription}>
                     	On the following screen, you will see a set of X random words. This is your wallet backup phrase. It can be entered in any version of ALE application in order to back up or restore your wallet’s funds and private key.
                     </Text>
-                    <CheckBox
-                        onClick={() => this.toggleCheckBox}
-                        style={styles.checkBox}
-                        isChecked={this.state.isChecked}
-                        rightText="Make sure nobody looks into your screen unless you want them to have access to your funds."
-                    />
                     <TouchableOpacity
                         onPress={this.generateMnemonicPhrase}
                         style={styles.nextBtn}
@@ -72,11 +58,6 @@ const styles = StyleSheet.create({
     },
     mnemonicGenerateDescription: {
         textAlign: 'center'
-    },
-    checkBox: {
-        marginTop: 20,
-        display: 'flex',
-        alignItems: 'center'
     },
     nextBtn: {
         backgroundColor: '#d1d8dd',
