@@ -94,7 +94,9 @@ export default class WalletsSlider extends React.Component {
                         </View>
                     </View>
                     <View>
-                        <TouchableHighlight onPress={(e) => this.editWalletName(item.address, item.name)}>
+                        <TouchableHighlight
+                            onPress={this.props.openWalletDetailsScreen}
+                        >
                             <SVGImage
                                 style={{width: wp(8), height: wp(8)}}
                                 source={require('../../assets/images/icons/icon_wallet-menu.svg')}

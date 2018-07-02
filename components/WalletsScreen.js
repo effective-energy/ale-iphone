@@ -34,11 +34,13 @@ export default class WalletsScreen extends React.Component {
                 userAvatar: ''
             }
         };
+
         this.changePage = this.changePage.bind(this);
         this.requestMoney = this.requestMoney.bind(this);
         this.sendMoney = this.sendMoney.bind(this);
         this.signOut = this.signOut.bind(this);
         this.createNewWallet = this.createNewWallet.bind(this);
+        this.openWalletDetailsScreen = this.openWalletDetailsScreen.bind(this);
     }
     
     static navigationOptions = {
@@ -124,6 +126,10 @@ export default class WalletsScreen extends React.Component {
         })
     }
 
+    openWalletDetailsScreen() {
+        this.props.navigation.navigate('WalletDetails')
+    }
+
     createNewWallet() {
         this.props.navigation.navigate('NewWallet', { animation: null });
     }
@@ -160,6 +166,7 @@ export default class WalletsScreen extends React.Component {
                         }
                     >
                         <WalletsSlider
+                            openWalletDetailsScreen={this.openWalletDetailsScreen}
                             walletsList={this.state.walletsList}
                             requestMoney={this.requestMoney}
                             sendMoney={this.sendMoney}

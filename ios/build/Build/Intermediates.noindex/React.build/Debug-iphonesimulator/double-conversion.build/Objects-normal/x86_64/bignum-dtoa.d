@@ -1,7 +1,7 @@
 dependencies: \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/third-party/double-conversion-1.1.5/src/bignum-dtoa.cc \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/third-party/double-conversion-1.1.5/src/bignum-dtoa.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/third-party/double-conversion-1.1.5/src/utils.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/third-party/double-conversion-1.1.5/src/bignum.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/third-party/double-conversion-1.1.5/src/ieee.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/third-party/double-conversion-1.1.5/src/diy-fp.h
+  /Users/voroncov/Desktop/jago/ale-iphone/node_modules/react-native/third-party/double-conversion-1.1.5/src/bignum-dtoa.cc \
+  /Users/voroncov/Desktop/jago/ale-iphone/node_modules/react-native/third-party/double-conversion-1.1.5/src/bignum-dtoa.h \
+  /Users/voroncov/Desktop/jago/ale-iphone/node_modules/react-native/third-party/double-conversion-1.1.5/src/utils.h \
+  /Users/voroncov/Desktop/jago/ale-iphone/node_modules/react-native/third-party/double-conversion-1.1.5/src/bignum.h \
+  /Users/voroncov/Desktop/jago/ale-iphone/node_modules/react-native/third-party/double-conversion-1.1.5/src/ieee.h \
+  /Users/voroncov/Desktop/jago/ale-iphone/node_modules/react-native/third-party/double-conversion-1.1.5/src/diy-fp.h

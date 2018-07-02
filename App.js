@@ -2,7 +2,7 @@ import React from 'react';
 
 import { createStackNavigator } from 'react-navigation';
 import { NavigatorIOS, YellowBox, Alert, Easing, Animated } from 'react-native';
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader'], ['Class RCTCxxModule']);
 
 import ls from 'react-native-local-storage';
 
@@ -27,6 +27,7 @@ import NotificationsScreen from './components/NotificationsScreen';
 import ChangeLanguageScreen from './components/ChangeLanguageScreen';
 import RecoveryPhraseScreen from './components/RecoveryPhraseScreen';
 import TwoFactorAuthScreen from './components/TwoFactorAuthScreen';
+import WalletDetailsScreen from './components/WalletDetailsScreen';
 
 //Modals
 import RequestMoneyScreen from './components/RequestMoneyScreen';
@@ -66,7 +67,8 @@ const RootStack = createStackNavigator({
     Notifications: { screen: NotificationsScreen },
     ChangeLanguage: { screen: ChangeLanguageScreen },
     RecoveryPhrase: { screen: RecoveryPhraseScreen },
-    TwoFactorAuth: { screen: TwoFactorAuthScreen }
+    TwoFactorAuth: { screen: TwoFactorAuthScreen },
+    WalletDetails: { screen: WalletDetailsScreen }
 }, {
     initialRouteName: initialRouteName(),
     transitionConfig,
