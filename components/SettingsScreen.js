@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert } from 'react-native';
-import Image from 'react-native-remote-svg';
+import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, Image } from 'react-native';
+import ImageSVG from 'react-native-remote-svg';
 
 import ls from 'react-native-local-storage';
 
@@ -26,7 +26,9 @@ export default class SettingsScreen extends React.Component {
             systemLanguage: '',
             fullName: '',
             userEmail: '',
+            userAvatar: '',
         };
+
         this.logout = this.logout.bind(this);
         this.changePage = this.changePage.bind(this);
         this.changeLanguage = this.changeLanguage.bind(this);
@@ -53,6 +55,10 @@ export default class SettingsScreen extends React.Component {
         });
     }
 
+    getUserAvatar() {
+        return `https://ale-demo-4550.nodechef.com/${this.state.userAvatar}`;
+    }
+
     getUserData() {
         this.setState({ isLoaderPage: true });
         ls.get('userToken').then((data) => {
@@ -70,7 +76,8 @@ export default class SettingsScreen extends React.Component {
                     isTwoAuthActive: responseJson.isTwoAuth,
                     isLoaderPage: false,
                     fullName: responseJson.name,
-                    userEmail: responseJson.email
+                    userEmail: responseJson.email,
+                    userAvatar: responseJson.avatar,
                 });
             })
             .catch((error) => {
@@ -108,49 +115,49 @@ export default class SettingsScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
-                <View style={{ marginTop: 20, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp(100), backgroundColor: '#ffffff', paddingRight: 15, paddingLeft: 15, paddingTop: 12, paddingBottom: 12 }}>
+
+                <TouchableOpacity
+                    style={{ marginTop: 1, backgroundColor: '#FFFFFF', height: 110, width: wp(100), padding: 15, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
+                >
+                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                        <Image
+                            style={{ width: 80, height: 80, borderRadius: 40 }}
+                            source={{uri: this.getUserAvatar()}}
+                        />
+                        <View style={{ marginLeft: 10 }}>
+                            <Text style={{ fontSize: 22 }}>{this.state.fullName}</Text>
+                            <Text style={{ fontSize: 18 }}>{this.state.userEmail}</Text>
+                        </View>
+                    </View>
+                    <ImageSVG
+                        source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                        style={{width: 15, height: 15}}
+                    />
+                </TouchableOpacity>
+
+                <View style={{ marginTop: 40, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp(100), backgroundColor: '#ffffff', paddingRight: 15, paddingLeft: 15, paddingTop: 12, paddingBottom: 12 }}>
                     <Text style={{ fontSize: wp(5), color: '#34343e' }}>{I18n.t('pages.settings.two_auth.enable')}</Text>
                     <Switch value={this.state.isTwoAuthActive} tintColor="#cccccc" onValueChange={this.onValueChange} />
                 </View>
 
                 <TouchableOpacity
-                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 2 }}
+                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 1 }}
                     onPress={this.changeLanguage}
                 >
                     <Text style={{ fontSize: wp(5), color: '#34343e' }}>{I18n.t('pages.settings.language')}</Text>
-                    <Image
+                    <ImageSVG
                         source={require('../assets/images/icons/icon_small-arrow-right.svg')}
-                        style={{width: 20, height: 20}}
+                        style={{ width: 15, height: 15}}
                     />
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 2 }}
-                >
-                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>{I18n.t('pages.settings.fullName')}</Text>
-                    <Image
-                        source={require('../assets/images/icons/icon_small-arrow-right.svg')}
-                        style={{width: 20, height: 20}}
-                    />
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 2 }}
-                >
-                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>{I18n.t('pages.settings.email')}</Text>
-                    <Image
-                        source={require('../assets/images/icons/icon_small-arrow-right.svg')}
-                        style={{width: 20, height: 20}}
-                    />
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 2 }}
+                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 1 }}
                 >
                     <Text style={{ fontSize: wp(5), color: '#34343e' }}>Password</Text>
-                    <Image
+                    <ImageSVG
                         source={require('../assets/images/icons/icon_small-arrow-right.svg')}
-                        style={{width: 20, height: 20}}
+                        style={{width: 15, height: 15}}
                     />
                 </TouchableOpacity>
 

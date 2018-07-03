@@ -50,7 +50,7 @@ export default class WalletsScreen extends React.Component {
         statusBarBackgroundColor: '#ffffff'
     };
 
-    componentDidMount() {
+    componentWillMount() {
         this.setState({ isOpenLeftMenu: false });
         this.initialUserWallets();
     }
