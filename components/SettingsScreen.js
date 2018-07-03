@@ -23,7 +23,6 @@ export default class SettingsScreen extends React.Component {
 	    this.state = {
             isTwoAuthActive: false,
             isLoaderPage: false,
-            systemLanguage: '',
             fullName: '',
             userEmail: '',
             userAvatar: '',
@@ -33,6 +32,7 @@ export default class SettingsScreen extends React.Component {
         this.changePage = this.changePage.bind(this);
         this.changeLanguage = this.changeLanguage.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
+        this.changePassword = this.changePassword.bind(this);
     }
 
     static navigationOptions = ({navigation}) => {
@@ -44,16 +44,9 @@ export default class SettingsScreen extends React.Component {
         };
     };
 
-    componentDidMount() {
-        return this.getSystemLanguage();
-    }
-
-    getSystemLanguage() {
-        ls.get('systemLanguage').then((result) => {
-            this.setState({systemLanguage: result});
-            return this.getUserData();
-        });
-    }
+    componentWillMount() {
+        this.getUserData();
+    }x
 
     getUserAvatar() {
         return `https://ale-demo-4550.nodechef.com/${this.state.userAvatar}`;
@@ -96,6 +89,10 @@ export default class SettingsScreen extends React.Component {
         this.props.navigation.navigate(e, { animation: null });
     }
 
+    changePassword() {
+        this.props.navigation.navigate('ChangePassword');
+    }
+
     onValueChange() {
         if (this.state.isTwoAuthActive) {
             return this.props.navigation.navigate('TwoFactorAuth', { animation: null, type: 'disable'});
@@ -105,7 +102,7 @@ export default class SettingsScreen extends React.Component {
     }
 
     changeLanguage() {
-        this.props.navigation.navigate('ChangeLanguage', { animation: null });
+        this.props.navigation.navigate('ChangeLanguage');
     }
 
     render() {
@@ -121,11 +118,11 @@ export default class SettingsScreen extends React.Component {
                 >
                     <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         <Image
-                            style={{ width: 80, height: 80, borderRadius: 40 }}
+                            style={{ width: 60, height: 60, borderRadius: 30, resizeMode: 'contain' }}
                             source={{uri: this.getUserAvatar()}}
                         />
                         <View style={{ marginLeft: 10 }}>
-                            <Text style={{ fontSize: 22 }}>{this.state.fullName}</Text>
+                            <Text style={{ fontSize: 24 }}>{this.state.fullName}</Text>
                             <Text style={{ fontSize: 18 }}>{this.state.userEmail}</Text>
                         </View>
                     </View>
@@ -137,7 +134,11 @@ export default class SettingsScreen extends React.Component {
 
                 <View style={{ marginTop: 40, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp(100), backgroundColor: '#ffffff', paddingRight: 15, paddingLeft: 15, paddingTop: 12, paddingBottom: 12 }}>
                     <Text style={{ fontSize: wp(5), color: '#34343e' }}>{I18n.t('pages.settings.two_auth.enable')}</Text>
-                    <Switch value={this.state.isTwoAuthActive} tintColor="#cccccc" onValueChange={this.onValueChange} />
+                    <Switch
+                        value={this.state.isTwoAuthActive}
+                        tintColor="#cccccc"
+                        onValueChange={this.onValueChange}
+                    />
                 </View>
 
                 <TouchableOpacity
@@ -147,12 +148,13 @@ export default class SettingsScreen extends React.Component {
                     <Text style={{ fontSize: wp(5), color: '#34343e' }}>{I18n.t('pages.settings.language')}</Text>
                     <ImageSVG
                         source={require('../assets/images/icons/icon_small-arrow-right.svg')}
-                        style={{ width: 15, height: 15}}
+                        style={{ width: 15, height: 15 }}
                     />
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 1 }}
+                    onPress={this.changePassword}
                 >
                     <Text style={{ fontSize: wp(5), color: '#34343e' }}>Password</Text>
                     <ImageSVG
@@ -162,8 +164,15 @@ export default class SettingsScreen extends React.Component {
                 </TouchableOpacity>
 
                 <View style={{ marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <TouchableOpacity style={styles.buttonContainer} onPress={this.logout}>
-                        <Text style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}>{I18n.t('pages.settings.signOut')}</Text>
+                    <TouchableOpacity
+                        style={styles.buttonContainer}
+                        onPress={this.logout}
+                    >
+                        <Text
+                            style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}
+                        >
+                            {I18n.t('pages.settings.signOut')}
+                        </Text>
                     </TouchableOpacity>
                 </View>
 
