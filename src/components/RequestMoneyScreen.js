@@ -26,7 +26,7 @@ export default class RequestMoneyScreen extends React.Component {
 
     copyToClipboard = async () => {
     	await Clipboard.setString(this.state.receiverAddress);
-    	return Alert.alert('Copied to Clipboard!');
+    	return Alert.alert('Copied to clipboard');
     };
 
     render() {
