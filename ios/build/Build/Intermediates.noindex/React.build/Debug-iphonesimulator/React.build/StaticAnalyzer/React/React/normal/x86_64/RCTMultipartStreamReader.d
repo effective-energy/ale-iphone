@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTMultipartStreamReader.m \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTMultipartStreamReader.h
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTMultipartStreamReader.m \
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTMultipartStreamReader.h

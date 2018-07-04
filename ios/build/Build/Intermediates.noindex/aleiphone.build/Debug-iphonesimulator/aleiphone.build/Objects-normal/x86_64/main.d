@@ -1,3 +1,2 @@
-dependencies: \
-  /Users/whoami/Desktop/Projects/ale-iphone/ios/aleiphone/main.m \
-  /Users/whoami/Desktop/Projects/ale-iphone/ios/aleiphone/AppDelegate.h
+dependencies: /Users/voroncov/Desktop/ai/ale-iphone/ios/aleiphone/main.m \
+  /Users/voroncov/Desktop/ai/ale-iphone/ios/aleiphone/AppDelegate.h

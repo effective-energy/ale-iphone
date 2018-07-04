@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/UIUtils/RCTUIUtils.m \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/UIUtils/RCTUIUtils.h
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/UIUtils/RCTUIUtils.m \
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/UIUtils/RCTUIUtils.h

@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/third-party/folly-2016.09.26.00/folly/Unicode.cpp \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/../third-party/folly-2016.09.26.00/folly/Unicode.h
+  /Users/voroncov/Desktop/jago/ale-iphone/node_modules/react-native/third-party/folly-2016.09.26.00/folly/Unicode.cpp \
+  /Users/voroncov/Desktop/jago/ale-iphone/node_modules/react-native/React/../third-party/folly-2016.09.26.00/folly/Unicode.h

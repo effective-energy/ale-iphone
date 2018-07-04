@@ -1,15 +1,15 @@
 dependencies: \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Modules/RCTDeviceInfo.m \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Modules/RCTDeviceInfo.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTBridge.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTDefines.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTBridgeModule.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTFrameUpdate.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTInvalidating.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Modules/RCTAccessibilityManager.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTAssert.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTEventDispatcher.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/UIUtils/RCTUIUtils.h \
-  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTUtils.h
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Modules/RCTDeviceInfo.m \
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Modules/RCTDeviceInfo.h \
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Modules/RCTAccessibilityManager.h \
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/UIUtils/RCTUIUtils.h \
+  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTUtils.h

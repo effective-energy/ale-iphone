@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>application-identifier</key>
-	<string>SP622G992Y.org.reactjs.native.example.aleiphoneTests</string>
+	<string>5QV62MH8PY.org.reactjs.native.example.aleiphoneTests</string>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>SP622G992Y.org.reactjs.native.example.aleiphoneTests</string>
+		<string>5QV62MH8PY.org.reactjs.native.example.aleiphoneTests</string>
 	</array>
 </dict>
 </plist>

@@ -8,33 +8,32 @@ import ls from 'react-native-local-storage';
 
 // MobX
 import { Provider } from "mobx-react";
-import stores from "./mobX";
+import stores from "./src/store";
 
 // I18n 
-import I18n from './i18n/index';
+import I18n from './src/i18n';
 
-import LoginScreen from './components/LoginScreen';
-import NewWalletScreen from './components/NewWalletScreen';
-import ImportwalletScreen from './components/ImportwalletScreen';
-import WalletsScreen from './components/WalletsScreen';
-import SettingsScreen from './components/SettingsScreen';
-import CreateAccountScreen from './components/CreateAccountScreen';
-import RecoverAccountScreen from './components/RecoverAccountScreen';
-import SuccessPaymentScreen from './components/SuccessPaymentScreen';
-import RestoreWalletScreen from './components/RestoreWalletScreen';
-import HistoryScreen from './components/HistoryScreen';
-import NotificationsScreen from './components/NotificationsScreen';
-import ChangeLanguageScreen from './components/ChangeLanguageScreen';
-import RecoveryPhraseScreen from './components/RecoveryPhraseScreen';
-import TwoFactorAuthScreen from './components/TwoFactorAuthScreen';
-import WalletDetailsScreen from './components/WalletDetailsScreen';
-import ChangePasswordScreen from './components/ChangePasswordScreen';
-
-//Modals
-import RequestMoneyScreen from './components/RequestMoneyScreen';
-import SendMoneyScreen from './components/SendMoneyScreen';
+import LoginScreen from './src/components/LoginScreen';
+import NewWalletScreen from './src/components/NewWalletScreen';
+import ImportwalletScreen from './src/components/ImportwalletScreen';
+import WalletsScreen from './src/components/WalletsScreen';
+import SettingsScreen from './src/components/SettingsScreen';
+import CreateAccountScreen from './src/components/CreateAccountScreen';
+import RecoverAccountScreen from './src/components/RecoverAccountScreen';
+import SuccessPaymentScreen from './src/components/SuccessPaymentScreen';
+import RestoreWalletScreen from './src/components/RestoreWalletScreen';
+import HistoryScreen from './src/components/HistoryScreen';
+import NotificationsScreen from './src/components/NotificationsScreen';
+import ChangeLanguageScreen from './src/components/ChangeLanguageScreen';
+import RecoveryPhraseScreen from './src/components/RecoveryPhraseScreen';
+import TwoFactorAuthScreen from './src/components/TwoFactorAuthScreen';
+import WalletDetailsScreen from './src/components/WalletDetailsScreen';
+import ChangePasswordScreen from './src/components/ChangePasswordScreen';
+import RequestMoneyScreen from './src/components/RequestMoneyScreen';
+import SendMoneyScreen from './src/components/SendMoneyScreen';
 
 const initialRouteName = () => {
+    return 'Login';
     ls.get('userToken').then((data) => {
         if (data !== null) {
             return 'Wallets';
@@ -70,7 +69,7 @@ const RootStack = createStackNavigator({
     RecoveryPhrase: { screen: RecoveryPhraseScreen },
     TwoFactorAuth: { screen: TwoFactorAuthScreen },
     WalletDetails: { screen: WalletDetailsScreen },
-    ChangePassword: { screen: ChangePasswordScreen }
+    ChangePassword: { screen: ChangePasswordScreen },
 }, {
     initialRouteName: initialRouteName(),
     transitionConfig,
