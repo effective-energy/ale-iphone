@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, StatusBar, TextInput, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, TextInput, Dimensions, TouchableOpacity, Alert } from 'react-native';
+import ls from 'react-native-local-storage';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -16,11 +17,58 @@ export default class ChangePasswordScreen extends React.Component {
             newPassword: '',
             newPasswordConfirm: '',
         };
+
+        this.changePassowrd = this.changePassowrd.bind(this);
     }
     
     static navigationOptions = {
         title: 'Change password'
     };
+
+    changePassowrd() {
+        if (this.state.oldPassword === '') {
+            return Alert.alert('Enter current password');
+        }
+
+        if (this.state.newPassword === '') {
+            return Alert.alert('Enter new password');
+        }
+
+        if (this.state.newPasswordConfirm === '') {
+            return Alert.alert('Confirm new password');
+        }
+
+        if (this.state.newPasswordConfirm !== this.state.newPassword) {
+            return Alert.alert('New passwords do not match');
+        }
+
+        ls.get('userToken').then((data) => {
+            return fetch('https://ale-demo-4550.nodechef.com/users/change-password', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': data,
+                },
+                body: JSON.stringify({
+                    old: this.state.oldPassword,
+                    new: this.state.newPassword
+                }),
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                if (responseJson.message === 'Password update') {
+                    Alert.alert(responseJson.message);
+                    return this.props.navigation.push('Settings');
+                } else {
+                    Alert.alert(responseJson.message);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
+    }
 
     render() {
         return (
@@ -48,7 +96,10 @@ export default class ChangePasswordScreen extends React.Component {
                         onChangeText={(newPasswordConfirm) => this.setState({newPasswordConfirm})}
                         value={this.state.newPasswordConfirm}
                     />
-                    <TouchableOpacity style={{ backgroundColor: '#ffd24f', borderRadius: 4, padding: 15, width: wp(80), marginBottom: 20 }}>
+                    <TouchableOpacity
+                        onPress={this.changePassowrd}
+                        style={{ backgroundColor: '#ffd24f', borderRadius: 4, padding: 15, width: wp(80), marginBottom: 20 }}
+                    >
                         <Text
                             style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}
                         >
