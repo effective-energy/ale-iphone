@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { createStackNavigator } from 'react-navigation';
-import { NavigatorIOS, YellowBox, Alert, Easing, Animated } from 'react-native';
+import { NavigatorIOS, YellowBox, Alert, NetInfo, StyleSheet, View, Text } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader'], ['Class RCTCxxModule']);
 
 import ls from 'react-native-local-storage';
@@ -75,14 +75,38 @@ const RootStack = createStackNavigator({
     transitionConfig,
 });
 
+function MiniOfflineSign() {
+    return (
+        <View style={styles.offlineContainer}>
+            <Text style={styles.offlineText}>No Internet Connection</Text>
+        </View>
+    );
+}
+
 export default class App extends React.Component {
     constructor(props: Object) {
         super(props);
+        this.state = {
+            isConnected: true,
+        };
     }
 
     componentDidMount() {
         this.getSystemLanguage();
+        NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange);
     }
+
+    componentWillUnmount() {
+        NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectivityChange);
+    }
+
+    handleConnectivityChange = isConnected => {
+        if (isConnected) {
+            this.setState({ isConnected: true });
+        } else {
+            this.setState({ isConnected: false });
+        }
+    };
 
     getSystemLanguage() {
         ls.get('systemLanguage').then((result) => {
@@ -97,6 +121,14 @@ export default class App extends React.Component {
     }
 
     render() {
+        if (!this.state.isConnected) {
+            return (
+                <View style={styles.offlineContainer}>
+                    <Text style={styles.offlineText}>No Internet Connection</Text>
+                </View>
+            );
+        }
+
         return (
             <Provider {...stores}>
                 <RootStack />
@@ -104,3 +136,18 @@ export default class App extends React.Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    offlineContainer: {
+        flex: 1,
+        backgroundColor: '#07132f',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+    },
+    offlineText: {
+        color: '#fff',
+        fontSize: 18,
+        fontWeight: 'bold'
+    }
+});
