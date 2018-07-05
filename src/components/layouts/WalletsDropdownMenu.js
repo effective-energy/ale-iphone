@@ -49,7 +49,7 @@ export default class WalletsDropdownMenu extends React.Component {
                     style={{ width: wp(80), height: 50, backgroundColor: isActiveWallet, paddingLeft: 10, paddingRight: 10, zIndex: 1, padding: 10 }}
                     onPress={() => this.selectWallet(i)}
                 >
-                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: wp(80) }}>
                         <Image
                             source={require('../../assets/images/navigation/bottom/icon_wallet-passive.svg')}
                             style={{width: 40, height: 40, marginRight: 10 }}
@@ -72,7 +72,7 @@ export default class WalletsDropdownMenu extends React.Component {
                 {
                     this.state.isMenuOpen &&
                     <View
-                        style={{ width: wp(90), backgroundColor: '#FFFFFF', zIndex: 0, position: 'absolute', top: 5 }}
+                        style={{ width: wp(90), zIndex: 0, position: 'absolute', top: 5 }}
                     >
                         {wallets}
                     </View>

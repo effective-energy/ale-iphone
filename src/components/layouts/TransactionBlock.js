@@ -42,6 +42,14 @@ export default class TransactionBlock extends React.Component {
             )
         }, this);
 
+        if (this.props.data.length === 0) {
+            return (
+                <View style={{ marginTop: 20 }}>
+                    <Text style={{ fontSize: 18 }}>Transactions not found</Text>
+                </View>
+            );
+        }
+
         return (
             <View style={{ display: 'flex', alignItems: 'center', marginTop: 20 }}>
                 {transactions}
