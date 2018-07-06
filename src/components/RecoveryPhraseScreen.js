@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Alert, Clipboard } from 'react-native';
+import { View, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Alert, Clipboard, TextInput } from 'react-native';
+import ls from 'react-native-local-storage';
 
 import CheckBox from './layouts/CheckBox';
 
@@ -16,13 +17,15 @@ export default class RecoveryPhraseScreen extends React.Component {
 	    this.state = {
             isShowMnemonicPhrase: false,
             isCheked: false,
-            mnemonicPhrase: 'note curious sibling anchor praise calm then whisper wrestle suspect fancy slab',
-            isShowMnemonicConfirm: false
+            mnemonicPhrase: '',
+            isShowMnemonicConfirm: false,
+            recoveryPharse: ''
         };
 
 	    this.generateMnemonicPhrase = this.generateMnemonicPhrase.bind(this);
         this.toggleCheckBox = this.toggleCheckBox.bind(this);
         this.confirmMnemonic = this.confirmMnemonic.bind(this);
+        this.confirmCreateWallet = this.confirmCreateWallet.bind(this);
     }
     
     static navigationOptions = {
@@ -30,9 +33,30 @@ export default class RecoveryPhraseScreen extends React.Component {
     };
 
     generateMnemonicPhrase() {
-        this.setState({
-            isShowMnemonicPhrase: true
-        })
+        if (!this.state.isCheked) {
+            return false;
+        }
+        ls.get('userToken').then((data) => {
+            return fetch('https://ale-demo-4550.nodechef.com/wallet/seed', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': data
+                },
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                let mnemonic = responseJson.seed.join(' ');
+                return this.setState({
+                    isShowMnemonicPhrase: true,
+                    mnemonicPhrase: mnemonic
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
     }
 
     toggleCheckBox() {
@@ -51,6 +75,38 @@ export default class RecoveryPhraseScreen extends React.Component {
             isShowMnemonicPhrase: false,
             isShowMnemonicConfirm: true
         })
+    }
+
+    confirmCreateWallet() {
+        const { params } = this.props.navigation.state;
+        let walletName = params.walletName;
+
+        let seed = this.state.recoveryPharse.split(" ");
+        if (seed.length !== 12) {
+            return Alert.alert('Enter valid mnemonic phrase');
+        }
+
+        ls.get('userToken').then((data) => {
+            return fetch('https://ale-demo-4550.nodechef.com/wallet/new', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': data
+                },
+                body: JSON.stringify({
+                    name: walletName,
+                    seed: seed
+                }),
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                return Alert.alert(responseJson.message)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
     }
 
     render() {
@@ -108,6 +164,43 @@ export default class RecoveryPhraseScreen extends React.Component {
                         barStyle='dark-content'
                     />
                     <View>
+                        <Text>Type each word in the correct order to verify your recovery phrase</Text>
+
+                         <TextInput
+                            placeholder="Type your recovery phrase here"
+                            placeholderTextColor="#000000"
+                            style={{height: 40, width: wp(80), marginBottom: 20, padding: 6, color: '#000000', borderBottomColor: '#000000', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
+                            onChangeText={(recoveryPharse) => this.setState({recoveryPharse})}
+                            value={this.state.recoveryPharse}
+                        />
+
+                        <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
+                            <CheckBox
+                                isCheked={this.state.isCheked}
+                                toggleCheckBox={this.toggleCheckBox}
+                                value="I understand that my money are held securely on this device only, not on the company servers"
+                            />
+                        </View>
+
+                        <View style={{ display: 'flex', flexDirection: 'row', marginTop: 20 }}>
+                            <CheckBox
+                                isCheked={this.state.isCheked}
+                                toggleCheckBox={this.toggleCheckBox}
+                                value="I understand that if this application is moved to another device or deleted, my money can be only recovered with the backup phrase which were written down in a secure place"
+                            />
+                        </View>
+
+                        <TouchableOpacity
+                            onPress={this.confirmCreateWallet}
+                            style={{ backgroundColor: '#FFBB00', padding: 5, borderRadius: 5, display: 'flex', alignItems: 'center', marginTop: 10, padding: 15 }}
+                        >
+                            <Text
+                                style={{ color: '#000000', fontSize: 18 }}
+                            >
+                                Confirm
+                            </Text>
+                        </TouchableOpacity>
+
                     </View>
                 </View>
             );
