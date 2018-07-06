@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
@@ -14,9 +14,7 @@ export default class CameraScreen extends React.Component {
     };
 
     onSuccess(e) {
-        Linking
-        .openURL(e.data)
-        .catch(err => console.error('An error occured', err));
+        Alert.alert(e.data)
     }
 
     backToSend() {
@@ -27,16 +25,6 @@ export default class CameraScreen extends React.Component {
         return (
             <QRCodeScanner
                 onRead={this.onSuccess.bind(this)}
-                topContent={
-                  <Text style={styles.centerText}>
-                    Go to <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on your computer and scan the QR code.
-                  </Text>
-                }
-                bottomContent={
-                  <TouchableOpacity style={styles.buttonTouchable}>
-                    <Text style={styles.buttonText}>OK. Got it!</Text>
-                  </TouchableOpacity>
-                }
               />
         );
     }
