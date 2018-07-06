@@ -30,6 +30,7 @@
     "react-native-fs": "^2.10.14",
     "react-native-i18n": "^2.0.12",
     "react-native-local-storage": "^1.5.2",
+    "react-native-qrcode-scanner": "^1.0.1",
     "react-native-qrcode-svg": "^5.0.7",
     "react-native-remote-svg": "^1.2.0",
     "react-native-side-menu": "^1.1.3",
