@@ -39,7 +39,6 @@ export default class LoginScreen extends React.Component {
 
 	static navigationOptions = {
         header: null,
-        statusBarBackgroundColor: '#ffffff'
     };
 
     componentDidMount() {
@@ -49,7 +48,7 @@ export default class LoginScreen extends React.Component {
     initWallets() {
     	ls.get('userToken').then((result) => {
     		if (result !== null) {
-    			return this.props.navigation.push('Wallets', { animation: null });
+    			return this.props.navigation.push('Wallets');
     		}
     	})
     }

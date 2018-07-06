@@ -31,6 +31,7 @@ import WalletDetailsScreen from './src/components/WalletDetailsScreen';
 import ChangePasswordScreen from './src/components/ChangePasswordScreen';
 import RequestMoneyScreen from './src/components/RequestMoneyScreen';
 import SendMoneyScreen from './src/components/SendMoneyScreen';
+import CameraScreen from './src/components/CameraScreen';
 
 const initialRouteName = () => {
     return 'Login';
@@ -70,6 +71,7 @@ const RootStack = createStackNavigator({
     TwoFactorAuth: { screen: TwoFactorAuthScreen },
     WalletDetails: { screen: WalletDetailsScreen },
     ChangePassword: { screen: ChangePasswordScreen },
+    Camera: { screen: CameraScreen },
 }, {
     initialRouteName: initialRouteName(),
     transitionConfig,

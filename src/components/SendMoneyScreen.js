@@ -20,6 +20,7 @@ export default class SendMoneyScreen extends React.Component {
         };
 
         this.sendMoney = this.sendMoney.bind(this);
+        this.scanQRCode = this.scanQRCode.bind(this);
     }
     
     static navigationOptions = {
@@ -81,6 +82,10 @@ export default class SendMoneyScreen extends React.Component {
         });
     }
 
+    scanQRCode() {
+        this.props.navigation.push('Camera');;
+    }
+
     render() {
         return (
             <View style={styles.pageContainer}>
@@ -105,9 +110,16 @@ export default class SendMoneyScreen extends React.Component {
                     </View>
                     <TouchableOpacity
                         onPress={this.sendMoney}
-                        style={{ backgroundColor: '#cfd8de', width: screenWidth, padding: 5, padding: 10, borderRadius: 15 }}
+                        style={{ backgroundColor: '#cfd8de', width: screenWidth, padding: 10, borderRadius: 10 }}
                     >
-                        <Text style={{ color: '#000000', textAlign: 'center', fontSize: 16 }}>Send</Text>
+                        <Text style={{ color: '#000000', textAlign: 'center', fontSize: 18 }}>Send</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        onPress={this.scanQRCode}
+                        style={{ backgroundColor: '#ffbb00', width: screenWidth, padding: 10, borderRadius: 10, marginTop: 20 }}
+                    >
+                        <Text style={{ color: '#000000', textAlign: 'center', fontSize: 18 }}>Scan QRCode</Text>
                     </TouchableOpacity>
             	</View>
             </View>
