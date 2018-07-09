@@ -33,6 +33,7 @@ export default class SettingsScreen extends React.Component {
         this.changeLanguage = this.changeLanguage.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
         this.changePassword = this.changePassword.bind(this);
+        this.openEditAccountScreen = this.openEditAccountScreen.bind(this);
     }
 
     static navigationOptions = ({navigation}) => {
@@ -105,6 +106,10 @@ export default class SettingsScreen extends React.Component {
         this.props.navigation.navigate('ChangeLanguage');
     }
 
+    openEditAccountScreen() {
+        this.props.navigation.navigate('EditAccount');
+    }
+
     render() {
         if (this.state.isLoaderPage) {
             return (<Pageloader title="Loading user data" />);
@@ -114,22 +119,19 @@ export default class SettingsScreen extends React.Component {
                 <StatusBar barStyle='dark-content' />
 
                 <TouchableOpacity
-                    style={{ marginTop: 1, backgroundColor: '#FFFFFF', height: 110, width: wp(100), padding: 15, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
+                    onPress={this.openEditAccountScreen}
+                    style={{ marginTop: 1, backgroundColor: '#FFFFFF', width: wp(100), padding: 15, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
                 >
-                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                         <Image
-                            style={{ width: 60, height: 60, borderRadius: 30, resizeMode: 'contain' }}
+                            style={{ width: 60, height: 60, borderRadius: 30, resizeMode: 'cover', marginBottom: 10 }}
                             source={{uri: this.getUserAvatar()}}
                         />
-                        <View style={{ marginLeft: 10 }}>
-                            <Text style={{ fontSize: 24 }}>{this.state.fullName}</Text>
-                            <Text style={{ fontSize: 18 }}>{this.state.userEmail}</Text>
+                        <View>
+                            <Text style={{ fontSize: 24, textAlign: 'center' }}>{this.state.fullName}</Text>
+                            <Text style={{ fontSize: 18, textAlign: 'center' }}>{this.state.userEmail}</Text>
                         </View>
                     </View>
-                    <ImageSVG
-                        source={require('../assets/images/icons/icon_small-arrow-right.svg')}
-                        style={{width: 15, height: 15}}
-                    />
                 </TouchableOpacity>
 
                 <View style={{ marginTop: 40, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp(100), backgroundColor: '#ffffff', paddingRight: 15, paddingLeft: 15, paddingTop: 12, paddingBottom: 12 }}>

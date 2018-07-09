@@ -22,7 +22,9 @@ export default class CameraScreen extends React.Component {
     }
 
     comeBack() {
-        this.props.navigation.push('SendMoney');
+        this.props.navigation.push('SendMoney', {
+            destinationAddress: undefined
+        });
     }
 
     render() {

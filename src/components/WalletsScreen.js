@@ -32,7 +32,8 @@ export default class WalletsScreen extends React.Component {
                 userEmail: '',
                 userName: '',
                 userAvatar: ''
-            }
+            },
+            isRefreshShow: false
         };
 
         this.changePage = this.changePage.bind(this);
@@ -41,6 +42,7 @@ export default class WalletsScreen extends React.Component {
         this.signOut = this.signOut.bind(this);
         this.createNewWallet = this.createNewWallet.bind(this);
         this.openWalletDetailsScreen = this.openWalletDetailsScreen.bind(this);
+        this.getWallets = this.getWallets.bind(this);
     }
     
     static navigationOptions = {
@@ -113,11 +115,11 @@ export default class WalletsScreen extends React.Component {
     }
 
     requestMoney(e) {
-        this.props.navigation.navigate('RequestMoney', { animation: null, walletAddress: e });
+        this.props.navigation.navigate('RequestMoney', { walletAddress: e });
     }
 
     sendMoney(e) {
-        this.props.navigation.navigate('SendMoney', { animation: null, walletAddress: e });
+        this.props.navigation.navigate('SendMoney', { walletAddress: e });
     }
 
     signOut() {
@@ -131,7 +133,35 @@ export default class WalletsScreen extends React.Component {
     }
 
     createNewWallet() {
-        this.props.navigation.navigate('NewWallet', { animation: null });
+        this.props.navigation.navigate('NewWallet');
+    }
+
+    getWallets() {
+        this.setState({
+            isRefreshShow: true
+        });
+
+        ls.get('userToken').then((data) => {
+            return fetch('https://ale-demo-4550.nodechef.com/users/user-wallets', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': data
+                },
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    walletsList: responseJson,
+                    isRefreshShow: false
+                });
+                return this.getUserData();
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
     }
 
     render() {
@@ -158,6 +188,8 @@ export default class WalletsScreen extends React.Component {
                         automaticallyAdjustContentInsets={false}
                         refreshControl={
                             <RefreshControl
+                                onRefresh={() => this.getWallets}
+                                refreshing={this.state.isRefreshShow}
                                 refreshing={false}
                                 tintColor="#FFFFFF"
                                 colors={['#ff0000', '#00ff00', '#0000ff']}

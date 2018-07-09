@@ -32,6 +32,7 @@ import ChangePasswordScreen from './src/components/ChangePasswordScreen';
 import RequestMoneyScreen from './src/components/RequestMoneyScreen';
 import SendMoneyScreen from './src/components/SendMoneyScreen';
 import CameraScreen from './src/components/CameraScreen';
+import EditAccountScreen from './src/components/EditAccountScreen';
 
 const initialRouteName = () => {
     return 'Login';
@@ -72,6 +73,7 @@ const RootStack = createStackNavigator({
     WalletDetails: { screen: WalletDetailsScreen },
     ChangePassword: { screen: ChangePasswordScreen },
     Camera: { screen: CameraScreen },
+    EditAccount: { screen: EditAccountScreen },
 }, {
     initialRouteName: initialRouteName(),
     transitionConfig,
