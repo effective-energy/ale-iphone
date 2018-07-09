@@ -38,7 +38,15 @@ export default class SendMoneyScreen extends React.Component {
         this.setState({
             amount: '',
             destinationAddress: ''
-        })
+        });
+
+        const { params } = this.props.navigation.state;
+
+        if (params.destinationAddress !== undefined) {
+            this.setState({
+                destinationAddress: params.destinationAddress
+            })
+        }
     }
 
     sendMoney() {
