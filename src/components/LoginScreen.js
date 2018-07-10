@@ -84,7 +84,7 @@ export default class LoginScreen extends React.Component {
     		if (responseJson.message === 'Auth success') {
     			ls.save('userToken', responseJson.user_token).then(() => {
     				this.setState({isPageLoader: false});
-    				return this.props.navigation.push('Wallets', { animation: null });
+    				return this.props.navigation.push('Wallets');
     			})
     		} else {
     			this.setState({isPageLoader: false});
@@ -97,11 +97,11 @@ export default class LoginScreen extends React.Component {
     }
 
     createAccount() {
-    	this.props.navigation.navigate('CreateAccount', { animation: null });
+    	this.props.navigation.navigate('CreateAccount');
     }
 
     recoverAccount() {
-    	this.props.navigation.navigate('RecoverAccount', { animation: null });
+    	this.props.navigation.navigate('RecoverAccount');
     }
 
     render() {

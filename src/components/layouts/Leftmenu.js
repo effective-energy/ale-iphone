@@ -37,10 +37,6 @@ export default class LeftMenu extends React.Component {
                             <Text style={{ color: '#ffffff', fontSize: 16, maxWidth: wp(45) }}>{this.props.userData.userEmail}</Text>
                         </View>
                     </View>
-                    <View style={{ display: 'flex', justifyContent: 'center', marginTop: 20 }}>
-                        <Text style={{ color: '#ffffff', fontSize: 20 }}>Total balance</Text>
-                        <Text style={{ color: '#ffffff', fontSize: 26 }}>1 999 900 990</Text>
-                    </View>
                 </View>
                 <View style={{ marginRight: 10, marginBottom: 25, display: 'flex', alignItems: 'center' }}>
                     <View style={{ backgroundColor: '#ffbb00', width: wp(55), borderRadius: 10, marginBottom: 30 }}>

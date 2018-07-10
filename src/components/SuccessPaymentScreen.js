@@ -24,7 +24,7 @@ export default class SuccessPaymentScreen extends React.Component {
     };
 
     backToWalletsList() {
-        this.props.navigation.push('Wallets', { animation: null });
+        this.props.navigation.push('Wallets');
     }
 
     render() {

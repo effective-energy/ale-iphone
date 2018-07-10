@@ -37,7 +37,7 @@ export default class RecoverAccountScreen extends React.Component {
     };
 
     loginToAccount() {
-        this.props.navigation.navigate('Login', { animation: null });
+        this.props.navigation.navigate('Login');
     }
 
     sendLink() {

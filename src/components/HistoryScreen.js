@@ -92,7 +92,7 @@ export default class SettingsScreen extends React.Component {
     }
 
     changePage(e) {
-        this.props.navigation.navigate(e, { animation: null });
+        this.props.navigation.navigate(e);
     }
 
     changeWallet(e) {

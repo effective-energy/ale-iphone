@@ -108,7 +108,7 @@ export default class TwoFactorAuthScreen extends React.Component {
                     this.setState({
                         isLoaderPage: false
                     });
-                    return this.props.navigation.push('Settings', { animation: null });
+                    return this.props.navigation.push('Settings');
                 }
             })
             .catch((error) => {
@@ -179,7 +179,7 @@ export default class TwoFactorAuthScreen extends React.Component {
                 }
                 else {
                     Alert.alert('Success!');
-                    return this.props.navigation.push('Settings', { animation: null });
+                    return this.props.navigation.push('Settings');
                 }
             })
             .catch((error) => {

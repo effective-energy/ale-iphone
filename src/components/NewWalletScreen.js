@@ -31,14 +31,14 @@ export default class NewWalletScreen extends React.Component {
     };
 
     restoreWallet() {
-        this.props.navigation.navigate('RestoreWallet', { animation: null });
+        this.props.navigation.navigate('RestoreWallet');
     }
 
     createNewWallet() {
         if (this.state.newWalletName === '') {
             return Alert.alert('Enter wallet name');
         } else {
-            return this.props.navigation.navigate('RecoveryPhrase', { animation: null, walletName: this.state.newWalletName });
+            return this.props.navigation.navigate('RecoveryPhrase', { walletName: this.state.newWalletName });
         }
     }
 

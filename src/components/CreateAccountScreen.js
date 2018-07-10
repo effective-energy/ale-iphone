@@ -33,7 +33,7 @@ export default class CreateAccountScreen extends React.Component {
     };
 
     backToLoginPage() {
-        this.props.navigation.navigate('Login', { animation: null });
+        this.props.navigation.navigate('Login');
     }
 
     render() {

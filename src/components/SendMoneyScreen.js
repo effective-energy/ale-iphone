@@ -79,7 +79,7 @@ export default class SendMoneyScreen extends React.Component {
             .then((response) => response.json())
             .then((responseJson) => {
                 if (responseJson.message === 'Success send') {
-                    return this.props.navigation.navigate('SuccessPayment', { animation: null });
+                    return this.props.navigation.navigate('SuccessPayment');
                 } else {
                     return Alert.alert(responseJson.message);
                 }

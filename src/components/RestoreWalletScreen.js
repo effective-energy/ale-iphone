@@ -58,7 +58,7 @@ export default class RestoreWalletScreen extends React.Component {
                     return Alert.alert(responseJson.message)
                 } else {
                     Alert.alert('Wallet successfully restored!');
-                    return this.props.navigation.navigate('Wallets', { animation: null });
+                    return this.props.navigation.navigate('Wallets');
                 }
             })
             .catch((error) => {
