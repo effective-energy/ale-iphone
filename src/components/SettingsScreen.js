@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, Image } from 'react-native';
+import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, Image, ScrollView, RefreshControl } from 'react-native';
 import ImageSVG from 'react-native-remote-svg';
 
 import ls from 'react-native-local-storage';
@@ -118,66 +118,78 @@ export default class SettingsScreen extends React.Component {
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
 
-                <TouchableOpacity
-                    onPress={this.openEditAccountScreen}
-                    style={{ marginTop: 1, backgroundColor: '#FFFFFF', width: wp(100), padding: 15, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
-                >
-                    <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                        <Image
-                            style={{ width: 60, height: 60, borderRadius: 30, resizeMode: 'cover', marginBottom: 10 }}
-                            source={{uri: this.getUserAvatar()}}
+                <ScrollView
+                    contentInset={{bottom:80}}
+                    automaticallyAdjustContentInsets={false}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={false}
+                            tintColor="#000000"
+                            colors={['#ff0000', '#00ff00', '#0000ff']}
+                            progressBackgroundColor="#EBEBEB"
                         />
-                        <View>
-                            <Text style={{ fontSize: 24, textAlign: 'center' }}>{this.state.fullName}</Text>
-                            <Text style={{ fontSize: 18, textAlign: 'center' }}>{this.state.userEmail}</Text>
-                        </View>
-                    </View>
-                </TouchableOpacity>
-
-                <View style={{ marginTop: 40, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp(100), backgroundColor: '#ffffff', paddingRight: 15, paddingLeft: 15, paddingTop: 12, paddingBottom: 12 }}>
-                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>{I18n.t('pages.settings.two_auth.enable')}</Text>
-                    <Switch
-                        value={this.state.isTwoAuthActive}
-                        tintColor="#cccccc"
-                        onValueChange={this.onValueChange}
-                    />
-                </View>
-
-                <TouchableOpacity
-                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 1 }}
-                    onPress={this.changeLanguage}
+                    }
                 >
-                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>{I18n.t('pages.settings.language')}</Text>
-                    <ImageSVG
-                        source={require('../assets/images/icons/icon_small-arrow-right.svg')}
-                        style={{ width: 15, height: 15 }}
-                    />
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 1 }}
-                    onPress={this.changePassword}
-                >
-                    <Text style={{ fontSize: wp(5), color: '#34343e' }}>Password</Text>
-                    <ImageSVG
-                        source={require('../assets/images/icons/icon_small-arrow-right.svg')}
-                        style={{width: 15, height: 15}}
-                    />
-                </TouchableOpacity>
-
-                <View style={{ marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <TouchableOpacity
-                        style={styles.buttonContainer}
-                        onPress={this.logout}
+                        onPress={this.openEditAccountScreen}
+                        style={{ marginTop: 1, backgroundColor: '#FFFFFF', width: wp(100), padding: 15, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
                     >
-                        <Text
-                            style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}
-                        >
-                            {I18n.t('pages.settings.signOut')}
-                        </Text>
+                        <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                            <Image
+                                style={{ width: 60, height: 60, borderRadius: 30, resizeMode: 'cover', marginBottom: 10 }}
+                                source={{uri: this.getUserAvatar()}}
+                            />
+                            <View>
+                                <Text style={{ fontSize: 24, textAlign: 'center' }}>{this.state.fullName}</Text>
+                                <Text style={{ fontSize: 18, textAlign: 'center' }}>{this.state.userEmail}</Text>
+                            </View>
+                        </View>
                     </TouchableOpacity>
-                </View>
 
+                    <View style={{ marginTop: 40, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp(100), backgroundColor: '#ffffff', paddingRight: 15, paddingLeft: 15, paddingTop: 12, paddingBottom: 12 }}>
+                        <Text style={{ fontSize: wp(5), color: '#34343e' }}>{I18n.t('pages.settings.two_auth.enable')}</Text>
+                        <Switch
+                            value={this.state.isTwoAuthActive}
+                            tintColor="#cccccc"
+                            onValueChange={this.onValueChange}
+                        />
+                    </View>
+
+                    <TouchableOpacity
+                        style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 1 }}
+                        onPress={this.changeLanguage}
+                    >
+                        <Text style={{ fontSize: wp(5), color: '#34343e' }}>{I18n.t('pages.settings.language')}</Text>
+                        <ImageSVG
+                            source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                            style={{ width: 15, height: 15 }}
+                        />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 1 }}
+                        onPress={this.changePassword}
+                    >
+                        <Text style={{ fontSize: wp(5), color: '#34343e' }}>Password</Text>
+                        <ImageSVG
+                            source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                            style={{width: 15, height: 15}}
+                        />
+                    </TouchableOpacity>
+
+                    <View style={{ marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <TouchableOpacity
+                            style={styles.buttonContainer}
+                            onPress={this.logout}
+                        >
+                            <Text
+                                style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}
+                            >
+                                {I18n.t('pages.settings.signOut')}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
                 <BottomNavigator
                     changePage={this.changePage}
                     activePage="settings"
