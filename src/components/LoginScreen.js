@@ -132,7 +132,7 @@ export default class LoginScreen extends React.Component {
                         />
 					</View>
 					<TouchableOpacity
-						style={{ backgroundColor: '#152038', width: screenWidth, padding: 15, borderRadius: 20, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
+						style={{ backgroundColor: '#152038', width: screenWidth, padding: 10, borderRadius: 15, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
 						onPress={this.loginToWallet}
 					>
 						<Image
@@ -148,7 +148,7 @@ export default class LoginScreen extends React.Component {
 							: null
 					}
 				</View>
-				<View style={{ maxWidth: wp(80), width: wp(80) }}>
+				<View style={{ width: wp(80) }}>
 					<View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
 						<Text style={{ color: '#34476f' }}>Forgot your email or password?</Text>
 						<TouchableOpacity

@@ -50,31 +50,28 @@ export default class WalletsSlider extends React.Component {
                         </TouchableHighlight>
                     </View>
                 </View>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <View style={{ width: '45%' }}>
-                        <TouchableOpacity
-                            style={{ backgroundColor: '#091628', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', padding: 5, alignItems: 'center' }}
-                            onPress={e => this.props.sendMoney(item.address)}
-                        >
-                            <SVGImage
-                                style={{width: wp(5), height: wp(5), marginRight: 10 }}
-                                source={require('../../assets/images/icons/icon_send.svg')}
-                            />
-                            <Text style={{ color: '#ffffff', fontSize: wp(5) }}>Send</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ width: '45%' }}>
-                        <TouchableOpacity
-                            style={{ backgroundColor: '#FFBB00', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', padding: 5, alignItems: 'center' }}
-                            onPress={e => this.props.requestMoney(item.address)}
-                        >
-                            <SVGImage
-                                style={{width: wp(5), height: wp(5), marginRight: 5 }}
-                                source={require('../../assets/images/icons/icon_request.svg')}
-                            />
-                            <Text style={{ color: '#000000', fontSize: wp(5) }}>Request</Text>
-                        </TouchableOpacity>
-                    </View>
+                <View style={{ maxWidth: wp(75), display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <TouchableOpacity
+                        style={{ backgroundColor: '#091628', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', padding: 5, alignItems: 'center', width: wp(32) }}
+                        onPress={e => this.props.sendMoney(item.address)}
+                    >
+                        <SVGImage
+                            style={{width: wp(5), height: wp(5), marginRight: 10 }}
+                            source={require('../../assets/images/icons/icon_send.svg')}
+                        />
+                        <Text style={{ color: '#ffffff', fontSize: wp(5) }}>Send</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={{ backgroundColor: '#FFBB00', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', padding: 5, alignItems: 'center', width: wp(32) }}
+                        onPress={e => this.props.requestMoney(item.address)}
+                    >
+                        <SVGImage
+                            style={{width: wp(5), height: wp(5), marginRight: 5 }}
+                            source={require('../../assets/images/icons/icon_request.svg')}
+                        />
+                        <Text style={{ color: '#000000', fontSize: wp(5) }}>Request</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );

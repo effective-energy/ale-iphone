@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, Image, ScrollView, RefreshControl } from 'react-native';
+import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, Image, ScrollView, RefreshControl, Share } from 'react-native';
 import ImageSVG from 'react-native-remote-svg';
 
 import ls from 'react-native-local-storage';
@@ -34,6 +34,7 @@ export default class SettingsScreen extends React.Component {
         this.onValueChange = this.onValueChange.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.openEditAccountScreen = this.openEditAccountScreen.bind(this);
+        this.shareApp = this.shareApp.bind(this);
     }
 
     static navigationOptions = ({navigation}) => {
@@ -110,6 +111,19 @@ export default class SettingsScreen extends React.Component {
         this.props.navigation.navigate('EditAccount');
     }
 
+    shareApp() {
+        Share.share({
+            message: 'Alehub wallet',
+            url: 'https://alehub.io/',
+            title: 'Wow, its alehub wallet!'
+        }, {
+            dialogTitle: 'Share',
+            excludedActivityTypes: [
+              'com.apple.UIKit.activity.PostToTwitter'
+            ]
+        })
+    }
+
     render() {
         if (this.state.isLoaderPage) {
             return (<Pageloader title="Loading user data" />);
@@ -176,6 +190,52 @@ export default class SettingsScreen extends React.Component {
                             style={{width: 15, height: 15}}
                         />
                     </TouchableOpacity>
+
+                    <View style={{ marginTop: 40 }}>
+                        <View style={{ marginLeft: 20, marginBottom: 10 }}>
+                            <Text style={{ fontSize: 16, color: '#666666' }}>{'Join the community'.toUpperCase()}</Text>
+                        </View>
+                        <TouchableOpacity
+                            style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 1 }}
+                        >
+                            <Text style={{ fontSize: wp(5), color: '#34343e' }}>Twitter</Text>
+                            <ImageSVG
+                                source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                                style={{ width: 15, height: 15 }}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 1 }}
+                        >
+                            <Text style={{ fontSize: wp(5), color: '#34343e' }}>Telegram Chat</Text>
+                            <ImageSVG
+                                source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                                style={{ width: 15, height: 15 }}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 1 }}
+                        >
+                            <Text style={{ fontSize: wp(5), color: '#34343e' }}>Facebook</Text>
+                            <ImageSVG
+                                source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                                style={{ width: 15, height: 15 }}
+                            />
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={{ marginTop: 40 }}>
+                        <TouchableOpacity
+                            style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 1 }}
+                            onPress={this.shareApp}
+                        >
+                            <Text style={{ fontSize: wp(5), color: '#34343e' }}>Share With Friends</Text>
+                            <ImageSVG
+                                source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                                style={{ width: 15, height: 15 }}
+                            />
+                        </TouchableOpacity>
+                    </View>
 
                     <View style={{ marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <TouchableOpacity
