@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, ScrollView, FlatList, RefreshControl } from 'react-native';
 import ls from 'react-native-local-storage';
 import Markdown from 'react-native-simple-markdown';
+import Swipeout from 'react-native-swipeout';
 
 import BottomNavigator from './layouts/BottomNavigator';
 import Pageloader from './layouts/Pageloader';
@@ -26,6 +27,7 @@ export default class NotificationsScreen extends React.Component {
 
         this.changePage = this.changePage.bind(this);
         this.refreshNotifications = this.refreshNotifications.bind(this);
+        this.removeNotification = this.removeNotification.bind(this);
     }
     
     static navigationOptions = {
@@ -95,15 +97,65 @@ export default class NotificationsScreen extends React.Component {
         });
     }
 
+    removeNotification(id, index) {
+        let notifications = [];
+        notifications.push(id);
+
+        ls.get('userToken').then((data) => {
+            fetch('https://ale-demo-4550.nodechef.com/notifications/list', {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': data
+                },
+                body: JSON.stringify({
+                    list: notifications
+                }),
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                Alert.alert(responseJson.message);
+                let notificationsList = [...this.state.notificationsList];
+                notificationsList.splice(index, 1);
+                return this.setState({
+                    notificationsList: notificationsList
+                });
+            })
+            .catch((error) => {
+                Alert.alert(error)
+            });
+        });
+    }
+
     render() {
         if (this.state.isLoaderPage) {
             return (<Pageloader title="Loading notifications..." />);
         }
+
+        let swipeoutBtns = [{
+            text: 'Delete',
+            backgroundColor: 'red'
+        }];
+
         let notifications = this.state.notificationsList.map(function (el, i) {
             return (
-                <View key={i} style={{ marginTop: 20, backgroundColor: '#FFFFFF', padding: 10, width: wp(100) }}>
-                    <Markdown>{el.title}</Markdown>
-                </View>
+                <Swipeout
+                    right={[{
+                        text: 'Delete',
+                        backgroundColor: 'red',
+                        onPress: () => this.removeNotification(el._id, i)
+                    }]}
+                    key={i}
+                    backgroundColor="#FFFFFF"
+                    style={{ width: wp(100), marginTop: 20 }}
+                    sensitivity="0"
+                    autoClose={true}
+                >
+                    <View style={{ padding: 20 }}>
+                        <Markdown>{el.title}</Markdown>
+                    </View>
+                </Swipeout>
             )
         }, this);
 

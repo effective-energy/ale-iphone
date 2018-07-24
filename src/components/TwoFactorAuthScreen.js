@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Alert, AlertIOS, TextInput, Clipboard } from 'react-native';
+import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Alert, AlertIOS, TextInput, Clipboard, ScrollView } from 'react-native';
 
 import ls from 'react-native-local-storage';
 
@@ -196,7 +196,7 @@ export default class TwoFactorAuthScreen extends React.Component {
             return (
                 <View style={styles.pageContainer}>
                     <StatusBar barStyle='dark-content' />
-                    <View style={styles.contentContainer}>
+                    <View style={styles.TwoFactorBlock}>
                         <TextInput
                             placeholder="Secret key"
                             placeholderTextColor="#455578"
@@ -226,36 +226,41 @@ export default class TwoFactorAuthScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
-                <View style={styles.contentContainer}>
-                    <View style={{ marginBottom: 20, display: 'flex', alignItems: 'center' }}>
-                        <QRCode
-                            value={this.state.qrCode}
-                            size={230}
-                        />
-                    </View>
-                    <View style={{ display: 'flex', alignItems: 'center' }}>
-                        <Text style={{ textAlign: 'center', fontSize: 18 }}>Save this secret code to safe place</Text>
-                        <Text style={{ textAlign: 'center', marginTop: 20, fontSize: 18 }}>{this.state.secretWord}</Text>
-
-                        <View style={{ marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <TouchableOpacity
-                                onPress={this.copyToClipboard}
-                                style={{backgroundColor: '#d1d8dd', borderRadius: 4, padding: 15, width: wp(80), marginBottom: 20}}
-                            >
-                                <Text style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}>Copy to clipboard</Text>
-                            </TouchableOpacity>
+                <ScrollView
+                    contentInset={{bottom:80}}
+                    automaticallyAdjustContentInsets={false}
+                >
+                    <View style={styles.TwoFactorBlock}>
+                        <View style={{ marginBottom: 20, display: 'flex', alignItems: 'center' }}>
+                            <QRCode
+                                value={this.state.qrCode}
+                                size={230}
+                            />
                         </View>
+                        <View style={{ display: 'flex', alignItems: 'center' }}>
+                            <Text style={{ textAlign: 'center', fontSize: 18 }}>Save this secret code to safe place</Text>
+                            <Text style={{ textAlign: 'center', marginTop: 20, fontSize: 18 }}>{this.state.secretWord}</Text>
 
-                        <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <TouchableOpacity
-                                onPress={this.confirmTwoFactor}
-                                style={{backgroundColor: '#ffd24f', borderRadius: 4, padding: 15, width: wp(80), marginBottom: 20}}
-                            >
-                                <Text style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}>I save code</Text>
-                            </TouchableOpacity>
+                            <View style={{ marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <TouchableOpacity
+                                    onPress={this.copyToClipboard}
+                                    style={{backgroundColor: '#d1d8dd', borderRadius: 4, padding: 15, width: wp(80), marginBottom: 20}}
+                                >
+                                    <Text style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}>Copy to clipboard</Text>
+                                </TouchableOpacity>
+                            </View>
+
+                            <View style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <TouchableOpacity
+                                    onPress={this.confirmTwoFactor}
+                                    style={{backgroundColor: '#ffd24f', borderRadius: 4, padding: 15, width: wp(80), marginBottom: 20}}
+                                >
+                                    <Text style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}>I save code</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
-                </View>
+                </ScrollView>
             </View>
         );
     }
@@ -264,13 +269,13 @@ export default class TwoFactorAuthScreen extends React.Component {
 const styles = StyleSheet.create({
     pageContainer: {
         flex: 1,
-        backgroundColor: '#e8ebee',
+        backgroundColor: '#FFFFFF',
         alignItems: 'center',
         paddingTop: 30
     },
-    contentContainer: {
-        width: wp(90),
-        backgroundColor: '#ffffff',
+    TwoFactorBlock: {
+        width: wp(100),
+        backgroundColor: '#FFFFFF',
         padding: wp(5),
         borderRadius: 6
     }
