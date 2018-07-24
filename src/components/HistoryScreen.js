@@ -23,13 +23,15 @@ export default class SettingsScreen extends React.Component {
             walletsList: [],
             isLoaderPage: false,
             activeWalletIndex: 0,
-            activeWalletAddress: ''
+            activeWalletAddress: '',
+            isRefreshShow: false,
         };
 
         this.changePage = this.changePage.bind(this);
         this.getTransaction = this.getTransaction.bind(this);
         this.changePage = this.changePage.bind(this);
         this.changeWallet = this.changeWallet.bind(this);
+        this.refreshTransactions = this.refreshTransactions.bind(this);
     }
     
     static navigationOptions = {
@@ -44,7 +46,7 @@ export default class SettingsScreen extends React.Component {
     getUserWallets() {
         this.setState({ isLoaderPage: true });
         ls.get('userToken').then((data) => {
-            return fetch('https://ale-demo-4550.nodechef.com/users/user-wallets', {
+            fetch('https://ale-demo-4550.nodechef.com/users/user-wallets', {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
@@ -70,7 +72,7 @@ export default class SettingsScreen extends React.Component {
     getTransaction(address) {
         this.setState({ isLoaderPage: true });
         ls.get('userToken').then((data) => {
-            return fetch('https://ale-demo-4550.nodechef.com/transactions/'+address, {
+            fetch('https://ale-demo-4550.nodechef.com/transactions/'+address, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
@@ -80,7 +82,7 @@ export default class SettingsScreen extends React.Component {
             })
             .then((response) => response.json())
             .then((responseJson) => {
-                return this.setState({
+                this.setState({
                     transactionsData: responseJson,
                     isLoaderPage: false
                 });
@@ -103,6 +105,33 @@ export default class SettingsScreen extends React.Component {
         this.getTransaction(this.state.walletsList[e].address);
     }
 
+    refreshTransactions() {
+        this.setState({
+            isRefreshShow: true,
+        });
+
+        ls.get('userToken').then((data) => {
+            fetch('https://ale-demo-4550.nodechef.com/transactions/'+this.state.walletsList[this.state.activeWalletIndex].address, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': data
+                },
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    transactionsData: responseJson,
+                    isRefreshShow: false
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
+    }
+
     render() {
         if (this.state.isLoaderPage) {
             return (<Pageloader title="Loading transactions..." />);
@@ -116,7 +145,8 @@ export default class SettingsScreen extends React.Component {
                     automaticallyAdjustContentInsets={false}
                     refreshControl={
                         <RefreshControl
-                            refreshing={false}
+                            onRefresh={this.refreshTransactions}
+                            refreshing={this.state.isRefreshShow}
                             tintColor="#000000"
                             colors={['#ff0000', '#00ff00', '#0000ff']}
                             progressBackgroundColor="#EBEBEB"

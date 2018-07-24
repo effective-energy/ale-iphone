@@ -52,7 +52,7 @@ export default class BottomNavigator extends React.Component {
             let icon = this.state.activeClass === el.activeClass ? el.activeIcon : el.icon;
             return (
                 <TouchableOpacity
-                    activeOpacity={1}
+                    activeOpacity={0.9}
                     key={i}
                     style={[styles.navigationItem]}
                     onPress={e => this.props.changePage(el.pageName)}
@@ -87,7 +87,9 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         flexDirection: 'row',
-        flex: 1
+        flex: 1,
+        borderTopColor: '#e8ebee',
+        borderTopWidth: 2
     },
     navigationItem: {
         width: '25%',
@@ -100,8 +102,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
     },
     itemImage: {
-        width: wp(8),
-        height: wp(8)
+        width: wp(7.5),
+        height: wp(7.5)
     },
     itemTitle: {
         textAlign: 'center',

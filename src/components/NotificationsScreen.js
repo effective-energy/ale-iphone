@@ -25,6 +25,7 @@ export default class NotificationsScreen extends React.Component {
         };
 
         this.changePage = this.changePage.bind(this);
+        this.refreshNotifications = this.refreshNotifications.bind(this);
     }
     
     static navigationOptions = {
@@ -40,18 +41,11 @@ export default class NotificationsScreen extends React.Component {
         this.props.navigation.navigate(e);
     }
 
-    getNotifications(isRefresh) {
-        if (isRefresh) {
-            this.setState({
-                isRefreshShow: true,
-                isLoaderPage: false
-            });
-        } else {
-            this.setState({
-                isRefreshShow: false,
-                isLoaderPage: true
-            });
-        }
+    getNotifications() {
+        this.setState({
+            isLoaderPage: true,
+        });
+
         ls.get('userToken').then((data) => {
             return fetch('https://ale-demo-4550.nodechef.com/notifications', {
                 method: 'GET',
@@ -66,7 +60,33 @@ export default class NotificationsScreen extends React.Component {
                 return this.setState({
                     notificationsList: responseJson,
                     isLoaderPage: false,
-                    isRefreshShow: false
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
+    }
+
+    refreshNotifications() {
+        this.setState({
+            isRefreshShow: true,
+        });
+
+        ls.get('userToken').then((data) => {
+            fetch('https://ale-demo-4550.nodechef.com/notifications', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': data
+                },
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                return this.setState({
+                    notificationsList: responseJson,
+                    isRefreshShow: false,
                 });
             })
             .catch((error) => {
@@ -95,7 +115,7 @@ export default class NotificationsScreen extends React.Component {
                     automaticallyAdjustContentInsets={false}
                     refreshControl={
                         <RefreshControl
-                            onRefresh={() => this.getNotifications(true)}
+                            onRefresh={this.refreshNotifications}
                             refreshing={this.state.isRefreshShow}
                             tintColor="#000000"
                             colors={['#ff0000', '#00ff00', '#0000ff']}

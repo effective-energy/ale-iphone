@@ -19,8 +19,8 @@ export default class EditAccountScreen extends React.Component {
         let uploadAvatar = new FormData();
         uploadAvatar.append("avatar", {
             uri: avatar.path,
-            type: 'image/jpg',
-            name: 'avatar.jpg'
+            type: 'image/png',
+            name: 'avatar.png'
         });
         ls.get('userToken').then((data) => {
             fetch('https://ale-demo-4550.nodechef.com/users/set_avatar', {

@@ -42,7 +42,7 @@ export default class WalletsScreen extends React.Component {
         this.signOut = this.signOut.bind(this);
         this.createNewWallet = this.createNewWallet.bind(this);
         this.openWalletDetailsScreen = this.openWalletDetailsScreen.bind(this);
-        this.getWallets = this.getWallets.bind(this);
+        this.refreshWallets = this.refreshWallets.bind(this);
     }
     
     static navigationOptions = {
@@ -136,7 +136,7 @@ export default class WalletsScreen extends React.Component {
         this.props.navigation.navigate('NewWallet');
     }
 
-    getWallets() {
+    refreshWallets() {
         this.setState({
             isRefreshShow: true
         });
@@ -156,7 +156,6 @@ export default class WalletsScreen extends React.Component {
                     walletsList: responseJson,
                     isRefreshShow: false
                 });
-                return this.getUserData();
             })
             .catch((error) => {
                 console.error(error);
@@ -188,9 +187,8 @@ export default class WalletsScreen extends React.Component {
                         automaticallyAdjustContentInsets={false}
                         refreshControl={
                             <RefreshControl
-                                onRefresh={() => this.getWallets}
+                                onRefresh={this.refreshWallets}
                                 refreshing={this.state.isRefreshShow}
-                                refreshing={false}
                                 tintColor="#FFFFFF"
                                 colors={['#ff0000', '#00ff00', '#0000ff']}
                                 progressBackgroundColor="#EBEBEB"
