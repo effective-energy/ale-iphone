@@ -17,16 +17,13 @@ export default class EditAccountScreen extends React.Component {
 
     setAvatar(avatar) {
         let uploadAvatar = new FormData();
-        uploadAvatar.append("avatar", {
-            uri: avatar.path,
-            type: 'image/png',
-            name: 'avatar.png'
-        });
+        uploadAvatar.append("avatar", avatar);
+
         ls.get('userToken').then((data) => {
+            return Alert.alert()
             fetch('https://ale-demo-4550.nodechef.com/users/set_avatar', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
                     'Authorization': data
                 },
                 body: uploadAvatar

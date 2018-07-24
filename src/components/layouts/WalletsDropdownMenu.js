@@ -45,11 +45,12 @@ export default class WalletsDropdownMenu extends React.Component {
             let isActiveWallet = this.props.activeWalletIndex === i ? '#cccccc' : '#c1c4cb';
             return (
                 <TouchableOpacity
+                    activeOpacity={0.9}
                     key={i}
-                    style={{ width: wp(80), height: 50, backgroundColor: isActiveWallet, paddingLeft: 10, paddingRight: 10, zIndex: 1, padding: 10 }}
+                    style={{ width: wp(80), height: 'auto', backgroundColor: isActiveWallet, paddingLeft: 10, paddingRight: 10, zIndex: 1, display: 'flex', alignItems: 'center', padding: 10 }}
                     onPress={() => this.selectWallet(i)}
                 >
-                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: wp(80) }}>
+                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: wp(80), marginLeft: 15 }}>
                         <Image
                             source={require('../../assets/images/navigation/bottom/icon_wallet-passive.svg')}
                             style={{width: 40, height: 40, marginRight: 10 }}

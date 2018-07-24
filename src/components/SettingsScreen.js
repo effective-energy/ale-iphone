@@ -150,7 +150,6 @@ export default class SettingsScreen extends React.Component {
                     }
                 >
                     <TouchableOpacity
-                        onPress={this.openEditAccountScreen}
                         style={{ marginTop: 1, backgroundColor: '#FFFFFF', width: wp(100), padding: 15, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
                     >
                         <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
