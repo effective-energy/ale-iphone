@@ -28,7 +28,6 @@ export default class NotificationsScreen extends React.Component {
         };
 
         this.changePage = this.changePage.bind(this);
-        this.refreshNotifications = this.refreshNotifications.bind(this);
         this.removeNotification = this.removeNotification.bind(this);
     }
     
@@ -44,10 +43,10 @@ export default class NotificationsScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.getNotifications().done();
+        this.getNotifications(false).done();
     }
 
-    async getNotifications() {
+    async getNotifications(isRefresh) {
         const userToken = await ls.get('userToken');
         if (!userToken) {
             throw userToken
@@ -72,6 +71,7 @@ export default class NotificationsScreen extends React.Component {
         await this.setStateAsync({
             notificationsList: responseJson,
             isLoaderPage: false,
+            isRefreshShow: false,
         });
     }
 
@@ -79,61 +79,41 @@ export default class NotificationsScreen extends React.Component {
         this.props.navigation.navigate(e);
     }
 
-    refreshNotifications() {
-        this.setState({
-            isRefreshShow: true,
-        });
+    async removeNotification(id, index) {
+        const userToken = await ls.get('userToken');
+        if (!userToken) {
+            throw userToken
+        }
 
-        ls.get('userToken').then((data) => {
-            fetch('https://ale-demo-4550.nodechef.com/notifications', {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data
-                },
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                return this.setState({
-                    notificationsList: responseJson,
-                    isRefreshShow: false,
-                });
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        });
-    }
-
-    removeNotification(id, index) {
         let notifications = [];
         notifications.push(id);
 
-        ls.get('userToken').then((data) => {
-            fetch('https://ale-demo-4550.nodechef.com/notifications/list', {
-                method: 'DELETE',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data
-                },
-                body: JSON.stringify({
-                    list: notifications
-                }),
+        const params = {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': userToken
+            },
+            body: JSON.stringify({
+                list: notifications
             })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                Alert.alert(responseJson.message);
-                let notificationsList = [...this.state.notificationsList];
-                notificationsList.splice(index, 1);
-                return this.setState({
-                    notificationsList: notificationsList
-                });
-            })
-            .catch((error) => {
-                Alert.alert(error)
-            });
+        }
+
+        const response = await fetch(`${Config.SERVER_URL}/notifications/list`, params);
+        if (!response) {
+            throw response
+        }
+
+        const responseJson = await response.json();
+
+        Alert.alert(responseJson.message);
+        
+        let notificationsList = [...this.state.notificationsList];
+        notificationsList.splice(index, 1);
+
+        await this.setStateAsync({
+            notificationsList: notificationsList,
         });
     }
 
@@ -158,7 +138,7 @@ export default class NotificationsScreen extends React.Component {
                     key={i}
                     backgroundColor="#FFFFFF"
                     style={{ width: wp(100), marginTop: 20 }}
-                    sensitivity="0"
+                    sensitivity={0}
                     autoClose={true}
                 >
                     <View style={{ padding: 20 }}>
@@ -176,7 +156,7 @@ export default class NotificationsScreen extends React.Component {
                     automaticallyAdjustContentInsets={false}
                     refreshControl={
                         <RefreshControl
-                            onRefresh={this.refreshNotifications}
+                            onRefresh={() => this.getNotifications(true)}
                             refreshing={this.state.isRefreshShow}
                             tintColor="#000000"
                             colors={['#ff0000', '#00ff00', '#0000ff']}
