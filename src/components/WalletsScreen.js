@@ -186,49 +186,39 @@ export default class WalletsScreen extends React.Component {
             return (<Pageloader title="Loading wallets..." />);
         }
         return (
-            <SideMenu
-                menu={
-                    <Leftmenu
-                        signOut={this.signOut}
-                        userData={this.state.userData}
-                    />
-                }
+            <View
+                style={styles.pageContainer}
             >
-                <View
-                    style={styles.pageContainer}
+                <StatusBar
+                    barStyle='light-content'
+                />
+                <ScrollView
+                    contentInset={{bottom:80}}
+                    automaticallyAdjustContentInsets={false}
+                    refreshControl={
+                        <RefreshControl
+                            onRefresh={this.refreshWallets}
+                            refreshing={this.state.isRefreshShow}
+                            tintColor="#FFFFFF"
+                            progressBackgroundColor="#EBEBEB"
+                        />
+                    }
                 >
-                    <StatusBar
-                        barStyle='light-content'
+                    <WalletsSlider
+                        openWalletDetailsScreen={this.openWalletDetailsScreen}
+                        walletsList={this.state.walletsList}
+                        requestMoney={this.requestMoney}
+                        sendMoney={this.sendMoney}
                     />
-                    <ScrollView
-                        contentInset={{bottom:80}}
-                        automaticallyAdjustContentInsets={false}
-                        refreshControl={
-                            <RefreshControl
-                                onRefresh={this.refreshWallets}
-                                refreshing={this.state.isRefreshShow}
-                                tintColor="#FFFFFF"
-                                colors={['#ff0000', '#00ff00', '#0000ff']}
-                                progressBackgroundColor="#EBEBEB"
-                            />
-                        }
-                    >
-                        <WalletsSlider
-                            openWalletDetailsScreen={this.openWalletDetailsScreen}
-                            walletsList={this.state.walletsList}
-                            requestMoney={this.requestMoney}
-                            sendMoney={this.sendMoney}
-                        />
-                        <NewWalletBlock
-                            createNewWallet={this.createNewWallet}
-                        />
-                    </ScrollView>
-                    <BottomNavigator
-                        changePage={this.changePage}
-                        activePage="wallets"
+                    <NewWalletBlock
+                        createNewWallet={this.createNewWallet}
                     />
-                </View>
-            </SideMenu>
+                </ScrollView>
+                <BottomNavigator
+                    changePage={this.changePage}
+                    activePage="wallets"
+                />
+            </View>
         );
     }
 }

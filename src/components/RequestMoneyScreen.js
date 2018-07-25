@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, Platform, Image, StatusBar, Clipboard, Button, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Platform, Image, StatusBar, Clipboard, Alert, TouchableOpacity } from 'react-native';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -20,7 +20,14 @@ export default class RequestMoneyScreen extends React.Component {
     }
     
     static navigationOptions = {
-        title: 'Request money'
+        title: 'Request money',
+        headerTitleStyle: {
+            color: '#000000'
+        },
+        headerStyle: {
+            backgroundColor: '#FFFFFF'
+        },
+        headerTintColor: '#ffbb00',
     };
 
     copyToClipboard = async () => {
@@ -43,13 +50,12 @@ export default class RequestMoneyScreen extends React.Component {
 						<Text style={{ fontSize: wp(6), marginBottom: 10, textAlign: 'center' }}>RECEIVER ADDRESS:</Text>
 						<Text style={{ textAlign: 'center' }}>{this.state.receiverAddress}</Text>
 					</View>
-					<View style={{ backgroundColor: '#d1d8dd', width: wp(70), padding: 5, borderRadius: 5, marginTop: 20 }}>
-                        <Button
-                            title="Copy to clipboard"
-                            onPress={this.copyToClipboard}
-                            color="#000000"
-                        />
-                    </View>
+                    <TouchableOpacity
+                        onPress={this.copyToClipboard}
+                        style={{ backgroundColor: '#d1d8dd', width: wp(70), padding: 10, borderRadius: 5, marginTop: 20 }}
+                    >
+                        <Text style={{ textAlign: 'center', color: '#000000', fontSize: 18 }}>Copy to clipboard</Text>
+                    </TouchableOpacity>
             	</View>
             </View>
         );
@@ -57,35 +63,17 @@ export default class RequestMoneyScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: 'black'
-      },
-      preview: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center'
-      },
-      capture: {
-        flex: 0,
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        padding: 15,
-        paddingHorizontal: 20,
-        alignSelf: 'center',
-        margin: 20
-      },
     pageContainer: {
         flex: 1,
         backgroundColor: '#e8ebee',
         alignItems: 'center',
-        paddingTop: 50
+        paddingTop: 20
     },
     qrCodeContainer: {
-    	width: screenWidth,
+    	width: wp(80),
     	backgroundColor: '#ffffff',
     	padding: wp(5),
-    	borderRadius: 6
+    	borderRadius: 6,
+        marginTop: 15
     }
 });
