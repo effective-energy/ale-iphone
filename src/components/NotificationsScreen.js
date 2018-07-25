@@ -7,6 +7,8 @@ import Swipeout from 'react-native-swipeout';
 import BottomNavigator from './layouts/BottomNavigator';
 import Pageloader from './layouts/Pageloader';
 
+import Config from '../config';
+
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
     return Math.round(value);
@@ -19,7 +21,7 @@ export default class NotificationsScreen extends React.Component {
         super(props);
 	    this.state = {
             isActive: false,
-            isLoaderPage: false,
+            isLoaderPage: true,
             notificationsList: [],
             checked: true,
             isRefreshShow: false
@@ -35,39 +37,46 @@ export default class NotificationsScreen extends React.Component {
         headerLeft: null,
     };
 
+    setStateAsync(state) {
+        return new Promise((resolve) => {
+            this.setState(state, resolve);
+        });
+    }
+
     componentDidMount() {
-        this.getNotifications(false);
+        this.getNotifications().done();
+    }
+
+    async getNotifications() {
+        const userToken = await ls.get('userToken');
+        if (!userToken) {
+            throw userToken
+        }
+
+        const params = {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': userToken
+            }
+        }
+
+        const response = await fetch(`${Config.SERVER_URL}/notifications`, params);
+        if (!response) {
+            throw response
+        }
+
+        const responseJson = await response.json();
+
+        await this.setStateAsync({
+            notificationsList: responseJson,
+            isLoaderPage: false,
+        });
     }
 
     changePage(e) {
         this.props.navigation.navigate(e);
-    }
-
-    getNotifications() {
-        this.setState({
-            isLoaderPage: true,
-        });
-
-        ls.get('userToken').then((data) => {
-            return fetch('https://ale-demo-4550.nodechef.com/notifications', {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data
-                },
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                return this.setState({
-                    notificationsList: responseJson,
-                    isLoaderPage: false,
-                });
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        });
     }
 
     refreshNotifications() {

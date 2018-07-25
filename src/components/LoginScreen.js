@@ -124,6 +124,7 @@ export default class LoginScreen extends React.Component {
                             value={this.state.userEmail}
                         />
                         <TextInput
+                        	secureTextEntry={true}
                         	placeholder="Enter your password"
                         	placeholderTextColor="#455578"
                             style={{height: 40, borderWidth: 1, width: screenWidth, marginBottom: 25, padding: 6, color: '#455578', borderBottomColor: '#455578', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', fontSize: 16 }}

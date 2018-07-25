@@ -140,16 +140,9 @@ export default class SettingsScreen extends React.Component {
                 <ScrollView
                     contentInset={{bottom:80}}
                     automaticallyAdjustContentInsets={false}
-                    refreshControl={
-                        <RefreshControl
-                            refreshing={false}
-                            tintColor="#000000"
-                            colors={['#ff0000', '#00ff00', '#0000ff']}
-                            progressBackgroundColor="#EBEBEB"
-                        />
-                    }
                 >
                     <TouchableOpacity
+                        onPress={this.openEditAccountScreen}
                         style={{ marginTop: 1, backgroundColor: '#FFFFFF', width: wp(100), padding: 15, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
                     >
                         <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>

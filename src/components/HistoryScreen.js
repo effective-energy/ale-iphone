@@ -2,6 +2,8 @@ import React from 'react';
 import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Text, Dimensions } from 'react-native';
 import ls from 'react-native-local-storage';
 
+import Config from '../config'
+
 import BottomNavigator from './layouts/BottomNavigator';
 import TransactionBlock from './layouts/TransactionBlock';
 import WalletsDropdownMenu from './layouts/WalletsDropdownMenu';
@@ -21,7 +23,7 @@ export default class SettingsScreen extends React.Component {
             isActive: false,
             transactionsData: [],
             walletsList: [],
-            isLoaderPage: false,
+            isLoaderPage: true,
             activeWalletIndex: 0,
             activeWalletAddress: '',
             isRefreshShow: false,
@@ -39,57 +41,75 @@ export default class SettingsScreen extends React.Component {
         headerLeft: null,
     };
 
-    componentDidMount() {
-        this.getUserWallets();
-    }
-
-    getUserWallets() {
-        this.setState({ isLoaderPage: true });
-        ls.get('userToken').then((data) => {
-            fetch('https://ale-demo-4550.nodechef.com/users/user-wallets', {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data
-                },
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    walletsList: responseJson,
-                    isLoaderPage: false,
-                    activeWalletAddress: responseJson[0].address
-                });
-                return this.getTransaction(this.state.walletsList[0].address);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+    setStateAsync(state) {
+        return new Promise((resolve) => {
+            this.setState(state, resolve);
         });
     }
 
-    getTransaction(address) {
-        this.setState({ isLoaderPage: true });
-        ls.get('userToken').then((data) => {
-            fetch('https://ale-demo-4550.nodechef.com/transactions/'+address, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data
-                },
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    transactionsData: responseJson,
-                    isLoaderPage: false
-                });
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+    componentDidMount() {
+        this.getUserWallets().done();
+    }
+
+    async getUserWallets() {
+        const userToken = await ls.get('userToken');
+        if (!userToken) {
+            throw userToken
+        }
+
+        const params = {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': userToken
+            }
+        }
+
+        const response = await fetch(`${Config.SERVER_URL}/users/user-wallets`, params);
+        if (!response) {
+            throw response
+        }
+
+        const responseJson = await response.json();
+
+        await this.setStateAsync({
+            walletsList: responseJson,
+            activeWalletAddress: responseJson[0].address,
+        });
+
+        return this.getTransaction(this.state.walletsList[0].address).done();
+    }
+
+    async getTransaction(address) {
+        await this.setStateAsync({
+            isLoaderPage: true,
+        });
+
+        const userToken = await ls.get('userToken');
+        if (!userToken) {
+            throw userToken
+        }
+
+        const params = {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': userToken
+            }
+        }
+
+        const response = await fetch(`${Config.SERVER_URL}/transactions/${address}`, params);
+        if (!response) {
+            throw response
+        }
+
+        const responseJson = await response.json();
+
+        await this.setStateAsync({
+            transactionsData: responseJson,
+            isLoaderPage: false,
         });
     }
 
@@ -105,30 +125,35 @@ export default class SettingsScreen extends React.Component {
         this.getTransaction(this.state.walletsList[e].address);
     }
 
-    refreshTransactions() {
-        this.setState({
+    async refreshTransactions() {
+        await this.setStateAsync({
             isRefreshShow: true,
         });
 
-        ls.get('userToken').then((data) => {
-            fetch('https://ale-demo-4550.nodechef.com/transactions/'+this.state.walletsList[this.state.activeWalletIndex].address, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data
-                },
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    transactionsData: responseJson,
-                    isRefreshShow: false
-                });
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        const userToken = await ls.get('userToken');
+        if (!userToken) {
+            throw userToken
+        }
+
+        const params = {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': userToken
+            }
+        }
+
+        const response = await fetch(`${Config.SERVER_URL}/transactions/${this.state.walletsList[this.state.activeWalletIndex].address}`, params);
+        if (!response) {
+            throw response
+        }
+
+        const responseJson = await response.json();
+
+        await this.setStateAsync({
+            transactionsData: responseJson,
+            isRefreshShow: false,
         });
     }
 

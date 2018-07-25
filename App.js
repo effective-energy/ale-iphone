@@ -55,27 +55,69 @@ const transitionConfig = () => {
 }
 
 const RootStack = createStackNavigator({
-    Login: { screen: LoginScreen },
-    NewWallet: { screen: NewWalletScreen },
-    Importwallet: { screen: ImportwalletScreen },
-    Wallets: { screen: WalletsScreen },
-    Settings: { screen: SettingsScreen },
-    RequestMoney: { screen: RequestMoneyScreen },
-    SendMoney: { screen: SendMoneyScreen },
-    CreateAccount: { screen: CreateAccountScreen },
-    RecoverAccount: { screen: RecoverAccountScreen },
-    SuccessPayment: { screen: SuccessPaymentScreen },
-    RestoreWallet: { screen: RestoreWalletScreen },
-    History: { screen: HistoryScreen },
-    Notifications: { screen: NotificationsScreen },
-    ChangeLanguage: { screen: ChangeLanguageScreen },
-    RecoveryPhrase: { screen: RecoveryPhraseScreen },
-    TwoFactorAuth: { screen: TwoFactorAuthScreen },
-    WalletDetails: { screen: WalletDetailsScreen },
-    ChangePassword: { screen: ChangePasswordScreen },
-    Camera: { screen: CameraScreen },
-    EditAccount: { screen: EditAccountScreen },
-    WebView: { screen: WebViewScreen },
+    Login: {
+        screen: LoginScreen,
+    },
+    NewWallet: {
+        screen: NewWalletScreen,
+    },
+    Importwallet: {
+        screen: ImportwalletScreen,
+    },
+    Wallets: {
+        screen: WalletsScreen,
+    },
+    Settings: {
+        screen: SettingsScreen,
+    },
+    RequestMoney: {
+        screen: RequestMoneyScreen,
+    },
+    SendMoney: {
+        screen: SendMoneyScreen,
+    },
+    CreateAccount: {
+        screen: CreateAccountScreen,
+    },
+    RecoverAccount: {
+        screen: RecoverAccountScreen,
+    },
+    SuccessPayment: {
+        screen: SuccessPaymentScreen,
+    },
+    RestoreWallet: {
+        screen: RestoreWalletScreen,
+    },
+    History: {
+        screen: HistoryScreen,
+    },
+    Notifications: {
+        screen: NotificationsScreen,
+    },
+    ChangeLanguage: {
+        screen: ChangeLanguageScreen,
+    },
+    RecoveryPhrase: {
+        screen: RecoveryPhraseScreen,
+    },
+    TwoFactorAuth: {
+        screen: TwoFactorAuthScreen,
+    },
+    WalletDetails: {
+        screen: WalletDetailsScreen,
+    },
+    ChangePassword: {
+        screen: ChangePasswordScreen,
+    },
+    Camera: {
+        screen: CameraScreen,
+    },
+    EditAccount: {
+        screen: EditAccountScreen,
+    },
+    WebView: {
+        screen: WebViewScreen,
+    },
 }, {
     initialRouteName: initialRouteName(),
     transitionConfig,

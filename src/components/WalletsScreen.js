@@ -4,6 +4,8 @@ import SideMenu from 'react-native-side-menu';
 import ls from 'react-native-local-storage';
 import SVGImage from 'react-native-remote-svg';
 
+import Config from '../config';
+
 import BottomNavigator from './layouts/BottomNavigator';
 import WalletsSlider from './layouts/WalletsSlider';
 import NewWalletBlock from './layouts/NewWalletBlock';
@@ -21,13 +23,12 @@ let screenWidth = wp(80);
 import { observable } from "mobx";
 import { observer, inject } from "mobx-react";
 
-@inject("counterStore")
 export default class WalletsScreen extends React.Component {
     constructor(props: Object) {
         super(props);
 	    this.state = {
             walletsList: [],
-            isLoaderPage: false,
+            isLoaderPage: true,
             userData: {
                 userEmail: '',
                 userName: '',
@@ -52,61 +53,74 @@ export default class WalletsScreen extends React.Component {
         statusBarBackgroundColor: '#ffffff'
     };
 
-    componentWillMount() {
-        this.setState({ isOpenLeftMenu: false });
-        this.initialUserWallets();
-    }
-
-    initialUserWallets() {
-        this.setState({ isLoaderPage: true });
-        ls.get('userToken').then((data) => {
-            return fetch('https://ale-demo-4550.nodechef.com/users/user-wallets', {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data
-                },
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    walletsList: responseJson,
-                    isLoaderPage: false
-                });
-                return this.getUserData();
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+    setStateAsync(state) {
+        return new Promise((resolve) => {
+            this.setState(state, resolve);
         });
     }
 
-    getUserData() {
-        this.setState({ isLoaderPage: true });
-        ls.get('userToken').then((data) => {
-            return fetch('https://ale-demo-4550.nodechef.com/users/get-user-data', {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data
-                },
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                return this.setState({
-                    userData: {
-                        userEmail: responseJson.email,
-                        userName: responseJson.name,
-                        userAvatar: responseJson.avatar
-                    },
-                    isLoaderPage: false
-                });
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+    componentDidMount() {
+        this.getUserWallets().done();
+    }
+
+    async getUserWallets() {
+        const userToken = await ls.get('userToken');
+        if (!userToken) {
+            throw userToken
+        }
+
+        const params = {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': userToken
+            }
+        }
+
+        const response = await fetch(`${Config.SERVER_URL}/users/user-wallets`, params);
+        if (!response) {
+            throw response
+        }
+
+        const responseJson = await response.json();
+
+        await this.setStateAsync({
+            walletsList: responseJson,
+        });
+
+        return this.getUserData().done();;
+    }
+
+    async getUserData() {
+        const userToken = await ls.get('userToken');
+        if (!userToken) {
+            throw userToken
+        }
+
+        const params = {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': userToken
+            }
+        }
+
+        const response = await fetch(`${Config.SERVER_URL}/users/get-user-data`, params);
+        if (!response) {
+            throw response
+        }
+
+        const responseJson = await response.json();
+
+        await this.setStateAsync({
+            userData: {
+                userEmail: responseJson.email,
+                userName: responseJson.name,
+                userAvatar: responseJson.avatar
+            },
+            isLoaderPage: false,
         });
     }
 
@@ -136,30 +150,34 @@ export default class WalletsScreen extends React.Component {
         this.props.navigation.navigate('NewWallet');
     }
 
-    refreshWallets() {
-        this.setState({
-            isRefreshShow: true
+    async refreshWallets() {
+        await this.setStateAsync({
+            isRefreshShow: true,
         });
 
-        ls.get('userToken').then((data) => {
-            return fetch('https://ale-demo-4550.nodechef.com/users/user-wallets', {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data
-                },
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                this.setState({
-                    walletsList: responseJson,
-                    isRefreshShow: false
-                });
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        const userToken = await ls.get('userToken');
+        if (!userToken) {
+            throw userToken
+        }
+
+        const params = {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': userToken
+            }
+        }
+
+        const response = await fetch(`${Config.SERVER_URL}/users/user-wallets`, params);
+        if (!response) {
+            throw response
+        }
+
+        const responseJson = await response.json();
+        await this.setStateAsync({
+            walletsList: responseJson,
+            isRefreshShow: false
         });
     }
 
@@ -205,16 +223,6 @@ export default class WalletsScreen extends React.Component {
                             createNewWallet={this.createNewWallet}
                         />
                     </ScrollView>
-                    {/*<View>
-                        <Counter />
-                    </View>
-                    <View>
-                        <Button
-                            onPress={() => this.props.counterStore.increment()}
-                            title="Increment Counter"
-                            color="#805841"
-                        />
-                    </View>*/}
                     <BottomNavigator
                         changePage={this.changePage}
                         activePage="wallets"
@@ -223,14 +231,6 @@ export default class WalletsScreen extends React.Component {
             </SideMenu>
         );
     }
-}
-
-@inject("counterStore")
-@observer
-class Counter extends React.Component {
-  render() {
-    return <Text>Count: {this.props.counterStore.count}</Text>;
-  }
 }
 
 const styles = StyleSheet.create({
