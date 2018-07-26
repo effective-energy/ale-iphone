@@ -31,7 +31,8 @@ export default class RecoverAccountScreen extends React.Component {
             color: '#ffbb00'
         },
         headerStyle: {
-            backgroundColor: '#07132f'
+            backgroundColor: '#07132f',
+            borderBottomWidth: 0,
         },
         headerTintColor: '#ffbb00',
     };
