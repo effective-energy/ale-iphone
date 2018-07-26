@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions, Platform, Image, StatusBar, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 import ls from 'react-native-local-storage';
+import SVGImage from 'react-native-remote-svg';
 
 import Config from '../config';
 
@@ -22,19 +23,28 @@ export default class SendMoneyScreen extends React.Component {
         };
 
         this.sendMoney = this.sendMoney.bind(this);
-        this.scanQRCode = this.scanQRCode.bind(this);
     }
-    
-    static navigationOptions = {
-        title: 'Send money',
-        headerTitleStyle: {
-            color: '#ffbb00'
-        },
-        headerStyle: {
-            backgroundColor: '#08142F',
-            borderBottomWidth: 0,
-        },
-        headerTintColor: '#ffbb00',
+
+    static navigationOptions = ({navigation}) => {
+        return {
+            title: 'Send money',
+            headerTitleStyle: {
+                color: '#ffbb00'
+            },
+            headerStyle: {
+                backgroundColor: '#08142F',
+                borderBottomWidth: 0,
+            },
+            headerTintColor: '#ffbb00',
+            headerRight: <TouchableOpacity
+                            onPress={() => navigation.navigate('Camera')}
+                        >
+                            <SVGImage
+                                source={require('../assets/images/icons/qr-code.svg')}
+                                style={{width: 20, height: 20, marginRight: 20}}
+                            />
+                        </TouchableOpacity>
+        };
     };
 
     componentDidMount() {
@@ -93,10 +103,6 @@ export default class SendMoneyScreen extends React.Component {
         });
     }
 
-    scanQRCode() {
-        this.props.navigation.push('Camera');;
-    }
-
     render() {
         return (
             <View style={styles.pageContainer}>
@@ -124,13 +130,6 @@ export default class SendMoneyScreen extends React.Component {
                         style={{ backgroundColor: '#16203a', width: screenWidth, padding: 10, borderRadius: 10 }}
                     >
                         <Text style={{ color: '#f0b721', textAlign: 'center', fontSize: wp(5), fontWeight: 'bold' }}>Send</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        onPress={this.scanQRCode}
-                        style={{ backgroundColor: '#ffbb00', width: screenWidth, padding: 10, borderRadius: 10, marginTop: 20 }}
-                    >
-                        <Text style={{ color: '#000000', textAlign: 'center', fontSize: wp(5), fontWeight: 'bold' }}>Scan QRCode</Text>
                     </TouchableOpacity>
             	</View>
             </View>

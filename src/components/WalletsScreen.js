@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet, Button, Text, StatusBar, Image, Alert, Dimensions, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
-import SideMenu from 'react-native-side-menu';
 import ls from 'react-native-local-storage';
 import SVGImage from 'react-native-remote-svg';
 

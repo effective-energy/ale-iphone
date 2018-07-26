@@ -1,5 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, StatusBar, TextInput, Dimensions, TouchableOpacity, Alert } from 'react-native';
+import ls from 'react-native-local-storage';
+import Config from '../config';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -25,6 +27,7 @@ export default class CreateAccountScreen extends React.Component {
 
         this.backToLoginPage = this.backToLoginPage.bind(this);
         this.createAccount = this.createAccount.bind(this);
+        this.refreshState = this.refreshState.bind(this);
     }
     
     static navigationOptions = {
@@ -39,24 +42,65 @@ export default class CreateAccountScreen extends React.Component {
         headerTintColor: '#ffbb00',
     };
 
+    componentDidMount() {
+        this.refreshState();
+    }
+
+    refreshState() {
+        this.state.fullName = '';
+        this.state.email = '';
+        this.state.password = '';
+        this.state.repeatPassword = '';
+    }
+
     backToLoginPage() {
         this.props.navigation.navigate('Login');
     }
 
     async createAccount() {
-        if (this.state.fullName === '') {
-            return Alert.alert('Enter your name');
-        }
-        if (this.state.email === '' || !validateEmail(this.state.email)) {
-            return Alert.alert('Enter valid E-mail');
-        }
-        if (this.state.password.length < 8) {
-            return Alert.alert('Minimum password length is 8 characters');
-        }
-        if (this.state.repeatPassword !== this.state.password) {
-            return Alert.alert('Passwords do not match');
-        }
+        try {
+            if (this.state.fullName === '') {
+                return Alert.alert('Enter your name');
+            }
+            if (this.state.email === '' || !validateEmail(this.state.email)) {
+                return Alert.alert('Enter valid E-mail');
+            }
+            if (this.state.password.length < 8) {
+                return Alert.alert('Minimum password length is 8 characters');
+            }
+            if (this.state.repeatPassword !== this.state.password) {
+                return Alert.alert('Passwords do not match');
+            }
 
+            const params = {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: this.state.email.toLowerCase(),
+                    name: this.state.fullName,
+                    password: this.state.password
+                }),
+            };
+
+            const response = await fetch(`${Config.SERVER_URL}/users/new`, params);
+            if (!response) {
+                throw response
+            }
+
+            const responseJson = await response.json();
+            if (responseJson.message !== 'User already exist!') {
+                Alert.alert(responseJson.message);
+                this.refreshState();
+                return this.props.navigation.push('Login');
+            } else {
+                Alert.alert(responseJson.message);
+            }
+        } catch (error) {
+            Alert.alert(error)
+        }
     }
 
     render() {
