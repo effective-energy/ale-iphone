@@ -34,6 +34,7 @@ export default class SendMoneyScreen extends React.Component {
             backgroundColor: '#08142F'
         },
         headerTintColor: '#ffbb00',
+        shadowColor: 'transparent',
     };
 
     componentDidMount() {
@@ -99,7 +100,7 @@ export default class SendMoneyScreen extends React.Component {
     render() {
         return (
             <View style={styles.pageContainer}>
-            	<StatusBar barStyle='dark-content' />
+            	<StatusBar barStyle='light-content' />
             	<View>
             		<View>
                         <TextInput

@@ -28,6 +28,7 @@ export default class NewWalletScreen extends React.Component {
             backgroundColor: '#08142F'
         },
         headerTintColor: '#ffbb00',
+        shadowColor: 'transparent',
     };
 
     restoreWallet() {

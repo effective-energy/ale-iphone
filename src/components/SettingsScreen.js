@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, Image, ScrollView, RefreshControl, Share } from 'react-native';
+import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, Image, ScrollView, RefreshControl, Share, Linking } from 'react-native';
 import ImageSVG from 'react-native-remote-svg';
 
 import ls from 'react-native-local-storage';
+
+import Config from '../config';
 
 // I18n 
 import I18n from '../i18n/index';
@@ -22,7 +24,7 @@ export default class SettingsScreen extends React.Component {
         super(props);
 	    this.state = {
             isTwoAuthActive: false,
-            isLoaderPage: false,
+            isLoaderPage: true,
             fullName: '',
             userEmail: '',
             userAvatar: '',
@@ -35,7 +37,7 @@ export default class SettingsScreen extends React.Component {
         this.changePassword = this.changePassword.bind(this);
         this.openEditAccountScreen = this.openEditAccountScreen.bind(this);
         this.shareApp = this.shareApp.bind(this);
-        this.openWebView = this.openWebView.bind(this);
+        this.openInApp = this.openInApp.bind(this);
     }
 
     static navigationOptions = ({navigation}) => {
@@ -47,38 +49,48 @@ export default class SettingsScreen extends React.Component {
         };
     };
 
+    setStateAsync(state) {
+        return new Promise((resolve) => {
+            this.setState(state, resolve);
+        });
+    }
+
     componentWillMount() {
         this.getUserData();
     }
 
     getUserAvatar() {
-        return `https://ale-demo-4550.nodechef.com/${this.state.userAvatar}`;
+        return `${Config.SERVER_URL}/${this.state.userAvatar}`;
     }
 
-    getUserData() {
-        this.setState({ isLoaderPage: true });
-        ls.get('userToken').then((data) => {
-            return fetch('https://ale-demo-4550.nodechef.com/users/get-user-data', {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data
-                },
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                return this.setState({
-                    isTwoAuthActive: responseJson.isTwoAuth,
-                    isLoaderPage: false,
-                    fullName: responseJson.name,
-                    userEmail: responseJson.email,
-                    userAvatar: responseJson.avatar,
-                });
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+    async getUserData() {
+        const userToken = await ls.get('userToken');
+        if (!userToken) {
+            throw userToken
+        }
+
+        const params = {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': userToken
+            }
+        }
+
+        const response = await fetch(`${Config.SERVER_URL}/users/get-user-data`, params);
+        if (!response) {
+            throw response
+        }
+
+        const responseJson = await response.json();
+
+        await this.setStateAsync({
+            isTwoAuthActive: responseJson.isTwoAuth,
+            isLoaderPage: false,
+            fullName: responseJson.name,
+            userEmail: responseJson.email,
+            userAvatar: responseJson.avatar,
         });
     }
 
@@ -125,8 +137,14 @@ export default class SettingsScreen extends React.Component {
         })
     }
 
-    openWebView(url, title) {
-        this.props.navigation.navigate('WebView', { url: url, title: title });
+    openInApp(url, social) {
+        if (social === 'twitter') {
+            return Linking.openURL('https://www.twitter.com/alehub_io');
+        } else if (social === 'telegram') {
+            return Linking.openURL('https://www.t.me/alehub');
+        } else if (social === 'facebook') {
+            return Linking.openURL('https://www.facebook.com/n/alehub.io');
+        }
     }
 
     render() {
@@ -194,7 +212,7 @@ export default class SettingsScreen extends React.Component {
                         </View>
                         <TouchableOpacity
                             style={styles.listView}
-                            onPress={() => this.openWebView('https://twitter.com/alehub_io', 'Twitter')}
+                            onPress={() => this.openInApp('alehub_io', 'twitter')}
                         >
                             <Text style={styles.listViewTitle}>Twitter</Text>
                             <ImageSVG
@@ -204,7 +222,7 @@ export default class SettingsScreen extends React.Component {
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.listView}
-                            onPress={() => this.openWebView('https://t.me/alehub', 'Telegram Chat')}
+                            onPress={() => this.openInApp('alehub', 'telegram')}
                         >
                             <Text style={styles.listViewTitle}>Telegram Chat</Text>
                             <ImageSVG
@@ -214,7 +232,7 @@ export default class SettingsScreen extends React.Component {
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.listView}
-                            onPress={() => this.openWebView('https://www.facebook.com/alehub.io/', 'Facebook')}
+                            onPress={() => this.openInApp('alehub.io', 'facebook')}
                         >
                             <Text style={styles.listViewTitle}>Facebook</Text>
                             <ImageSVG
