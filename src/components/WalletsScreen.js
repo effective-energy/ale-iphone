@@ -63,64 +63,76 @@ export default class WalletsScreen extends React.Component {
     }
 
     async getUserWallets() {
-        const userToken = await ls.get('userToken');
-        if (!userToken) {
-            throw userToken
-        }
-
-        const params = {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': userToken
+        try {
+            const userToken = await ls.get('userToken');
+            if (!userToken) {
+                throw userToken
             }
+
+            const params = {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': userToken
+                }
+            }
+
+            const response = await fetch(`${Config.SERVER_URL}/users/user-wallets`, params);
+            if (!response) {
+                throw response
+            }
+
+            const responseJson = await response.json();
+
+            if (responseJson.length === 0) {
+                return this.props.navigation.push('NewWallet');
+            }
+
+            await this.setStateAsync({
+                walletsList: responseJson,
+            });
+
+            return this.getUserData().done();
+        } catch (error) {
+            console.log(error);
         }
-
-        const response = await fetch(`${Config.SERVER_URL}/users/user-wallets`, params);
-        if (!response) {
-            throw response
-        }
-
-        const responseJson = await response.json();
-
-        await this.setStateAsync({
-            walletsList: responseJson,
-        });
-
-        return this.getUserData().done();;
     }
 
     async getUserData() {
-        const userToken = await ls.get('userToken');
-        if (!userToken) {
-            throw userToken
-        }
-
-        const params = {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': userToken
+        try {
+            const userToken = await ls.get('userToken');
+            if (!userToken) {
+                throw userToken
             }
+
+            const params = {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': userToken
+                }
+            }
+
+            const response = await fetch(`${Config.SERVER_URL}/users/get-user-data`, params);
+            if (!response) {
+                throw response
+            }
+
+            const responseJson = await response.json();
+
+            await this.setStateAsync({
+                userData: {
+                    userEmail: responseJson.email,
+                    userName: responseJson.name,
+                    userAvatar: responseJson.avatar
+                },
+                isLoaderPage: false,
+            });
+        } catch (error) {
+            console.log(error);
         }
-
-        const response = await fetch(`${Config.SERVER_URL}/users/get-user-data`, params);
-        if (!response) {
-            throw response
-        }
-
-        const responseJson = await response.json();
-
-        await this.setStateAsync({
-            userData: {
-                userEmail: responseJson.email,
-                userName: responseJson.name,
-                userAvatar: responseJson.avatar
-            },
-            isLoaderPage: false,
-        });
     }
 
     changePage(e) {
@@ -150,34 +162,38 @@ export default class WalletsScreen extends React.Component {
     }
 
     async refreshWallets() {
-        await this.setStateAsync({
-            isRefreshShow: true,
-        });
+        try {
+            await this.setStateAsync({
+                isRefreshShow: true,
+            });
 
-        const userToken = await ls.get('userToken');
-        if (!userToken) {
-            throw userToken
-        }
-
-        const params = {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': userToken
+            const userToken = await ls.get('userToken');
+            if (!userToken) {
+                throw userToken
             }
-        }
 
-        const response = await fetch(`${Config.SERVER_URL}/users/user-wallets`, params);
-        if (!response) {
-            throw response
-        }
+            const params = {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': userToken
+                }
+            }
 
-        const responseJson = await response.json();
-        await this.setStateAsync({
-            walletsList: responseJson,
-            isRefreshShow: false
-        });
+            const response = await fetch(`${Config.SERVER_URL}/users/user-wallets`, params);
+            if (!response) {
+                throw response
+            }
+
+            const responseJson = await response.json();
+            await this.setStateAsync({
+                walletsList: responseJson,
+                isRefreshShow: false
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     render() {
