@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet, Dimensions, Platform, Image, StatusBar, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 import ls from 'react-native-local-storage';
 
+import Config from '../config';
+
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
     return Math.round(value);
@@ -26,10 +28,10 @@ export default class SendMoneyScreen extends React.Component {
     static navigationOptions = {
         title: 'Send money',
         headerTitleStyle: {
-            color: '#000000'
+            color: '#ffbb00'
         },
         headerStyle: {
-            backgroundColor: '#e7ebee'
+            backgroundColor: '#08142F'
         },
         headerTintColor: '#ffbb00',
     };
@@ -102,32 +104,32 @@ export default class SendMoneyScreen extends React.Component {
             		<View>
                         <TextInput
                             placeholder="Amount"
-                            placeholderTextColor="#000000"
-                            style={{height: 40, width: screenWidth, marginBottom: 20, padding: 6, color: '#000000', borderBottomColor: '#000000', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
+                            placeholderTextColor="#455578"
+                            style={styles.text_input}
                             onChangeText={(amount) => this.setState({amount})}
                             value={this.state.amount}
                             keyboardType = 'numeric'
                         />
                         <TextInput
                             placeholder="Address destination"
-                            placeholderTextColor="#000000"
-                            style={{height: 40, width: screenWidth, marginBottom: 20, padding: 6, color: '#000000', borderBottomColor: '#000000', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
+                            placeholderTextColor="#455578"
+                            style={styles.text_input}
                             onChangeText={(destinationAddress) => this.setState({destinationAddress})}
                             value={this.state.destinationAddress}
                         />
                     </View>
                     <TouchableOpacity
                         onPress={this.sendMoney}
-                        style={{ backgroundColor: '#cfd8de', width: screenWidth, padding: 10, borderRadius: 10 }}
+                        style={{ backgroundColor: '#16203a', width: screenWidth, padding: 10, borderRadius: 10 }}
                     >
-                        <Text style={{ color: '#000000', textAlign: 'center', fontSize: 18 }}>Send</Text>
+                        <Text style={{ color: '#f0b721', textAlign: 'center', fontSize: wp(5), fontWeight: 'bold' }}>Send</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
                         onPress={this.scanQRCode}
                         style={{ backgroundColor: '#ffbb00', width: screenWidth, padding: 10, borderRadius: 10, marginTop: 20 }}
                     >
-                        <Text style={{ color: '#000000', textAlign: 'center', fontSize: 18 }}>Scan QRCode</Text>
+                        <Text style={{ color: '#000000', textAlign: 'center', fontSize: wp(5), fontWeight: 'bold' }}>Scan QRCode</Text>
                     </TouchableOpacity>
             	</View>
             </View>
@@ -138,27 +140,20 @@ export default class SendMoneyScreen extends React.Component {
 const styles = StyleSheet.create({
     pageContainer: {
         flex: 1,
-        backgroundColor: '#e7ebee',
+        backgroundColor: '#08142F',
         alignItems: 'center',
         paddingTop: 50
     },
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: 'black'
-      },
-      preview: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'center'
-      },
-      capture: {
-        flex: 0,
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        padding: 15,
-        paddingHorizontal: 20,
-        alignSelf: 'center',
-        margin: 20
-      }
+    text_input: {
+        height: 40,
+        width: screenWidth,
+        marginBottom: 20,
+        padding: 6,
+        color: '#455578',
+        borderBottomColor: '#455578',
+        borderBottomWidth: 1,
+        borderTopColor: 'transparent',
+        borderLeftColor: 'transparent',
+        borderRightColor: 'transparent'
+    }
 });

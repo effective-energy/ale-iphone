@@ -45,27 +45,27 @@ export default class NewWalletScreen extends React.Component {
     render() {
         return (
             <View
-                style={{ flex: 1, backgroundColor: '#08142F', alignItems: 'center', justifyContent: 'space-between', paddingTop: 30, paddingBottom: 30 }}
+                style={styles.pageContainer}
             >
                 <StatusBar barStyle='light-content' />
                 <View>
                     <TextInput
                         placeholder="Wallet name"
                         placeholderTextColor="#455578"
-                        style={{height: 40, borderWidth: 1, width: wp(80), marginBottom: 20, borderRadius: 2, padding: 6, color: '#455578', borderBottomColor: '#455578', borderBottomWidth: 1, fontSize: 18, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
+                        style={styles.new_wallet_input}
                         onChangeText={(newWalletName) => this.setState({newWalletName})}
                         value={this.state.newWalletName}
                     />
                     <TouchableOpacity
                         onPress={this.createNewWallet}
-                        style={{backgroundColor: '#16203a', width: wp(80), borderRadius: 10, padding: 12, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}
+                        style={styles.new_wallet_button}
                     >
                         <Image
-                            style={{width: wp(7), height: wp(7), marginRight: 10}}
+                            style={styles.new_wallet_button_icon}
                             source={require('../assets/images/icons/icon_new-wallet.svg')}
                         />
                         <Text
-                            style={{color: '#f0b721', fontSize: 18, fontWeight: 'bold', textAlign: 'center'}}
+                            style={styles.new_wallet_button_text}
                         >
                             Create wallet
                         </Text>
@@ -75,14 +75,14 @@ export default class NewWalletScreen extends React.Component {
                 <View>
                     <TouchableOpacity
                         onPress={this.restoreWallet}
-                        style={{ backgroundColor: '#ffbb00', width: wp(80), padding: 5, borderRadius: 15, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
+                        style={styles.restore_wallet_block}
                     >
                         <Image
                             source={require('../assets/images/icons/icon_restore-wallet.svg')}
-                            style={{width: 30, height: 30, marginRight: 10 }}
+                            style={styles.restore_wallet_block_icon}
                         />
                         <Text
-                            style={{ color: '#000000', fontSize: 18}}
+                            style={styles.restore_wallet_block_text}
                         >
                             Restore wallet
                         </Text>
@@ -93,4 +93,68 @@ export default class NewWalletScreen extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    pageContainer: {
+        flex: 1,
+        backgroundColor: '#08142F',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingTop: 30,
+        paddingBottom: 30
+    },
+    new_wallet_input: {
+        height: 40,
+        borderWidth: 1,
+        width: wp(80),
+        marginBottom: 20,
+        borderRadius: 2,
+        padding: 6,
+        color: '#455578',
+        borderBottomColor: '#455578',
+        borderBottomWidth: 1,
+        fontSize: 18,
+        borderTopColor: 'transparent',
+        borderLeftColor: 'transparent',
+        borderRightColor: 'transparent'
+    },
+    new_wallet_button: {
+        backgroundColor: '#16203a',
+        width: wp(80),
+        borderRadius: 10,
+        padding: 12,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    new_wallet_button_icon: {
+        width: wp(7),
+        height: wp(7),
+        marginRight: 10
+    },
+    new_wallet_button_text: {
+        color: '#f0b721',
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    restore_wallet_block: {
+        backgroundColor: '#ffbb00',
+        width: wp(80),
+        padding: 5,
+        borderRadius: 15,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    restore_wallet_block_icon: {
+        width: 30,
+        height: 30,
+        marginRight: 10
+    },
+    restore_wallet_block_text: {
+        color: '#000000',
+        fontSize: 18
+    }
+});
