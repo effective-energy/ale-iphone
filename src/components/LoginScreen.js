@@ -119,7 +119,7 @@ export default class LoginScreen extends React.Component {
 						<TextInput
 							placeholder="Enter your email"
 							placeholderTextColor="#455578"
-                            style={{height: 40, borderWidth: 1, width: screenWidth, marginBottom: 20, padding: 6, color: '#455578', borderBottomColor: '#455578', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', fontSize: 16 }}
+                            style={styles.emailInput}
                             onChangeText={(userEmail) => this.setState({userEmail})}
                             value={this.state.userEmail}
                         />
@@ -127,20 +127,20 @@ export default class LoginScreen extends React.Component {
                         	secureTextEntry={true}
                         	placeholder="Enter your password"
                         	placeholderTextColor="#455578"
-                            style={{height: 40, borderWidth: 1, width: screenWidth, marginBottom: 25, padding: 6, color: '#455578', borderBottomColor: '#455578', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', fontSize: 16 }}
+                            style={styles.passwordInput}
                             onChangeText={(userPassword) => this.setState({userPassword})}
                             value={this.state.userPassword}
                         />
 					</View>
 					<TouchableOpacity
-						style={{ backgroundColor: '#152038', width: screenWidth, padding: 10, borderRadius: 15, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
+						style={styles.loginButton}
 						onPress={this.loginToWallet}
 					>
 						<Image
                             source={require('../assets/images/icons/icon_login-icon.svg')}
-                            style={{width: 20, height: 20, marginRight: 10 }}
+                            style={styles.loginIcon}
                         />
-						<Text style={{ color: '#ffbb00', textAlign: 'center', fontSize: 18 }}>Login to wallet</Text>
+						<Text style={styles.loginText}>Login to wallet</Text>
 					</TouchableOpacity>
 
 					{
@@ -149,23 +149,23 @@ export default class LoginScreen extends React.Component {
 							: null
 					}
 				</View>
-				<View style={{ width: wp(80) }}>
-					<View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-						<Text style={{ color: '#34476f' }}>Forgot your email or password?</Text>
+				<View style={styles.bottomInfo}>
+					<View style={styles.bottomInfo_recover}>
+						<Text style={styles.bottomInfo_recover_text}>Forgot your email or password?</Text>
 						<TouchableOpacity
 							onPress={this.recoverAccount}
-							style={{ marginLeft: 10 }}
+							style={styles.bottomInfo_recover_link}
 						>
-							<Text style={{ color: '#ffbb00' }}>Recover account</Text>
+							<Text style={styles.bottomInfo_recover_link_text}>Recover account</Text>
 						</TouchableOpacity>
 					</View>
-					<View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
-						<Text style={{ color: '#34476f' }}>Don't have an account?</Text>
+					<View style={styles.bottomInfo_register}>
+						<Text style={styles.bottomInfo_register_text}>Don't have an account?</Text>
 						<TouchableOpacity
 							onPress={this.createAccount}
-							style={{ marginLeft: 10 }}
+							style={styles.bottomInfo_register_link}
 						>
-							<Text style={{ color: '#ffbb00' }}>Create one</Text>
+							<Text style={styles.bottomInfo_register_link_text}>Create one</Text>
 						</TouchableOpacity>
 					</View>
 				</View>
@@ -194,5 +194,85 @@ const styles = StyleSheet.create({
 		maxWidth: '80%',
 		display: 'flex',
 		alignItems: 'center'
-	}
+	},
+    emailInput: {
+        height: 40,
+        borderWidth: 1,
+        width: screenWidth,
+        marginBottom: 20,
+        padding: 6,
+        color: '#455578',
+        borderBottomColor: '#455578',
+        borderBottomWidth: 1,
+        borderTopColor: 'transparent',
+        borderLeftColor: 'transparent',
+        borderRightColor: 'transparent',
+        fontSize: 16
+    },
+    passwordInput: {
+        height: 40,
+        borderWidth: 1,
+        width: screenWidth,
+        marginBottom: 25,
+        padding: 6,
+        color: '#455578',
+        borderBottomColor: '#455578',
+        borderBottomWidth: 1,
+        borderTopColor: 'transparent',
+        borderLeftColor: 'transparent',
+        borderRightColor: 'transparent',
+        fontSize: 16
+    },
+    loginButton: {
+        backgroundColor: '#152038',
+        width: screenWidth,
+        padding: 10,
+        borderRadius: 15,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    loginIcon: {
+        width: 20,
+        height: 20,
+        marginRight: 10
+    },
+    loginText: {
+        color: '#ffbb00',
+        textAlign: 'center',
+        fontSize: 18
+    },
+    bottomInfo: {
+        width: wp(80)
+    },
+    bottomInfo_recover: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    bottomInfo_recover_text: {
+        color: '#34476f'
+    },
+    bottomInfo_recover_link: {
+        marginLeft: 10
+    },
+    bottomInfo_recover_link_text: {
+        color: '#ffbb00'
+    },
+    bottomInfo_register: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: 10
+    },
+    bottomInfo_register_text: {
+        color: '#34476f'
+    },
+    bottomInfo_register_link: {
+        marginLeft: 10
+    },
+    bottomInfo_register_link_text: {
+        color: '#ffbb00'
+    }
 });

@@ -51,8 +51,8 @@ export default class NewWalletScreen extends React.Component {
                 <View>
                     <TextInput
                         placeholder="Wallet name"
-                        placeholderTextColor="#ffffff"
-                        style={{height: 40, borderWidth: 1, width: wp(80), marginBottom: 20, borderRadius: 2, padding: 6, color: '#ffffff', borderBottomColor: '#ffffff', borderBottomWidth: 1, fontSize: 18, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
+                        placeholderTextColor="#455578"
+                        style={{height: 40, borderWidth: 1, width: wp(80), marginBottom: 20, borderRadius: 2, padding: 6, color: '#455578', borderBottomColor: '#455578', borderBottomWidth: 1, fontSize: 18, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
                         onChangeText={(newWalletName) => this.setState({newWalletName})}
                         value={this.state.newWalletName}
                     />
