@@ -10,9 +10,12 @@ export default class EditAccountScreen extends React.Component {
 
         this.setAvatar = this.setAvatar.bind(this);
     }
-    
-    static navigationOptions = {
-        title: 'Edit account'
+
+    static navigationOptions = ({navigation}) => {
+        const {params = {}} = navigation.state;
+        return {
+            title: 'Edit account data',
+        };
     };
 
     setAvatar(avatar) {
@@ -40,8 +43,8 @@ export default class EditAccountScreen extends React.Component {
 
     render() {
         return (
-            <View>
-                <PhotoUpload
+            <View style={styles.pageContainer}>
+                {/*<PhotoUpload
                     onPhotoSelect={avatar => {
                         if (avatar) {
                             this.setAvatar(avatar)
@@ -60,10 +63,15 @@ export default class EditAccountScreen extends React.Component {
                             uri: 'https://ale-demo-4550.nodechef.com/assets/9dd0578525ef3e4f2c8185ec169ebed365292c6d6d61848513d7e5c830a929b0%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202018-07-06%20%D0%B2%2022.23.50.png'
                         }}
                     />
-                </PhotoUpload>  
+                </PhotoUpload> */} 
             </View>
         );
     }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    pageContainer: {
+        flex: 1,
+        backgroundColor: '#e8ebee',
+    }
+});

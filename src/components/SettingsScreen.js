@@ -35,7 +35,6 @@ export default class SettingsScreen extends React.Component {
         this.changeLanguage = this.changeLanguage.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
         this.changePassword = this.changePassword.bind(this);
-        this.openEditAccountScreen = this.openEditAccountScreen.bind(this);
         this.shareApp = this.shareApp.bind(this);
         this.openInApp = this.openInApp.bind(this);
     }
@@ -46,6 +45,13 @@ export default class SettingsScreen extends React.Component {
             title: I18n.t('pages.settings.title'),
             headerLeft: null,
             gesturesEnabled: false,
+            headerRight:
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('EditAccount')}
+                    style={{marginRight: 20}}
+                >
+                    <Text style={{ fontSize: 16 }}>Edit</Text>    
+                </TouchableOpacity>
         };
     };
 
@@ -120,10 +126,6 @@ export default class SettingsScreen extends React.Component {
         this.props.navigation.navigate('ChangeLanguage');
     }
 
-    openEditAccountScreen() {
-        this.props.navigation.navigate('EditAccount');
-    }
-
     shareApp() {
         Share.share({
             message: 'Alehub wallet',
@@ -159,21 +161,22 @@ export default class SettingsScreen extends React.Component {
                     contentInset={{bottom:80}}
                     automaticallyAdjustContentInsets={false}
                 >
-                    <TouchableOpacity
-                        onPress={this.openEditAccountScreen}
+                    <View
                         style={{ marginTop: 1, backgroundColor: '#FFFFFF', width: wp(100), padding: 15, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
                     >
                         <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                            <Image
+                            { this.state.userAvatar === '' ? <View style={{width: 60, height: 60, borderRadius: 30, backgroundColor: '#CCCCCC', alignItems: 'center', display: 'flex', justifyContent: 'center', marginBottom: 10}}>
+                                <Text style={{ color: '#FFFFFF', textAlign: 'center', fontSize: 30, fontWeight: 'bold' }}>{this.state.fullName.substr(0, 2).toUpperCase()}</Text>
+                            </View> : <Image
                                 style={{ width: 60, height: 60, borderRadius: 30, resizeMode: 'cover', marginBottom: 10 }}
                                 source={{uri: this.getUserAvatar()}}
-                            />
+                            />}
                             <View>
                                 <Text style={{ fontSize: 24, textAlign: 'center' }}>{this.state.fullName}</Text>
                                 <Text style={{ fontSize: 18, textAlign: 'center' }}>{this.state.userEmail}</Text>
                             </View>
                         </View>
-                    </TouchableOpacity>
+                    </View>
 
                     <View style={{ marginTop: 40, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp(100), backgroundColor: '#ffffff', paddingRight: 15, paddingLeft: 15, paddingTop: 12, paddingBottom: 12 }}>
                         <Text style={styles.listViewTitle}>{I18n.t('pages.settings.two_auth.enable')}</Text>
@@ -248,10 +251,6 @@ export default class SettingsScreen extends React.Component {
                             onPress={this.shareApp}
                         >
                             <Text style={styles.listViewTitle}>Share With Friends</Text>
-                            <ImageSVG
-                                source={require('../assets/images/icons/icon_small-arrow-right.svg')}
-                                style={styles.listViewImage}
-                            />
                         </TouchableOpacity>
                     </View>
 
