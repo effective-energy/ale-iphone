@@ -16,6 +16,16 @@ function wp (percentage) {
 
 const { width: viewportWidth } = Dimensions.get('window');
 
+class EmptyNotifications extends React.Component {
+  render() {
+    return (
+        <View style={{ marginTop: 20 }}>
+            <Text style={{ fontSize: 18 }}>Notifications not found</Text>
+        </View>
+    );
+  }
+}
+
 export default class NotificationsScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -128,13 +138,14 @@ export default class NotificationsScreen extends React.Component {
         }];
 
         let notifications = this.state.notificationsList.map(function (el, i) {
+            let rightButtons = [{
+                text: 'Delete',
+                backgroundColor: 'red',
+                onPress: () => this.removeNotification(el._id, i)
+            }]
             return (
                 <Swipeout
-                    right={[{
-                        text: 'Delete',
-                        backgroundColor: 'red',
-                        onPress: () => this.removeNotification(el._id, i)
-                    }]}
+                    right={rightButtons}
                     key={i}
                     backgroundColor="#FFFFFF"
                     style={{ width: wp(100), marginTop: 20 }}
@@ -165,7 +176,7 @@ export default class NotificationsScreen extends React.Component {
                     }
                 >
                     <View style={{ width: wp(100), display: 'flex', alignItems: 'center' }}>
-                        {notifications}
+                        {this.state.notificationsList.length !== 0 ? notifications : <EmptyNotifications />}
                     </View>
                 </ScrollView>
                 <BottomNavigator
