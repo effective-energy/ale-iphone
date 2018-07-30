@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, StatusBar, TextInput, Dimensions, TouchableOpacity, Alert } from 'react-native';
 import ls from 'react-native-local-storage';
+import SVGImage from 'react-native-remote-svg';
+
 import Config from '../config';
 
 function wp (percentage) {
@@ -104,22 +106,21 @@ export default class CreateAccountScreen extends React.Component {
     }
 
     render() {
-        const { params } = this.props.navigation.state;
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='light-content' />
-                <View style={{ marginTop: 20 }}>
+                <View>
                     <TextInput
                         placeholder="Full name"
                         placeholderTextColor="#455578"
-                        style={styles.input_text}
+                        style={styles.textInput}
                         onChangeText={(fullName) => this.setState({fullName})}
                         value={this.state.fullName}
                     />
                     <TextInput
                         placeholder="E-mail"
                         placeholderTextColor="#455578"
-                        style={styles.input_text}
+                        style={styles.textInput}
                         onChangeText={(email) => this.setState({email})}
                         value={this.state.email}
                     />
@@ -127,7 +128,7 @@ export default class CreateAccountScreen extends React.Component {
                         secureTextEntry={true}
                         placeholder="Password"
                         placeholderTextColor="#455578"
-                        style={styles.input_text}
+                        style={styles.textInput}
                         onChangeText={(password) => this.setState({password})}
                         value={this.state.password}
                     />
@@ -135,28 +136,36 @@ export default class CreateAccountScreen extends React.Component {
                         secureTextEntry={true}
                         placeholder="Repeat password"
                         placeholderTextColor="#455578"
-                        style={styles.input_text}
+                        style={styles.textInput}
                         onChangeText={(repeatPassword) => this.setState({repeatPassword})}
                         value={this.state.repeatPassword}
                     />
+                    <TouchableOpacity
+                        style={styles.buttonBlock}
+                        onPress={this.createAccount}
+                    >
+                        <SVGImage
+                            source={require('../assets/images/icons/plus-icon.svg')}
+                            style={styles.buttonBlock_icon}
+                        />
+                        <Text
+                            style={styles.buttonBlock_text}
+                        >
+                            Create account
+                        </Text>
+                    </TouchableOpacity>
                 </View>
 
                 <TouchableOpacity
-                    style={{ backgroundColor: '#152038', width: wp(80), padding: 15, borderRadius: 20, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
-                    onPress={this.createAccount}
+                    style={styles.buttonBlock}
+                    onPress={this.backToLoginPage.bind(this)}
                 >
-                    <Text style={{ color: '#ffbb00', textAlign: 'center', fontSize: 16 }}>Create account</Text>
+                    <SVGImage
+                        source={require('../assets/images/icons/icon_login-icon.svg')}
+                        style={styles.buttonBlock_icon}
+                    />
+                    <Text style={styles.buttonBlock_text}>Log in to account</Text>
                 </TouchableOpacity>
-
-                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 20 }}>
-                    <Text style={{ color: '#34476f' }}>Already have an account?</Text>
-                    <TouchableOpacity
-                        style={{ marginLeft: 10 }}
-                        onPress={this.backToLoginPage}
-                    >
-                        <Text style={{ color: '#ffbb00' }}>Log in</Text>
-                    </TouchableOpacity>
-                </View>
             </View>
         );
     }
@@ -165,14 +174,17 @@ export default class CreateAccountScreen extends React.Component {
 const styles = StyleSheet.create({
     pageContainer: {
         flex: 1,
-        backgroundColor: '#07132f',
-        alignItems: 'center'
+        backgroundColor: '#08142F',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingTop: 20,
+        paddingBottom: 20,
     },
-    input_text: {
+    textInput: {
         height: 40,
         borderWidth: 1,
         width: wp(80),
-        marginBottom: 30,
+        marginBottom: 20,
         padding: 6,
         color: '#455578',
         borderBottomColor: '#455578',
@@ -181,5 +193,25 @@ const styles = StyleSheet.create({
         borderLeftColor: 'transparent',
         borderRightColor: 'transparent',
         fontSize: 16
+    },
+    buttonBlock: {
+        backgroundColor: '#152038',
+        width: wp(80),
+        padding: 10,
+        borderRadius: 10,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'   
+    },
+    buttonBlock_text: {
+        color: '#ffbb00',
+        textAlign: 'center',
+        fontSize: 16
+    },
+    buttonBlock_icon: {
+        width: 20,
+        height: 20,
+        marginRight: 10
     }
 });

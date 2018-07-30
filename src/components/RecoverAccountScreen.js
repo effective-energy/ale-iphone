@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, StatusBar, TouchableOpacity, TextInput, Dimensions, Alert } from 'react-native';
+import SVGImage from 'react-native-remote-svg';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -7,7 +8,6 @@ function wp (percentage) {
 }
 
 const { width: viewportWidth } = Dimensions.get('window');
-let screenWidth = wp(80);
 
 function validateEmail(email)  {
     let re = /\S+@\S+\.\S+/;
@@ -20,9 +20,6 @@ export default class RecoverAccountScreen extends React.Component {
         this.state = {
             recoverEmail: ''
         };
-
-        this.loginToAccount = this.loginToAccount.bind(this);
-        this.sendLink = this.sendLink.bind(this);
     }
     
     static navigationOptions = {
@@ -69,42 +66,90 @@ export default class RecoverAccountScreen extends React.Component {
     }
 
     render() {
-        const { params } = this.props.navigation.state;
         return (
             <View
-                style={{ flex: 1, backgroundColor: '#08142F', alignItems: 'center', justifyContent: 'space-between', paddingTop: 30, paddingBottom: 30 }}
+                style={styles.pageContainer}
             >
-                <StatusBar barStyle='light-content' />
+                <StatusBar
+                    barStyle='light-content'
+                />
                 <View>
-                    <View>
-                        <TextInput
-                            placeholder="Enter your email"
-                            placeholderTextColor="#455578"
-                            style={{height: 40, borderColor: 'gray', borderWidth: 1, width: screenWidth, marginBottom: 20, borderRadius: 2, padding: 6, color: '#455578', borderBottomColor: '#455578', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
-                            onChangeText={(recoverEmail) => this.setState({recoverEmail})}
-                            value={this.state.recoverEmail}
-                        />
-                    </View>
-                    <View style={{ backgroundColor: '#152038', width: screenWidth, padding: 5, borderRadius: 15 }}>
-                        <Button
-                            title="Send link to recover"
-                            onPress={this.sendLink}
-                            color="#ffbb00"
-                        />
-                    </View>
-                </View>
-                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
-                    <Text style={{ color: '#34476f' }}>Already have an account?</Text>
+                    <TextInput
+                        placeholder="Enter your email"
+                        placeholderTextColor="#455578"
+                        style={styles.textInput}
+                        onChangeText={(recoverEmail) => this.setState({recoverEmail})}
+                        value={this.state.recoverEmail}
+                    />
                     <TouchableOpacity
-                        onPress={this.loginToAccount}
-                        style={{ marginLeft: 10 }}
+                        style={styles.buttonBlock}
+                        onPress={this.sendLink.bind(this)}
                     >
-                        <Text style={{ color: '#ffbb00' }}>Log in</Text>
+                        <SVGImage
+                            source={require('../assets/images/icons/mail-icon.svg')}
+                            style={styles.buttonBlock_icon}
+                        />
+                        <Text style={styles.buttonBlock_text}>Send link to recover</Text>
                     </TouchableOpacity>
                 </View>
+                <TouchableOpacity
+                    style={styles.buttonBlock}
+                    onPress={this.loginToAccount.bind(this)}
+                >
+                    <SVGImage
+                        source={require('../assets/images/icons/icon_login-icon.svg')}
+                        style={styles.buttonBlock_icon}
+                    />
+                    <Text style={styles.buttonBlock_text}>Log in to account</Text>
+                </TouchableOpacity>
             </View>
         );
     }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    pageContainer: {
+        flex: 1,
+        backgroundColor: '#08142F',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingTop: 20,
+        paddingBottom: 20,
+    },
+    textInput: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        width: wp(80),
+        marginBottom: 20,
+        borderRadius: 2,
+        padding: 6,
+        color: '#455578',
+        borderBottomColor: '#455578',
+        borderBottomWidth: 1,
+        borderTopColor: 'transparent',
+        borderLeftColor: 'transparent',
+        borderRightColor: 'transparent',
+        fontSize: 16
+    },
+    buttonBlock: {
+        backgroundColor: '#152038',
+        width: wp(80),
+        padding: 10,
+        borderRadius: 10,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'   
+    },
+    buttonBlock_text: {
+        color: '#ffbb00',
+        textAlign: 'center',
+        fontSize: 16
+    },
+    buttonBlock_icon: {
+        width: 20,
+        height: 20,
+        marginRight: 10
+    }
+});

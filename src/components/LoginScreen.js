@@ -4,8 +4,6 @@ import { StyleSheet, Text, View, Button, Alert, Dimensions, TextInput, StatusBar
 import Image from 'react-native-remote-svg';
 
 import ls from 'react-native-local-storage';
-import Pageloader from './layouts/Pageloader';
-import Spinner from './layouts/Spinner';
 
 // I18n 
 import I18n from '../i18n/index';
@@ -117,7 +115,7 @@ export default class LoginScreen extends React.Component {
 				<View>
 					<View>
 						<TextInput
-							placeholder="Enter your email"
+							placeholder="Your E-mail"
 							placeholderTextColor="#455578"
                             style={styles.emailInput}
                             onChangeText={(userEmail) => this.setState({userEmail})}
@@ -125,7 +123,7 @@ export default class LoginScreen extends React.Component {
                         />
                         <TextInput
                         	secureTextEntry={true}
-                        	placeholder="Enter your password"
+                        	placeholder="Your password"
                         	placeholderTextColor="#455578"
                             style={styles.passwordInput}
                             onChangeText={(userPassword) => this.setState({userPassword})}
@@ -150,24 +148,30 @@ export default class LoginScreen extends React.Component {
 					}
 				</View>
 				<View style={styles.bottomInfo}>
-					<View style={styles.bottomInfo_recover}>
-						<Text style={styles.bottomInfo_recover_text}>Forgot your email or password?</Text>
-						<TouchableOpacity
-							onPress={this.recoverAccount}
-							style={styles.bottomInfo_recover_link}
-						>
-							<Text style={styles.bottomInfo_recover_link_text}>Recover account</Text>
-						</TouchableOpacity>
-					</View>
-					<View style={styles.bottomInfo_register}>
-						<Text style={styles.bottomInfo_register_text}>Don't have an account?</Text>
-						<TouchableOpacity
-							onPress={this.createAccount}
-							style={styles.bottomInfo_register_link}
-						>
-							<Text style={styles.bottomInfo_register_link_text}>Create one</Text>
-						</TouchableOpacity>
-					</View>
+                    <TouchableOpacity
+                        onPress={this.createAccount}
+                        style={[styles.loginButton, {marginBottom: 10}]}
+                    >
+                        <Image
+                            source={require('../assets/images/icons/plus-icon.svg')}
+                            style={{width: 20, height: 20, marginRight: 10}}
+                        />
+                        <Text
+                            style={{color: '#ffbb00', textAlign: 'center', fontSize: 18}}
+                        >Create account</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={this.recoverAccount}
+                        style={styles.loginButton}
+                    >
+                        <Image
+                            source={require('../assets/images/icons/recover-icon.svg')}
+                            style={{width: 20, height: 20, marginRight: 10}}
+                        />
+                        <Text
+                            style={{color: '#ffbb00', textAlign: 'center', fontSize: 18}}
+                        >Recover account</Text>
+                    </TouchableOpacity>
 				</View>
 	        </View>
 	    );
@@ -198,7 +202,7 @@ const styles = StyleSheet.create({
     emailInput: {
         height: 40,
         borderWidth: 1,
-        width: screenWidth,
+        width: wp(80),
         marginBottom: 20,
         padding: 6,
         color: '#455578',
@@ -212,7 +216,7 @@ const styles = StyleSheet.create({
     passwordInput: {
         height: 40,
         borderWidth: 1,
-        width: screenWidth,
+        width: wp(80),
         marginBottom: 25,
         padding: 6,
         color: '#455578',
@@ -225,9 +229,9 @@ const styles = StyleSheet.create({
     },
     loginButton: {
         backgroundColor: '#152038',
-        width: screenWidth,
+        width: wp(80),
         padding: 10,
-        borderRadius: 15,
+        borderRadius: 10,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
