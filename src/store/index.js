@@ -1,5 +1,9 @@
-import CounterStore from "./CounterStore";
+import WalletsStore from './WalletsStore';
+import UserStore from './UserStore';
+import SystemStore from './SystemStore';
 
 export default {
-  counterStore: new CounterStore()
+  walletsStore: new WalletsStore(),
+  userStore: new UserStore(),
+  systemStore: new SystemStore(),
 };
