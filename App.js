@@ -2,7 +2,7 @@ import React from 'react';
 
 import { createStackNavigator } from 'react-navigation';
 import { NavigatorIOS, YellowBox, Alert, NetInfo, StyleSheet, View, Text } from 'react-native';
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader'], ['Class RCTCxxModule']);
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader', 'Warning']);
 
 import ls from 'react-native-local-storage';
 
@@ -34,17 +34,6 @@ import SendMoneyScreen from './src/components/SendMoneyScreen';
 import CameraScreen from './src/components/CameraScreen';
 import EditAccountScreen from './src/components/EditAccountScreen';
 import WebViewScreen from './src/components/WebViewScreen';
-
-const initialRouteName = () => {
-    return 'Login';
-    ls.get('userToken').then((data) => {
-        if (data !== null) {
-            return 'Wallets';
-        } else {
-            return 'Login';
-        }
-    });
-}
 
 const transitionConfig = () => {
   return {
@@ -119,7 +108,7 @@ const RootStack = createStackNavigator({
         screen: WebViewScreen,
     },
 }, {
-    initialRouteName: initialRouteName(),
+    initialRouteName: 'Login',
     transitionConfig,
 });
 

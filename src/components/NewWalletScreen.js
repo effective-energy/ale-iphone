@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#16203a',
         width: wp(80),
         borderRadius: 10,
-        padding: 12,
+        padding: 10,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
@@ -142,16 +142,16 @@ const styles = StyleSheet.create({
     restore_wallet_block: {
         backgroundColor: '#ffbb00',
         width: wp(80),
-        padding: 5,
-        borderRadius: 15,
+        padding: 10,
+        borderRadius: 10,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center'
     },
     restore_wallet_block_icon: {
-        width: 30,
-        height: 30,
+        width: 20,
+        height: 20,
         marginRight: 10
     },
     restore_wallet_block_text: {

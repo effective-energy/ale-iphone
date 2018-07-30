@@ -127,9 +127,17 @@ export default class SendMoneyScreen extends React.Component {
                     </View>
                     <TouchableOpacity
                         onPress={this.sendMoney}
-                        style={{ backgroundColor: '#16203a', width: screenWidth, padding: 10, borderRadius: 10 }}
+                        style={{ backgroundColor: '#16203a', width: screenWidth, padding: 10, borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
                     >
-                        <Text style={{ color: '#f0b721', textAlign: 'center', fontSize: wp(5), fontWeight: 'bold' }}>Send</Text>
+                        <SVGImage
+                            source={require('../assets/images/icons/sent-icon.svg')}
+                            style={{width: 20, height: 20, marginRight: 10}}
+                        />
+                        <Text
+                            style={{ color: '#f0b721', textAlign: 'center', fontSize: 18 }}
+                        >
+                            Send
+                        </Text>
                     </TouchableOpacity>
             	</View>
             </View>
@@ -141,8 +149,7 @@ const styles = StyleSheet.create({
     pageContainer: {
         flex: 1,
         backgroundColor: '#08142F',
-        alignItems: 'center',
-        paddingTop: 50
+        alignItems: 'center'
     },
     text_input: {
         height: 40,

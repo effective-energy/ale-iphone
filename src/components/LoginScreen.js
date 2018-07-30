@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert, Dimensions, TextInput, StatusBar, TouchableOpacity, ActivityIndicator } from 'react-native';
-
-import Image from 'react-native-remote-svg';
+import { observer, inject } from "mobx-react";
+import { when } from "mobx";
+import SVGImage from 'react-native-remote-svg';
 
 import ls from 'react-native-local-storage';
 
@@ -21,6 +22,8 @@ function validateEmail(email) {
 const { width: viewportWidth } = Dimensions.get('window');
 let screenWidth = wp(80);
 
+@inject("userStore")
+@observer
 export default class LoginScreen extends React.Component {
 	constructor(props) {
 		super(props);
@@ -29,10 +32,6 @@ export default class LoginScreen extends React.Component {
 			userEmail: '',
 			userPassword: '',
 		};
-
-		this.loginToWallet = this.loginToWallet.bind(this);
-		this.createAccount = this.createAccount.bind(this);
-		this.recoverAccount = this.recoverAccount.bind(this);
 	}
 
 	static navigationOptions = {
@@ -40,16 +39,20 @@ export default class LoginScreen extends React.Component {
     };
 
     componentDidMount() {
-    	this.initWallets();
+        this.initWallets();
     }
 
     initWallets() {
-    	ls.get('userToken').then((result) => {
-    		if (result !== null) {
-    			return this.props.navigation.push('Wallets');
-    		}
-    	})
+        ls.get('userToken').then((result) => {
+            if (result !== null) {
+                return this.props.navigation.push('Wallets');
+            }
+        })
     }
+
+    watcher = when(() => this.props.userStore.isLogin === true, () => {
+        this.props.navigation.push('Wallets');
+    });
 
     loginToWallet() {
     	if (this.state.userEmail.length === 0) {
@@ -64,34 +67,10 @@ export default class LoginScreen extends React.Component {
     		return Alert.alert('Enter your password');
     	}
 
-    	this.setState({isPageLoader: true});
-
-    	return fetch('https://ale-demo-4550.nodechef.com/users/login', {
-    		method: 'POST',
-    		headers: {
-    			'Accept': 'application/json',
-    			'Content-Type': 'application/json',
-    		},
-    		body: JSON.stringify({
-    			email: this.state.userEmail.toLowerCase(),
-    			password: this.state.userPassword
-    		}),
-    	})
-    	.then((response) => response.json())
-    	.then((responseJson) => {
-    		if (responseJson.message === 'Auth success') {
-    			ls.save('userToken', responseJson.user_token).then(() => {
-    				this.setState({isPageLoader: false});
-    				return this.props.navigation.push('Wallets');
-    			})
-    		} else {
-    			this.setState({isPageLoader: false});
-    			Alert.alert(responseJson.message)
-    		}
-    	})
-    	.catch((error) => {
-    		console.error(error);
-    	});
+        this.props.userStore.login({
+            email: this.state.userEmail,
+            password: this.state.userPassword
+        });
     }
 
     createAccount() {
@@ -107,7 +86,7 @@ export default class LoginScreen extends React.Component {
     		<View style={styles.container}>
     			<StatusBar barStyle='light-content' />
     			<View>
-					<Image
+					<SVGImage
 					  source={require('../assets/images/logo/white_logo.svg')}
 					  style={styles.logo}
 					/>
@@ -132,9 +111,9 @@ export default class LoginScreen extends React.Component {
 					</View>
 					<TouchableOpacity
 						style={styles.loginButton}
-						onPress={this.loginToWallet}
+						onPress={this.loginToWallet.bind(this)}
 					>
-						<Image
+						<SVGImage
                             source={require('../assets/images/icons/icon_login-icon.svg')}
                             style={styles.loginIcon}
                         />
@@ -142,17 +121,17 @@ export default class LoginScreen extends React.Component {
 					</TouchableOpacity>
 
 					{
-						this.state.isPageLoader === true ?
+						this.props.userStore.isLoader === true ?
 							<ActivityIndicator size="large" color="#CCCCCC" style={{marginTop: 20}} />
 							: null
 					}
 				</View>
 				<View style={styles.bottomInfo}>
                     <TouchableOpacity
-                        onPress={this.createAccount}
+                        onPress={this.createAccount.bind(this)}
                         style={[styles.loginButton, {marginBottom: 10}]}
                     >
-                        <Image
+                        <SVGImage
                             source={require('../assets/images/icons/plus-icon.svg')}
                             style={{width: 20, height: 20, marginRight: 10}}
                         />
@@ -161,16 +140,18 @@ export default class LoginScreen extends React.Component {
                         >Create account</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={this.recoverAccount}
+                        onPress={this.recoverAccount.bind(this)}
                         style={styles.loginButton}
                     >
-                        <Image
+                        <SVGImage
                             source={require('../assets/images/icons/recover-icon.svg')}
                             style={{width: 20, height: 20, marginRight: 10}}
                         />
                         <Text
                             style={{color: '#ffbb00', textAlign: 'center', fontSize: 18}}
-                        >Recover account</Text>
+                        >
+                            Recover account
+                        </Text>
                     </TouchableOpacity>
 				</View>
 	        </View>

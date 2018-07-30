@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Button, Text, StatusBar, Image, Alert, Dimensions, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
 import ls from 'react-native-local-storage';
 import SVGImage from 'react-native-remote-svg';
+import { observer, inject } from "mobx-react";
 
 import Config from '../config';
 
@@ -16,9 +17,6 @@ function wp (percentage) {
 }
 
 const { width: viewportWidth } = Dimensions.get('window');
-
-import { observable } from "mobx";
-import { observer, inject } from "mobx-react";
 
 @inject("walletsStore")
 @observer
