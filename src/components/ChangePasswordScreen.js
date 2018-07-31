@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, StatusBar, TextInput, Dimensions, TouchableOpacity, Alert } from 'react-native';
 import ls from 'react-native-local-storage';
+import { observer, inject } from "mobx-react";
+import { when } from "mobx";
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -9,6 +11,8 @@ function wp (percentage) {
 
 const { width: viewportWidth } = Dimensions.get('window');
 
+@inject("userStore")
+@observer
 export default class ChangePasswordScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -20,10 +24,16 @@ export default class ChangePasswordScreen extends React.Component {
 
         this.changePassowrd = this.changePassowrd.bind(this);
     }
-    
-    static navigationOptions = {
-        title: 'Change password'
+
+    static navigationOptions = ({navigation}) => {
+        return {
+            title: 'Change password'
+        };
     };
+
+    watcher = when(() => this.props.userStore.isUpdatePassword === true, () => {
+        this.props.navigation.push('Settings');
+    });
 
     changePassowrd() {
         if (this.state.oldPassword === '') {
@@ -42,31 +52,9 @@ export default class ChangePasswordScreen extends React.Component {
             return Alert.alert('New passwords do not match');
         }
 
-        ls.get('userToken').then((data) => {
-            return fetch('https://ale-demo-4550.nodechef.com/users/change-password', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data,
-                },
-                body: JSON.stringify({
-                    old: this.state.oldPassword,
-                    new: this.state.newPassword
-                }),
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                if (responseJson.message === 'Password update') {
-                    Alert.alert(responseJson.message);
-                    return this.props.navigation.push('Settings');
-                } else {
-                    Alert.alert(responseJson.message);
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        this.props.userStore.changePassword({
+            old: this.state.oldPassword,
+            new: this.state.newPassword
         });
     }
 
@@ -74,36 +62,39 @@ export default class ChangePasswordScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
             	<StatusBar barStyle='dark-content' />
-            	<View style={{ display: 'flex', alignItems: 'center', marginTop: 20 }}>
+            	<View>
                     <TextInput
+                        secureTextEntry={true}
                         placeholder="Old password"
-                        placeholderTextColor="#000000"
-                        style={{height: 40, width: wp(80), marginBottom: 20, padding: 6, color: '#000000', borderBottomColor: '#000000', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
+                        placeholderTextColor="#717e96"
+                        style={styles.textInput}
                         onChangeText={(oldPassword) => this.setState({oldPassword})}
                         value={this.state.oldPassword}
                     />
                     <TextInput
+                        secureTextEntry={true}
                         placeholder="New password"
-                        placeholderTextColor="#000000"
-                        style={{height: 40, width: wp(80), marginBottom: 20, padding: 6, color: '#000000', borderBottomColor: '#000000', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
+                        placeholderTextColor="#717e96"
+                        style={styles.textInput}
                         onChangeText={(newPassword) => this.setState({newPassword})}
                         value={this.state.newPassword}
                     />
                     <TextInput
+                        secureTextEntry={true}
                         placeholder="Confirm new password"
-                        placeholderTextColor="#000000"
-                        style={{height: 40, width: wp(80), marginBottom: 20, padding: 6, color: '#000000', borderBottomColor: '#000000', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
+                        placeholderTextColor="#717e96"
+                        style={styles.textInput}
                         onChangeText={(newPasswordConfirm) => this.setState({newPasswordConfirm})}
                         value={this.state.newPasswordConfirm}
                     />
                     <TouchableOpacity
                         onPress={this.changePassowrd}
-                        style={{ backgroundColor: '#ffd24f', borderRadius: 4, padding: 15, width: wp(80), marginBottom: 20 }}
+                        style={styles.buttonBlock}
                     >
                         <Text
-                            style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}
+                            style={styles.buttonBlock_text}
                         >
-                            Change password
+                            Change
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -115,6 +106,35 @@ export default class ChangePasswordScreen extends React.Component {
 const styles = StyleSheet.create({
     pageContainer: {
         flex: 1,
-        backgroundColor: '#e8ebee'
-    }
+        backgroundColor: '#e8ebee',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingTop: 20,
+        paddingBottom: 20,
+    },
+    textInput: {
+        height: 40,
+        width: wp(80),
+        marginBottom: 20,
+        padding: 6,
+        color: '#717e96',
+        borderBottomColor: '#717e96',
+        borderBottomWidth: 1,
+        borderTopColor: 'transparent',
+        borderLeftColor: 'transparent',
+        borderRightColor: 'transparent',
+        fontSize: 16
+    },
+    buttonBlock: {
+        backgroundColor: '#d0d8de',
+        borderRadius: 10,
+        padding: 10,
+        width: wp(80),
+        marginBottom: 20
+    },
+    buttonBlock_text: {
+        color: "#282f3e",
+        textAlign: 'center',
+        fontSize: 16
+    },
 });

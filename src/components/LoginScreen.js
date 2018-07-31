@@ -34,21 +34,11 @@ export default class LoginScreen extends React.Component {
 		};
 	}
 
-	static navigationOptions = {
-        header: null,
+    static navigationOptions = ({navigation}) => {
+        return {
+            header: null,
+        };
     };
-
-    componentDidMount() {
-        this.initWallets();
-    }
-
-    initWallets() {
-        ls.get('userToken').then((result) => {
-            if (result !== null) {
-                return this.props.navigation.push('Wallets');
-            }
-        })
-    }
 
     watcher = when(() => this.props.userStore.isLogin === true, () => {
         this.props.navigation.push('Wallets');
