@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { createStackNavigator } from 'react-navigation';
-import { NavigatorIOS, YellowBox, Alert, NetInfo, StyleSheet, View, Text } from 'react-native';
+import { NavigatorIOS, YellowBox, Alert, NetInfo, StyleSheet, View, Text, AsyncStorage } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader', 'Warning']);
 
 import ls from 'react-native-local-storage';
@@ -34,6 +34,7 @@ import SendMoneyScreen from './src/components/SendMoneyScreen';
 import CameraScreen from './src/components/CameraScreen';
 import EditAccountScreen from './src/components/EditAccountScreen';
 import WebViewScreen from './src/components/WebViewScreen';
+import initialScreen from './src/components/initialScreen';
 
 const transitionConfig = () => {
   return {
@@ -44,71 +45,30 @@ const transitionConfig = () => {
 }
 
 const RootStack = createStackNavigator({
-    Login: {
-        screen: LoginScreen,
-    },
-    NewWallet: {
-        screen: NewWalletScreen,
-    },
-    Importwallet: {
-        screen: ImportwalletScreen,
-    },
-    Wallets: {
-        screen: WalletsScreen,
-    },
-    Settings: {
-        screen: SettingsScreen,
-    },
-    RequestMoney: {
-        screen: RequestMoneyScreen,
-    },
-    SendMoney: {
-        screen: SendMoneyScreen,
-    },
-    CreateAccount: {
-        screen: CreateAccountScreen,
-    },
-    RecoverAccount: {
-        screen: RecoverAccountScreen,
-    },
-    SuccessPayment: {
-        screen: SuccessPaymentScreen,
-    },
-    RestoreWallet: {
-        screen: RestoreWalletScreen,
-    },
-    History: {
-        screen: HistoryScreen,
-    },
-    Notifications: {
-        screen: NotificationsScreen,
-    },
-    ChangeLanguage: {
-        screen: ChangeLanguageScreen,
-    },
-    RecoveryPhrase: {
-        screen: RecoveryPhraseScreen,
-    },
-    TwoFactorAuth: {
-        screen: TwoFactorAuthScreen,
-    },
-    WalletDetails: {
-        screen: WalletDetailsScreen,
-    },
-    ChangePassword: {
-        screen: ChangePasswordScreen,
-    },
-    Camera: {
-        screen: CameraScreen,
-    },
-    EditAccount: {
-        screen: EditAccountScreen,
-    },
-    WebView: {
-        screen: WebViewScreen,
-    },
+    Login: { screen: LoginScreen },
+    NewWallet: { screen: NewWalletScreen },
+    Importwallet: { screen: ImportwalletScreen },
+    Wallets: { screen: WalletsScreen },
+    Settings: { screen: SettingsScreen },
+    RequestMoney: { screen: RequestMoneyScreen },
+    SendMoney: { screen: SendMoneyScreen },
+    CreateAccount: { screen: CreateAccountScreen },
+    RecoverAccount: { screen: RecoverAccountScreen },
+    SuccessPayment: { screen: SuccessPaymentScreen },
+    RestoreWallet: { screen: RestoreWalletScreen },
+    History: { screen: HistoryScreen },
+    Notifications: { screen: NotificationsScreen },
+    ChangeLanguage: { screen: ChangeLanguageScreen },
+    RecoveryPhrase: { screen: RecoveryPhraseScreen },
+    TwoFactorAuth: { screen: TwoFactorAuthScreen },
+    WalletDetails: { screen: WalletDetailsScreen },
+    ChangePassword: { screen: ChangePasswordScreen },
+    Camera: { screen: CameraScreen },
+    EditAccount: { screen: EditAccountScreen },
+    WebView: { screen: WebViewScreen },
+    initialPage: { screen: initialScreen },
 }, {
-    initialRouteName: 'Login',
+    initialRouteName: 'initialPage',
     transitionConfig,
 });
 
