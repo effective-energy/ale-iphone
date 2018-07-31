@@ -172,8 +172,26 @@ export default class SettingsScreen extends React.Component {
                         </View>
                     </View>
 
-                    <View style={{ marginTop: 40, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: wp(100), backgroundColor: '#ffffff', paddingRight: 15, paddingLeft: 15, paddingTop: 12, paddingBottom: 12 }}>
-                        <Text style={styles.listViewTitle}>{I18n.t('pages.settings.two_auth.enable')}</Text>
+                    <View
+                        style={[styles.listView, {marginTop: 40}]}
+                    >
+                        <View
+                            style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}
+                        >
+                            <View
+                                style={{width: 30, height: 30, backgroundColor: '#2196F3', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                            >
+                                <ImageSVG
+                                    source={require('../assets/images/icons/up-down-arrow-icon.svg')}
+                                    style={{width: 20, height: 20}}
+                                />
+                            </View>
+                            <Text
+                                style={{fontSize: 18, color: '#34343e', marginLeft: 10}}
+                            >
+                                Two-factor auth
+                            </Text>
+                        </View>
                         <Switch
                             value={this.state.isTwoAuthActive}
                             tintColor="#cccccc"
@@ -182,24 +200,56 @@ export default class SettingsScreen extends React.Component {
                     </View>
 
                     <TouchableOpacity
-                        style={styles.listView}
                         onPress={this.changeLanguage.bind(this)}
+                        style={styles.listView}
                     >
-                        <Text style={styles.listViewTitle}>{I18n.t('pages.settings.language')}</Text>
+                        <View
+                            style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}
+                        >
+                            <View
+                                style={{width: 30, height: 30, backgroundColor: '#4CAF50', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                            >
+                                <ImageSVG
+                                    source={require('../assets/images/icons/globe-icon.svg')}
+                                    style={{width: 20, height: 20}}
+                                />
+                            </View>
+                            <Text
+                                style={{fontSize: 18, color: '#34343e', marginLeft: 10}}
+                            >
+                                Language
+                            </Text>
+                        </View>
                         <ImageSVG
                             source={require('../assets/images/icons/icon_small-arrow-right.svg')}
-                            style={styles.listViewImage}
+                            style={{width: 15, height: 15}}
                         />
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        style={styles.listView}
                         onPress={this.changePassword.bind(this)}
+                        style={styles.listView}
                     >
-                        <Text style={styles.listViewTitle}>Password</Text>
+                        <View
+                            style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}
+                        >
+                            <View
+                                style={{width: 30, height: 30, backgroundColor: '#F44336', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                            >
+                                <ImageSVG
+                                    source={require('../assets/images/icons/security-icon.svg')}
+                                    style={{width: 20, height: 20}}
+                                />
+                            </View>
+                            <Text
+                                style={{fontSize: 18, color: '#34343e', marginLeft: 10}}
+                            >
+                                Password
+                            </Text>
+                        </View>
                         <ImageSVG
                             source={require('../assets/images/icons/icon_small-arrow-right.svg')}
-                            style={styles.listViewImage}
+                            style={{width: 15, height: 15}}
                         />
                     </TouchableOpacity>
 
@@ -208,43 +258,107 @@ export default class SettingsScreen extends React.Component {
                             <Text style={{ fontSize: 16, color: '#666666' }}>{'Join the community'.toUpperCase()}</Text>
                         </View>
                         <TouchableOpacity
+                            onPress={() => this.openInApp('alehub_io', 'twitter')}
                             style={styles.listView}
-                            onPress={() => this.openInApp('alehub_io', 'twitter').bind(this)}
                         >
-                            <Text style={styles.listViewTitle}>Twitter</Text>
+                            <View
+                                style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}
+                            >
+                                <View
+                                    style={{width: 30, height: 30, backgroundColor: '#00ACED', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                                >
+                                    <ImageSVG
+                                        source={require('../assets/images/icons/twitter-icon.svg')}
+                                        style={{width: 20, height: 20}}
+                                    />
+                                </View>
+                                <Text
+                                    style={{fontSize: 18, color: '#34343e', marginLeft: 10}}
+                                >
+                                    Twitter
+                                </Text>
+                            </View>
                             <ImageSVG
                                 source={require('../assets/images/icons/icon_small-arrow-right.svg')}
-                                style={styles.listViewImage}
+                                style={{width: 15, height: 15}}
                             />
                         </TouchableOpacity>
                         <TouchableOpacity
+                            onPress={() => this.openInApp('alehub', 'telegram')}
                             style={styles.listView}
-                            onPress={() => this.openInApp('alehub', 'telegram').bind(this)}
                         >
-                            <Text style={styles.listViewTitle}>Telegram Chat</Text>
+                            <View
+                                style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}
+                            >
+                                <View
+                                    style={{width: 30, height: 30, backgroundColor: '#0088CC', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                                >
+                                    <ImageSVG
+                                        source={require('../assets/images/icons/telegram-icon.svg')}
+                                        style={{width: 20, height: 20}}
+                                    />
+                                </View>
+                                <Text
+                                    style={{fontSize: 18, color: '#34343e', marginLeft: 10}}
+                                >
+                                    Telegram Chat
+                                </Text>
+                            </View>
                             <ImageSVG
                                 source={require('../assets/images/icons/icon_small-arrow-right.svg')}
-                                style={styles.listViewImage}
+                                style={{width: 15, height: 15}}
                             />
                         </TouchableOpacity>
                         <TouchableOpacity
+                            onPress={() => this.openInApp('alehub.io', 'facebook')}
                             style={styles.listView}
-                            onPress={() => this.openInApp('alehub.io', 'facebook').bind(this)}
                         >
-                            <Text style={styles.listViewTitle}>Facebook</Text>
+                            <View
+                                style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}
+                            >
+                                <View
+                                    style={{width: 30, height: 30, backgroundColor: '#3B5998', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                                >
+                                    <ImageSVG
+                                        source={require('../assets/images/icons/facebook-icon.svg')}
+                                        style={{width: 20, height: 20}}
+                                    />
+                                </View>
+                                <Text
+                                    style={{fontSize: 18, color: '#34343e', marginLeft: 10}}
+                                >
+                                    Facebook
+                                </Text>
+                            </View>
                             <ImageSVG
                                 source={require('../assets/images/icons/icon_small-arrow-right.svg')}
-                                style={styles.listViewImage}
+                                style={{width: 15, height: 15}}
                             />
                         </TouchableOpacity>
                     </View>
 
                     <View style={{ marginTop: 40 }}>
                         <TouchableOpacity
-                            style={styles.listView}
                             onPress={this.shareApp.bind(this)}
+                            style={styles.listView}
                         >
-                            <Text style={styles.listViewTitle}>Share With Friends</Text>
+                            <View
+                                style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}
+                            >
+                                <View
+                                    style={{width: 30, height: 30, backgroundColor: '#E91E63', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                                >
+                                    <ImageSVG
+                                        source={require('../assets/images/icons/share-icon.svg')}
+                                        style={{width: 15, height: 15}}
+                                    />
+                                </View>
+                                <Text
+                                    style={{fontSize: 18, color: '#34343e', marginLeft: 10}}
+                                >
+                                    Share With Friends
+                                </Text>
+                            </View>
                         </TouchableOpacity>
                     </View>
 
@@ -293,15 +407,44 @@ const styles = StyleSheet.create({
         width: wp(100),
         paddingLeft: 15,
         paddingRight: 15,
-        paddingTop: 15,
-        paddingBottom: 15,
-        marginTop: 1
+        marginTop: 1,
+        height: 50
     },
-    listViewTitle: {
-        fontSize: wp(5),
-        color: '#34343e'
+    listViewContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: '#ffffff',
+        width: wp(100),
+        paddingLeft: 15,
+        paddingRight: 15,
+        marginTop: 1,
+        height: 50
     },
-    listViewImage: {
+    listViewRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    listViewIconBlock: {
+        width: 30,
+        height: 30,
+        borderRadius: 4,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    listViewIconBlock_image: {
+        width: 15,
+        height: 15
+    },
+    listViewIconBlock_text: {
+        fontSize: 18, 
+        color: '#34343e',
+        marginLeft: 10
+    },
+    listViewArrow: {
         width: 15,
         height: 15
     }
