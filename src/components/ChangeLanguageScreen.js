@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, Dimensions, StatusBar, TouchableOpacity, Alert 
 import ls from 'react-native-local-storage';
 import Image from 'react-native-remote-svg';
 
+import langList from '../i18n/languagesList';
+
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
     return Math.round(value);
@@ -18,13 +20,6 @@ export default class ChangeLanguageScreen extends React.Component {
     constructor(props) {
         super(props);
 	    this.state = {
-            languagesList: [{
-                name: 'English',
-                code: 'en'
-            }, {
-                name: 'Russian',
-                code: 'ru'
-            }],
             systemLanguage: ''
         };
 
@@ -58,7 +53,7 @@ export default class ChangeLanguageScreen extends React.Component {
     }
 
     render() {
-        let languagesList = this.state.languagesList.map(function (el, i) {
+        let languagesList = langList.map(function (el, i) {
             let isActiveLanguage = this.state.systemLanguage === el.code ? require('../assets/images/icons/check-small.svg') : null;
             return (
                 <TouchableOpacity

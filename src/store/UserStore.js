@@ -70,7 +70,7 @@ export default class UserStore {
 
     @action async logout() {
     	try {
-
+            
     	} catch (error) {
             console.log(error);
     	}

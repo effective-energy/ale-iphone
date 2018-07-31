@@ -29,14 +29,6 @@ export default class SettingsScreen extends React.Component {
             userEmail: '',
             userAvatar: '',
         };
-
-        this.logout = this.logout.bind(this);
-        this.changePage = this.changePage.bind(this);
-        this.changeLanguage = this.changeLanguage.bind(this);
-        this.onValueChange = this.onValueChange.bind(this);
-        this.changePassword = this.changePassword.bind(this);
-        this.shareApp = this.shareApp.bind(this);
-        this.openInApp = this.openInApp.bind(this);
     }
 
     static navigationOptions = ({navigation}) => {
@@ -45,7 +37,7 @@ export default class SettingsScreen extends React.Component {
             title: I18n.t('pages.settings.title'),
             headerLeft: null,
             gesturesEnabled: false,
-            headerRight:
+            headerRight: params.isLoaderPage === true ? null :
                 <TouchableOpacity
                     onPress={() => navigation.navigate('EditAccount')}
                     style={{marginRight: 20}}
@@ -61,7 +53,8 @@ export default class SettingsScreen extends React.Component {
         });
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        this.props.navigation.setParams({ isLoaderPage: true });
         this.getUserData();
     }
 
@@ -98,6 +91,7 @@ export default class SettingsScreen extends React.Component {
             userEmail: responseJson.email,
             userAvatar: responseJson.avatar,
         });
+        this.props.navigation.setParams({ isLoaderPage: false });
     }
 
     logout() {
@@ -183,13 +177,13 @@ export default class SettingsScreen extends React.Component {
                         <Switch
                             value={this.state.isTwoAuthActive}
                             tintColor="#cccccc"
-                            onValueChange={this.onValueChange}
+                            onValueChange={this.onValueChange.bind(this)}
                         />
                     </View>
 
                     <TouchableOpacity
                         style={styles.listView}
-                        onPress={this.changeLanguage}
+                        onPress={this.changeLanguage.bind(this)}
                     >
                         <Text style={styles.listViewTitle}>{I18n.t('pages.settings.language')}</Text>
                         <ImageSVG
@@ -200,7 +194,7 @@ export default class SettingsScreen extends React.Component {
 
                     <TouchableOpacity
                         style={styles.listView}
-                        onPress={this.changePassword}
+                        onPress={this.changePassword.bind(this)}
                     >
                         <Text style={styles.listViewTitle}>Password</Text>
                         <ImageSVG
@@ -215,7 +209,7 @@ export default class SettingsScreen extends React.Component {
                         </View>
                         <TouchableOpacity
                             style={styles.listView}
-                            onPress={() => this.openInApp('alehub_io', 'twitter')}
+                            onPress={() => this.openInApp('alehub_io', 'twitter').bind(this)}
                         >
                             <Text style={styles.listViewTitle}>Twitter</Text>
                             <ImageSVG
@@ -225,7 +219,7 @@ export default class SettingsScreen extends React.Component {
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.listView}
-                            onPress={() => this.openInApp('alehub', 'telegram')}
+                            onPress={() => this.openInApp('alehub', 'telegram').bind(this)}
                         >
                             <Text style={styles.listViewTitle}>Telegram Chat</Text>
                             <ImageSVG
@@ -235,7 +229,7 @@ export default class SettingsScreen extends React.Component {
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.listView}
-                            onPress={() => this.openInApp('alehub.io', 'facebook')}
+                            onPress={() => this.openInApp('alehub.io', 'facebook').bind(this)}
                         >
                             <Text style={styles.listViewTitle}>Facebook</Text>
                             <ImageSVG
@@ -248,7 +242,7 @@ export default class SettingsScreen extends React.Component {
                     <View style={{ marginTop: 40 }}>
                         <TouchableOpacity
                             style={styles.listView}
-                            onPress={this.shareApp}
+                            onPress={this.shareApp.bind(this)}
                         >
                             <Text style={styles.listViewTitle}>Share With Friends</Text>
                         </TouchableOpacity>
@@ -257,7 +251,7 @@ export default class SettingsScreen extends React.Component {
                     <View style={{ marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <TouchableOpacity
                             style={styles.buttonContainer}
-                            onPress={this.logout}
+                            onPress={this.logout.bind(this)}
                         >
                             <Text
                                 style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}
@@ -268,7 +262,7 @@ export default class SettingsScreen extends React.Component {
                     </View>
                 </ScrollView>
                 <BottomNavigator
-                    changePage={this.changePage}
+                    changePage={this.changePage.bind(this)}
                     activePage="settings"
                 />
             </View>
