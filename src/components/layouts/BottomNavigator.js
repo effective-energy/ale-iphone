@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import Image from 'react-native-remote-svg';
+import isIphoneX from '../../config/isIphoneX';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -83,13 +84,14 @@ export default class BottomNavigator extends React.Component {
 const styles = StyleSheet.create({
     navigationContainer: {
         width: '100%',
-        height: 60,
+        height: isIphoneX === true ? 94 : 60,
         position: 'absolute',
         bottom: 0,
         flexDirection: 'row',
         flex: 1,
         borderTopColor: '#e8ebee',
-        borderTopWidth: 2
+        borderTopWidth: 2,
+        backgroundColor: '#ffffff',
     },
     navigationItem: {
         width: '25%',

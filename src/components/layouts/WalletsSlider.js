@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Dimensions, Platform, Alert, Image, TouchableHighlight, TouchableOpacity, AlertIOS } from 'react-native';
 import SVGImage from 'react-native-remote-svg';
 import ls from 'react-native-local-storage';
+import isIphoneX from '../../config/isIphoneX';
 
 import Carousel from 'react-native-snap-carousel';
 
@@ -86,7 +87,7 @@ export default class WalletsSlider extends React.Component {
                     loop={false}
                     layoutCardOffset={50}
                     hasParallaxImages={true}
-                    containerCustomStyle={{ marginTop: 50, overflow: 'visible' }}
+                    containerCustomStyle={{ marginTop: isIphoneX === true ? 80 : 50, overflow: 'visible' }}
                     data={this.props.walletsList}
                     renderItem={item => this._renderItem(item)}
                     sliderWidth={sliderWidth}
