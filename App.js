@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { createStackNavigator } from 'react-navigation';
-import { NavigatorIOS, YellowBox, Alert, NetInfo, StyleSheet, View, Text, AsyncStorage } from 'react-native';
+import { NavigatorIOS, YellowBox, Alert, NetInfo, StyleSheet, View, Text, StatusBar } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader', 'Warning']);
 
 import ls from 'react-native-local-storage';
@@ -120,8 +120,11 @@ export default class App extends React.Component {
     render() {
         if (!this.state.isConnected) {
             return (
-                <View style={styles.offlineContainer}>
-                    <Text style={styles.offlineText}>No Internet Connection</Text>
+                <View>
+                    <StatusBar barStyle='light-content' />
+                    <View style={styles.offlineContainer}>
+                        <Text style={styles.offlineText}>No Internet Connection</Text>
+                    </View>
                 </View>
             );
         }

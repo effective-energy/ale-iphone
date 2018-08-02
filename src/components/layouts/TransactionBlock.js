@@ -61,7 +61,7 @@ export default class TransactionBlock extends React.Component {
 const styles = StyleSheet.create({
     transactionBlockContainer: {
         padding: 10,
-        backgroundColor: '#c1c4cb',
+        backgroundColor: '#E8EBEE',
         width: wp(80),
         borderRadius: 5,
         display: 'flex',
@@ -69,7 +69,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         zIndex: 1,
-        marginBottom: 20
+        marginBottom: 20,
+        shadowOpacity: 0.5,
+        shadowRadius: 50,
+        shadowColor: '#535968',
+        shadowOffset: {
+            height: 20,
+            width: 20
+        },
     },
     transactionBlockRow: {
         display: 'flex',

@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Text, Dimensions, TouchableOpacity } from 'react-native';
-import Image from 'react-native-remote-svg';
+import { View, StyleSheet, Text, Dimensions, TouchableOpacity, Alert } from 'react-native';
+import SVGImage from 'react-native-remote-svg';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -20,9 +20,9 @@ export default class WalletsDropdownMenu extends React.Component {
         this.selectWallet = this.selectWallet.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.setState({
-            selectedWallet: this.props.walletsList[0]
+            selectedWallet: this.props.walletsList[Number(this.props.activeWalletIndex)]
         })
     }
 
@@ -33,68 +33,87 @@ export default class WalletsDropdownMenu extends React.Component {
     }
 
     selectWallet(index) {
+        if (this.props.walletsList[index]._id === this.state.selectedWallet._id) {
+            return this.setState({
+                isMenuOpen: false,
+            });
+        }
         this.setState({
             selectedWallet: this.props.walletsList[index],
             isMenuOpen: false,
         });
-        return this.props.changeWallet(index);
+        this.props.changeWallet(index);
     }
 
     render() {
         let wallets = this.props.walletsList.map(function (el, i) {
-            let isActiveWallet = this.props.activeWalletIndex === i ? '#cccccc' : '#c1c4cb';
+            let isShowCloseIcon = i === 0 ? 1 : 0;
+            let isFirstWalelt = i !== 0 ? {marginTop: 10} : null;
+            let isLastWallet = el._id === this.props.walletsList.slice(-1)[0]._id ? null : {borderBottomWidth: 1, borderBottomColor: '#D1D8DD', paddingBottom: 8};
+            return (
+                <View
+                    key={i}
+                    style={[{display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', borderBottomColor: '#D1D8DD'}, isFirstWalelt, isLastWallet]}
+                >
+                    <TouchableOpacity
+                        onPress={() => this.selectWallet(i)}
+                        style={{display: 'flex', flexDirection: 'row'}}
+                    >
+                        <SVGImage
+                            source={require('../../assets/images/navigation/bottom/icon_wallet-passive.svg')}
+                            style={{width: 40, height: 40, marginRight: 10 }}
+                        />
+                        <View>
+                            <Text style={{fontSize: 14}}>{el.name}</Text>
+                            <Text style={{fontSize: 18}}>{el.balance}</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => this.setState({isMenuOpen: false})}
+                        style={{opacity: isShowCloseIcon}}
+                    >
+                        <SVGImage
+                            source={require('../../assets/images/icons/close-icon.svg')}
+                            style={{width: 35, height: 35}}
+                        />
+                    </TouchableOpacity>
+                </View>
+            )
+        }, this);
+        if (this.state.isMenuOpen) {
+            return (
+                <View
+                    style={{width: wp(80), backgroundColor: '#FFFFFF', borderRadius: 8, Height: 200, marginTop: 20, padding: 10}}
+                >
+                    {wallets}
+                </View>
+            );
+        } else {
             return (
                 <TouchableOpacity
-                    activeOpacity={0.9}
-                    key={i}
-                    style={{ width: wp(80), height: 'auto', backgroundColor: isActiveWallet, paddingLeft: 10, paddingRight: 10, zIndex: 1, display: 'flex', alignItems: 'center', padding: 10 }}
-                    onPress={() => this.selectWallet(i)}
+                    style={{ width: wp(80), height: 50, marginTop: 20, justifyContent: 'space-between', paddingLeft: 10, paddingRight: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', borderBottomColor: '#BAC0CF', borderBottomWidth: 1, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent' }}
+                    onPress={this.toggleMenu}
                 >
-                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: wp(80), marginLeft: 15 }}>
-                        <Image
+                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                        <SVGImage
                             source={require('../../assets/images/navigation/bottom/icon_wallet-passive.svg')}
                             style={{width: 40, height: 40, marginRight: 10 }}
                         />
                         <View style={{ display: 'flex', flexDirection: 'column' }}>
-                            <Text>{el.name}</Text>
-                            <Text>{el.balance} ALE</Text>
+                            <Text>{this.state.selectedWallet.name}</Text>
+                            <Text>{this.state.selectedWallet.balance} ALE</Text>
                         </View>
                     </View>
-                </TouchableOpacity>
-            )
-        }, this);
-
-        let isMenuOpen = this.state.isMenuOpen === true ? 0 : 1;
-        return (
-            <TouchableOpacity
-                style={{ width: wp(80), height: 50, marginTop: 20, justifyContent: 'space-between', paddingLeft: 10, paddingRight: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', borderBottomColor: '#cccccc', borderBottomWidth: 2, borderTopColor: 'transparent', borderLeftColor: 'transparent', borderRightColor: 'transparent', zIndex: 1 }}
-                onPress={this.toggleMenu}
-            >
-                {
-                    this.state.isMenuOpen &&
-                    <View
-                        style={{ width: wp(90), zIndex: 0, position: 'absolute', top: 5 }}
-                    >
-                        {wallets}
-                    </View>
-                }
-                <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', opacity: isMenuOpen }}>
-                    <Image
-                        source={require('../../assets/images/navigation/bottom/icon_wallet-passive.svg')}
-                        style={{width: 40, height: 40, marginRight: 10 }}
+                    <SVGImage
+                        source={require('../../assets/images/icons/icon_down-arrow.svg')}
+                        style={{width: 15, height: 15 }}
                     />
-                    <View style={{ display: 'flex', flexDirection: 'column' }}>
-                        <Text>{this.state.selectedWallet.name}</Text>
-                        <Text>{this.state.selectedWallet.balance} ALE</Text>
-                    </View>
-                </View>
-                <Image
-                    source={require('../../assets/images/icons/icon_down-arrow.svg')}
-                    style={{width: 15, height: 15 }}
-                />
-            </TouchableOpacity>
-        );
+                </TouchableOpacity>
+            );
+        }
     }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+
+});
