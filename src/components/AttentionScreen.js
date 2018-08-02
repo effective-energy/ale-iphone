@@ -1,0 +1,73 @@
+import React from 'react';
+import { View, StyleSheet, Text, StatusBar, TouchableOpacity, Dimensions } from 'react-native';
+import CircleProgress from './layouts/CircleProgress';
+
+function wp (percentage) {
+    const value = (percentage * viewportWidth) / 100;
+    return Math.round(value);
+}
+
+const { width: viewportWidth } = Dimensions.get('window');
+
+export default class AttentionScreen extends React.Component {
+	constructor(props) {
+        super(props);
+	    this.state = {};
+    }
+
+    static navigationOptions = ({navigation}) => {
+        return {
+            title: 'Attention'
+        };
+    };
+
+    render() {
+    	return (
+    		<View style={styles.pageContainer}>
+                <StatusBar barStyle='dark-content' />
+                <View style={styles.pageRow}>
+                    <Text style={{fontSize: 18, marginBottom: 20, textAlign: 'center'}}>
+                        On the following screen, you will see a set of X random words. This is your wallet backup phrase. It can be entered in any version of ALE application in order to back up or restore your wallet's funds and private key.
+                    </Text>
+                    <Text style={{fontSize: 18, textAlign: 'center'}}>
+                        Make sure nobody looks into your screen unless you want them to have access to your funds.
+                    </Text>
+                    <TouchableOpacity style={styles.buttonBlock}>
+                        <Text style={styles.buttonBlock_text}>
+                            My data protected
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                {/*<CircleProgress />*/}
+            </View>
+    	);
+    }
+}
+
+const styles = StyleSheet.create({
+    pageContainer: {
+        flex: 1,
+        backgroundColor: '#e8ebee',
+        alignItems: 'center',
+    },
+    pageRow: {
+        width: wp(80),
+        display: 'flex',
+        alignItems: 'center',
+        marginTop: 20
+    },
+    buttonBlock: {
+        backgroundColor: '#16203a',
+        width: wp(80),
+        padding: 10,
+        borderRadius: 10,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    buttonBlock_text: {
+        color: '#f0b721',
+        fontSize: 18
+    }
+});

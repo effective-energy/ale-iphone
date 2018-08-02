@@ -34,7 +34,8 @@ import SendMoneyScreen from './src/components/SendMoneyScreen';
 import CameraScreen from './src/components/CameraScreen';
 import EditAccountScreen from './src/components/EditAccountScreen';
 import WebViewScreen from './src/components/WebViewScreen';
-import initialScreen from './src/components/initialScreen';
+import InitialScreen from './src/components/initialScreen';
+import AttentionScreen from './src/components/AttentionScreen';
 
 const transitionConfig = () => {
   return {
@@ -66,9 +67,10 @@ const RootStack = createStackNavigator({
     Camera: { screen: CameraScreen },
     EditAccount: { screen: EditAccountScreen },
     WebView: { screen: WebViewScreen },
-    initialPage: { screen: initialScreen },
+    InitialPage: { screen: InitialScreen },
+    Attention: { screen: AttentionScreen },
 }, {
-    initialRouteName: 'initialPage',
+    initialRouteName: 'InitialPage',
     transitionConfig,
 });
 
