@@ -8,6 +8,7 @@ export default class WalletsStore {
 	@observable walletsList = [];
     @observable isLoaderPage = false;
     @observable isRefreshLoader = false;
+    @observable mnemonicPhrase = [];
 
 	@action async initWallets() {
 		try {
@@ -70,6 +71,38 @@ export default class WalletsStore {
             
         } catch (error) {
             this.isRefreshLoader = false;
+            console.log(error);
+        }
+    }
+
+    @action async getMnemonic() {
+        try {
+            this.isLoaderPage = true;
+
+            const userToken = await ls.get('userToken');
+            if (!userToken) {
+                throw userToken
+            }
+
+            const params = {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': userToken
+                }
+            }
+
+            const response = await fetch(`${Config.SERVER_URL}/wallet/seed`, params);
+            if (!response) {
+                throw response
+            }
+
+            const responseJson = await response.json();
+            this.mnemonicPhrase = responseJson.seed;
+            this.isLoaderPage = false;
+        } catch (error) {
+            this.isLoaderPage = false;
             console.log(error);
         }
     }

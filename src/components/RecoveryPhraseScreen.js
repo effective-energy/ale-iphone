@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Alert, Clipboard, TextInput } from 'react-native';
 import ls from 'react-native-local-storage';
+import { observer, inject } from "mobx-react";
+import Pageloader from './layouts/Pageloader';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -9,11 +11,12 @@ function wp (percentage) {
 
 const { width: viewportWidth } = Dimensions.get('window');
 
+@inject("walletsStore")
+@observer
 export default class RecoveryPhraseScreen extends React.Component {
     constructor(props) {
         super(props);
 	    this.state = {
-            mnemonic: ['shove', 'render', 'thing', 'exhaust', 'fatal', 'siege', 'shadow', 'pear', 'catch', 'story', 'runway', 'vivid'],
             currentMnemonicWordIndex: 0
         };
     }
@@ -23,6 +26,10 @@ export default class RecoveryPhraseScreen extends React.Component {
             title: 'Recovery Phrase'
         };
     };
+
+    componentDidMount() {
+        this.props.walletsStore.getMnemonic();
+    }
 
     prevMnemonicWord () {
         if (this.state.currentMnemonicWordIndex === 0) {
@@ -43,7 +50,9 @@ export default class RecoveryPhraseScreen extends React.Component {
     }
 
     render() {
-        
+        if (this.props.walletsStore.isLoaderPage) {
+            return (<Pageloader title="Loading wallets..." />);
+        }
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
@@ -55,7 +64,7 @@ export default class RecoveryPhraseScreen extends React.Component {
                         >
                             <Text>PREV</Text>
                         </TouchableOpacity>
-                        <Text>{this.state.mnemonic[this.state.currentMnemonicWordIndex]}</Text>
+                        <Text>{this.props.walletsStore.mnemonicPhrase[this.state.currentMnemonicWordIndex]}</Text>
                         <TouchableOpacity
                             onPress={this.nextMnemonicWord.bind(this)}
                         >
