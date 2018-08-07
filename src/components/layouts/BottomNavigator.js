@@ -62,9 +62,7 @@ export default class BottomNavigator extends React.Component {
                         style={styles.itemImage}
                         source={icon}
                     />
-                    <Text
-                        style={[styles.itemTitle, this.state.activeClass === el.activeClass ? styles.itemTitleActive : styles.itemTitleDefault]}
-                    >
+                    <Text style={[styles.itemTitle, this.state.activeClass === el.activeClass ? styles.itemTitleActive : styles.itemTitleDefault]}>
                         {el.title}
                     </Text>
                 </TouchableOpacity>
@@ -72,9 +70,7 @@ export default class BottomNavigator extends React.Component {
         }, this);
 
     	return (
-    		<View
-                style={styles.navigationContainer}
-            >
+    		<View style={styles.navigationContainer}>
                 {navigations}
             </View>
     	)
@@ -84,28 +80,27 @@ export default class BottomNavigator extends React.Component {
 const styles = StyleSheet.create({
     navigationContainer: {
         width: '100%',
-        height: isIphoneX === true ? 94 : 60,
         position: 'absolute',
         bottom: 0,
         flexDirection: 'row',
         flex: 1,
-        borderTopColor: '#e8ebee',
-        borderTopWidth: 2,
         backgroundColor: '#ffffff',
+        height: 63,
+        borderTopColor: '#e8ebee',
+        borderTopWidth: 1,
+        minHeight: 63
     },
     navigationItem: {
         width: '25%',
-        height: 60,
         flex: 1,
         flexDirection: 'column',
-        maxHeight: 60,
         alignItems: 'center',
         justifyContent: 'space-around',
         backgroundColor: '#ffffff',
     },
     itemImage: {
-        width: wp(7.5),
-        height: wp(7.5)
+        width: 30,
+        height: 30
     },
     itemTitle: {
         textAlign: 'center',

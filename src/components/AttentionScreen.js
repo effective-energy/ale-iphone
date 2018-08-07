@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, StatusBar, TouchableOpacity, Dimensions } from 'react-native';
 import CircleProgress from './layouts/CircleProgress';
+import SVGImage from 'react-native-remote-svg';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -21,18 +22,29 @@ export default class AttentionScreen extends React.Component {
         };
     };
 
+    openRecoveryPhrasePage() {
+        this.props.navigation.navigate('RecoveryPhrase');
+    }
+
     render() {
     	return (
     		<View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
                 <View style={styles.pageRow}>
+                    <SVGImage
+                        style={{width: 120, height: 120, marginBottom: 10}}
+                        source={require('../assets/images/icons/icon_lock.svg')}
+                    />
                     <Text style={{fontSize: 18, marginBottom: 20, textAlign: 'center'}}>
                         On the following screen, you will see a set of X random words. This is your wallet backup phrase. It can be entered in any version of ALE application in order to back up or restore your wallet's funds and private key.
                     </Text>
-                    <Text style={{fontSize: 18, textAlign: 'center'}}>
+                    <Text style={{fontSize: 18, textAlign: 'center', marginBottom: 20}}>
                         Make sure nobody looks into your screen unless you want them to have access to your funds.
                     </Text>
-                    <TouchableOpacity style={styles.buttonBlock}>
+                    <TouchableOpacity
+                        onPress={this.openRecoveryPhrasePage.bind(this)}
+                        style={styles.buttonBlock}
+                    >
                         <Text style={styles.buttonBlock_text}>
                             My data protected
                         </Text>
