@@ -3,6 +3,7 @@ import { View, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Alert,
 import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
 import Pageloader from './layouts/Pageloader';
+import MnemonicSlider from './layouts/MnemonicSlider';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -50,7 +51,7 @@ export default class RecoveryPhraseScreen extends React.Component {
     }
 
     render() {
-        if (this.props.walletsStore.isLoaderPage) {
+        if (this.props.walletsStore.isLoaderPage || this.props.walletsStore.mnemonicPhrase.length === 0) {
             return (<Pageloader title="Loading wallets..." />);
         }
         return (
@@ -58,19 +59,19 @@ export default class RecoveryPhraseScreen extends React.Component {
                 <StatusBar barStyle='dark-content' />
                 <View style={{width: wp(80), height: 150, marginTop: 50, display: 'flex', flexDirection: 'column'}}>
                     <Text style={{textAlign: 'center', marginBottom: 50}}>Word {this.state.currentMnemonicWordIndex+1} of 12</Text>
-                    <View style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', width: '100%', alignItems: 'center' }}>
-                        <TouchableOpacity
-                            onPress={this.prevMnemonicWord.bind(this)}
-                        >
-                            <Text>PREV</Text>
-                        </TouchableOpacity>
-                        <Text>{this.props.walletsStore.mnemonicPhrase[this.state.currentMnemonicWordIndex]}</Text>
-                        <TouchableOpacity
-                            onPress={this.nextMnemonicWord.bind(this)}
-                        >
-                            <Text>NEXT</Text>
-                        </TouchableOpacity>
-                    </View>
+                    <MnemonicSlider
+                        currentWord={this.state.currentMnemonicWordIndex}
+                        mnemonicPhrase={this.props.walletsStore.mnemonicPhrase}
+                        prevMnemonicWord={this.prevMnemonicWord.bind(this)}
+                        nextMnemonicWord={this.nextMnemonicWord.bind(this)}
+                    />
+                    <TouchableOpacity
+                        style={{backgroundColor: '#d0d8de', width: wp(80), padding: 10, borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 50}}
+                    >
+                        <Text style={{color: '#091529', fontSize: 18}}>
+                            Continue
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );

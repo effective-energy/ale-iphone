@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet, Text, StatusBar, TouchableOpacity, Dimensions } from 'react-native';
-import CircleProgress from './layouts/CircleProgress';
 import SVGImage from 'react-native-remote-svg';
 
 function wp (percentage) {
@@ -50,7 +49,6 @@ export default class AttentionScreen extends React.Component {
                         </Text>
                     </TouchableOpacity>
                 </View>
-                {/*<CircleProgress />*/}
             </View>
     	);
     }
@@ -69,7 +67,7 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     buttonBlock: {
-        backgroundColor: '#16203a',
+        backgroundColor: '#d0d8de',
         width: wp(80),
         padding: 10,
         borderRadius: 10,
@@ -79,7 +77,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     buttonBlock_text: {
-        color: '#f0b721',
+        color: '#091529',
         fontSize: 18
     }
 });
