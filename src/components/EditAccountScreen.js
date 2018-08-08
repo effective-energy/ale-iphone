@@ -1,7 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Alert } from 'react-native';
+import { View, Text, StyleSheet, Image, Alert, TextInput, Dimensions } from 'react-native';
 import PhotoUpload from 'react-native-photo-upload';
 import ls from 'react-native-local-storage';
+
+function wp (percentage) {
+    const value = (percentage * viewportWidth) / 100;
+    return Math.round(value);
+}
+const { width: viewportWidth } = Dimensions.get('window');
 
 export default class EditAccountScreen extends React.Component {
     constructor(props) {
@@ -44,26 +50,16 @@ export default class EditAccountScreen extends React.Component {
     render() {
         return (
             <View style={styles.pageContainer}>
-                {/*<PhotoUpload
-                    onPhotoSelect={avatar => {
-                        if (avatar) {
-                            this.setAvatar(avatar)
-                        }
-                    }}
-                >
-                    <Image
-                        style={{
-                            paddingVertical: 30,
-                            width: 150,
-                            height: 150,
-                            borderRadius: 75
-                        }}
-                        resizeMode='cover'
-                        source={{
-                            uri: 'https://ale-demo-4550.nodechef.com/assets/9dd0578525ef3e4f2c8185ec169ebed365292c6d6d61848513d7e5c830a929b0%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202018-07-06%20%D0%B2%2022.23.50.png'
-                        }}
-                    />
-                </PhotoUpload> */} 
+                <View style={{width: '100%', height: 80, backgroundColor: '#FFFFFF', padding: 10, display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <View style={{width: 60, height: 60, borderRadius: 30, backgroundColor: 'red'}}></View>
+                    <View>
+                        <TextInput
+                            placeholder="ALEHUB"
+                            placeholderTextColor="#455578"
+                            style={styles.textInput}
+                        />
+                    </View>
+                </View>
             </View>
         );
     }
@@ -73,5 +69,20 @@ const styles = StyleSheet.create({
     pageContainer: {
         flex: 1,
         backgroundColor: '#e8ebee',
-    }
+        alignItems: 'center',
+    },
+    textInput: {
+        height: 40,
+        borderWidth: 1,
+        width: wp(70),
+        marginBottom: 20,
+        padding: 6,
+        color: '#455578',
+        borderBottomColor: '#455578',
+        borderBottomWidth: 1,
+        borderTopColor: 'transparent',
+        borderLeftColor: 'transparent',
+        borderRightColor: 'transparent',
+        fontSize: 16
+    },
 });

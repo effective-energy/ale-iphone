@@ -362,7 +362,7 @@ export default class SettingsScreen extends React.Component {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={{ marginTop: 20, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ marginTop: 40, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <TouchableOpacity
                             style={styles.buttonContainer}
                             onPress={this.logout.bind(this)}
