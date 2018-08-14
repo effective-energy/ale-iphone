@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Text, Dimensions } from 'react-native';
+import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Text, Dimensions, ListView } from 'react-native';
 import ls from 'react-native-local-storage';
 
 import Config from '../config'
@@ -178,6 +178,7 @@ export default class SettingsScreen extends React.Component {
                         />
                     }
                 >
+
                     <View style={{ width: wp(100), display: 'flex', alignItems: 'center' }}>
                         <WalletsDropdownMenu 
                             activeWalletIndex={this.state.activeWalletIndex}

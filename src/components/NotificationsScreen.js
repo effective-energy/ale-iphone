@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, ScrollView, FlatList, RefreshControl } from 'react-native';
 import ls from 'react-native-local-storage';
 import Markdown from 'react-native-simple-markdown';
-import Swipeout from 'react-native-swipeout';
+import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
 
 import BottomNavigator from './layouts/BottomNavigator';
 import Pageloader from './layouts/Pageloader';
@@ -132,30 +132,33 @@ export default class NotificationsScreen extends React.Component {
             return (<Pageloader title="Loading notifications..." />);
         }
 
-        let swipeoutBtns = [{
-            text: 'Delete',
-            backgroundColor: 'red'
-        }];
-
         let notifications = this.state.notificationsList.map(function (el, i) {
-            let rightButtons = [{
-                text: 'Delete',
-                backgroundColor: 'red',
-                onPress: () => this.removeNotification(el._id, i)
-            }]
             return (
-                <Swipeout
-                    right={rightButtons}
+                <SwipeRow
+                    disableRightSwipe={true}
+                    rightOpenValue={-75}
                     key={i}
-                    backgroundColor="#FFFFFF"
-                    style={{ width: wp(100), marginTop: 20 }}
-                    sensitivity={0}
-                    autoClose={true}
+                    style={{
+                        width: wp(80),
+                        marginTop: 20,
+                        display: 'flex',
+                        alignItems: 'center',
+                        shadowOpacity: 0.5,
+                        shadowRadius: 50,
+                        shadowColor: '#535968',
+                        shadowOffset: {
+                            height: 20,
+                            width: 20
+                        }
+                    }}
                 >
-                    <View style={{ padding: 20 }}>
+                    <View style={styles.standaloneRowBack}>
+                        <Text style={styles.backTextWhite} onPress={() => this.removeNotification(el._id, i)}>Delete</Text>
+                    </View>
+                    <View style={styles.standaloneRowFront}>
                         <Markdown>{el.title}</Markdown>
                     </View>
-                </Swipeout>
+                </SwipeRow>
             )
         }, this);
 
@@ -194,5 +197,31 @@ const styles = StyleSheet.create({
         backgroundColor: '#e8ebee',
         alignItems: 'center',
         justifyContent: 'center'
-    }
+    },
+    standalone: {
+        marginTop: 30,
+        marginBottom: 30,
+        display: 'flex',
+        alignItems: 'center'
+    },
+    standaloneRowFront: {
+        alignItems: 'center',
+        backgroundColor: '#E8EBEE',
+        justifyContent: 'center',
+        height: 'auto',
+        padding: 15,
+        borderRadius: 5,
+    },
+    standaloneRowBack: {
+        alignItems: 'center',
+        backgroundColor: 'red',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        padding: 15,
+        borderRadius: 5,
+    },
+    backTextWhite: {
+        color: '#FFF'
+    },
 });
