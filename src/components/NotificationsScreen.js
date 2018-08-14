@@ -3,6 +3,7 @@ import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions
 import ls from 'react-native-local-storage';
 import Markdown from 'react-native-simple-markdown';
 import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
+import { observer, inject } from "mobx-react";
 
 import BottomNavigator from './layouts/BottomNavigator';
 import Pageloader from './layouts/Pageloader';
@@ -26,14 +27,14 @@ class EmptyNotifications extends React.Component {
   }
 }
 
+@inject("notificationsStore")
+@observer
 export default class NotificationsScreen extends React.Component {
     constructor(props) {
         super(props);
 	    this.state = {
-            isActive: false,
             isLoaderPage: true,
             notificationsList: [],
-            checked: true,
             isRefreshShow: false
         };
 
@@ -53,86 +54,26 @@ export default class NotificationsScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.getNotifications(false).done();
-    }
-
-    async getNotifications(isRefresh) {
-        const userToken = await ls.get('userToken');
-        if (!userToken) {
-            throw userToken
-        }
-
-        const params = {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': userToken
-            }
-        }
-
-        const response = await fetch(`${Config.SERVER_URL}/notifications`, params);
-        if (!response) {
-            throw response
-        }
-
-        const responseJson = await response.json();
-
-        await this.setStateAsync({
-            notificationsList: responseJson,
-            isLoaderPage: false,
-            isRefreshShow: false,
-        });
+        this.props.notificationsStore.getNotifications();
     }
 
     changePage(e) {
         this.props.navigation.navigate(e);
     }
 
-    async removeNotification(id, index) {
-        const userToken = await ls.get('userToken');
-        if (!userToken) {
-            throw userToken
-        }
-
-        let notifications = [];
-        notifications.push(id);
-
-        const params = {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': userToken
-            },
-            body: JSON.stringify({
-                list: notifications
-            })
-        }
-
-        const response = await fetch(`${Config.SERVER_URL}/notifications/list`, params);
-        if (!response) {
-            throw response
-        }
-
-        const responseJson = await response.json();
-
-        Alert.alert(responseJson.message);
-        
-        let notificationsList = [...this.state.notificationsList];
-        notificationsList.splice(index, 1);
-
-        await this.setStateAsync({
-            notificationsList: notificationsList,
+    removeNotification(id, index) {
+        this.props.notificationsStore.removeNotification({
+            id: id,
+            index: index
         });
     }
 
     render() {
-        if (this.state.isLoaderPage) {
+        if (this.props.notificationsStore.isLoader) {
             return (<Pageloader title="Loading notifications..." />);
         }
 
-        let notifications = this.state.notificationsList.map(function (el, i) {
+        let notifications = this.props.notificationsStore.notifications.map(function (el, i) {
             return (
                 <SwipeRow
                     disableRightSwipe={true}
@@ -152,10 +93,10 @@ export default class NotificationsScreen extends React.Component {
                         }
                     }}
                 >
-                    <View style={styles.standaloneRowBack}>
+                    <View style={styles.rowBack}>
                         <Text style={styles.backTextWhite} onPress={() => this.removeNotification(el._id, i)}>Delete</Text>
                     </View>
-                    <View style={styles.standaloneRowFront}>
+                    <View style={styles.rowFront}>
                         <Markdown>{el.title}</Markdown>
                     </View>
                 </SwipeRow>
@@ -170,8 +111,8 @@ export default class NotificationsScreen extends React.Component {
                     automaticallyAdjustContentInsets={false}
                     refreshControl={
                         <RefreshControl
-                            onRefresh={() => this.getNotifications(true)}
-                            refreshing={this.state.isRefreshShow}
+                            onRefresh={() => this.props.notificationsStore.refreshNotifications()}
+                            refreshing={this.props.notificationsStore.isRefreshLoader}
                             tintColor="#000000"
                             colors={['#ff0000', '#00ff00', '#0000ff']}
                             progressBackgroundColor="#EBEBEB"
@@ -179,7 +120,7 @@ export default class NotificationsScreen extends React.Component {
                     }
                 >
                     <View style={{ width: wp(100), display: 'flex', alignItems: 'center' }}>
-                        {this.state.notificationsList.length !== 0 ? notifications : <EmptyNotifications />}
+                        {this.props.notificationsStore.notifications.length !== 0 ? notifications : <EmptyNotifications />}
                     </View>
                 </ScrollView>
                 <BottomNavigator
@@ -198,13 +139,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    standalone: {
-        marginTop: 30,
-        marginBottom: 30,
-        display: 'flex',
-        alignItems: 'center'
-    },
-    standaloneRowFront: {
+    rowFront: {
         alignItems: 'center',
         backgroundColor: '#E8EBEE',
         justifyContent: 'center',
@@ -212,7 +147,7 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 5,
     },
-    standaloneRowBack: {
+    rowBack: {
         alignItems: 'center',
         backgroundColor: 'red',
         flex: 1,
