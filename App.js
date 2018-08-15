@@ -34,7 +34,7 @@ import SendMoneyScreen from './src/components/SendMoneyScreen';
 import CameraScreen from './src/components/CameraScreen';
 import EditAccountScreen from './src/components/EditAccountScreen';
 import WebViewScreen from './src/components/WebViewScreen';
-import InitialScreen from './src/components/initialScreen';
+import InitialScreen from './src/components/InitialScreen';
 import AttentionScreen from './src/components/AttentionScreen';
 
 const transitionConfig = () => {
