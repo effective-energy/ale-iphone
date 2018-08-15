@@ -16,7 +16,6 @@ export default class InitialScreen extends React.Component {
     }
 
     async initialData () {
-        return this.props.navigation.navigate('Login');
         const userToken = await ls.get('userToken');
         if (!userToken) {
             throw userToken

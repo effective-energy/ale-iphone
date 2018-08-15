@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, Image, ScrollView, RefreshControl, Share, Linking } from 'react-native';
 import ImageSVG from 'react-native-remote-svg';
+import ImagePicker from 'react-native-image-picker';
 
 import ls from 'react-native-local-storage';
 
@@ -133,6 +134,57 @@ export default class SettingsScreen extends React.Component {
         }
     }
 
+    uploadAvatar () {
+        let options = {
+            storageOptions: {
+                skipBackup: true,
+                path: 'images'
+            }
+        };
+        ImagePicker.showImagePicker(options, (response) => {
+            if (!response.error && !response.didCancel) {
+                this.loadAvatarToServer(response.uri);
+            } else if (response.error) {
+                Alert.alert('Error');
+            }
+        });
+    }
+
+    async loadAvatarToServer (avatar) {
+        const userToken = await ls.get('userToken');
+        if (!userToken) {
+            throw userToken
+        }
+
+        let fd = new FormData();
+        fd.append('avatar', {
+            uri: avatar,
+            type: 'image/jpeg',
+            name: 'photo.jpg'
+        });
+
+        const params = {
+            method: 'POST',
+            headers: {
+                'Authorization': userToken
+            },
+            body: fd
+        }
+
+        const response = await fetch(`${Config.SERVER_URL}/users/set_avatar`, params);
+        if (!response) {
+            throw response
+        }
+
+        const responseJson = await response.json();
+
+        Alert.alert(responseJson.message);
+
+        this.setState({
+            userAvatar: responseJson.avatar_path
+        })
+    }
+
     render() {
         if (this.state.isLoaderPage) {
             return (<Pageloader title="Loading user data" />);
@@ -149,12 +201,12 @@ export default class SettingsScreen extends React.Component {
                         style={{ marginTop: 1, backgroundColor: '#FFFFFF', width: wp(100), padding: 15, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}
                     >
                         <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                            { this.state.userAvatar === '' ? <View style={{width: 60, height: 60, borderRadius: 30, backgroundColor: '#CCCCCC', alignItems: 'center', display: 'flex', justifyContent: 'center', marginBottom: 10}}>
+                            { this.state.userAvatar === '' ? <TouchableOpacity onPress={this.uploadAvatar.bind(this)} style={{width: 60, height: 60, borderRadius: 30, backgroundColor: '#CCCCCC', alignItems: 'center', display: 'flex', justifyContent: 'center', marginBottom: 10}}>
                                 <Text style={{ color: '#FFFFFF', textAlign: 'center', fontSize: 30, fontWeight: 'bold' }}>{this.state.fullName.substr(0, 2).toUpperCase()}</Text>
-                            </View> : <Image
+                            </TouchableOpacity> : <TouchableOpacity onPress={this.uploadAvatar.bind(this)} style={{width: 60, height: 60, borderRadius: 30}}><Image
                                 style={{ width: 60, height: 60, borderRadius: 30, resizeMode: 'cover', marginBottom: 10 }}
                                 source={{uri: this.getUserAvatar()}}
-                            />}
+                            /></TouchableOpacity>}
                             <View>
                                 <Text style={{ fontSize: 24, textAlign: 'center' }}>{this.state.fullName}</Text>
                                 <Text style={{ fontSize: 18, textAlign: 'center' }}>{this.state.userEmail}</Text>
