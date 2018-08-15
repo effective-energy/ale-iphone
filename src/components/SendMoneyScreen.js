@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, Platform, Image, StatusBar, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Platform, Image, StatusBar, TextInput, Button, Alert, TouchableOpacity, Modal, TouchableHighlight } from 'react-native';
 import ls from 'react-native-local-storage';
 import SVGImage from 'react-native-remote-svg';
+import QRCodeScanner from 'react-native-qrcode-scanner';
 
 import Config from '../config';
 
@@ -19,7 +20,8 @@ export default class SendMoneyScreen extends React.Component {
 	    this.state = {
             amount: '',
             destinationAddress: '',
-            senderAddress: this.props.navigation.state.params.walletAddress
+            senderAddress: this.props.navigation.state.params.walletAddress,
+            modalVisible: false,
         };
 
         this.sendMoney = this.sendMoney.bind(this);
@@ -36,14 +38,6 @@ export default class SendMoneyScreen extends React.Component {
                 borderBottomWidth: 0,
             },
             headerTintColor: '#ffbb00',
-            headerRight: <TouchableOpacity
-                            onPress={() => navigation.navigate('Camera')}
-                        >
-                            <SVGImage
-                                source={require('../assets/images/icons/qr-code.svg')}
-                                style={{width: 20, height: 20, marginRight: 20}}
-                            />
-                        </TouchableOpacity>
         };
     };
 
@@ -60,6 +54,10 @@ export default class SendMoneyScreen extends React.Component {
                 destinationAddress: params.destinationAddress
             })
         }
+    }
+
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
     }
 
     sendMoney() {
@@ -103,6 +101,13 @@ export default class SendMoneyScreen extends React.Component {
         });
     }
 
+    onSuccess(e) {
+        this.setState({
+            destinationAddress: e.data,
+            modalVisible: false
+        });
+    }
+
     render() {
         return (
             <View style={styles.pageContainer}>
@@ -125,6 +130,27 @@ export default class SendMoneyScreen extends React.Component {
                             value={this.state.destinationAddress}
                         />
                     </View>
+
+                    <Modal
+                        animationType="slide"
+                        transparent={false}
+                        visible={this.state.modalVisible}
+                    >
+                        <QRCodeScanner
+                            showMarker
+                            onRead={this.onSuccess.bind(this)}
+                            bottomContent={
+                                <TouchableHighlight
+                                    onPress={() => {
+                                        this.setModalVisible(!this.state.modalVisible);
+                                    }}
+                                >
+                                    <Text>Hide Modal</Text>
+                                </TouchableHighlight>
+                            }
+                        />
+                    </Modal>
+
                     <TouchableOpacity
                         onPress={this.sendMoney}
                         style={{ backgroundColor: '#16203a', width: screenWidth, padding: 10, borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
@@ -137,6 +163,23 @@ export default class SendMoneyScreen extends React.Component {
                             style={{ color: '#f0b721', textAlign: 'center', fontSize: 18 }}
                         >
                             Send
+                        </Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        onPress={() => {
+                            this.setModalVisible(true);
+                        }}
+                        style={{ backgroundColor: '#16203a', width: screenWidth, padding: 10, borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}
+                    >
+                        <SVGImage
+                            source={require('../assets/images/icons/qr-code.svg')}
+                            style={{width: 15, height: 15, marginRight: 10}}
+                        />
+                        <Text
+                            style={{ color: '#f0b721', textAlign: 'center', fontSize: 18 }}
+                        >
+                            Scan QR code
                         </Text>
                     </TouchableOpacity>
             	</View>
