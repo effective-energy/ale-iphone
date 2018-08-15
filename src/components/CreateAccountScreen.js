@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, StatusBar, TextInput, Dimensions, TouchableOpacity, Alert } from 'react-native';
 import ls from 'react-native-local-storage';
 import SVGImage from 'react-native-remote-svg';
+import ImagePicker from 'react-native-image-picker';
 
 import Config from '../config';
 
@@ -24,7 +25,8 @@ export default class CreateAccountScreen extends React.Component {
             fullName: '',
             email: '',
             password: '',
-            repeatPassword: ''
+            repeatPassword: '',
+            avatar: null
         };
 
         this.backToLoginPage = this.backToLoginPage.bind(this);
@@ -105,11 +107,56 @@ export default class CreateAccountScreen extends React.Component {
         }
     }
 
+    uploadAvatar () {
+        let options = {
+            storageOptions: {
+                skipBackup: true,
+                path: 'images'
+            }
+        };
+        ImagePicker.showImagePicker(options, (response) => {
+            if (!response.error && !response.didCancel) {
+                this.setState({
+                    avatar: response.uri
+                });
+            } else if (response.error) {
+                Alert.alert('Error');
+            }
+        });
+    }
+
     render() {
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='light-content' />
                 <View>
+                    <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 20}}>
+                        { this.state.avatar === null ?
+                            <TouchableOpacity
+                                onPress={this.uploadAvatar.bind(this)}
+                                style={{width: 40, height: 40, backgroundColor: '#556B98', borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                            >
+                                <SVGImage
+                                    source={require('../assets/images/icons/plus-avatar-icon.svg')}
+                                    style={{width: 20, height: 20}}
+                                />
+                            </TouchableOpacity>
+                            :
+                            <TouchableOpacity
+                                onPress={this.uploadAvatar.bind(this)}
+                                style={{width: 40, height: 40, backgroundColor: '#556B98', borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                            >
+                                <SVGImage
+                                    source={{uri: this.state.avatar}}
+                                    style={{width: 40, height: 40, borderRadius: 5}}
+                                    resizeMode='cover'
+                                />
+                            </TouchableOpacity>
+                        }
+                        <Text style={{color: '#455578', marginLeft: 10, fontSize: 16}}>
+                            Upload photo
+                        </Text>
+                    </View>
                     <TextInput
                         placeholder="Full name"
                         placeholderTextColor="#455578"

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions, StatusBar, TouchableOpacity, Alert } from 'react-native';
-import ls from 'react-native-local-storage';
 import Image from 'react-native-remote-svg';
+import I18n from '../i18n/index';
 
 import langList from '../i18n/languagesList';
 
@@ -13,9 +13,6 @@ function wp (percentage) {
 const { width: viewportWidth } = Dimensions.get('window');
 let screenWidth = wp(80);
 
-// I18n 
-import I18n from '../i18n/index';
-
 export default class ChangeLanguageScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -25,9 +22,11 @@ export default class ChangeLanguageScreen extends React.Component {
 
         this.changeLanguage = this.changeLanguage.bind(this);
     }
-    
-    static navigationOptions = {
-        title: 'Change language'
+
+    static navigationOptions = ({navigation}) => {
+        return {
+            title: 'Change language',
+        };
     };
 
     componentDidMount() {
@@ -35,8 +34,8 @@ export default class ChangeLanguageScreen extends React.Component {
     }
 
     getSystemLanguage() {
-        ls.get('systemLanguage').then((result) => {
-            return this.setState({systemLanguage: result});
+        this.setState({
+            systemLanguage: I18n.currentLocale()
         });
     }
 
@@ -44,12 +43,8 @@ export default class ChangeLanguageScreen extends React.Component {
         if (code === this.state.systemLanguage) {
             return false;
         }
-        ls.save('systemLanguage', code).then(() => {
-            this.setState({systemLanguage: code});
-            Alert.alert('Language successfully changed');
-            I18n.locale = code;
-            return this.props.navigation.navigate('Settings');
-        });
+        this.setState({systemLanguage: code});
+        I18n.locale = code;
     }
 
     render() {

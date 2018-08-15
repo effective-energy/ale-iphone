@@ -10,6 +10,9 @@ export default {
 			fullName: 'Full name',
 			email: 'E-mail',
 			signOut: 'Sign out'
+		},
+		changeLanguage: {
+			title: 'Change language'
 		}
 	},
 	bottom_navigation: {

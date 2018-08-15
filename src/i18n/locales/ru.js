@@ -10,6 +10,9 @@ export default {
 			fullName: 'Полное имя',
 			email: 'E-mail',
 			signOut: 'Выход'
+		},
+		changeLanguage: {
+			title: 'Изменить язык'
 		}
 	},
 	bottom_navigation: {

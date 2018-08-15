@@ -31,7 +31,6 @@ import WalletDetailsScreen from './src/components/WalletDetailsScreen';
 import ChangePasswordScreen from './src/components/ChangePasswordScreen';
 import RequestMoneyScreen from './src/components/RequestMoneyScreen';
 import SendMoneyScreen from './src/components/SendMoneyScreen';
-import EditAccountScreen from './src/components/EditAccountScreen';
 import WebViewScreen from './src/components/WebViewScreen';
 import InitialScreen from './src/components/InitialScreen';
 import AttentionScreen from './src/components/AttentionScreen';
@@ -63,7 +62,6 @@ const RootStack = createStackNavigator({
     TwoFactorAuth: { screen: TwoFactorAuthScreen },
     WalletDetails: { screen: WalletDetailsScreen },
     ChangePassword: { screen: ChangePasswordScreen },
-    EditAccount: { screen: EditAccountScreen },
     WebView: { screen: WebViewScreen },
     InitialPage: { screen: InitialScreen },
     Attention: { screen: AttentionScreen },

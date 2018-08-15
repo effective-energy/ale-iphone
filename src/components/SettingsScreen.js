@@ -36,14 +36,7 @@ export default class SettingsScreen extends React.Component {
         return {
             title: I18n.t('pages.settings.title'),
             headerLeft: null,
-            gesturesEnabled: false,
-            headerRight: params.isLoaderPage === true ? null :
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('EditAccount')}
-                    style={{marginRight: 20}}
-                >
-                    <Text style={{ fontSize: 16 }}>Edit</Text>    
-                </TouchableOpacity>
+            gesturesEnabled: false
         };
     };
 
@@ -54,7 +47,6 @@ export default class SettingsScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.props.navigation.setParams({ isLoaderPage: true });
         this.getUserData();
     }
 
@@ -91,7 +83,6 @@ export default class SettingsScreen extends React.Component {
             userEmail: responseJson.email,
             userAvatar: responseJson.avatar,
         });
-        this.props.navigation.setParams({ isLoaderPage: false });
     }
 
     logout() {
@@ -124,7 +115,6 @@ export default class SettingsScreen extends React.Component {
         Share.share({
             message: 'Alehub wallet',
             url: 'https://alehub.io/',
-            title: 'Wow, its alehub wallet!'
         }, {
             dialogTitle: 'Share',
             excludedActivityTypes: [
