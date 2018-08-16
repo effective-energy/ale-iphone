@@ -44,6 +44,13 @@ export default class LoginScreen extends React.Component {
         this.props.navigation.push('Wallets');
     });
 
+    watcher = when(() => this.props.userStore.isTwoFactor === true, () => {
+        this.props.navigation.navigate('TwoFactorLogin', {
+            email: this.state.userEmail,
+            password: this.state.userPassword
+        });
+    });
+
     loginToWallet() {
     	if (this.state.userEmail.length === 0) {
     		return Alert.alert('Enter your E-mail');

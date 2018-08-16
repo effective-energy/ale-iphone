@@ -51,10 +51,12 @@ export default class CreateAccountScreen extends React.Component {
     }
 
     refreshState() {
-        this.state.fullName = '';
-        this.state.email = '';
-        this.state.password = '';
-        this.state.repeatPassword = '';
+        this.setState({
+            fullName: '',
+            email: '',
+            password: '',
+            repeatPassword: '',
+        });
     }
 
     backToLoginPage() {

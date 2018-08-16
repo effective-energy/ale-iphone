@@ -12,11 +12,13 @@ export default class UserStore {
     @observable isLoader = false;
     @observable isLogin = false;
     @observable isUpdatePassword = false;
+    @observable isTwoFactor = false;
 
     @action async login(data: Object) {
     	try {
     		this.isLoader = true;
     		this.isLogin = false;
+            this.isTwoFactor = false
 
             const params = {
                 method: 'POST',
@@ -42,6 +44,9 @@ export default class UserStore {
             		this.isLoader = false;
     				this.isLogin = true;
             	})
+            } else if (responseJson.message === 'Authorization was successful. Enter the two-factor code.') {
+                this.isLoader = false;
+                this.isTwoFactor = true;
             } else {
             	this.isLoader = false;
             	Alert.alert(responseJson.message)
