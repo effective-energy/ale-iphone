@@ -1,6 +1,13 @@
 import React from 'react';
-import { Text, TouchableOpacity, StyleSheet, View } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet, View, Dimensions } from 'react-native';
 import SVGImage from 'react-native-remote-svg';
+
+function wp (percentage) {
+    const value = (percentage * viewportWidth) / 100;
+    return Math.round(value);
+}
+
+const { width: viewportWidth } = Dimensions.get('window');
 
 export default class CheckBox extends React.Component {
 	constructor(props) {
@@ -13,7 +20,7 @@ export default class CheckBox extends React.Component {
     	return (
     		<TouchableOpacity
                 onPress={this.props.toggleCheckBox}
-                style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+                style={{ width: wp(70), display: 'flex', flexDirection: 'row', alignItems: 'flex-start', marginBottom: 20 }}
             >
                 <View
                     style={styles.checkBoxContainer}
@@ -23,7 +30,7 @@ export default class CheckBox extends React.Component {
                         style={{ width: 15, height: 15 }}
                     />
                 </View>
-                <Text style={{ paddingLeft: 10 }}>{this.props.value}</Text>
+                <Text style={{ paddingLeft: 15 }}>{this.props.value}</Text>
             </TouchableOpacity>
     	)
     }
@@ -31,10 +38,9 @@ export default class CheckBox extends React.Component {
 
 const styles = StyleSheet.create({
     checkBoxContainer: {
-        width: 20,
-        height: 20,
-        borderColor: '#000000',
-        borderWidth: 2,
+        width: 25,
+        height: 25,
+        backgroundColor: '#D1D8DD',
         borderRadius: 5,
         display: 'flex',
         alignItems: 'center',

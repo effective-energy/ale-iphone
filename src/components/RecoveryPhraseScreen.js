@@ -50,6 +50,10 @@ export default class RecoveryPhraseScreen extends React.Component {
         });
     }
 
+    openConfirmKeyPage () {
+        this.props.navigation.navigate('ConfirmMnemonic');
+    }
+
     render() {
         if (this.props.walletsStore.isLoaderPage || this.props.walletsStore.mnemonicPhrase.length === 0) {
             return (<Pageloader title="Loading wallets..." />);
@@ -58,7 +62,7 @@ export default class RecoveryPhraseScreen extends React.Component {
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
                 <View style={{width: wp(80), height: 150, marginTop: 50, display: 'flex', flexDirection: 'column'}}>
-                    <Text style={{textAlign: 'center', marginBottom: 50}}>Word {this.state.currentMnemonicWordIndex+1} of 12</Text>
+                    <Text style={{textAlign: 'center', marginBottom: 50, color: '#556B98', fontSize: 18}}>Word {this.state.currentMnemonicWordIndex+1} of 12</Text>
                     <MnemonicSlider
                         currentWord={this.state.currentMnemonicWordIndex}
                         mnemonicPhrase={this.props.walletsStore.mnemonicPhrase}
@@ -66,7 +70,8 @@ export default class RecoveryPhraseScreen extends React.Component {
                         nextMnemonicWord={this.nextMnemonicWord.bind(this)}
                     />
                     <TouchableOpacity
-                        style={{backgroundColor: '#d0d8de', width: wp(80), padding: 10, borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 50}}
+                        onPress={this.openConfirmKeyPage.bind(this)}
+                        style={{backgroundColor: '#D1D8DD', width: wp(80), padding: 10, borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 50}}
                     >
                         <Text style={{color: '#091529', fontSize: 18}}>
                             Continue

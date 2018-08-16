@@ -117,8 +117,8 @@ const styles = StyleSheet.create({
         width: wp(80),
         marginBottom: 20,
         padding: 6,
-        color: '#717e96',
-        borderBottomColor: '#717e96',
+        color: '#34476F',
+        borderBottomColor: '#445882',
         borderBottomWidth: 1,
         borderTopColor: 'transparent',
         borderLeftColor: 'transparent',
@@ -126,14 +126,14 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     buttonBlock: {
-        backgroundColor: '#d0d8de',
+        backgroundColor: '#D1D8DD',
         borderRadius: 10,
         padding: 10,
         width: wp(80),
         marginBottom: 20
     },
     buttonBlock_text: {
-        color: "#282f3e",
+        color: "#091529",
         textAlign: 'center',
         fontSize: 16
     },

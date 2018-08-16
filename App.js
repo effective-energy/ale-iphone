@@ -35,6 +35,7 @@ import WebViewScreen from './src/components/WebViewScreen';
 import InitialScreen from './src/components/InitialScreen';
 import AttentionScreen from './src/components/AttentionScreen';
 import TwoFactorLoginScreen from './src/components/TwoFactorLoginScreen';
+import ConfirmMnemonicScreen from './src/components/ConfirmMnemonicScreen';
 
 const transitionConfig = () => {
   return {
@@ -67,6 +68,7 @@ const RootStack = createStackNavigator({
     InitialPage: { screen: InitialScreen },
     Attention: { screen: AttentionScreen },
     TwoFactorLogin: { screen: TwoFactorLoginScreen },
+    ConfirmMnemonic: { screen: ConfirmMnemonicScreen },
 }, {
     initialRouteName: 'InitialPage',
     transitionConfig,

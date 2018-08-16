@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import SVGImage from 'react-native-remote-svg';
 
 export default class MnemonicSlider extends React.Component {
     constructor(props) {
@@ -11,11 +12,17 @@ export default class MnemonicSlider extends React.Component {
         return (
             <View style={styles.sliderContainer}>
                 <TouchableOpacity onPress={() => this.props.prevMnemonicWord()}>
-                    <Text>PREV</Text>
+                    <SVGImage
+                        source={require('../../assets/images/icons/back-arrow.svg')}
+                        style={{width: 20, height: 20}}
+                    />
                 </TouchableOpacity>
-                <Text>{this.props.mnemonicPhrase[this.props.currentWord]}</Text>
+                <Text style={{color: '#091529', fontSize: 16}}>{this.props.mnemonicPhrase[this.props.currentWord]}</Text>
                 <TouchableOpacity onPress={() => this.props.nextMnemonicWord()}>
-                    <Text>NEXT</Text>
+                    <SVGImage
+                        source={require('../../assets/images/icons/next-arrow.svg')}
+                        style={{width: 20, height: 20}}
+                    />
                 </TouchableOpacity>
             </View>
         );
