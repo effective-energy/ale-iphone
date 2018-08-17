@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, TextInput } from 'react-native';
+import { View, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, TextInput, Alert } from 'react-native';
 import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
 import CheckBox from './layouts/CheckBox';
+import Config from '../config';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -18,7 +19,13 @@ export default class ConfirmMnemonicScreen extends React.Component {
         super(props);
 	    this.state = {
             currentMnemonicWordIndex: 0,
-            selecredWordsForConfirm: []
+            selecredWordsForConfirm: [],
+            confirmMnemonicWords: [],
+            isConfirmDeviceOnly: false,
+            isConfirmBackup: false,
+            firstWord: '',
+            secondWord: '',
+            thirdWord: '',
         };
     }
 
@@ -29,13 +36,77 @@ export default class ConfirmMnemonicScreen extends React.Component {
     };
 
     componentDidMount () {
-        let array = [1,2,3,4,5,6,7,8,9];
+        this.generateConfirmWords();
+    }
+
+    generateConfirmWords () {
+        let array = [1,2,3,4,5,6,7,8,9,10,11,12];
         let shuffled = array.map((a) => [Math.random(),a]).sort((a,b) => a[0]-b[0]).map((a) => a[1]);
         shuffled = shuffled.splice(0, 3);
+        this.setState({
+            confirmMnemonicWords: shuffled
+        });
+    }
+
+    confirmDevice (value) {
+        this.setState({
+            isConfirmDeviceOnly: value
+        });
+    }
+
+    confirmBackup (value) {
+        this.setState({
+            isConfirmBackup: value
+        });
     }
 
     confirmMnemonic () {
+        let first_word = this.state.firstWord.toLowerCase();
+        let second_word = this.state.secondWord.toLowerCase();
+        let third_word = this.state.thirdWord.toLowerCase();
 
+        if (this.props.navigation.state.params.mnemonicPhrase[Number(this.state.confirmMnemonicWords[0]-1)] !== first_word) {
+            return Alert.alert(`Incorrect ${this.state.confirmMnemonicWords[0]}th word`)
+        }
+
+        if (this.props.navigation.state.params.mnemonicPhrase[Number(this.state.confirmMnemonicWords[1]-1)] !== second_word) {
+            return Alert.alert(`Incorrect ${this.state.confirmMnemonicWords[1]}th word`)
+        }
+
+        if (this.props.navigation.state.params.mnemonicPhrase[Number(this.state.confirmMnemonicWords[2]-1)] !== third_word) {
+            return Alert.alert(`Incorrect ${this.state.confirmMnemonicWords[2]}th word`)
+        }
+
+        if (!this.state.isConfirmDeviceOnly || !this.state.isConfirmBackup) {
+            return Alert.alert('Agree with all conditions');
+        }
+
+        ls.get('userToken').then((data) => {
+            fetch(`${Config.SERVER_URL}/wallet/new`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': data
+                },
+                body: JSON.stringify({
+                    name: this.props.navigation.state.params.walletName,
+                    seed: this.props.navigation.state.params.mnemonicPhrase,
+                }),
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                if (responseJson.message === 'New wallet success create!') {
+                    Alert.alert(responseJson.message)
+                    return this.props.navigation.navigate('Wallets');
+                } else {
+                    return Alert.alert(responseJson.message);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        });
     }
 
     render() {
@@ -50,28 +121,36 @@ export default class ConfirmMnemonicScreen extends React.Component {
                     </Text>
                     <View style={{marginTop: 20, marginBottom: 10}}>
                         <TextInput
-                            placeholder="3th word"
+                            placeholder={this.state.confirmMnemonicWords[0]+'th word'}
                             placeholderTextColor="#ABB8C6"
                             style={styles.textInput}
+                            onChangeText={(firstWord) => this.setState({firstWord})}
+                            value={this.state.firstWord}
                         />
                         <TextInput
-                            placeholder="8th word"
+                            placeholder={this.state.confirmMnemonicWords[1]+'th word'}
                             placeholderTextColor="#ABB8C6"
                             style={styles.textInput}
+                            onChangeText={(secondWord) => this.setState({secondWord})}
+                            value={this.state.secondWord}
                         />
                         <TextInput
-                            placeholder="10th word"
+                            placeholder={this.state.confirmMnemonicWords[2]+'th word'}
                             placeholderTextColor="#ABB8C6"
                             style={styles.textInput}
+                            onChangeText={(thirdWord) => this.setState({thirdWord})}
+                            value={this.state.thirdWord}
                         />
                     </View>
                     <View>
                         <CheckBox
-                            isCheked={false}
+                            toggleCheckBox={() => this.confirmDevice(!this.state.isConfirmDeviceOnly)}
+                            isCheked={this.state.isConfirmDeviceOnly}
                             value='I understand that my money are held securely on this device only, not on the company servers'
                         />
                         <CheckBox
-                            isCheked={false}
+                            toggleCheckBox={() => this.confirmBackup(!this.state.isConfirmBackup)}
+                            isCheked={this.state.isConfirmBackup}
                             value='I understand that if this application is moved to another device or deleted, my money can be only recovered with the backup phrase which were written down in a secure place'
                         />
                     </View>

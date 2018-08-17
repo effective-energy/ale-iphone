@@ -22,7 +22,9 @@ export default class AttentionScreen extends React.Component {
     };
 
     openRecoveryPhrasePage() {
-        this.props.navigation.navigate('RecoveryPhrase');
+        this.props.navigation.navigate('RecoveryPhrase', {
+            walletName: this.props.navigation.state.params.walletName
+        });
     }
 
     render() {
