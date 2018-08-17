@@ -17,7 +17,8 @@ export default class ConfirmMnemonicScreen extends React.Component {
     constructor(props) {
         super(props);
 	    this.state = {
-            currentMnemonicWordIndex: 0
+            currentMnemonicWordIndex: 0,
+            selecredWordsForConfirm: []
         };
     }
 
@@ -26,6 +27,16 @@ export default class ConfirmMnemonicScreen extends React.Component {
             title: 'Confirm the key',
         };
     };
+
+    componentDidMount () {
+        let array = [1,2,3,4,5,6,7,8,9];
+        let shuffled = array.map((a) => [Math.random(),a]).sort((a,b) => a[0]-b[0]).map((a) => a[1]);
+        shuffled = shuffled.splice(0, 3);
+    }
+
+    confirmMnemonic () {
+
+    }
 
     render() {
         return (
@@ -66,6 +77,7 @@ export default class ConfirmMnemonicScreen extends React.Component {
                     </View>
                     <View>
                         <TouchableOpacity
+                            onPress={this.confirmMnemonic.bind(this)}
                             style={{backgroundColor: '#D1D8DD', width: wp(80), padding: 10, borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10}}
                         >
                             <Text style={{color: '#091529', fontSize: 18}}>

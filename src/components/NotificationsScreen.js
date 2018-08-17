@@ -4,7 +4,6 @@ import ls from 'react-native-local-storage';
 import Markdown from 'react-native-simple-markdown';
 import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
 import { observer, inject } from "mobx-react";
-
 import BottomNavigator from './layouts/BottomNavigator';
 import Pageloader from './layouts/Pageloader';
 
@@ -25,6 +24,10 @@ class EmptyNotifications extends React.Component {
         </View>
     );
   }
+}
+
+function parseNotificationText (text) {
+    return text.replace(/(<([^>]+)>)/ig,'');
 }
 
 @inject("notificationsStore")
@@ -79,25 +82,15 @@ export default class NotificationsScreen extends React.Component {
                     disableRightSwipe={true}
                     rightOpenValue={-75}
                     key={i}
-                    style={{
-                        width: wp(80),
-                        marginTop: 20,
-                        display: 'flex',
-                        alignItems: 'center',
-                        shadowOpacity: 0.5,
-                        shadowRadius: 50,
-                        shadowColor: '#535968',
-                        shadowOffset: {
-                            height: 20,
-                            width: 20
-                        }
-                    }}
+                    style={styles.row}
                 >
                     <View style={styles.rowBack}>
-                        <Text style={styles.backTextWhite} onPress={() => this.removeNotification(el._id, i)}>Delete</Text>
+                        <Text style={styles.rowBack_text} onPress={() => this.removeNotification(el._id, i)}>Delete</Text>
                     </View>
                     <View style={styles.rowFront}>
-                        <Markdown>{el.title}</Markdown>
+                        <Markdown>
+                            {parseNotificationText(el.title)}
+                        </Markdown>
                     </View>
                 </SwipeRow>
             )
@@ -139,6 +132,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    row: {
+        width: wp(80),
+        marginTop: 20,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        shadowOpacity: 0.5,
+        shadowRadius: 50,
+        shadowColor: '#535968',
+        shadowOffset: {
+            height: 20,
+            width: 20
+        }
+    },
     rowFront: {
         alignItems: 'center',
         backgroundColor: '#E8EBEE',
@@ -154,9 +161,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         padding: 15,
-        borderRadius: 5,
+        borderRadius: 20,
+        borderColor: '#E8EBEE',
+        borderWidth: 2
     },
-    backTextWhite: {
-        color: '#FFF'
+    rowBack_text: {
+        color: '#FFFFFF'
     },
 });

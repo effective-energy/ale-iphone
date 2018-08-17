@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         position: 'relative',
         bottom: 2,
-        fontSize: 14
+        fontSize: wp(4)
     },
     itemTitleActive: {
         color: '#FFBB00'
