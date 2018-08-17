@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, Image, ScrollView, RefreshControl, Share, Linking } from 'react-native';
+import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, Image, ScrollView, RefreshControl, Share, Linking, Modal } from 'react-native';
 import ImageSVG from 'react-native-remote-svg';
 import ImagePicker from 'react-native-image-picker';
 
@@ -29,6 +29,7 @@ export default class SettingsScreen extends React.Component {
             fullName: '',
             userEmail: '',
             userAvatar: '',
+            isOpenAvatarModal: false
         };
     }
 
@@ -135,17 +136,37 @@ export default class SettingsScreen extends React.Component {
     }
 
     uploadAvatar () {
-        let options = {
-            storageOptions: {
-                skipBackup: true,
-                path: 'images'
+        let options = {};
+
+        if (this.state.userAvatar === '') {
+            options = {
+                storageOptions: {
+                    skipBackup: true,
+                    path: 'images'
+                }
+            };
+        } else {
+            options = {
+                storageOptions: {
+                    skipBackup: true,
+                    path: 'images'
+                },
+                customButtons: [{
+                    name: 'viewavatar',
+                    title: 'View avatar'
+                }],
             }
-        };
+        }
+
         ImagePicker.showImagePicker(options, (response) => {
-            if (!response.error && !response.didCancel) {
-                this.loadAvatarToServer(response.uri);
+            if (response.customButton === 'viewavatar') {
+                return this.setState({
+                    isOpenAvatarModal: true
+                });
+            } else if (!response.error && !response.didCancel) {
+                return this.loadAvatarToServer(response.uri);
             } else if (response.error) {
-                Alert.alert('Error');
+                return Alert.alert('Error');
             }
         });
     }
@@ -185,6 +206,12 @@ export default class SettingsScreen extends React.Component {
         })
     }
 
+    closeAvatarModal () {
+        this.setState({
+            isOpenAvatarModal: false
+        });
+    }
+
     render() {
         if (this.state.isLoaderPage) {
             return (<Pageloader title="Loading user data" />);
@@ -192,6 +219,22 @@ export default class SettingsScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
+
+                <Modal
+                    animationType="slide"
+                    transparent={false}
+                    visible={this.state.isOpenAvatarModal}
+                >
+                    <View style={{flex: 1, backgroundColor: '#e8ebee', alignItems: 'center', justifyContent: 'center'}}>
+                        <Image
+                            style={{ width: wp(80), height: wp(80)}}
+                            source={{uri: this.getUserAvatar()}}
+                        />
+                        <TouchableOpacity style={{marginTop: 20}} onPress={this.closeAvatarModal.bind(this)}>
+                            <Text style={{fontSize: 20}}>Close</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
 
                 <ScrollView
                     contentInset={{bottom:80}}
