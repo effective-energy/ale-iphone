@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Text, Dimensions, ListView } from 'react-native';
+import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Text, Dimensions, ListView, Alert } from 'react-native';
 import ls from 'react-native-local-storage';
+import { observer, inject } from "mobx-react";
 
 import Config from '../config'
 
@@ -16,6 +17,8 @@ function wp (percentage) {
 
 const { width: viewportWidth } = Dimensions.get('window');
 
+@inject("transactionsStore", "walletsStore")
+@observer
 export default class SettingsScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -30,15 +33,14 @@ export default class SettingsScreen extends React.Component {
         };
 
         this.changePage = this.changePage.bind(this);
-        this.getTransaction = this.getTransaction.bind(this);
-        this.changePage = this.changePage.bind(this);
         this.changeWallet = this.changeWallet.bind(this);
-        this.refreshTransactions = this.refreshTransactions.bind(this);
     }
-    
-    static navigationOptions = {
-        title: "Operations history",
-        headerLeft: null,
+
+    static navigationOptions = ({navigation}) => {
+        return {
+            title: "Operations history",
+            headerLeft: null,
+        };
     };
 
     setStateAsync(state) {
@@ -48,68 +50,9 @@ export default class SettingsScreen extends React.Component {
     }
 
     componentDidMount() {
-        this.getUserWallets().done();
-    }
-
-    async getUserWallets() {
-        const userToken = await ls.get('userToken');
-        if (!userToken) {
-            throw userToken
-        }
-
-        const params = {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': userToken
-            }
-        }
-
-        const response = await fetch(`${Config.SERVER_URL}/users/user-wallets`, params);
-        if (!response) {
-            throw response
-        }
-
-        const responseJson = await response.json();
-
-        await this.setStateAsync({
-            walletsList: responseJson,
-            activeWalletAddress: responseJson[0].address,
-        });
-
-        return this.getTransaction(this.state.walletsList[0].address).done();
-    }
-
-    async getTransaction(address) {
-        await this.setStateAsync({
-            isLoaderPage: true,
-        });
-
-        const userToken = await ls.get('userToken');
-        if (!userToken) {
-            throw userToken
-        }
-
-        const params = {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': userToken
-            }
-        }
-
-        const response = await fetch(`${Config.SERVER_URL}/transactions/${address}`, params);
-        if (!response) {
-            throw response
-        }
-
-        const responseJson = await response.json();
-
-        await this.setStateAsync({
-            transactionsData: responseJson,
-            isLoaderPage: false,
+        this.props.transactionsStore.getTransactions({
+            address: this.props.walletsStore.walletsList[0].address,
+            selectedWalletIndex: 0
         });
     }
 
@@ -118,47 +61,14 @@ export default class SettingsScreen extends React.Component {
     }
 
     changeWallet(e) {
-        this.setState({
-            activeWalletIndex: e,
-            activeWalletAddress: this.state.walletsList[e].address
-        });
-        this.getTransaction(this.state.walletsList[e].address);
-    }
-
-    async refreshTransactions() {
-        await this.setStateAsync({
-            isRefreshShow: true,
-        });
-
-        const userToken = await ls.get('userToken');
-        if (!userToken) {
-            throw userToken
-        }
-
-        const params = {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': userToken
-            }
-        }
-
-        const response = await fetch(`${Config.SERVER_URL}/transactions/${this.state.walletsList[this.state.activeWalletIndex].address}`, params);
-        if (!response) {
-            throw response
-        }
-
-        const responseJson = await response.json();
-
-        await this.setStateAsync({
-            transactionsData: responseJson,
-            isRefreshShow: false,
+        this.props.transactionsStore.getTransactions({
+            address: this.props.walletsStore.walletsList[e].address,
+            selectedWalletIndex: e
         });
     }
 
     render() {
-        if (this.state.isLoaderPage) {
+        if (this.props.transactionsStore.isLoader) {
             return (<Pageloader title="Loading transactions..." />);
         }
         return (
@@ -170,8 +80,8 @@ export default class SettingsScreen extends React.Component {
                     automaticallyAdjustContentInsets={false}
                     refreshControl={
                         <RefreshControl
-                            onRefresh={this.refreshTransactions}
-                            refreshing={this.state.isRefreshShow}
+                            onRefresh={() => this.props.transactionsStore.refreshTransactions()}
+                            refreshing={this.props.transactionsStore.isRefreshLoader}
                             tintColor="#000000"
                             colors={['#ff0000', '#00ff00', '#0000ff']}
                             progressBackgroundColor="#EBEBEB"
@@ -181,13 +91,13 @@ export default class SettingsScreen extends React.Component {
 
                     <View style={{ width: wp(100), display: 'flex', alignItems: 'center' }}>
                         <WalletsDropdownMenu 
-                            activeWalletIndex={this.state.activeWalletIndex}
-                            walletsList={this.state.walletsList}
+                            activeWalletIndex={this.props.transactionsStore.selectedWalletIndex}
+                            walletsList={this.props.walletsStore.walletsList}
                             changeWallet={this.changeWallet}
                         />
                         <TransactionBlock
-                            activeWalletAddress={this.state.activeWalletAddress}
-                            data={this.state.transactionsData}
+                            activeWalletAddress={this.props.transactionsStore.selectedWallet}
+                            data={this.props.transactionsStore.transactions}
                         />
                     </View>
 

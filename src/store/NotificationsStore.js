@@ -11,6 +11,9 @@ export default class NotificationsStore {
 
     @action async getNotifications() {
     	try {
+    		if (this.notifications.length !== 0) {
+    			return false;
+    		}
     		this.isLoader = true;
     		const userToken = await ls.get('userToken');
 	        if (!userToken) {
