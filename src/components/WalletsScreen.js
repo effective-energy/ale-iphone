@@ -1,22 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Button, Text, StatusBar, Image, Alert, Dimensions, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
+import { View, StyleSheet, StatusBar, ScrollView, RefreshControl } from 'react-native';
 import ls from 'react-native-local-storage';
-import SVGImage from 'react-native-remote-svg';
 import { observer, inject } from "mobx-react";
-
-import Config from '../config';
 
 import BottomNavigator from './layouts/BottomNavigator';
 import WalletsSlider from './layouts/WalletsSlider';
 import NewWalletBlock from './layouts/NewWalletBlock';
 import Pageloader from './layouts/Pageloader';
-
-function wp (percentage) {
-    const value = (percentage * viewportWidth) / 100;
-    return Math.round(value);
-}
-
-const { width: viewportWidth } = Dimensions.get('window');
 
 @inject("walletsStore")
 @observer
@@ -41,7 +31,7 @@ export default class WalletsScreen extends React.Component {
     }
 
     changePage(e) {
-        this.props.navigation.navigate(e, { transition: 'vertical' });
+        this.props.navigation.navigate(e);
     }
 
     requestMoney(e) {

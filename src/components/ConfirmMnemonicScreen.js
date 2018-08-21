@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, TextInput, Alert } from 'react-native';
+import { View, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, TextInput, Alert, ScrollView } from 'react-native';
 import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
 import CheckBox from './layouts/CheckBox';
@@ -113,58 +113,62 @@ export default class ConfirmMnemonicScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
-                <View style={{width: wp(80)}}>
-                    <Text
-                        style={{textAlign: 'center', color: '#091529', fontSize: 16}}
-                    >
-                        Type each word in the correct order to verify your recover phrase
-                    </Text>
-                    <View style={{marginTop: 20, marginBottom: 10}}>
-                        <TextInput
-                            placeholder={this.state.confirmMnemonicWords[0]+'th word'}
-                            placeholderTextColor="#ABB8C6"
-                            style={styles.textInput}
-                            onChangeText={(firstWord) => this.setState({firstWord})}
-                            value={this.state.firstWord}
-                        />
-                        <TextInput
-                            placeholder={this.state.confirmMnemonicWords[1]+'th word'}
-                            placeholderTextColor="#ABB8C6"
-                            style={styles.textInput}
-                            onChangeText={(secondWord) => this.setState({secondWord})}
-                            value={this.state.secondWord}
-                        />
-                        <TextInput
-                            placeholder={this.state.confirmMnemonicWords[2]+'th word'}
-                            placeholderTextColor="#ABB8C6"
-                            style={styles.textInput}
-                            onChangeText={(thirdWord) => this.setState({thirdWord})}
-                            value={this.state.thirdWord}
-                        />
-                    </View>
-                    <View>
-                        <CheckBox
-                            toggleCheckBox={() => this.confirmDevice(!this.state.isConfirmDeviceOnly)}
-                            isCheked={this.state.isConfirmDeviceOnly}
-                            value='I understand that my money are held securely on this device only, not on the company servers'
-                        />
-                        <CheckBox
-                            toggleCheckBox={() => this.confirmBackup(!this.state.isConfirmBackup)}
-                            isCheked={this.state.isConfirmBackup}
-                            value='I understand that if this application is moved to another device or deleted, my money can be only recovered with the backup phrase which were written down in a secure place'
-                        />
-                    </View>
-                    <View>
-                        <TouchableOpacity
-                            onPress={this.confirmMnemonic.bind(this)}
-                            style={{backgroundColor: '#D1D8DD', width: wp(80), padding: 10, borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10}}
+                <ScrollView
+                    refreshing={false}
+                >
+                    <View style={{width: wp(80)}}>
+                        <Text
+                            style={{textAlign: 'center', color: '#091529', fontSize: 16}}
                         >
-                            <Text style={{color: '#091529', fontSize: 18}}>
-                                Continue
-                            </Text>
-                        </TouchableOpacity>
+                            Type each word in the correct order to verify your recover phrase
+                        </Text>
+                        <View style={{marginTop: 20, marginBottom: 10}}>
+                            <TextInput
+                                placeholder={this.state.confirmMnemonicWords[0]+'th word'}
+                                placeholderTextColor="#ABB8C6"
+                                style={styles.textInput}
+                                onChangeText={(firstWord) => this.setState({firstWord})}
+                                value={this.state.firstWord}
+                            />
+                            <TextInput
+                                placeholder={this.state.confirmMnemonicWords[1]+'th word'}
+                                placeholderTextColor="#ABB8C6"
+                                style={styles.textInput}
+                                onChangeText={(secondWord) => this.setState({secondWord})}
+                                value={this.state.secondWord}
+                            />
+                            <TextInput
+                                placeholder={this.state.confirmMnemonicWords[2]+'th word'}
+                                placeholderTextColor="#ABB8C6"
+                                style={styles.textInput}
+                                onChangeText={(thirdWord) => this.setState({thirdWord})}
+                                value={this.state.thirdWord}
+                            />
+                        </View>
+                        <View>
+                            <CheckBox
+                                toggleCheckBox={() => this.confirmDevice(!this.state.isConfirmDeviceOnly)}
+                                isCheked={this.state.isConfirmDeviceOnly}
+                                value='I understand that my money are held securely on this device only, not on the company servers'
+                            />
+                            <CheckBox
+                                toggleCheckBox={() => this.confirmBackup(!this.state.isConfirmBackup)}
+                                isCheked={this.state.isConfirmBackup}
+                                value='I understand that if this application is moved to another device or deleted, my money can be only recovered with the backup phrase which were written down in a secure place'
+                            />
+                        </View>
+                        <View>
+                            <TouchableOpacity
+                                onPress={this.confirmMnemonic.bind(this)}
+                                style={{backgroundColor: '#D1D8DD', width: wp(80), padding: 10, borderRadius: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 10}}
+                            >
+                                <Text style={{color: '#091529', fontSize: 18}}>
+                                    Continue
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
-                </View>
+                </ScrollView>
             </View>
         );
     }

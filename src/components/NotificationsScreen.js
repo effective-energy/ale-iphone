@@ -106,8 +106,6 @@ export default class NotificationsScreen extends React.Component {
                         <RefreshControl
                             onRefresh={() => this.props.notificationsStore.refreshNotifications()}
                             refreshing={this.props.notificationsStore.isRefreshLoader}
-                            tintColor="#000000"
-                            colors={['#ff0000', '#00ff00', '#0000ff']}
                             progressBackgroundColor="#EBEBEB"
                         />
                     }
@@ -156,14 +154,12 @@ const styles = StyleSheet.create({
     },
     rowBack: {
         alignItems: 'center',
-        backgroundColor: 'red',
+        backgroundColor: '#F44336',
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
         padding: 15,
-        borderRadius: 20,
-        borderColor: '#E8EBEE',
-        borderWidth: 2
+        borderRadius: 5,
     },
     rowBack_text: {
         color: '#FFFFFF'

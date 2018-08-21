@@ -70,7 +70,11 @@ export default class SendMoneyScreen extends React.Component {
         }
 
         if (this.state.destinationAddress === '') {
-            return Alert.alert('Enter destination address')
+            return Alert.alert('Enter destination address');
+        }
+
+        if (this.state.senderAddress === this.state.destinationAddress) {
+            return Alert.alert('You can not send money to yourself');
         }
 
         ls.get('userToken').then((data) => {

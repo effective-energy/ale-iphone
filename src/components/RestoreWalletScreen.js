@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Dimensions, StatusBar, TouchableOpacity, Alert, TextInput } from 'react-native';
 import Image from 'react-native-remote-svg';
 import ls from 'react-native-local-storage';
+import { observer, inject } from "mobx-react";
 
 import Config from '../config';
 
@@ -12,6 +13,8 @@ function wp (percentage) {
 const { width: viewportWidth } = Dimensions.get('window');
 let screenWidth = wp(80);
 
+@inject("walletsStore")
+@observer
 export default class RestoreWalletScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -34,7 +37,10 @@ export default class RestoreWalletScreen extends React.Component {
         headerTintColor: '#ffbb00',
     };
 
+    //erode version primary pelican purse corn work balance quick help survey roof
+
     async restoreWallet() {
+        return this.props.walletsStore.restoreWallet(this.state.mnemonicPhrase);
         if (this.state.mnemonicPhrase === '') {
             return Alert.alert('Enter mnemonic phrase');
         }
@@ -57,7 +63,7 @@ export default class RestoreWalletScreen extends React.Component {
                 'Authorization': userToken
             },
             body: JSON.stringify({
-                Seed: mnemonicPhrase
+                seed: mnemonicPhrase
             }),
         };
 
@@ -68,8 +74,8 @@ export default class RestoreWalletScreen extends React.Component {
 
         const responseJson = await response.json();
 
-        if (responseJson.message !== 'Wallet successfully restored!') {
-            return Alert.alert('Wallet not found')
+        if (responseJson.message === 'Incorrect mnemonic!') {
+            return Alert.alert('Wallet not found');
         } else {
             Alert.alert('Wallet successfully restored!');
             return this.props.navigation.navigate('Wallets');

@@ -28,7 +28,7 @@ export default class WalletsSlider extends React.Component {
 
     _renderItem ({item}) {
         return (
-            <View style={{ backgroundColor: '#e7ebee', padding: 20, borderRadius: 6, height: 150 }}>
+            <View style={{ backgroundColor: '#e7ebee', padding: 20, borderRadius: 6 }}>
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={{ marginBottom: 20 }}>
                         <Text style={{ backgroundColor: 'transparent', color: '#091628', fontSize: 18, textAlign: 'left' }}>{ item.name }</Text>
@@ -98,31 +98,4 @@ export default class WalletsSlider extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 0.5
-    },
-    contentContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#cccccc'
-    },
-    sliderRow: {
-        backgroundColor: '#cccccc',
-        height: 170
-    },
-    sliderWalletBlock: {
-        flex: 1,
-        alignItems: 'center',
-        marginTop: 20
-    },
-    sliderWalletBlock_name: {
-        fontSize: 20,
-        marginBottom: 10
-    },
-    sliderWalletBlock_actions: {
-        flex: 1,
-        flexDirection: 'row'
-    }
-});
+const styles = StyleSheet.create({});
