@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar, ScrollView, RefreshControl } from 'react-native';
+import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Alert } from 'react-native';
 import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
+import { when } from "mobx";
 
 import BottomNavigator from './layouts/BottomNavigator';
 import WalletsSlider from './layouts/WalletsSlider';
@@ -25,6 +26,10 @@ export default class WalletsScreen extends React.Component {
             statusBarBackgroundColor: '#ffffff'
         };
     };
+
+    watcher = when(() => this.props.walletsStore.isEmptyWallets === true, () => {
+        this.props.navigation.push('NewWallet');
+    });
 
     componentDidMount() {
         this.props.walletsStore.initWallets();

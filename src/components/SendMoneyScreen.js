@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Dimensions, Platform, Image, StatusBar, TextInp
 import ls from 'react-native-local-storage';
 import SVGImage from 'react-native-remote-svg';
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import Spinner from './layouts/Spinner';
 
 import Config from '../config';
 
@@ -22,6 +23,7 @@ export default class SendMoneyScreen extends React.Component {
             destinationAddress: '',
             senderAddress: this.props.navigation.state.params.walletAddress,
             modalVisible: false,
+            isShowSpinner: false,
         };
 
         this.sendMoney = this.sendMoney.bind(this);
@@ -77,6 +79,10 @@ export default class SendMoneyScreen extends React.Component {
             return Alert.alert('You can not send money to yourself');
         }
 
+        this.setState({
+            isShowSpinner: true,
+        });
+
         ls.get('userToken').then((data) => {
             return fetch('https://ale-demo-4550.nodechef.com/transactions/send', {
                 method: 'POST',
@@ -93,6 +99,9 @@ export default class SendMoneyScreen extends React.Component {
             })
             .then((response) => response.json())
             .then((responseJson) => {
+                this.setState({
+                    isShowSpinner: false,
+                });
                 if (responseJson.message === 'Success send') {
                     return this.props.navigation.navigate('SuccessPayment');
                 } else {
@@ -100,6 +109,9 @@ export default class SendMoneyScreen extends React.Component {
                 }
             })
             .catch((error) => {
+                this.setState({
+                    isShowSpinner: false,
+                });
                 console.error(error);
             });
         });
@@ -116,6 +128,7 @@ export default class SendMoneyScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
             	<StatusBar barStyle='light-content' />
+                { this.state.isShowSpinner === true && <Spinner />}
             	<View>
             		<View>
                         <TextInput

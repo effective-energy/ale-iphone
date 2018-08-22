@@ -41,7 +41,7 @@ export default class LoginScreen extends React.Component {
     };
 
     watcher = when(() => this.props.userStore.isLogin === true, () => {
-        this.props.navigation.push('Wallets');
+        this.props.navigation.navigate('Wallets');
     });
 
     watcher = when(() => this.props.userStore.isTwoFactor === true, () => {

@@ -9,11 +9,13 @@ export default class WalletsStore {
 	@observable walletsList = [];
     @observable isLoaderPage = false;
     @observable isRefreshLoader = false;
+    @observable isEmptyWallets = false;
     @observable mnemonicPhrase = [];
 
 	@action async initWallets () {
 		try {
             this.isLoaderPage = true;
+            this.isEmptyWallets = false;
 			const userToken = await ls.get('userToken');
             if (!userToken) {
                 throw userToken
@@ -34,6 +36,10 @@ export default class WalletsStore {
             }
 
             const responseJson = await response.json();
+
+            if (responseJson.length === 0) {
+                return this.isEmptyWallets = true;
+            }
 
             this.walletsList = responseJson;
             this.isLoaderPage = false;

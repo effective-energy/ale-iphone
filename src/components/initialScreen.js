@@ -11,6 +11,12 @@ export default class InitialScreen extends React.Component {
 	    this.state = {};
     }
 
+    static navigationOptions = ({navigation}) => {
+        return {
+            header: null,
+        };
+    };
+
     componentDidMount() {
         this.initialData();
     }

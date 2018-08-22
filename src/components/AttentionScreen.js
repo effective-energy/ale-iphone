@@ -40,7 +40,7 @@ export default class AttentionScreen extends React.Component {
                             source={require('../assets/images/icons/icon_lock.svg')}
                         />
                         <Text style={{fontSize: 16, marginBottom: 20, textAlign: 'center', color: '#091529'}}>
-                            On the following screen, you will see a set of X random words. This is your wallet backup phrase. It can be entered in any version of ALE application in order to back up or restore your wallet's funds and private key.
+                            On the following screen, you will see a set of 12 random words. This is your wallet backup phrase. It can be entered in any version of ALE application in order to back up or restore your wallet's funds and private key.
                         </Text>
                         <Text style={{fontSize: 16, textAlign: 'center', marginBottom: 20, color: '#091529'}}>
                             Make sure nobody looks into your screen unless you want them to have access to your funds.
