@@ -14,7 +14,7 @@ export default class TransactionsStore {
 
     @action async getTransactions (data: Object) {
     	try {
-    		if (this.transactions.length !== 0) {
+    		if (this.transactions.length !== 0 && this.selectedWallet === data.address) {
     			return false;
     		}
     		this.isLoader = true;
