@@ -2,6 +2,8 @@ import React from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, AlertIOS, Alert } from 'react-native';
 import SVGImage from 'react-native-remote-svg';
 import ls from 'react-native-local-storage';
+import { observer, inject } from "mobx-react";
+import { when } from "mobx";
 
 import BottomNavigator from './layouts/BottomNavigator';
 
@@ -12,6 +14,8 @@ function wp (percentage) {
 
 const { width: viewportWidth } = Dimensions.get('window');
 
+@inject("walletsStore")
+@observer
 export default class WalletDetailsScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -35,6 +39,18 @@ export default class WalletDetailsScreen extends React.Component {
             headerTintColor: '#ffbb00',
         };
     };
+
+    watcher = when(() => this.props.walletsStore.isSuccessDeletedWallet === true, () => {
+        Alert.alert('Wallet successfully deleted')
+        this.props.navigation.push('Wallets');
+    });
+
+    watcher = when(() => this.props.walletsStore.isEmptyWallets === true, () => {
+        Alert.alert('Wallet successfully deleted. You need to create a new wallet')
+        this.props.navigation.push('NewWallet', {
+            disableBackArrow: true
+        });
+    });
 
     componentDidMount() {
         const { params } = this.props.navigation.state;
@@ -120,29 +136,7 @@ export default class WalletDetailsScreen extends React.Component {
         if (walletName !== params.walletData.name) {
             return Alert.alert('Incorrect wallet name');
         }
-
-        ls.get('userToken').then((data) => {
-            return fetch('https://ale-demo-4550.nodechef.com/wallet/'+params.walletData.address, {
-                method: 'DELETE',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data
-                }
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                if (responseJson.message === 'Wallet successfully disabled by this user') {
-                    Alert.alert('Wallet successfully deleted');
-                } else {
-                    Alert.alert(responseJson.message);
-                }
-                return this.props.navigation.navigate('Wallets');
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        });
+        return this.props.walletsStore.deleteWallet(params.walletData.address);
     }
 
     render() {

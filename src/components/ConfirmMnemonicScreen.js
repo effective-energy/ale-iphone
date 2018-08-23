@@ -4,6 +4,7 @@ import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
 import CheckBox from './layouts/CheckBox';
 import Config from '../config';
+import { when } from "mobx";
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -34,6 +35,11 @@ export default class ConfirmMnemonicScreen extends React.Component {
             title: 'Confirm the key',
         };
     };
+
+    watcher = when(() => this.props.walletsStore.isSuccessCreateWallet === true, () => {
+        Alert.alert('Wallet successfully create');
+        this.props.navigation.navigate('Wallets');
+    });
 
     componentDidMount () {
         this.generateConfirmWords();
@@ -81,31 +87,9 @@ export default class ConfirmMnemonicScreen extends React.Component {
             return Alert.alert('Agree with all conditions');
         }
 
-        ls.get('userToken').then((data) => {
-            fetch(`${Config.SERVER_URL}/wallet/new`, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': data
-                },
-                body: JSON.stringify({
-                    name: this.props.navigation.state.params.walletName,
-                    seed: this.props.navigation.state.params.mnemonicPhrase,
-                }),
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                if (responseJson.message === 'New wallet success create!') {
-                    Alert.alert(responseJson.message)
-                    return this.props.navigation.navigate('Wallets');
-                } else {
-                    return Alert.alert(responseJson.message);
-                }
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        this.props.walletsStore.createNewWallet({
+            name: this.props.navigation.state.params.walletName,
+            seed: this.props.navigation.state.params.mnemonicPhrase
         });
     }
 

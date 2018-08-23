@@ -19,16 +19,22 @@ export default class NewWalletScreen extends React.Component {
         this.createNewWallet = this.createNewWallet.bind(this);
     }
 
-    static navigationOptions = {
-        title: 'Add new wallet',
-        headerTitleStyle: {
-            color: '#ffbb00'
-        },
-        headerStyle: {
-            backgroundColor: '#08142F',
-            borderBottomWidth: 0,
-        },
-        headerTintColor: '#ffbb00',
+    static navigationOptions = ({navigation}) => {
+        const {params = {}} = navigation.state;
+
+        let isHideBackArrow = params.disableBackArrow === true ? null : undefined;
+        return {
+            title: 'Add new wallet',
+            headerLeft: isHideBackArrow,
+            headerTitleStyle: {
+                color: '#ffbb00'
+            },
+            headerStyle: {
+                backgroundColor: '#08142F',
+                borderBottomWidth: 0,
+            },
+            headerTintColor: '#ffbb00',
+        };
     };
 
     restoreWallet() {

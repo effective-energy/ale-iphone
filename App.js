@@ -2,7 +2,7 @@ import React from 'react';
 
 import { createStackNavigator } from 'react-navigation';
 import { NavigatorIOS, YellowBox, Alert, NetInfo, StyleSheet, View, Text, StatusBar } from 'react-native';
-YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader', 'Warning']);
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader', 'Warning', 'Class RCTCxxModule']);
 
 import ls from 'react-native-local-storage';
 

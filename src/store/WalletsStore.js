@@ -11,6 +11,8 @@ export default class WalletsStore {
     @observable isRefreshLoader = false;
     @observable isEmptyWallets = false;
     @observable mnemonicPhrase = [];
+    @observable isSuccessDeletedWallet = false;
+    @observable isSuccessCreateWallet = false;
 
 	@action async initWallets () {
 		try {
@@ -48,6 +50,46 @@ export default class WalletsStore {
 			console.log(error);
 		}
 	}
+
+    @action async createNewWallet(data: Object) {
+        try {
+            this.isSuccessCreateWallet = false;
+            const userToken = await ls.get('userToken');
+            if (!userToken) {
+                throw userToken
+            }
+
+            const params = {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': userToken
+                },
+                body: JSON.stringify({
+                    name: data.name,
+                    seed: data.seed,
+                }),
+            }
+
+            const response = await fetch(`${Config.SERVER_URL}/wallet/new`, params);
+            if (!response) {
+                throw response
+            }
+
+            const responseJson = await response.json();
+
+            if (responseJson.message === 'New wallet success create!') {
+                this.initWallets();
+                this.isSuccessCreateWallet = true;
+            } else {
+                return Alert.alert(responseJson.message);
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     @action async refreshWallets () {
         try {
@@ -150,6 +192,45 @@ export default class WalletsStore {
             }
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    @action async deleteWallet (walletAddress) {
+        try {
+            this.isSuccessDeletedWallet = false;
+            this.isEmptyWallets = false;
+
+            const userToken = await ls.get('userToken');
+            if (!userToken) {
+                throw userToken
+            }
+
+            const params = {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': userToken
+                },
+            }
+
+            const response = await fetch(`${Config.SERVER_URL}/wallet/${walletAddress}`, params);
+            if (!response) {
+                throw response
+            }
+
+            const responseJson = await response.json();
+            if (responseJson.message === 'Wallet successfully disabled by this user') {
+                if (this.walletsList.length !== 1) {
+                    this.isSuccessDeletedWallet = true;
+                } else {
+                    this.isEmptyWallets = true;
+                }
+            } else {
+                Alert.alert(responseJson.message);
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 }
