@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, StatusBar, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, StatusBar, TouchableOpacity } from 'react-native';
 import Image from 'react-native-remote-svg';
 import I18n from '../i18n/index';
 
@@ -66,9 +66,15 @@ export default class ChangeLanguageScreen extends React.Component {
         }, this);
 
         return (
-            <View style={styles.pageContainer}>
-            	<StatusBar barStyle='dark-content' />
-            	<View style={{ marginTop: 20 }}>
+            <View
+                style={styles.pageContainer}
+            >
+            	<StatusBar
+                    barStyle='dark-content'
+                />
+            	<View
+                    style={{ marginTop: 20 }}
+                >
                     {languagesList}
                 </View>
             </View>

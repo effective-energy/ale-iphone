@@ -9,10 +9,22 @@ export default class Pageloader extends React.Component {
 
     render() {
     	return (
-    		<View style={styles.loading}>
-                <StatusBar barStyle='dark-content' />
-                <ActivityIndicator size="large" color="#CCCCCC" style={styles.spinner} />
-                <Text style={styles.loadingTitle}>{this.props.title}</Text>
+    		<View
+                style={styles.loading}
+            >
+                <StatusBar
+                    barStyle='dark-content'
+                />
+                <ActivityIndicator
+                    size="large"
+                    color="#CCCCCC" 
+                    style={styles.spinner}
+                />
+                <Text
+                    style={styles.loadingTitle}
+                >
+                    {this.props.title}
+                </Text>
             </View>
     	)
     }

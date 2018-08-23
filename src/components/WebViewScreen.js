@@ -18,7 +18,9 @@ export default class WebViewScreen extends React.Component {
     render() {
     	const { params } = this.props.navigation.state;
     	return (
-    		<WebView source={{uri: params.url}} />
+    		<WebView
+                source={{uri: params.url}}
+            />
     	);
     }
 }

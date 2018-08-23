@@ -1,9 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Dimensions, Platform, Alert, Image, TouchableHighlight, TouchableOpacity, AlertIOS } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, TouchableHighlight, TouchableOpacity } from 'react-native';
 import SVGImage from 'react-native-remote-svg';
-import ls from 'react-native-local-storage';
 import isIphoneX from '../../config/isIphoneX';
-
 import Carousel from 'react-native-snap-carousel';
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
@@ -28,7 +26,7 @@ export default class WalletsSlider extends React.Component {
 
     _renderItem ({item}) {
         return (
-            <View style={{ backgroundColor: '#e7ebee', padding: 20, borderRadius: 6 }}>
+            <View style={styles.walletsSlider_container}>
                 <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={{ marginBottom: 20 }}>
                         <Text style={{ backgroundColor: 'transparent', color: '#091628', fontSize: 18, textAlign: 'left' }}>{ item.name }</Text>
@@ -87,7 +85,7 @@ export default class WalletsSlider extends React.Component {
                     loop={false}
                     layoutCardOffset={50}
                     hasParallaxImages={true}
-                    containerCustomStyle={{ marginTop: isIphoneX === true ? 80 : 50, overflow: 'visible' }}
+                    containerCustomStyle={styles.walletsSlider_container_custom}
                     data={this.props.walletsList}
                     renderItem={item => this._renderItem(item)}
                     sliderWidth={sliderWidth}
@@ -98,4 +96,14 @@ export default class WalletsSlider extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    walletsSlider_container: {
+        backgroundColor: '#e7ebee',
+        padding: 20,
+        borderRadius: 6,
+    },
+    walletsSlider_container_custom: {
+        marginTop: isIphoneX === true ? 80 : 50,
+        overflow: 'visible',
+    },
+});

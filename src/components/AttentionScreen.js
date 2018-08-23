@@ -29,20 +29,24 @@ export default class AttentionScreen extends React.Component {
 
     render() {
     	return (
-    		<View style={styles.pageContainer}>
-                <StatusBar barStyle='dark-content' />
+    		<View
+                style={styles.pageContainer}
+            >
+                <StatusBar
+                    barStyle='dark-content'
+                />
                 <ScrollView
                     refreshing={false}
                 >
                     <View style={styles.pageRow}>
                         <SVGImage
-                            style={{width: 120, height: 120, marginBottom: 10}}
+                            style={styles.lockIcon}
                             source={require('../assets/images/icons/icon_lock.svg')}
                         />
-                        <Text style={{fontSize: 16, marginBottom: 20, textAlign: 'center', color: '#091529'}}>
+                        <Text style={styles.attention_text}>
                             On the following screen, you will see a set of 12 random words. This is your wallet backup phrase. It can be entered in any version of ALE application in order to back up or restore your wallet's funds and private key.
                         </Text>
-                        <Text style={{fontSize: 16, textAlign: 'center', marginBottom: 20, color: '#091529'}}>
+                        <Text style={styles.attention_text}>
                             Make sure nobody looks into your screen unless you want them to have access to your funds.
                         </Text>
                         <TouchableOpacity
@@ -72,6 +76,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 20
     },
+    lockIcon: {
+        width: 120,
+        height: 120,
+        marginBottom: 10,
+    },
     buttonBlock: {
         backgroundColor: '#D1D8DD',
         width: wp(80),
@@ -85,5 +94,11 @@ const styles = StyleSheet.create({
     buttonBlock_text: {
         color: '#091529',
         fontSize: 18
+    },
+    attention_text: {
+        fontSize: 16,
+        marginBottom: 20,
+        textAlign: 'center',
+        color: '#091529',
     }
 });

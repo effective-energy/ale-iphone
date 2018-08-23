@@ -13,6 +13,7 @@ export default class UserStore {
     @observable isLogin = false;
     @observable isUpdatePassword = false;
     @observable isTwoFactor = false;
+    @observable isIncorrectPassword = false;
 
     @action async login(data: Object) {
     	try {
@@ -84,6 +85,7 @@ export default class UserStore {
     @action async changePassword(data: Object) {
         try {
             this.isUpdatePassword = false;
+            this.isIncorrectPassword = false;
             const userToken = await ls.get('userToken');
             if (!userToken) {
                 throw userToken
@@ -113,6 +115,7 @@ export default class UserStore {
                 Alert.alert(responseJson.message);
                 this.isUpdatePassword = true;
             } else {
+                this.isIncorrectPassword = true;
                 this.isUpdatePassword = false;
                 Alert.alert(responseJson.message);
             }

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, StatusBar, TextInput, Dimensions, TouchableOpac
 import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
 import { when } from "mobx";
+import Spinner from './layouts/Spinner';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -20,6 +21,7 @@ export default class ChangePasswordScreen extends React.Component {
             oldPassword: '',
             newPassword: '',
             newPasswordConfirm: '',
+            isShowSpinner: false,
         };
 
         this.changePassowrd = this.changePassowrd.bind(this);
@@ -32,7 +34,16 @@ export default class ChangePasswordScreen extends React.Component {
     };
 
     watcher = when(() => this.props.userStore.isUpdatePassword === true, () => {
+        this.setState({
+            isShowSpinner: false,
+        });
         this.props.navigation.push('Settings');
+    });
+
+    watcher = when(() => this.props.userStore.isIncorrectPassword === true, () => {
+        this.setState({
+            isShowSpinner: false,
+        });
     });
 
     changePassowrd() {
@@ -52,6 +63,10 @@ export default class ChangePasswordScreen extends React.Component {
             return Alert.alert('New passwords do not match');
         }
 
+        this.setState({
+            isShowSpinner: true,
+        });
+
         this.props.userStore.changePassword({
             old: this.state.oldPassword,
             new: this.state.newPassword
@@ -60,8 +75,13 @@ export default class ChangePasswordScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.pageContainer}>
-            	<StatusBar barStyle='dark-content' />
+            <View
+                style={styles.pageContainer}
+            >
+            	<StatusBar
+                    barStyle='dark-content'
+                />
+                { this.state.isShowSpinner === true && <Spinner />}
             	<View>
                     <TextInput
                         secureTextEntry={true}
@@ -127,7 +147,7 @@ const styles = StyleSheet.create({
     },
     buttonBlock: {
         backgroundColor: '#D1D8DD',
-        borderRadius: 10,
+        borderRadius: 5,
         padding: 10,
         width: wp(80),
         marginBottom: 20

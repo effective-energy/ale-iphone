@@ -20,10 +20,10 @@ export default class CheckBox extends React.Component {
     	return (
     		<TouchableOpacity
                 onPress={this.props.toggleCheckBox}
-                style={{ width: wp(70), display: 'flex', flexDirection: 'row', alignItems: 'flex-start', marginBottom: 20 }}
+                style={styles.checkBoxContainer}
             >
                 <View
-                    style={styles.checkBoxContainer}
+                    style={styles.checkBoxRow}
                 >
                     <SVGImage
                         source={isCheked}
@@ -38,6 +38,13 @@ export default class CheckBox extends React.Component {
 
 const styles = StyleSheet.create({
     checkBoxContainer: {
+        width: wp(70),
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        marginBottom: 20,
+    },
+    checkBoxRow: {
         width: 25,
         height: 25,
         backgroundColor: '#D1D8DD',

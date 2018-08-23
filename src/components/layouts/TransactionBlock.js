@@ -27,7 +27,7 @@ export default class TransactionBlock extends React.Component {
                         <View style={[styles.transactionBlockType, {backgroundColor: transactionTypeBlockColor}]}>
                             <Image
                                 source={transactionTypeBlockImage}
-                                style={{ width: 20, height: 20 }}
+                                style={styles.transactionBlockIcon}
                             />
                         </View>
                         <View style={styles.transactionBlockInfo}>
@@ -44,14 +44,14 @@ export default class TransactionBlock extends React.Component {
 
         if (this.props.data.length === 0) {
             return (
-                <View style={{ marginTop: 20 }}>
-                    <Text style={{ fontSize: 18 }}>Transactions not found</Text>
+                <View style={styles.notFoundBlock}>
+                    <Text style={styles.notFoundBlock_text}>Transactions not found</Text>
                 </View>
             );
         }
 
         return (
-            <View style={{ display: 'flex', alignItems: 'center', marginTop: 20 }}>
+            <View style={styles.transactionBlock}>
                 {transactions}
             </View>
         );
@@ -59,6 +59,17 @@ export default class TransactionBlock extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    notFoundBlock: {
+        marginTop: 20
+    },
+    notFoundBlock_text: {
+        fontSize: 18
+    },
+    transactionBlock: {
+        display: 'flex',
+        alignItems: 'center',
+        marginTop: 20
+    },
     transactionBlockContainer: {
         padding: 10,
         backgroundColor: '#E8EBEE',
@@ -82,6 +93,10 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    transactionBlockIcon: {
+        width: 20,
+        height: 20
     },
     transactionBlockType: {
         width: 40,

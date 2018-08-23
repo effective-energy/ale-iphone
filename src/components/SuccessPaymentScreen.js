@@ -18,9 +18,12 @@ export default class SuccessPaymentScreen extends React.Component {
 
         this.backToWalletsList = this.backToWalletsList.bind(this);
     }
-    
-    static navigationOptions = {
-        title: 'Congratulations!'
+
+    static navigationOptions = ({navigation}) => {
+        return {
+            title: 'Congratulations!',
+            headerLeft: null,
+        };
     };
 
     backToWalletsList() {
@@ -29,16 +32,28 @@ export default class SuccessPaymentScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.pageContainer}>
-                <StatusBar barStyle='dark-content' />
-                <View style={{ marginTop: 50, width: screenWidth, display: 'flex', alignItems: 'center' }}>
-                    <Text style={{ fontSize: 20, textAlign: 'center' }}>Your payment{'\n'}was successfully sent</Text>
+            <View
+                style={styles.pageContainer}
+            >
+                <StatusBar
+                    barStyle='dark-content'
+                />
+                <View
+                    style={styles.pageRow}
+                >
+                    <Text
+                        style={{ fontSize: 20, textAlign: 'center' }}
+                    >
+                        Your payment{'\n'}was successfully sent
+                    </Text>
                     <Image
                         source={require('../assets/images/icons/success_payment.svg')}
                         style={styles.paymentIcon}
                     />
                 </View>
-                <View style={{ backgroundColor: '#152038', width: screenWidth, padding: 5, borderRadius: 15, marginTop: 50 }}>
+                <View
+                    style={{ backgroundColor: '#152038', width: screenWidth, padding: 5, borderRadius: 15, marginTop: 50 }}
+                >
                     <Button
                         title="Back to wallets"
                         onPress={this.backToWalletsList}
@@ -54,11 +69,17 @@ const styles = StyleSheet.create({
     pageContainer: {
         flex: 1,
         backgroundColor: '#e8ebee',
-        alignItems: 'center'
+        alignItems: 'center',
+    },
+    pageRow: {
+        marginTop: 50,
+        width: screenWidth,
+        display: 'flex',
+        alignItems: 'center',
     },
     paymentIcon: {
         width: wp(80),
         height: wp(70),
-        marginTop: 20
+        marginTop: 20,
     }
 });

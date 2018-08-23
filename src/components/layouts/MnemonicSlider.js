@@ -14,14 +14,14 @@ export default class MnemonicSlider extends React.Component {
                 <TouchableOpacity onPress={() => this.props.prevMnemonicWord()}>
                     <SVGImage
                         source={require('../../assets/images/icons/back-arrow.svg')}
-                        style={{width: 20, height: 20}}
+                        style={styles.sliderIcon}
                     />
                 </TouchableOpacity>
-                <Text style={{color: '#091529', fontSize: 16}}>{this.props.mnemonicPhrase[this.props.currentWord]}</Text>
+                <Text style={styles.slideCurrentWord}>{this.props.mnemonicPhrase[this.props.currentWord]}</Text>
                 <TouchableOpacity onPress={() => this.props.nextMnemonicWord()}>
                     <SVGImage
                         source={require('../../assets/images/icons/next-arrow.svg')}
-                        style={{width: 20, height: 20}}
+                        style={styles.sliderIcon}
                     />
                 </TouchableOpacity>
             </View>
@@ -37,4 +37,12 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
     },
+    sliderIcon: {
+       width: 20,
+       height: 20 
+    },
+    slideCurrentWord: {
+        color: '#091529',
+        fontSize: 16
+    }
 });

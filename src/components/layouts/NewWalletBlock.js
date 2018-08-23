@@ -24,7 +24,7 @@ export default class NewWalletBlock extends React.Component {
                     onPress={this.props.createNewWallet}
                 >
                     <Image
-                        style={{width: wp(7), height: wp(7), marginRight: 10}}
+                        style={styles.blockIcon}
                         source={require('../../assets/images/icons/icon_new-wallet.svg')}
                     />
                     <Text
@@ -55,5 +55,10 @@ const styles = StyleSheet.create({
         fontSize: wp(5),
         fontWeight: 'bold',
         textAlign: 'center'
+    },
+    blockIcon: {
+        width: wp(7),
+        height: wp(7),
+        marginRight: 10
     }
 });
