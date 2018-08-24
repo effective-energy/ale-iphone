@@ -1,23 +1,23 @@
 dependencies: \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Modules/RCTDevSettings.mm \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Modules/RCTDevSettings.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTBridge.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTDefines.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTBridgeModule.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTFrameUpdate.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTInvalidating.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JavaScriptCore.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JSCWrapper.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTBridge+Private.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTEventDispatcher.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Modules/RCTJSCSamplingProfiler.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTLog.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTAssert.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTUtils.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/DevSupport/RCTPackagerClient.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Profiler/RCTProfile.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/DevSupport/RCTPackagerConnection.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/DevSupport/RCTInspectorDevServerHelper.h \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Inspector/RCTInspectorPackagerConnection.h
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Modules/RCTDevSettings.mm \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Modules/RCTDevSettings.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JavaScriptCore.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JSCWrapper.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTBridge+Private.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Modules/RCTJSCSamplingProfiler.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/DevSupport/RCTPackagerClient.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Profiler/RCTProfile.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/DevSupport/RCTPackagerConnection.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/DevSupport/RCTInspectorDevServerHelper.h \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Inspector/RCTInspectorPackagerConnection.h

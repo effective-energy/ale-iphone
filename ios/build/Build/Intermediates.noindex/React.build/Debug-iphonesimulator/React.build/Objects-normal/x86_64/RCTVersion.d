@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTVersion.m \
-  /Users/voroncov/Desktop/ai/ale-iphone/node_modules/react-native/React/Base/RCTVersion.h
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTVersion.m \
+  /Users/whoami/Desktop/Projects/ale-iphone/node_modules/react-native/React/Base/RCTVersion.h

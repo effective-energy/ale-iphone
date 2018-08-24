@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, Image, ScrollView, RefreshControl, Share, Linking, Modal } from 'react-native';
 import ImageSVG from 'react-native-remote-svg';
 import ImagePicker from 'react-native-image-picker';
+import isIphoneX from '../config/isIphoneX';
 
 import ls from 'react-native-local-storage';
 
@@ -237,7 +238,7 @@ export default class SettingsScreen extends React.Component {
                 </Modal>
 
                 <ScrollView
-                    contentInset={{bottom:80}}
+                    contentInset={{bottom: isIphoneX === true ? 104 : 80}}
                     automaticallyAdjustContentInsets={false}
                 >
                     <View

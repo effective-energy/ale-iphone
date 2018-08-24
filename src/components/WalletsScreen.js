@@ -3,6 +3,7 @@ import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Alert } from '
 import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
 import { when } from "mobx";
+import isIphoneX from '../config/isIphoneX';
 
 import BottomNavigator from './layouts/BottomNavigator';
 import WalletsSlider from './layouts/WalletsSlider';
@@ -71,7 +72,7 @@ export default class WalletsScreen extends React.Component {
                     barStyle='light-content'
                 />
                 <ScrollView
-                    contentInset={{bottom:80}}
+                    contentInset={{bottom: isIphoneX === true ? 104 : 80}}
                     automaticallyAdjustContentInsets={false}
                     refreshControl={
                         <RefreshControl

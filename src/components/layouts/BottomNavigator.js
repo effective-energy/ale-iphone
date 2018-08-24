@@ -80,20 +80,21 @@ export default class BottomNavigator extends React.Component {
 const styles = StyleSheet.create({
     navigationContainer: {
         width: '100%',
+        height: isIphoneX === true ? 94 : 60,
         position: 'absolute',
         bottom: 0,
         flexDirection: 'row',
         flex: 1,
-        backgroundColor: '#ffffff',
-        height: 63,
         borderTopColor: '#e8ebee',
-        borderTopWidth: 1,
-        minHeight: 63
+        borderTopWidth: 2,
+        backgroundColor: '#ffffff',
     },
     navigationItem: {
         width: '25%',
+        height: 60,
         flex: 1,
         flexDirection: 'column',
+        maxHeight: 60,
         alignItems: 'center',
         justifyContent: 'space-around',
         backgroundColor: '#ffffff',
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         position: 'relative',
         bottom: 2,
-        fontSize: wp(4)
+        fontSize: wp(3.5)
     },
     itemTitleActive: {
         color: '#FFBB00'

@@ -6,6 +6,7 @@ import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
 import { observer, inject } from "mobx-react";
 import BottomNavigator from './layouts/BottomNavigator';
 import Pageloader from './layouts/Pageloader';
+import isIphoneX from '../config/isIphoneX';
 
 import Config from '../config';
 
@@ -100,7 +101,7 @@ export default class NotificationsScreen extends React.Component {
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
                 <ScrollView
-                    contentInset={{bottom:80}}
+                    contentInset={{bottom: isIphoneX === true ? 104 : 80}}
                     automaticallyAdjustContentInsets={false}
                     refreshControl={
                         <RefreshControl
