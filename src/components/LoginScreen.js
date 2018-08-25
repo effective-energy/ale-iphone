@@ -96,8 +96,11 @@ export default class LoginScreen extends React.Component {
                             style={styles.emailInput}
                             onChangeText={(userEmail) => this.setState({userEmail})}
                             value={this.state.userEmail}
+                            returnKeyType = { "next" }
+                            onSubmitEditing={() => { this.passwordTextInput.focus(); }}
                         />
                         <TextInput
+                            ref={(input) => { this.passwordTextInput = input; }}
                         	secureTextEntry={true}
                         	placeholder="Your password"
                         	placeholderTextColor="#455578"

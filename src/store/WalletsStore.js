@@ -13,6 +13,7 @@ export default class WalletsStore {
     @observable mnemonicPhrase = [];
     @observable isSuccessDeletedWallet = false;
     @observable isSuccessCreateWallet = false;
+    @observable isErrorCreateWallet = false;
 
 	@action async initWallets () {
 		try {
@@ -54,6 +55,7 @@ export default class WalletsStore {
     @action async createNewWallet(data: Object) {
         try {
             this.isSuccessCreateWallet = false;
+            this.isErrorCreateWallet = false;
             const userToken = await ls.get('userToken');
             if (!userToken) {
                 throw userToken
@@ -83,10 +85,12 @@ export default class WalletsStore {
                 this.initWallets();
                 this.isSuccessCreateWallet = true;
             } else {
+                this.isErrorCreateWallet = true;
                 return Alert.alert(responseJson.message);
             }
 
         } catch (error) {
+            this.isErrorCreateWallet = true;
             console.log(error);
         }
     }

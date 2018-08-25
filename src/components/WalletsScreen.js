@@ -29,7 +29,9 @@ export default class WalletsScreen extends React.Component {
     };
 
     watcher = when(() => this.props.walletsStore.isEmptyWallets === true, () => {
-        this.props.navigation.push('NewWallet');
+        this.props.navigation.push('NewWallet', {
+            disableBackArrow: true
+        });
     });
 
     componentDidMount() {

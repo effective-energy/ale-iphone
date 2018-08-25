@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, Platform, Image, StatusBar, TextInput, Button, Alert, TouchableOpacity, Modal, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, StatusBar, TextInput, Alert, TouchableOpacity, Modal, TouchableHighlight } from 'react-native';
 import ls from 'react-native-local-storage';
 import SVGImage from 'react-native-remote-svg';
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -44,18 +44,15 @@ export default class SendMoneyScreen extends React.Component {
     };
 
     componentDidMount() {
+        this.resetState();
+    }
+
+    resetState () {
+        Alert.alert('kek')
         this.setState({
             amount: '',
             destinationAddress: ''
         });
-
-        const { params } = this.props.navigation.state;
-
-        if (params.destinationAddress !== undefined) {
-            this.setState({
-                destinationAddress: params.destinationAddress
-            })
-        }
     }
 
     setModalVisible(visible) {

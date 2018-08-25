@@ -5,6 +5,7 @@ import { observer, inject } from "mobx-react";
 import CheckBox from './layouts/CheckBox';
 import Config from '../config';
 import { when } from "mobx";
+import Spinner from './layouts/Spinner';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -27,6 +28,7 @@ export default class ConfirmMnemonicScreen extends React.Component {
             firstWord: '',
             secondWord: '',
             thirdWord: '',
+            isShowSpinner: false
         };
     }
 
@@ -38,7 +40,16 @@ export default class ConfirmMnemonicScreen extends React.Component {
 
     watcher = when(() => this.props.walletsStore.isSuccessCreateWallet === true, () => {
         Alert.alert('Wallet successfully create');
+        this.setState({
+            isShowSpinner: false,
+        });
         this.props.navigation.navigate('Wallets');
+    });
+
+    watcher = when(() => this.props.walletsStore.isErrorCreateWallet === true, () => {
+        this.setState({
+            isShowSpinner: false,
+        });
     });
 
     componentDidMount () {
@@ -87,6 +98,10 @@ export default class ConfirmMnemonicScreen extends React.Component {
             return Alert.alert('Agree with all conditions');
         }
 
+        this.setState({
+            isShowSpinner: true,
+        });
+
         this.props.walletsStore.createNewWallet({
             name: this.props.navigation.state.params.walletName,
             seed: this.props.navigation.state.params.mnemonicPhrase
@@ -95,8 +110,13 @@ export default class ConfirmMnemonicScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.pageContainer}>
-                <StatusBar barStyle='dark-content' />
+            <View
+                style={styles.pageContainer}
+            >
+                <StatusBar
+                    barStyle='dark-content'
+                />
+                { this.state.isShowSpinner === true && <Spinner />}
                 <ScrollView
                     refreshing={false}
                 >
@@ -164,7 +184,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#e8ebee',
         alignItems: 'center',
         paddingTop: 30,
-        paddingBottom: 20
+        paddingBottom: 20,
+        width: wp(100)
     },
     textInput: {
         height: 40,

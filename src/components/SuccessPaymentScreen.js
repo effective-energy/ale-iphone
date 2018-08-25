@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, Platform, StatusBar, Button, Alert } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, StatusBar, TouchableOpacity } from 'react-native';
 import ls from 'react-native-local-storage';
 import Image from 'react-native-remote-svg';
 
@@ -51,15 +51,16 @@ export default class SuccessPaymentScreen extends React.Component {
                         style={styles.paymentIcon}
                     />
                 </View>
-                <View
-                    style={{ backgroundColor: '#152038', width: screenWidth, padding: 5, borderRadius: 15, marginTop: 50 }}
+                <TouchableOpacity
+                    onPress={this.backToWalletsList}
+                    style={styles.buttonBlock}
                 >
-                    <Button
-                        title="Back to wallets"
-                        onPress={this.backToWalletsList}
-                        color="#ffbb00"
-                    />
-                </View>
+                    <Text
+                        style={styles.buttonBlock_text}
+                    >
+                        Back to wallets
+                    </Text>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -81,5 +82,17 @@ const styles = StyleSheet.create({
         width: wp(80),
         height: wp(70),
         marginTop: 20,
-    }
+    },
+    buttonBlock: {
+        backgroundColor: '#D1D8DD',
+        borderRadius: 5,
+        padding: 10,
+        width: wp(80),
+        marginTop: 20
+    },
+    buttonBlock_text: {
+        color: "#091529",
+        textAlign: 'center',
+        fontSize: 16
+    },
 });
