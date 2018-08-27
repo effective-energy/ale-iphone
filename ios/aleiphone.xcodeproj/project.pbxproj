@@ -658,7 +658,7 @@
 				A90A668584154296B5A574D3 /* libReactNativePermissions.a */,
 				917872C5F1FA4EE7A6344DBB /* libRNImagePicker.a */,
 				8F2532D465224157A03504B8 /* libRNImgToBase64.a */,
-				6E897D9956DC4591A96E8C21 /* libRNVectorIcons.a */,
+				DE66752D8CDC4EDCB5CE0A8F /* libRNFetchBlob.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";

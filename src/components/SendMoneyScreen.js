@@ -48,7 +48,6 @@ export default class SendMoneyScreen extends React.Component {
     }
 
     resetState () {
-        Alert.alert('kek')
         this.setState({
             amount: '',
             destinationAddress: ''
