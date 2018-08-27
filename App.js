@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { createStackNavigator } from 'react-navigation';
-import { NavigatorIOS, YellowBox, Alert, NetInfo, StyleSheet, View, Text, StatusBar } from 'react-native';
+import { NavigatorIOS, YellowBox, Alert, NetInfo, StyleSheet, View, Text, StatusBar, Platform } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader', 'Warning', 'Class RCTCxxModule']);
 
 import ls from 'react-native-local-storage';
@@ -36,6 +36,7 @@ import InitialScreen from './src/components/InitialScreen';
 import AttentionScreen from './src/components/AttentionScreen';
 import TwoFactorLoginScreen from './src/components/TwoFactorLoginScreen';
 import ConfirmMnemonicScreen from './src/components/ConfirmMnemonicScreen';
+import ConfirmRegisterScreen from './src/components/ConfirmRegisterScreen';
 
 const transitionConfig = () => {
   return {
@@ -69,6 +70,7 @@ const RootStack = createStackNavigator({
     Attention: { screen: AttentionScreen },
     TwoFactorLogin: { screen: TwoFactorLoginScreen },
     ConfirmMnemonic: { screen: ConfirmMnemonicScreen },
+    ConfirmRegister: { screen: ConfirmRegisterScreen },
 }, {
     initialRouteName: 'InitialPage',
     transitionConfig,
@@ -81,6 +83,8 @@ function MiniOfflineSign() {
         </View>
     );
 }
+
+const prefix = Platform.OS == 'android' ? 'alewallet://alewallet/' : 'alewallet://';
 
 export default class App extends React.Component {
     constructor(props: Object) {
@@ -98,7 +102,7 @@ export default class App extends React.Component {
     componentWillUnmount() {
         NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectivityChange);
     }
-
+    
     handleConnectivityChange = isConnected => {
         if (isConnected) {
             this.setState({ isConnected: true });
@@ -133,7 +137,7 @@ export default class App extends React.Component {
 
         return (
             <Provider {...stores}>
-                <RootStack />
+                <RootStack uriPrefix={prefix} />
             </Provider>
         );
     }

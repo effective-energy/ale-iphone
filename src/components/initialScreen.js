@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert } from 'react-native';
+import { Linking, Alert, Platform } from 'react-native';
 import ls from 'react-native-local-storage';
 import Config from '../config';
 
@@ -18,7 +18,35 @@ export default class InitialScreen extends React.Component {
     };
 
     componentDidMount() {
+        if (Platform.OS === 'android') {
+            Linking.getInitialURL().then(url => {
+                this.navigate(url);
+            });
+        } else {
+            Linking.addEventListener('url', this.handleOpenURL);
+        }
         this.initialData();
+    }
+
+    componentWillUnmount() {
+        Linking.removeEventListener('url', this.handleOpenURL);
+    }
+
+    handleOpenURL = (event) => {
+        this.navigate(event.url);
+    }
+
+    navigate = (url) => {
+        const { navigate } = this.props.navigation;
+        const route = url.replace(/.*?:\/\//g, '');
+
+        ls.get('userToken').then((data) => {
+            if (data === null && route.split('token=')[1] !== undefined) {
+                return this.props.navigation.navigate('ConfirmRegister', {
+                    token: route.split('token=')[1]
+                });
+            }
+        });
     }
 
     async initialData () {

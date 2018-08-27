@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Alert } from 'react-native';
+import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Alert, SafeAreaView } from 'react-native';
 import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
 import { when } from "mobx";
@@ -67,7 +67,7 @@ export default class WalletsScreen extends React.Component {
             return (<Pageloader title="Loading wallets..." />);
         }
         return (
-            <View
+            <SafeAreaView
                 style={styles.pageContainer}
             >
                 <StatusBar
@@ -99,7 +99,7 @@ export default class WalletsScreen extends React.Component {
                     changePage={this.changePage.bind(this)}
                     activePage="wallets"
                 />
-            </View>
+            </SafeAreaView>
         );
     }
 }
