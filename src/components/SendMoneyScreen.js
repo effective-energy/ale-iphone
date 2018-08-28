@@ -150,6 +150,11 @@ export default class SendMoneyScreen extends React.Component {
                         visible={this.state.modalVisible}
                     >
                         <QRCodeScanner
+                            notAuthorizedView={
+                                <View>
+                                    <Text style={{textAlign: 'center'}}>Allow the use of the camera in the settings</Text>
+                                </View>
+                            }
                             showMarker
                             onRead={this.onSuccess.bind(this)}
                             bottomContent={
@@ -158,7 +163,7 @@ export default class SendMoneyScreen extends React.Component {
                                         this.setModalVisible(!this.state.modalVisible);
                                     }}
                                 >
-                                    <Text>Hide Modal</Text>
+                                    <Text>Hide QR Scanner</Text>
                                 </TouchableHighlight>
                             }
                         />

@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, ScrollView, FlatList, RefreshControl } from 'react-native';
 import ls from 'react-native-local-storage';
 import Markdown from 'react-native-simple-markdown';
-import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
 import { observer, inject } from "mobx-react";
 import BottomNavigator from './layouts/BottomNavigator';
 import Pageloader from './layouts/Pageloader';
@@ -79,21 +78,13 @@ export default class NotificationsScreen extends React.Component {
 
         let notifications = this.props.notificationsStore.notifications.map(function (el, i) {
             return (
-                <SwipeRow
-                    disableRightSwipe={true}
-                    rightOpenValue={-75}
-                    key={i}
-                    style={styles.row}
-                >
-                    <View style={styles.rowBack}>
-                        <Text style={styles.rowBack_text} onPress={() => this.removeNotification(el._id, i)}>Delete</Text>
-                    </View>
+                <View style={styles.row}>
                     <View style={styles.rowFront}>
                         <Markdown>
                             {parseNotificationText(el.title)}
                         </Markdown>
                     </View>
-                </SwipeRow>
+                </View>
             )
         }, this);
 

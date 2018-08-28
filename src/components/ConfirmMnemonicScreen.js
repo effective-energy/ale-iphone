@@ -120,11 +120,11 @@ export default class ConfirmMnemonicScreen extends React.Component {
                 <ScrollView
                     refreshing={false}
                 >
-                    <View style={{width: wp(80)}}>
+                    <View style={{marginTop: 20, width: wp(100), alignItems: 'center', marginBottom: 20}}>
                         <Text
                             style={{textAlign: 'center', color: '#091529', fontSize: 16}}
                         >
-                            Type each word in the correct order to verify your recover phrase
+                            Type random word in the correct order to verify your recover phrase
                         </Text>
                         <View style={{marginTop: 20, marginBottom: 10}}>
                             <TextInput
@@ -149,7 +149,7 @@ export default class ConfirmMnemonicScreen extends React.Component {
                                 value={this.state.thirdWord}
                             />
                         </View>
-                        <View>
+                        <View style={{width: wp(80)}}>
                             <CheckBox
                                 toggleCheckBox={() => this.confirmDevice(!this.state.isConfirmDeviceOnly)}
                                 isCheked={this.state.isConfirmDeviceOnly}
@@ -183,8 +183,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#e8ebee',
         alignItems: 'center',
-        paddingTop: 30,
-        paddingBottom: 20,
         width: wp(100)
     },
     textInput: {

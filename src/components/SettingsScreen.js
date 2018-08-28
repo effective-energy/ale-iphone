@@ -3,6 +3,7 @@ import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions
 import ImageSVG from 'react-native-remote-svg';
 import ImagePicker from 'react-native-image-picker';
 import isIphoneX from '../config/isIphoneX';
+import Spinner from './layouts/Spinner';
 
 import ls from 'react-native-local-storage';
 
@@ -30,7 +31,8 @@ export default class SettingsScreen extends React.Component {
             fullName: '',
             userEmail: '',
             userAvatar: '',
-            isOpenAvatarModal: false
+            isOpenAvatarModal: false,
+            isShowSpinner: false,
         };
     }
 
@@ -51,10 +53,6 @@ export default class SettingsScreen extends React.Component {
 
     componentDidMount() {
         this.getUserData();
-    }
-
-    getUserAvatar() {
-        return `${Config.SERVER_URL}/${this.state.userAvatar}`;
     }
 
     async getUserData() {
@@ -137,7 +135,7 @@ export default class SettingsScreen extends React.Component {
     }
 
     uploadAvatar () {
-        let options = {};
+    let options = {};
 
         if (this.state.userAvatar === '') {
             options = {
@@ -167,12 +165,15 @@ export default class SettingsScreen extends React.Component {
             } else if (!response.error && !response.didCancel) {
                 return this.loadAvatarToServer(response.uri);
             } else if (response.error) {
-                return Alert.alert('Error');
+                return Alert.alert(response.error);
             }
         });
     }
 
     async loadAvatarToServer (avatar) {
+        this.setState({
+            isShowSpinner: true,
+        });
         const userToken = await ls.get('userToken');
         if (!userToken) {
             throw userToken
@@ -203,8 +204,9 @@ export default class SettingsScreen extends React.Component {
         Alert.alert(responseJson.message);
 
         this.setState({
-            userAvatar: responseJson.avatar_path
-        })
+            userAvatar: responseJson.avatar_path,
+            isShowSpinner: false,
+        });
     }
 
     closeAvatarModal () {
@@ -220,7 +222,7 @@ export default class SettingsScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
-
+                { this.state.isShowSpinner === true && <Spinner isBorder={true} />}
                 <Modal
                     animationType="slide"
                     transparent={false}
@@ -229,7 +231,7 @@ export default class SettingsScreen extends React.Component {
                     <View style={{flex: 1, backgroundColor: '#e8ebee', alignItems: 'center', justifyContent: 'center'}}>
                         <Image
                             style={{ width: wp(80), height: wp(80)}}
-                            source={{uri: this.getUserAvatar()}}
+                            source={{uri: `${Config.SERVER_URL}/${this.state.userAvatar}`}}
                         />
                         <TouchableOpacity style={{marginTop: 20}} onPress={this.closeAvatarModal.bind(this)}>
                             <Text style={{fontSize: 20}}>Close</Text>
@@ -249,7 +251,7 @@ export default class SettingsScreen extends React.Component {
                                 <Text style={{ color: '#FFFFFF', textAlign: 'center', fontSize: 30, fontWeight: 'bold' }}>{this.state.fullName.substr(0, 2).toUpperCase()}</Text>
                             </TouchableOpacity> : <TouchableOpacity onPress={this.uploadAvatar.bind(this)} style={{width: 60, height: 60, borderRadius: 30}}><Image
                                 style={{ width: 60, height: 60, borderRadius: 30, resizeMode: 'cover', marginBottom: 10 }}
-                                source={{uri: this.getUserAvatar()}}
+                                source={{uri: `${Config.SERVER_URL}/${this.state.userAvatar}`}}
                             /></TouchableOpacity>}
                             <View>
                                 <Text style={{ fontSize: 24, textAlign: 'center' }}>{this.state.fullName}</Text>

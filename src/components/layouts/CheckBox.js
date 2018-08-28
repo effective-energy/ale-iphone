@@ -30,7 +30,7 @@ export default class CheckBox extends React.Component {
                         style={{ width: 15, height: 15 }}
                     />
                 </View>
-                <Text style={{ paddingLeft: 15 }}>{this.props.value}</Text>
+                <Text style={{ paddingLeft: 15, paddingRight: 15 }}>{this.props.value}</Text>
             </TouchableOpacity>
     	)
     }
@@ -38,7 +38,6 @@ export default class CheckBox extends React.Component {
 
 const styles = StyleSheet.create({
     checkBoxContainer: {
-        width: wp(70),
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'flex-start',

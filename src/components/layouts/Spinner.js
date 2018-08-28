@@ -8,9 +8,10 @@ export default class Spinner extends React.Component {
     }
 
     render() {
+        let borderStyle = this.props.isBorder === true ? {borderWidth: 1, borderColor: '#CCCCCC'} : null;
     	return (
             <View style={styles.spinnerContainer}>
-                <View style={styles.spinnerRow}>
+                <View style={[styles.spinnerRow, borderStyle]}>
                     <ActivityIndicator
                         size="large"
                         color="#000000"

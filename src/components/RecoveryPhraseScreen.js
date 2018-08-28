@@ -59,7 +59,7 @@ export default class RecoveryPhraseScreen extends React.Component {
 
     render() {
         if (this.props.walletsStore.isLoaderPage || this.props.walletsStore.mnemonicPhrase.length === 0) {
-            return (<Pageloader title="Loading wallets..." />);
+            return (<Pageloader title="Generate mnemonic phrase..." />);
         }
         return (
             <View style={styles.pageContainer}>
