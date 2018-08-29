@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Alert, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import Image from 'react-native-remote-svg';
 
 function wp (percentage) {
@@ -52,13 +52,13 @@ const styles = StyleSheet.create({
     },
     blockText: {
         color: '#f0b721',
-        fontSize: wp(5),
+        fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'center'
     },
     blockIcon: {
-        width: wp(7),
-        height: wp(7),
+        width: 25,
+        height: 25,
         marginRight: 10
     }
 });

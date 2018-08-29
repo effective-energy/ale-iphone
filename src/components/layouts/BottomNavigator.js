@@ -1,17 +1,7 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import Image from 'react-native-remote-svg';
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import SVGImage from 'react-native-remote-svg';
 import isIphoneX from '../../config/isIphoneX';
-
-function wp (percentage) {
-    const value = (percentage * viewportWidth) / 100;
-    return Math.round(value);
-}
-
-const { width: viewportWidth } = Dimensions.get('window');
-
-// I18n 
-import I18n from '../../i18n/index';
 
 export default class BottomNavigator extends React.Component {
 	constructor(props) {
@@ -20,25 +10,21 @@ export default class BottomNavigator extends React.Component {
             activeClass: this.props.activePage,
             tabs: [
                 {
-                    title: I18n.t('bottom_navigation.wallet'),
                     icon: require('../../assets/images/navigation/bottom/icon_wallet-passive.svg'),
                     activeIcon: require('../../assets/images/navigation/bottom/icon_wallet-active.svg'),
                     pageName: 'Wallets',
                     activeClass: 'wallets'
                 }, {
-                    title: I18n.t('bottom_navigation.history'),
                     icon: require('../../assets/images/navigation/bottom/icon_history-passive.svg'),
                     activeIcon: require('../../assets/images/navigation/bottom/icon_history-active.svg'),
                     pageName: 'History',
                     activeClass: 'history'
                 }, {
-                    title: I18n.t('bottom_navigation.notifications'),
                     icon: require('../../assets/images/navigation/bottom/icon_notifications-passive.svg'),
                     activeIcon: require('../../assets/images/navigation/bottom/icon_notifications-active.svg'),
                     pageName: 'Notifications',
                     activeClass: 'notifications'
                 }, {
-                    title: I18n.t('bottom_navigation.settings'),
                     icon: require('../../assets/images/navigation/bottom/icon_settings-passive.svg'),
                     activeIcon: require('../../assets/images/navigation/bottom/icon_settings-active.svg'),
                     pageName: 'Settings',
@@ -58,12 +44,12 @@ export default class BottomNavigator extends React.Component {
                     style={[styles.navigationItem]}
                     onPress={e => this.props.changePage(el.pageName)}
                 >
-                    <Image
+                    <SVGImage
                         style={styles.itemImage}
                         source={icon}
                     />
                     <Text style={[styles.itemTitle, this.state.activeClass === el.activeClass ? styles.itemTitleActive : styles.itemTitleDefault]}>
-                        {el.title}
+                        {el.pageName}
                     </Text>
                 </TouchableOpacity>
             )
@@ -107,7 +93,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         position: 'relative',
         bottom: 2,
-        fontSize: wp(3.5)
+        fontSize: 12
     },
     itemTitleActive: {
         color: '#FFBB00'

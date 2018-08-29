@@ -58,7 +58,7 @@ export default class WalletsSlider extends React.Component {
                             style={{width: wp(5), height: wp(5), marginRight: 10 }}
                             source={require('../../assets/images/icons/icon_send.svg')}
                         />
-                        <Text style={{ color: '#ffffff', fontSize: wp(5) }}>Send</Text>
+                        <Text style={{ color: '#ffffff', fontSize: 16 }}>Send</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
@@ -69,7 +69,7 @@ export default class WalletsSlider extends React.Component {
                             style={{width: wp(5), height: wp(5), marginRight: 5 }}
                             source={require('../../assets/images/icons/icon_request.svg')}
                         />
-                        <Text style={{ color: '#000000', fontSize: wp(5) }}>Request</Text>
+                        <Text style={{ color: '#000000', fontSize: 16 }}>Request</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
     },
     walletsSlider_container_custom: {
-        marginTop: isIphoneX === true ? 80 : 50,
+        marginTop: isIphoneX === true ? 50 : 20,
         overflow: 'visible',
     },
 });

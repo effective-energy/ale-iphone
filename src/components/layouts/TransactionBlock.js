@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     },
     transactionBlockAmount: {
         textAlign: 'right',
-        fontSize: 18
+        fontSize: 16
     },
     transactionBlockDescription: {
         textAlign: 'right'

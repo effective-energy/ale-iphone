@@ -21,10 +21,16 @@ export default class WalletsScreen extends React.Component {
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
         return {
-            header: null,
+            title: 'Wallets',
             headerLeft: null,
-            gesturesEnabled: false,
-            statusBarBackgroundColor: '#ffffff'
+            headerTitleStyle: {
+                color: '#ffbb00'
+            },
+            headerStyle: {
+                backgroundColor: '#08142F',
+                borderBottomWidth: 0,
+            },
+            headerTintColor: '#ffbb00',
         };
     };
 

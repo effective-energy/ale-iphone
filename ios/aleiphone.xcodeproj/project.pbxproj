@@ -25,6 +25,7 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		1EB2240420EF96A600D3A0AC /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EB223FF20EF969300D3A0AC /* libRNSVG.a */; };
 		1EB2244D20EF9AA200D3A0AC /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EB2244620EF9A5500D3A0AC /* libRNCamera.a */; };
+		1EECC7472136E0A800C6AA54 /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EB223B820EF95C700D3A0AC /* libRNI18n.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -476,6 +477,7 @@
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
+				1EECC7472136E0A800C6AA54 /* libRNI18n.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,

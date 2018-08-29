@@ -6,9 +6,6 @@ import SVGImage from 'react-native-remote-svg';
 
 import ls from 'react-native-local-storage';
 
-// I18n 
-import I18n from '../i18n/index';
-
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
     return Math.round(value);

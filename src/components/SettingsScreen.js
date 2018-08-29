@@ -9,9 +9,6 @@ import ls from 'react-native-local-storage';
 
 import Config from '../config';
 
-// I18n 
-import I18n from '../i18n/index';
-
 import BottomNavigator from './layouts/BottomNavigator';
 import Pageloader from './layouts/Pageloader';
 
@@ -39,7 +36,7 @@ export default class SettingsScreen extends React.Component {
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
         return {
-            title: I18n.t('pages.settings.title'),
+            title: 'Settings',
             headerLeft: null,
             gesturesEnabled: false
         };
@@ -458,7 +455,7 @@ export default class SettingsScreen extends React.Component {
                             <Text
                                 style={{ color: "#34343e", textAlign: 'center', fontSize: wp(5) }}
                             >
-                                {I18n.t('pages.settings.signOut')}
+                                Sign out
                             </Text>
                         </TouchableOpacity>
                     </View>
