@@ -72,6 +72,7 @@ export default class TwoFactorAuthScreen extends React.Component {
                 <StatusBar barStyle='light-content' />
                 <View>
                     <TextInput
+                        selectTextOnFocus={true}
                         placeholder="Enter Two-factor key"
                         placeholderTextColor="#455578"
                         style={styles.textInput}

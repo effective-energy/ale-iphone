@@ -134,8 +134,11 @@ export default class SendMoneyScreen extends React.Component {
                             onChangeText={(amount) => this.setState({amount})}
                             value={this.state.amount}
                             keyboardType = 'numeric'
+                            returnKeyType = { "next" }
+                            onSubmitEditing={() => { this.addressTextInput.focus(); }}
                         />
                         <TextInput
+                            ref={(input) => { this.addressTextInput = input; }}
                             placeholder="Address destination"
                             placeholderTextColor="#455578"
                             style={styles.text_input}

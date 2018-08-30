@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { createStackNavigator } from 'react-navigation';
-import { NavigatorIOS, YellowBox, Alert, NetInfo, StyleSheet, View, Text, StatusBar, Platform } from 'react-native';
+import { YellowBox, NetInfo, StyleSheet, View, Text, StatusBar, Platform } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader', 'Warning', 'Class RCTCxxModule']);
 
 import ls from 'react-native-local-storage';
@@ -9,9 +9,6 @@ import ls from 'react-native-local-storage';
 // MobX
 import { Provider } from "mobx-react";
 import stores from "./src/store";
-
-// I18n 
-import I18n from './src/i18n';
 
 import LoginScreen from './src/components/LoginScreen';
 import NewWalletScreen from './src/components/NewWalletScreen';
@@ -95,7 +92,6 @@ export default class App extends React.Component {
     }
 
     componentDidMount() {
-        this.getSystemLanguage();
         NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange);
     }
 
@@ -110,18 +106,6 @@ export default class App extends React.Component {
             this.setState({ isConnected: false });
         }
     };
-
-    getSystemLanguage() {
-        ls.get('systemLanguage').then((result) => {
-            if (result === null) {
-                ls.save('systemLanguage', 'en').then(() => {
-                    I18n.locale = 'en';
-                });
-            } else {
-                I18n.locale = result;
-            }
-        });
-    }
 
     render() {
         if (!this.state.isConnected) {
@@ -145,8 +129,10 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
     offlineContainer: {
-        flex: 1,
         backgroundColor: '#07132f',
+        width: '100%',
+        height: '100%',
+        display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
