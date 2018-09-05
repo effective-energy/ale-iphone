@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
     },
     walletsSlider_container_custom: {
-        marginTop: isIphoneX === true ? 50 : 20,
+        marginTop: isIphoneX === true ? 30 : 20,
         overflow: 'visible',
     },
 });

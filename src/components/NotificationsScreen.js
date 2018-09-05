@@ -6,6 +6,7 @@ import { observer, inject } from "mobx-react";
 import BottomNavigator from './layouts/BottomNavigator';
 import Pageloader from './layouts/Pageloader';
 import isIphoneX from '../config/isIphoneX';
+import Moment from 'react-moment';
 
 import Config from '../config';
 
@@ -83,6 +84,13 @@ export default class NotificationsScreen extends React.Component {
                         <Markdown>
                             {parseNotificationText(el.title)}
                         </Markdown>
+                         <Moment
+                            element={Text}
+                            format="DD MMM in HH:mm"
+                            style={{marginTop: 10}}
+                        >
+                            {el.date}
+                        </Moment>
                     </View>
                 </View>
             )
@@ -137,9 +145,7 @@ const styles = StyleSheet.create({
         }
     },
     rowFront: {
-        alignItems: 'center',
         backgroundColor: '#E8EBEE',
-        justifyContent: 'center',
         height: 'auto',
         padding: 15,
         borderRadius: 5,

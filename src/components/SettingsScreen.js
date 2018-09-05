@@ -127,7 +127,7 @@ export default class SettingsScreen extends React.Component {
         } else if (social === 'telegram') {
             return Linking.openURL('https://www.t.me/alehub');
         } else if (social === 'facebook') {
-            return Linking.openURL('https://www.facebook.com/n/alehub.io');
+            return Linking.openURL('https://www.facebook.com/alehub.io');
         }
     }
 

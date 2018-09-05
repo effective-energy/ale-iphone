@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Alert, Dimensions, TextInput, StatusBar, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, Dimensions, TextInput, StatusBar, TouchableOpacity, ActivityIndicator, ScrollView, Keyboard } from 'react-native';
 import { observer, inject } from "mobx-react";
 import { when } from "mobx";
 import SVGImage from 'react-native-remote-svg';
@@ -77,7 +77,10 @@ export default class LoginScreen extends React.Component {
 
     render() {
     	return (
-    		<View style={styles.container}>
+    		<ScrollView
+                contentContainerStyle={styles.pageContainer}
+                keyboardShouldPersistTaps='handled'
+            >
     			<StatusBar barStyle='light-content' />
     			<View>
 					<SVGImage
@@ -93,7 +96,7 @@ export default class LoginScreen extends React.Component {
                             style={styles.emailInput}
                             onChangeText={(userEmail) => this.setState({userEmail})}
                             value={this.state.userEmail}
-                            returnKeyType = { "next" }
+                            returnKeyType={"next"}
                             onSubmitEditing={() => { this.passwordTextInput.focus(); }}
                         />
                         <TextInput
@@ -104,6 +107,8 @@ export default class LoginScreen extends React.Component {
                             style={styles.passwordInput}
                             onChangeText={(userPassword) => this.setState({userPassword})}
                             value={this.state.userPassword}
+                            returnKeyType={"go"}
+                            onSubmitEditing={() => { this.loginToWallet() }}
                         />
 					</View>
 					<TouchableOpacity
@@ -151,13 +156,13 @@ export default class LoginScreen extends React.Component {
                         </Text>
                     </TouchableOpacity>
 				</View>
-	        </View>
+	        </ScrollView>
 	    );
 	}
 }
 
 const styles = StyleSheet.create({
-	container: {
+	pageContainer: {
 		flex: 1,
 		backgroundColor: '#07132f',
 		alignItems: 'center',

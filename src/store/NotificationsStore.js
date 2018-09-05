@@ -35,7 +35,7 @@ export default class NotificationsStore {
 	        }
 
 	        const responseJson = await response.json();
-	        this.notifications = responseJson;
+	        this.notifications = responseJson.reverse();
 	        this.isLoader = false;
     	} catch (error) {
     		console.log(error);
@@ -66,7 +66,7 @@ export default class NotificationsStore {
 	        }
 
 	        const responseJson = await response.json();
-	        this.notifications = responseJson;
+	        this.notifications = responseJson.reverse();
 	        this.isRefreshLoader = false;
     	} catch (error) {
     		console.log(error);

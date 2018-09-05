@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, StatusBar, TextInput, Dimensions, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, Button, StatusBar, TextInput, Dimensions, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import ls from 'react-native-local-storage';
 import SVGImage from 'react-native-remote-svg';
 import ImagePicker from 'react-native-image-picker';
@@ -129,7 +129,10 @@ export default class CreateAccountScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.pageContainer}>
+            <ScrollView
+                contentContainerStyle={styles.pageContainer}
+                keyboardShouldPersistTaps='handled'
+            >
                 <StatusBar barStyle='light-content' />
                 <View>
                     <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 20}}>
@@ -215,7 +218,7 @@ export default class CreateAccountScreen extends React.Component {
                     />
                     <Text style={styles.buttonBlock_text}>Log in to account</Text>
                 </TouchableOpacity>
-            </View>
+            </ScrollView>
         );
     }
 }

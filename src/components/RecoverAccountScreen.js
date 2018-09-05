@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, StatusBar, TouchableOpacity, TextInput, Dimensions, Alert } from 'react-native';
+import { StyleSheet, Text, View, Button, StatusBar, TouchableOpacity, TextInput, Dimensions, Alert, ScrollView } from 'react-native';
 import SVGImage from 'react-native-remote-svg';
 
 function wp (percentage) {
@@ -67,8 +67,9 @@ export default class RecoverAccountScreen extends React.Component {
 
     render() {
         return (
-            <View
-                style={styles.pageContainer}
+            <ScrollView
+                contentContainerStyle={styles.pageContainer}
+                keyboardShouldPersistTaps='handled'
             >
                 <StatusBar
                     barStyle='light-content'
@@ -102,7 +103,7 @@ export default class RecoverAccountScreen extends React.Component {
                     />
                     <Text style={styles.buttonBlock_text}>Log in to account</Text>
                 </TouchableOpacity>
-            </View>
+            </ScrollView>
         );
     }
 }

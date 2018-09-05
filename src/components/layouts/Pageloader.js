@@ -10,10 +10,10 @@ export default class Pageloader extends React.Component {
     render() {
     	return (
     		<View
-                style={styles.loading}
+                style={[styles.loading, this.props.isDark && styles.darkLoading]}
             >
                 <StatusBar
-                    barStyle='dark-content'
+                    barStyle={this.props.isDark === true ? 'light-content' : 'dark-content'}
                 />
                 <ActivityIndicator
                     size="large"
@@ -21,7 +21,7 @@ export default class Pageloader extends React.Component {
                     style={styles.spinner}
                 />
                 <Text
-                    style={styles.loadingTitle}
+                    style={[styles.loadingTitle, this.props.isDark && styles.whiteTitle]}
                 >
                     {this.props.title}
                 </Text>
@@ -35,15 +35,21 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: '100%',
         height: '100%',
-        backgroundColor: '#ffffff',
         flex: 1,
         zIndex: 2,
         top: 0,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: '#FFFFFF',
+    },
+    darkLoading: {
+        backgroundColor: '#08142F',
     },
     loadingTitle: {
         fontSize: 18
+    },
+    whiteTitle: {
+        color: '#FFFFFF',
     },
     spinner: {
         marginBottom: 20

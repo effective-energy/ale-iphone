@@ -23,7 +23,8 @@ export default class TwoFactorAuthScreen extends React.Component {
             qrCode: '""',
             isDisableTwoAuth: false,
             disabledSecretKey: '',
-            disabledTwoAuthKey: ''
+            disabledTwoAuthKey: '',
+            pageLoaderTitle: 'Generate QR code...',
         };
 
         this.copyToClipboard = this.copyToClipboard.bind(this);
@@ -77,10 +78,11 @@ export default class TwoFactorAuthScreen extends React.Component {
 
     confirmCode(code) {
         if (code.length !== 6 || isNaN(code)) {
-            return Alert.alert('Код должен быть из 6 цифр');
+            return Alert.alert('The code must be 6 digits long');
         }
         this.setState({
-            isLoaderPage: true
+            isLoaderPage: true,
+            pageLoaderTitle: 'Check two factor code...'
         });
 
         ls.get('userToken').then((data) => {
@@ -100,13 +102,15 @@ export default class TwoFactorAuthScreen extends React.Component {
             .then((responseJson) => {
                 if (responseJson.message === 'Failed to verify') {
                     this.setState({
-                        isLoaderPage: false
+                        isLoaderPage: false,
+                        pageLoaderTitle: 'Generate QR code...',
                     });
                     return Alert.alert(responseJson.message);
                 } else {
                     Alert.alert('Success!');
                     this.setState({
-                        isLoaderPage: false
+                        isLoaderPage: false,
+                        pageLoaderTitle: 'Generate QR code...',
                     });
                     return this.props.navigation.push('Settings');
                 }
@@ -190,7 +194,10 @@ export default class TwoFactorAuthScreen extends React.Component {
 
     render() {
         if (this.state.isLoaderPage) {
-            return (<Pageloader title="Generate QR code..." />);
+            return (
+                <Pageloader
+                    title={this.state.pageLoaderTitle}
+                />);
         }
         if (this.state.isDisableTwoAuth) {
             return (

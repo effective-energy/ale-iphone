@@ -20,11 +20,7 @@ export default class WalletsScreen extends React.Component {
 
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
-        if (!params.isShowHeader) {
-        	return {
-        		header: null,
-        	}
-        } else return {
+        return {
         	title: 'Wallets',
             headerLeft: null,
             headerTitleStyle: {
@@ -42,15 +38,6 @@ export default class WalletsScreen extends React.Component {
         this.props.navigation.push('NewWallet', {
             disableBackArrow: true
         });
-    });
-
-    watcher = when(() => this.props.walletsStore.isLoaderPage === false, () => {
-    	let _this = this;
-    	setTimeout(function () {
-    		_this.props.navigation.setParams({
-	            isShowHeader: true
-	        });
-    	}, 600)
     });
 
     componentDidMount() {
@@ -83,7 +70,11 @@ export default class WalletsScreen extends React.Component {
 
     render() {
         if (this.props.walletsStore.isLoaderPage) {
-            return (<Pageloader title="Loading wallets..." />);
+            return (
+            	<Pageloader
+        			title="Loading wallets..."
+        			isDark={true}
+    			/>);
         }
         return (
             <SafeAreaView
