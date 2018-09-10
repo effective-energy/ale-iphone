@@ -60,7 +60,7 @@ export default class WalletsDropdownMenu extends React.Component {
                         style={{display: 'flex', flexDirection: 'row'}}
                     >
                         <SVGImage
-                            source={require('../../assets/images/navigation/bottom/icon_wallet-passive.svg')}
+                            source={require('../../assets/images/navigation/bottom/wallet.png')}
                             style={{width: 40, height: 40, marginRight: 10 }}
                         />
                         <View>
@@ -96,7 +96,7 @@ export default class WalletsDropdownMenu extends React.Component {
                 >
                     <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         <SVGImage
-                            source={require('../../assets/images/navigation/bottom/icon_wallet-passive.svg')}
+                            source={require('../../assets/images/navigation/bottom/wallet.png')}
                             style={{width: 40, height: 40, marginRight: 10 }}
                         />
                         <View style={{ display: 'flex', flexDirection: 'column' }}>
