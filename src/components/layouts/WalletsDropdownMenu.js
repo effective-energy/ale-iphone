@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, Dimensions, TouchableOpacity, Alert } from 'react-native';
-import SVGImage from 'react-native-remote-svg';
+import { CachedImage } from "react-native-img-cache";
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -59,7 +59,7 @@ export default class WalletsDropdownMenu extends React.Component {
                         onPress={() => this.selectWallet(i)}
                         style={{display: 'flex', flexDirection: 'row'}}
                     >
-                        <SVGImage
+                        <CachedImage
                             source={require('../../assets/images/navigation/bottom/wallet.png')}
                             style={{width: 40, height: 40, marginRight: 10 }}
                         />
@@ -72,8 +72,8 @@ export default class WalletsDropdownMenu extends React.Component {
                         onPress={() => this.setState({isMenuOpen: false})}
                         style={{opacity: isShowCloseIcon}}
                     >
-                        <SVGImage
-                            source={require('../../assets/images/icons/close-icon.svg')}
+                        <CachedImage
+                            source={require('../../assets/images/icons/close.png')}
                             style={{width: 35, height: 35}}
                         />
                     </TouchableOpacity>
@@ -95,7 +95,7 @@ export default class WalletsDropdownMenu extends React.Component {
                     onPress={this.toggleMenu}
                 >
                     <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <SVGImage
+                        <CachedImage
                             source={require('../../assets/images/navigation/bottom/wallet.png')}
                             style={{width: 40, height: 40, marginRight: 10 }}
                         />
@@ -104,9 +104,10 @@ export default class WalletsDropdownMenu extends React.Component {
                             <Text>{this.state.selectedWallet.balance} ALE</Text>
                         </View>
                     </View>
-                    <SVGImage
-                        source={require('../../assets/images/icons/icon_down-arrow.svg')}
+                    <CachedImage
+                        source={require('../../assets/images/icons/arrow-down.png')}
                         style={{width: 15, height: 15 }}
+                        resizeMode='contain'
                     />
                 </TouchableOpacity>
             );

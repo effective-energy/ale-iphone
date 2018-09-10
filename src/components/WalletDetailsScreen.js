@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#0a1627',
     },
     walletInfoBlock_button_delete: {
-        backgroundColor: '#ec1972',
+        backgroundColor: '#F44336',
     },
     walletActionBlock_icon: {
         width: 20,

@@ -4,6 +4,7 @@ import ls from 'react-native-local-storage';
 import ImagePicker from 'react-native-image-picker';
 import isIphoneX from '../config/isIphoneX';
 import { CachedImage } from "react-native-img-cache";
+import Spinner from './layouts/Spinner';
 
 import Config from '../config';
 
@@ -27,7 +28,8 @@ export default class CreateAccountScreen extends React.Component {
             email: '',
             password: '',
             repeatPassword: '',
-            avatar: null
+            avatar: null,
+            isShowSpinner: false
         };
 
         this.backToLoginPage = this.backToLoginPage.bind(this);
@@ -79,6 +81,10 @@ export default class CreateAccountScreen extends React.Component {
                 return Alert.alert('Passwords do not match');
             }
 
+            this.setState({
+                isShowSpinner: true,
+            });
+
             const params = {
                 method: 'POST',
                 headers: {
@@ -98,6 +104,9 @@ export default class CreateAccountScreen extends React.Component {
             }
 
             const responseJson = await response.json();
+            this.setState({
+                isShowSpinner: false,
+            });
             if (responseJson.message !== 'User already exist!') {
                 Alert.alert(responseJson.message);
                 this.refreshState();
@@ -135,6 +144,7 @@ export default class CreateAccountScreen extends React.Component {
                 keyboardShouldPersistTaps='handled'
             >
                 <StatusBar barStyle='light-content' />
+                { this.state.isShowSpinner === true && <Spinner />}
                 <View>
                     <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 20}}>
                         { this.state.avatar === null ?

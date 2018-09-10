@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
 	logo: {
 		width: 235,
 		height: 106,
-		maxWidth: '80%',
+		maxWidth: '50%',
 	},
     emailInput: {
         height: 40,

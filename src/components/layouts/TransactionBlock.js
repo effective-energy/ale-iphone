@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, Dimensions } from 'react-native';
 import Moment from 'react-moment';
 import 'moment-timezone';
-import Image from 'react-native-remote-svg';
+import { CachedImage } from "react-native-img-cache";
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -20,14 +20,15 @@ export default class TransactionBlock extends React.Component {
         let transactions = this.props.data.map(function (el, i) {
             let transactionType = this.props.activeWalletAddress === el.walletAddress ? 'SENT' : 'RECIEVED';
             let transactionTypeBlockColor = this.props.activeWalletAddress === el.walletAddress ? '#091629' : '#FFBB00';
-            let transactionTypeBlockImage = this.props.activeWalletAddress === el.walletAddress ? require('../../assets/images/icons/icon_Send-history.svg') : require('../../assets/images/icons/icon_Request-history.svg');
+            let transactionTypeBlockImage = this.props.activeWalletAddress === el.walletAddress ? require('../../assets/images/icons/history-send.png') : require('../../assets/images/icons/history-request.png');
             return (
                 <View style={styles.transactionBlockContainer} key={i}>
                     <View style={styles.transactionBlockRow}>
                         <View style={[styles.transactionBlockType, {backgroundColor: transactionTypeBlockColor}]}>
-                            <Image
+                            <CachedImage
                                 source={transactionTypeBlockImage}
                                 style={styles.transactionBlockIcon}
+                                resizeMode='contain'
                             />
                         </View>
                         <View style={styles.transactionBlockInfo}>
