@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Alert, Dimensions, TextInput, StatusBar, TouchableOpacity, ActivityIndicator, ScrollView, Keyboard } from 'react-native';
 import { observer, inject } from "mobx-react";
 import { when } from "mobx";
-import SVGImage from 'react-native-remote-svg';
+import { CachedImage } from "react-native-img-cache";
 
 import ls from 'react-native-local-storage';
 
@@ -83,10 +83,11 @@ export default class LoginScreen extends React.Component {
             >
     			<StatusBar barStyle='light-content' />
     			<View>
-					<SVGImage
-					  source={require('../assets/images/logo/white_logo.svg')}
-					  style={styles.logo}
-					/>
+                    <CachedImage
+                        resizeMode='contain'
+                        source={require('../assets/images/logo/ale.png')}
+                        style={styles.logo}
+                    />
 				</View>
 				<View>
 					<View>
@@ -115,8 +116,8 @@ export default class LoginScreen extends React.Component {
 						style={styles.loginButton}
 						onPress={this.loginToWallet.bind(this)}
 					>
-						<SVGImage
-                            source={require('../assets/images/icons/icon_login-icon.svg')}
+                        <CachedImage
+                            source={require('../assets/images/icons/login.png')}
                             style={styles.loginIcon}
                         />
 						<Text style={styles.loginText}>Login to wallet</Text>
@@ -133,8 +134,8 @@ export default class LoginScreen extends React.Component {
                         onPress={this.createAccount.bind(this)}
                         style={[styles.loginButton, {marginBottom: 10}]}
                     >
-                        <SVGImage
-                            source={require('../assets/images/icons/plus-icon.svg')}
+                        <CachedImage
+                            source={require('../assets/images/icons/plus.png')}
                             style={{width: 20, height: 20, marginRight: 10}}
                         />
                         <Text
@@ -145,8 +146,8 @@ export default class LoginScreen extends React.Component {
                         onPress={this.recoverAccount.bind(this)}
                         style={styles.loginButton}
                     >
-                        <SVGImage
-                            source={require('../assets/images/icons/recover-icon.svg')}
+                        <CachedImage
+                            source={require('../assets/images/icons/recover.png')}
                             style={{width: 20, height: 20, marginRight: 10}}
                         />
                         <Text
@@ -179,8 +180,6 @@ const styles = StyleSheet.create({
 		width: 235,
 		height: 106,
 		maxWidth: '80%',
-		display: 'flex',
-		alignItems: 'center'
 	},
     emailInput: {
         height: 40,

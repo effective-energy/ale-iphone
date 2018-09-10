@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Button, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Switch, Alert, Image, ScrollView, RefreshControl, Share, Linking, Modal } from 'react-native';
-import ImageSVG from 'react-native-remote-svg';
 import ImagePicker from 'react-native-image-picker';
 import isIphoneX from '../config/isIphoneX';
 import Spinner from './layouts/Spinner';
+import { CachedImage } from "react-native-img-cache";
 
 import ls from 'react-native-local-storage';
 
@@ -266,8 +266,8 @@ export default class SettingsScreen extends React.Component {
                             <View
                                 style={{width: 30, height: 30, backgroundColor: '#2196F3', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
                             >
-                                <ImageSVG
-                                    source={require('../assets/images/icons/up-down-arrow-icon.svg')}
+                                <CachedImage
+                                    source={require('../assets/images/icons/twoauth.png')}
                                     style={{width: 20, height: 20}}
                                 />
                             </View>
@@ -294,8 +294,8 @@ export default class SettingsScreen extends React.Component {
                             <View
                                 style={{width: 30, height: 30, backgroundColor: '#4CAF50', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
                             >
-                                <ImageSVG
-                                    source={require('../assets/images/icons/globe-icon.svg')}
+                                <CachedImage
+                                    source={require('../assets/images/icons/globe.png')}
                                     style={{width: 20, height: 20}}
                                 />
                             </View>
@@ -305,9 +305,10 @@ export default class SettingsScreen extends React.Component {
                                 Language
                             </Text>
                         </View>
-                        <ImageSVG
-                            source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                        <CachedImage
+                            source={require('../assets/images/icons/arrow-right.png')}
                             style={{width: 15, height: 15}}
+                            resizeMode='contain'
                         />
                     </TouchableOpacity>
 
@@ -321,8 +322,8 @@ export default class SettingsScreen extends React.Component {
                             <View
                                 style={{width: 30, height: 30, backgroundColor: '#F44336', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
                             >
-                                <ImageSVG
-                                    source={require('../assets/images/icons/security-icon.svg')}
+                                <CachedImage
+                                    source={require('../assets/images/icons/password.png')}
                                     style={{width: 20, height: 20}}
                                 />
                             </View>
@@ -332,9 +333,10 @@ export default class SettingsScreen extends React.Component {
                                 Password
                             </Text>
                         </View>
-                        <ImageSVG
-                            source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                        <CachedImage
+                            source={require('../assets/images/icons/arrow-right.png')}
                             style={{width: 15, height: 15}}
+                            resizeMode='contain'
                         />
                     </TouchableOpacity>
 
@@ -352,8 +354,8 @@ export default class SettingsScreen extends React.Component {
                                 <View
                                     style={{width: 30, height: 30, backgroundColor: '#00ACED', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
                                 >
-                                    <ImageSVG
-                                        source={require('../assets/images/icons/twitter-icon.svg')}
+                                    <CachedImage
+                                        source={require('../assets/images/icons/twitter.png')}
                                         style={{width: 20, height: 20}}
                                     />
                                 </View>
@@ -363,9 +365,10 @@ export default class SettingsScreen extends React.Component {
                                     Twitter
                                 </Text>
                             </View>
-                            <ImageSVG
-                                source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                            <CachedImage
+                                source={require('../assets/images/icons/arrow-right.png')}
                                 style={{width: 15, height: 15}}
+                                resizeMode='contain'
                             />
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -378,20 +381,21 @@ export default class SettingsScreen extends React.Component {
                                 <View
                                     style={{width: 30, height: 30, backgroundColor: '#0088CC', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
                                 >
-                                    <ImageSVG
-                                        source={require('../assets/images/icons/telegram-icon.svg')}
+                                    <CachedImage
+                                        source={require('../assets/images/icons/telegram.png')}
                                         style={{width: 20, height: 20}}
                                     />
                                 </View>
                                 <Text
                                     style={{fontSize: 18, color: '#34343e', marginLeft: 10}}
                                 >
-                                    Telegram Chat
+                                    Telegram
                                 </Text>
                             </View>
-                            <ImageSVG
-                                source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                            <CachedImage
+                                source={require('../assets/images/icons/arrow-right.png')}
                                 style={{width: 15, height: 15}}
+                                resizeMode='contain'
                             />
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -404,8 +408,8 @@ export default class SettingsScreen extends React.Component {
                                 <View
                                     style={{width: 30, height: 30, backgroundColor: '#3B5998', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
                                 >
-                                    <ImageSVG
-                                        source={require('../assets/images/icons/facebook-icon.svg')}
+                                    <CachedImage
+                                        source={require('../assets/images/icons/facebook.png')}
                                         style={{width: 20, height: 20}}
                                     />
                                 </View>
@@ -415,9 +419,10 @@ export default class SettingsScreen extends React.Component {
                                     Facebook
                                 </Text>
                             </View>
-                            <ImageSVG
-                                source={require('../assets/images/icons/icon_small-arrow-right.svg')}
+                            <CachedImage
+                                source={require('../assets/images/icons/arrow-right.png')}
                                 style={{width: 15, height: 15}}
+                                resizeMode='contain'
                             />
                         </TouchableOpacity>
                     </View>
@@ -433,8 +438,8 @@ export default class SettingsScreen extends React.Component {
                                 <View
                                     style={{width: 30, height: 30, backgroundColor: '#E91E63', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
                                 >
-                                    <ImageSVG
-                                        source={require('../assets/images/icons/share-icon.svg')}
+                                    <CachedImage
+                                        source={require('../assets/images/icons/share.png')}
                                         style={{width: 15, height: 15}}
                                     />
                                 </View>

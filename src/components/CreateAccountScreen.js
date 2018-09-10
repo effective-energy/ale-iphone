@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, StatusBar, TextInput, Dimensions, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, StatusBar, TextInput, Dimensions, TouchableOpacity, Alert, ScrollView, Image } from 'react-native';
 import ls from 'react-native-local-storage';
-import SVGImage from 'react-native-remote-svg';
 import ImagePicker from 'react-native-image-picker';
+import isIphoneX from '../config/isIphoneX';
+import { CachedImage } from "react-native-img-cache";
 
 import Config from '../config';
 
@@ -141,8 +142,8 @@ export default class CreateAccountScreen extends React.Component {
                                 onPress={this.uploadAvatar.bind(this)}
                                 style={{width: 40, height: 40, backgroundColor: '#556B98', borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
                             >
-                                <SVGImage
-                                    source={require('../assets/images/icons/plus-avatar-icon.svg')}
+                                <CachedImage
+                                    source={require('../assets/images/icons/black_plus.png')}
                                     style={{width: 20, height: 20}}
                                 />
                             </TouchableOpacity>
@@ -151,7 +152,7 @@ export default class CreateAccountScreen extends React.Component {
                                 onPress={this.uploadAvatar.bind(this)}
                                 style={{width: 40, height: 40, backgroundColor: '#556B98', borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
                             >
-                                <SVGImage
+                                <Image
                                     source={{uri: this.state.avatar}}
                                     style={{width: 40, height: 40, borderRadius: 5}}
                                     resizeMode='cover'
@@ -196,9 +197,9 @@ export default class CreateAccountScreen extends React.Component {
                         style={styles.buttonBlock}
                         onPress={this.createAccount}
                     >
-                        <SVGImage
-                            source={require('../assets/images/icons/plus-icon.svg')}
-                            style={styles.buttonBlock_icon}
+                        <CachedImage
+                            source={require('../assets/images/icons/plus.png')}
+                            style={{width: 20, height: 20, marginRight: 10}}
                         />
                         <Text
                             style={styles.buttonBlock_text}
@@ -212,8 +213,8 @@ export default class CreateAccountScreen extends React.Component {
                     style={styles.buttonBlock}
                     onPress={this.backToLoginPage.bind(this)}
                 >
-                    <SVGImage
-                        source={require('../assets/images/icons/icon_login-icon.svg')}
+                    <CachedImage
+                        source={require('../assets/images/icons/login.png')}
                         style={styles.buttonBlock_icon}
                     />
                     <Text style={styles.buttonBlock_text}>Log in to account</Text>
@@ -230,7 +231,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingTop: 20,
-        paddingBottom: 20,
+        paddingBottom: isIphoneX === true ? 50 : 20,
     },
     textInput: {
         height: 40,

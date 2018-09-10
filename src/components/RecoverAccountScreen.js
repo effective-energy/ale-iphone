@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, StatusBar, TouchableOpacity, TextInput, Dimensions, Alert, ScrollView } from 'react-native';
-import SVGImage from 'react-native-remote-svg';
+import isIphoneX from '../config/isIphoneX';
+import { CachedImage } from "react-native-img-cache";
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -86,8 +87,8 @@ export default class RecoverAccountScreen extends React.Component {
                         style={styles.buttonBlock}
                         onPress={this.sendLink.bind(this)}
                     >
-                        <SVGImage
-                            source={require('../assets/images/icons/mail-icon.svg')}
+                        <CachedImage
+                            source={require('../assets/images/icons/mail.png')}
                             style={styles.buttonBlock_icon}
                         />
                         <Text style={styles.buttonBlock_text}>Send link to recover</Text>
@@ -97,8 +98,8 @@ export default class RecoverAccountScreen extends React.Component {
                     style={styles.buttonBlock}
                     onPress={this.loginToAccount.bind(this)}
                 >
-                    <SVGImage
-                        source={require('../assets/images/icons/icon_login-icon.svg')}
+                    <CachedImage
+                        source={require('../assets/images/icons/login.png')}
                         style={styles.buttonBlock_icon}
                     />
                     <Text style={styles.buttonBlock_text}>Log in to account</Text>
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingTop: 20,
-        paddingBottom: 20,
+        paddingBottom: isIphoneX === true ? 50 : 20,
     },
     textInput: {
         height: 40,

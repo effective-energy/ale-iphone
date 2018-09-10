@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#0a1627',
         width: wp(38),
-        borderRadius: 15,
+        borderRadius: 10,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',

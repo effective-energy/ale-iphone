@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import SVGImage from 'react-native-remote-svg';
 import isIphoneX from '../../config/isIphoneX';
-import {CachedImage} from "react-native-img-cache";
+import { CachedImage } from "react-native-img-cache";
 
 export default class BottomNavigator extends React.Component {
 	constructor(props) {
@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
     },
     itemImage: {
-        width: 30,
-        height: 30
+        width: 25,
+        height: 25
     },
     itemTitle: {
         textAlign: 'center',
