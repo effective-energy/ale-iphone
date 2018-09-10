@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableHighlight, TouchableOpacity } from 'react-native';
-import SVGImage from 'react-native-remote-svg';
 import isIphoneX from '../../config/isIphoneX';
 import Carousel from 'react-native-snap-carousel';
+import { CachedImage } from "react-native-img-cache";
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
@@ -32,9 +32,9 @@ export default class WalletsSlider extends React.Component {
                         <Text style={{ backgroundColor: 'transparent', color: '#091628', fontSize: 18, textAlign: 'left' }}>{ item.name }</Text>
                         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: 5 }}>
                             <Text style={{ color: '#091628', fontSize: 24 }}>{item.balance}</Text>
-                            <SVGImage
+                            <CachedImage
+                                source={require('../../assets/images/icons/alecoin.png')}
                                 style={{width: wp(5), height: wp(5), paddingLeft: 5 }}
-                                source={require('../../assets/images/icons/icon_ale-icon.svg')}
                             />
                         </View>
                     </View>
@@ -42,32 +42,32 @@ export default class WalletsSlider extends React.Component {
                         <TouchableHighlight
                             onPress={() => this.props.openWalletDetailsScreen(item)}
                         >
-                            <SVGImage
-                                style={{width: wp(8), height: wp(8)}}
-                                source={require('../../assets/images/icons/icon_wallet-menu.svg')}
+                            <CachedImage
+                                style={{width: 25, height: 25}}
+                                source={require('../../assets/images/icons/wallet-menu.png')}
                             />
                         </TouchableHighlight>
                     </View>
                 </View>
                 <View style={{ maxWidth: wp(75), display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                     <TouchableOpacity
-                        style={{ backgroundColor: '#091628', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', padding: 5, alignItems: 'center', width: wp(32) }}
+                        style={{ backgroundColor: '#091628', borderRadius: 6, display: 'flex', flexDirection: 'row', justifyContent: 'center', padding: 5, alignItems: 'center', width: wp(32) }}
                         onPress={e => this.props.sendMoney(item.address)}
                     >
-                        <SVGImage
-                            style={{width: wp(5), height: wp(5), marginRight: 10 }}
-                            source={require('../../assets/images/icons/icon_send.svg')}
+                        <CachedImage
+                            style={{width: 15, height: 15, marginRight: 5 }}
+                            source={require('../../assets/images/icons/send.png')}
                         />
                         <Text style={{ color: '#ffffff', fontSize: 16 }}>Send</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        style={{ backgroundColor: '#FFBB00', borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', padding: 5, alignItems: 'center', width: wp(32) }}
+                        style={{ backgroundColor: '#FFBB00', borderRadius: 6, display: 'flex', flexDirection: 'row', justifyContent: 'center', padding: 5, alignItems: 'center', width: wp(32) }}
                         onPress={e => this.props.requestMoney(item.address)}
                     >
-                        <SVGImage
-                            style={{width: wp(5), height: wp(5), marginRight: 5 }}
-                            source={require('../../assets/images/icons/icon_request.svg')}
+                        <CachedImage
+                             style={{width: 15, height: 15, marginRight: 5 }}
+                            source={require('../../assets/images/icons/request.png')}
                         />
                         <Text style={{ color: '#000000', fontSize: 16 }}>Request</Text>
                     </TouchableOpacity>

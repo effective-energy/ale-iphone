@@ -226,9 +226,9 @@ export default class SettingsScreen extends React.Component {
                     visible={this.state.isOpenAvatarModal}
                 >
                     <View style={{flex: 1, backgroundColor: '#e8ebee', alignItems: 'center', justifyContent: 'center'}}>
-                        <Image
-                            style={{ width: wp(80), height: wp(80)}}
+                        <CachedImage
                             source={{uri: `${Config.SERVER_URL}/${this.state.userAvatar}`}}
+                            style={{ width: wp(80), height: wp(80)}}
                         />
                         <TouchableOpacity style={{marginTop: 20}} onPress={this.closeAvatarModal.bind(this)}>
                             <Text style={{fontSize: 20}}>Close</Text>
@@ -246,10 +246,13 @@ export default class SettingsScreen extends React.Component {
                         <View style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                             { this.state.userAvatar === '' ? <TouchableOpacity onPress={this.uploadAvatar.bind(this)} style={{width: 60, height: 60, borderRadius: 30, backgroundColor: '#CCCCCC', alignItems: 'center', display: 'flex', justifyContent: 'center', marginBottom: 10}}>
                                 <Text style={{ color: '#FFFFFF', textAlign: 'center', fontSize: 30, fontWeight: 'bold' }}>{this.state.fullName.substr(0, 2).toUpperCase()}</Text>
-                            </TouchableOpacity> : <TouchableOpacity onPress={this.uploadAvatar.bind(this)} style={{width: 60, height: 60, borderRadius: 30}}><Image
-                                style={{ width: 60, height: 60, borderRadius: 30, resizeMode: 'cover', marginBottom: 10 }}
-                                source={{uri: `${Config.SERVER_URL}/${this.state.userAvatar}`}}
-                            /></TouchableOpacity>}
+                            </TouchableOpacity> :
+                            <TouchableOpacity onPress={this.uploadAvatar.bind(this)} style={{width: 60, height: 60, borderRadius: 30}}>
+                                <CachedImage
+                                    source={{uri: `${Config.SERVER_URL}/${this.state.userAvatar}`}}
+                                    style={{ width: 60, height: 60, borderRadius: 30, resizeMode: 'cover', marginBottom: 10 }}
+                                />
+                            </TouchableOpacity>}
                             <View>
                                 <Text style={{ fontSize: 24, textAlign: 'center' }}>{this.state.fullName}</Text>
                                 <Text style={{ fontSize: 18, textAlign: 'center' }}>{this.state.userEmail}</Text>
@@ -484,7 +487,7 @@ const styles = StyleSheet.create({
     buttonContainer: {
         backgroundColor: '#ffd24f',
         borderRadius: 4,
-        padding: 15,
+        padding: 10,
         width: wp(80),
         marginBottom: 20
     },

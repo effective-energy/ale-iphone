@@ -49,6 +49,7 @@ export default class NotificationsScreen extends React.Component {
     static navigationOptions = {
         title: "Notifications",
         headerLeft: null,
+        gesturesEnabled: false,
     };
 
     setStateAsync(state) {

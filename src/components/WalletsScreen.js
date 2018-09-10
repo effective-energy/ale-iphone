@@ -21,6 +21,7 @@ export default class WalletsScreen extends React.Component {
     static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
         return {
+            gesturesEnabled: false,
         	title: 'Wallets',
             headerLeft: null,
             headerTitleStyle: {

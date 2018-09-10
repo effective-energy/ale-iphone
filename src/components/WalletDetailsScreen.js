@@ -4,6 +4,7 @@ import SVGImage from 'react-native-remote-svg';
 import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
 import { when } from "mobx";
+import { CachedImage } from "react-native-img-cache";
 
 import BottomNavigator from './layouts/BottomNavigator';
 
@@ -153,9 +154,9 @@ export default class WalletDetailsScreen extends React.Component {
                             <Text style={styles.walletInfoBlock_balanceBlock_amount}>
                                 {params.walletData.balance}
                             </Text>
-                            <SVGImage
+                            <CachedImage
+                                source={require('../assets/images/icons/alecoin.png')}
                                 style={styles.walletInfoBlock_balanceBlock_amount_icon}
-                                source={require('../assets/images/icons/icon_ale-icon.svg')}
                             />
                         </View>
                     </View>
@@ -276,7 +277,6 @@ const styles = StyleSheet.create({
         color: '#FFFFFF',
         fontSize: 18,
         textAlign: 'center',
-        fontWeight: 'bold',
         paddingLeft: 5,
     }
 });

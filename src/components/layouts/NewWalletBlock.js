@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
-import Image from 'react-native-remote-svg';
+import { CachedImage } from "react-native-img-cache";
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -23,9 +23,10 @@ export default class NewWalletBlock extends React.Component {
                     style={styles.blockContainer}
                     onPress={this.props.createNewWallet}
                 >
-                    <Image
+                    <CachedImage
                         style={styles.blockIcon}
-                        source={require('../../assets/images/icons/icon_new-wallet.svg')}
+                        source={require('../../assets/images/icons/new-wallet.png')}
+                        resizeMode='contain'
                     />
                     <Text
                         style={styles.blockText}

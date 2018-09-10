@@ -21,6 +21,7 @@ export default class TransactionBlock extends React.Component {
             let transactionType = this.props.activeWalletAddress === el.walletAddress ? 'SENT' : 'RECIEVED';
             let transactionTypeBlockColor = this.props.activeWalletAddress === el.walletAddress ? '#091629' : '#FFBB00';
             let transactionTypeBlockImage = this.props.activeWalletAddress === el.walletAddress ? require('../../assets/images/icons/history-send.png') : require('../../assets/images/icons/history-request.png');
+            let transactionTypeMoneySymbol = this.props.activeWalletAddress === el.walletAddress ? '-' : '+';
             return (
                 <View style={styles.transactionBlockContainer} key={i}>
                     <View style={styles.transactionBlockRow}>
@@ -37,7 +38,7 @@ export default class TransactionBlock extends React.Component {
                         </View>
                     </View>
                     <View>
-                        <Text style={styles.transactionBlockAmount}>{el.count} ALE</Text>
+                        <Text style={styles.transactionBlockAmount}>{transactionTypeMoneySymbol}{el.count} ALE</Text>
                     </View>
                 </View>
             )

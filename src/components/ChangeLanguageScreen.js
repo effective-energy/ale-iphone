@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, StatusBar, TouchableOpacity } from 'react-native';
-import Image from 'react-native-remote-svg';
-import I18n from '../i18n/index';
+import { View, Text, StyleSheet, Dimensions, StatusBar, TouchableOpacity } from 'react-native';import I18n from '../i18n/index';
+import { CachedImage } from "react-native-img-cache";
 
 import langList from '../i18n/languagesList';
 
@@ -49,7 +48,7 @@ export default class ChangeLanguageScreen extends React.Component {
 
     render() {
         let languagesList = langList.map(function (el, i) {
-            let isActiveLanguage = this.state.systemLanguage === el.code ? require('../assets/images/icons/check-small.svg') : null;
+            let isActiveLanguage = this.state.systemLanguage === el.code ? require('../assets/images/icons/check.png') : null;
             return (
                 <TouchableOpacity
                     onPress={() => this.changeLanguage(el.code)}
@@ -57,10 +56,13 @@ export default class ChangeLanguageScreen extends React.Component {
                     style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#ffffff', width: wp(100), paddingLeft: 15, paddingRight: 15, paddingTop: 15, paddingBottom: 15, marginTop: 1 }}
                 >
                     <Text style={{ fontSize: wp(5), color: '#34343e' }}>{el.name}</Text>
-                    <Image
-                        source={isActiveLanguage}
-                        style={{ width: 20, height: 20 }}
-                    />
+                    {
+                        isActiveLanguage !== null && <CachedImage
+                            source={isActiveLanguage}
+                            style={{ width: 20, height: 20 }}
+                            resizeMode='contain'
+                        />
+                    }
                 </TouchableOpacity>
             )
         }, this);

@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, StatusBar, TouchableOpacity, Alert, TextInput } from 'react-native';
 import Image from 'react-native-remote-svg';
+import isIphoneX from '../config/isIphoneX';
+import { CachedImage } from "react-native-img-cache";
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -67,9 +69,10 @@ export default class NewWalletScreen extends React.Component {
                         onPress={this.createNewWallet}
                         style={styles.new_wallet_button}
                     >
-                        <Image
+                        <CachedImage
+                            source={require('../assets/images/icons/new-wallet.png')}
                             style={styles.new_wallet_button_icon}
-                            source={require('../assets/images/icons/icon_new-wallet.svg')}
+                            resizeMode='contain'
                         />
                         <Text
                             style={styles.new_wallet_button_text}
@@ -84,8 +87,8 @@ export default class NewWalletScreen extends React.Component {
                         onPress={this.restoreWallet}
                         style={styles.restore_wallet_block}
                     >
-                        <Image
-                            source={require('../assets/images/icons/icon_restore-wallet.svg')}
+                        <CachedImage
+                            source={require('../assets/images/icons/restore-wallet.png')}
                             style={styles.restore_wallet_block_icon}
                         />
                         <Text
@@ -106,8 +109,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#08142F',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingTop: 30,
-        paddingBottom: 30
+        paddingTop: 20,
+        paddingBottom: isIphoneX === true ? 50 : 20,
     },
     new_wallet_input: {
         height: 40,

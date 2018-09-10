@@ -40,6 +40,7 @@ export default class SettingsScreen extends React.Component {
         return {
             title: "Operations history",
             headerLeft: null,
+            gesturesEnabled: false,
         };
     };
 
