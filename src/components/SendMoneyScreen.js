@@ -4,6 +4,7 @@ import ls from 'react-native-local-storage';
 import SVGImage from 'react-native-remote-svg';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Spinner from './layouts/Spinner';
+import { CachedImage } from "react-native-img-cache";
 
 import Config from '../config';
 
@@ -176,9 +177,10 @@ export default class SendMoneyScreen extends React.Component {
                         onPress={this.sendMoney}
                         style={{ backgroundColor: '#16203a', width: screenWidth, padding: 10, borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
                     >
-                        <SVGImage
-                            source={require('../assets/images/icons/sent-icon.svg')}
+                        <CachedImage
+                            source={require('../assets/images/icons/send-money.png')}
                             style={{width: 20, height: 20, marginRight: 10}}
+                            resizeMode='contain'
                         />
                         <Text
                             style={{ color: '#f0b721', textAlign: 'center', fontSize: 18 }}
@@ -193,9 +195,10 @@ export default class SendMoneyScreen extends React.Component {
                         }}
                         style={{ backgroundColor: '#16203a', width: screenWidth, padding: 10, borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20 }}
                     >
-                        <SVGImage
-                            source={require('../assets/images/icons/qr-code.svg')}
+                        <CachedImage
+                            source={require('../assets/images/icons/qr-code.png')}
                             style={{width: 15, height: 15, marginRight: 10}}
+                            resizeMode='contain'
                         />
                         <Text
                             style={{ color: '#f0b721', textAlign: 'center', fontSize: 18 }}

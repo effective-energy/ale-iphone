@@ -178,15 +178,17 @@ export default class WalletDetailsScreen extends React.Component {
                             <CachedImage
                                 source={require('../assets/images/icons/alecoin.png')}
                                 style={styles.walletInfoBlock_balanceBlock_amount_icon}
+                                resizeMode='contain'
                             />
                         </View>
                     </View>
                     <TouchableOpacity
                         onPress={() => this.receiveMoney(params.walletData.address)}
                     >
-                        <SVGImage
+                        <CachedImage
+                            source={require('../assets/images/icons/plus-balance.png')}
                             style={styles.walletInfoBlock_receive_icon}
-                            source={require('../assets/images/icons/icon_plus-balance.svg')}
+                            resizeMode='contain'
                         />
                     </TouchableOpacity>
                 </View>
@@ -196,9 +198,10 @@ export default class WalletDetailsScreen extends React.Component {
                         onPress={this.editWalletName}
                         style={[styles.walletInfoBlock_button, styles.walletInfoBlock_button_edit]}
                     >
-                        <SVGImage
+                        <CachedImage
+                            source={require('../assets/images/icons/wallet-edit.png')}
                             style={styles.walletActionBlock_icon}
-                            source={require('../assets/images/icons/icon_edit-wallet.svg')}
+                            resizeMode='contain'
                         />
                         <Text style={styles.walletActionBlock_text}>
                             Edit
@@ -209,9 +212,10 @@ export default class WalletDetailsScreen extends React.Component {
                         onPress={this.deleteWallet}
                         style={[styles.walletInfoBlock_button, styles.walletInfoBlock_button_delete]}
                     >
-                        <SVGImage
+                        <CachedImage
+                            source={require('../assets/images/icons/wallet-delete.png')}
                             style={styles.walletActionBlock_icon}
-                            source={require('../assets/images/icons/icon_delete-wallet.svg')}
+                            resizeMode='contain'
                         />
                         <Text style={styles.walletActionBlock_text}>
                             Delete

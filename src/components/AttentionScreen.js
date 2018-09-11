@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, StatusBar, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
-import SVGImage from 'react-native-remote-svg';
+import { CachedImage } from "react-native-img-cache";
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -39,9 +39,10 @@ export default class AttentionScreen extends React.Component {
                     refreshing={false}
                 >
                     <View style={styles.pageRow}>
-                        <SVGImage
+                        <CachedImage
+                            source={require('../assets/images/icons/lock.png')}
                             style={styles.lockIcon}
-                            source={require('../assets/images/icons/icon_lock.svg')}
+                            resizeMode='contain'
                         />
                         <Text style={styles.attention_text}>
                             On the following screen, you will see a set of 12 random words. This is your wallet backup phrase. It can be entered in any version of ALE application in order to back up or restore your wallet's funds and private key.

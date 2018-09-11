@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions, StatusBar, TouchableOpacity } from 'react-native';
-import ls from 'react-native-local-storage';
-import Image from 'react-native-remote-svg';
+import { CachedImage } from "react-native-img-cache";
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -46,9 +45,10 @@ export default class SuccessPaymentScreen extends React.Component {
                     >
                         Your payment{'\n'}was successfully sent
                     </Text>
-                    <Image
-                        source={require('../assets/images/icons/success_payment.svg')}
+                    <CachedImage
+                        source={require('../assets/images/icons/success-payment.png')}
                         style={styles.paymentIcon}
+                        resizeMode='contain'
                     />
                 </View>
                 <TouchableOpacity

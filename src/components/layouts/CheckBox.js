@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet, View, Dimensions } from 'react-native';
-import SVGImage from 'react-native-remote-svg';
+import { CachedImage } from "react-native-img-cache";
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;
@@ -16,7 +16,7 @@ export default class CheckBox extends React.Component {
     }
 
     render() {
-        let isCheked = this.props.isCheked ? require('../../assets/images/icons/check-small.svg') : null;
+        let isCheked = this.props.isCheked ? require('../../assets/images/icons/check.png') : null;
     	return (
     		<TouchableOpacity
                 onPress={this.props.toggleCheckBox}
@@ -25,10 +25,11 @@ export default class CheckBox extends React.Component {
                 <View
                     style={styles.checkBoxRow}
                 >
-                    <SVGImage
+                    {isCheked !== null && <CachedImage
                         source={isCheked}
                         style={{ width: 15, height: 15 }}
-                    />
+                        resizeMode='contain'
+                    />}
                 </View>
                 <Text style={{ paddingLeft: 15, paddingRight: 15 }}>{this.props.value}</Text>
             </TouchableOpacity>

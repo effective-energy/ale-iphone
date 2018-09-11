@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import SVGImage from 'react-native-remote-svg';
+import { CachedImage } from "react-native-img-cache";
 
 export default class MnemonicSlider extends React.Component {
     constructor(props) {
@@ -12,16 +12,18 @@ export default class MnemonicSlider extends React.Component {
         return (
             <View style={styles.sliderContainer}>
                 <TouchableOpacity onPress={() => this.props.prevMnemonicWord()}>
-                    <SVGImage
-                        source={require('../../assets/images/icons/back-arrow.svg')}
+                    <CachedImage
+                        source={require('../../assets/images/icons/arrow-back.png')}
                         style={styles.sliderIcon}
+                        resizeMode='contain'
                     />
                 </TouchableOpacity>
                 <Text style={styles.slideCurrentWord}>{this.props.mnemonicPhrase[this.props.currentWord]}</Text>
                 <TouchableOpacity onPress={() => this.props.nextMnemonicWord()}>
-                    <SVGImage
-                        source={require('../../assets/images/icons/next-arrow.svg')}
+                    <CachedImage
+                        source={require('../../assets/images/icons/arrow-next.png')}
                         style={styles.sliderIcon}
+                        resizeMode='contain'
                     />
                 </TouchableOpacity>
             </View>
