@@ -47,38 +47,60 @@ export default class WalletsDropdownMenu extends React.Component {
 
     render() {
         let wallets = this.props.walletsList.map(function (el, i) {
-            let isShowCloseIcon = i === 0 ? 1 : 0;
+            let isShowCloseIcon = i === 0 ? true : false;
             let isFirstWalelt = i !== 0 ? {marginTop: 10} : null;
             let isLastWallet = el._id === this.props.walletsList.slice(-1)[0]._id ? null : {borderBottomWidth: 1, borderBottomColor: '#D1D8DD', paddingBottom: 8};
-            return (
-                <View
-                    key={i}
-                    style={[{display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', borderBottomColor: '#D1D8DD'}, isFirstWalelt, isLastWallet]}
-                >
+            if (isShowCloseIcon) {
+                return (
+                    <View
+                        key={i}
+                        style={[{display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', borderBottomColor: '#D1D8DD'}, isFirstWalelt, isLastWallet]}
+                    >
+                        <TouchableOpacity
+                            onPress={() => this.selectWallet(i)}
+                            style={{display: 'flex', flexDirection: 'row'}}
+                        >
+                            <CachedImage
+                                source={require('../../assets/images/navigation/bottom/wallet.png')}
+                                style={{width: 40, height: 40, marginRight: 10 }}
+                            />
+                            <View>
+                                <Text style={{fontSize: 14}}>{el.name}</Text>
+                                <Text style={{fontSize: 18}}>{el.balance}</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => this.setState({isMenuOpen: false})}
+                        >
+                            <CachedImage
+                                source={require('../../assets/images/icons/close.png')}
+                                style={{width: 35, height: 35}}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                )
+            } else {
+                return (
                     <TouchableOpacity
                         onPress={() => this.selectWallet(i)}
-                        style={{display: 'flex', flexDirection: 'row'}}
+                        key={i}
+                        style={[{display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', borderBottomColor: '#D1D8DD'}, isFirstWalelt, isLastWallet]}
                     >
-                        <CachedImage
-                            source={require('../../assets/images/navigation/bottom/wallet.png')}
-                            style={{width: 40, height: 40, marginRight: 10 }}
-                        />
-                        <View>
-                            <Text style={{fontSize: 14}}>{el.name}</Text>
-                            <Text style={{fontSize: 18}}>{el.balance}</Text>
+                        <View
+                            style={{display: 'flex', flexDirection: 'row'}}
+                        >
+                            <CachedImage
+                                source={require('../../assets/images/navigation/bottom/wallet.png')}
+                                style={{width: 40, height: 40, marginRight: 10 }}
+                            />
+                            <View>
+                                <Text style={{fontSize: 14}}>{el.name}</Text>
+                                <Text style={{fontSize: 18}}>{el.balance}</Text>
+                            </View>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => this.setState({isMenuOpen: false})}
-                        style={{opacity: isShowCloseIcon}}
-                    >
-                        <CachedImage
-                            source={require('../../assets/images/icons/close.png')}
-                            style={{width: 35, height: 35}}
-                        />
-                    </TouchableOpacity>
-                </View>
-            )
+                )
+            }
         }, this);
         if (this.state.isMenuOpen) {
             return (

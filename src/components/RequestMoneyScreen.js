@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, Platform, Image, StatusBar, Clipboard, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, Platform, StatusBar, Clipboard, Alert, TouchableOpacity } from 'react-native';
 
 function wp (percentage) {
     const value = (percentage * viewportWidth) / 100;

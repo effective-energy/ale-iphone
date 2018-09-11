@@ -59,11 +59,40 @@ export default class UserStore {
     }
 
     @action async createAccount() {
-    	try {
+        try {
+            this.isSuccessCreateAccount = false;
+            this.isLoader = true;
+            const params = {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: data.email,
+                    name: data.fullName,
+                    password: data.password
+                }),
+            };
 
-    	} catch (error) {
+            const response = await fetch(`${Config.SERVER_URL}/users/new`, params);
+            if (!response) {
+                throw response
+            }
+
+            const responseJson = await response.json();
+
+            if (responseJson.message !== 'User already exist!') {
+                Alert.alert(responseJson.message);
+                this.isLoader = false;
+                return this.isSuccessCreateAccount = true;
+            } else {
+                Alert.alert(responseJson.message);
+            }
+        } catch (error) {
+            this.isLoader = false;
             console.log(error);
-    	}
+        }
     }
 
     @action async recoverAccount() {
@@ -75,11 +104,19 @@ export default class UserStore {
     }
 
     @action async logout() {
-    	try {
-            
-    	} catch (error) {
+        try {
+
+        } catch (error) {
             console.log(error);
-    	}
+        }
+    }
+
+    @action async uploadAvatar(data: Object) {
+        try {
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     @action async changePassword(data: Object) {

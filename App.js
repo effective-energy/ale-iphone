@@ -3,8 +3,7 @@ import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 import { YellowBox, NetInfo, StyleSheet, View, Text, StatusBar, Platform } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader', 'Warning', 'Class RCTCxxModule']);
-
-import ls from 'react-native-local-storage';
+import I18n from './src/i18n/index';
 
 // MobX
 import { Provider } from "mobx-react";
@@ -92,6 +91,7 @@ export default class App extends React.Component {
     }
 
     componentDidMount() {
+        I18n.locale = 'en'; //Default language
         NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange);
     }
 

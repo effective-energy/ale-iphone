@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, StatusBar, TextInput, Dimensions, TouchableOpacity, Alert, ScrollView, Image } from 'react-native';
-import ls from 'react-native-local-storage';
 import ImagePicker from 'react-native-image-picker';
 import isIphoneX from '../config/isIphoneX';
 import { CachedImage } from "react-native-img-cache";
 import Spinner from './layouts/Spinner';
+import { observer, inject } from "mobx-react";
+import { when } from "mobx";
 
 import Config from '../config';
 
@@ -20,6 +21,8 @@ function validateEmail(email)  {
     return re.test(email);
 }
 
+@inject("userStore")
+@observer
 export default class CreateAccountScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -29,12 +32,10 @@ export default class CreateAccountScreen extends React.Component {
             password: '',
             repeatPassword: '',
             avatar: null,
-            isShowSpinner: false
         };
 
         this.backToLoginPage = this.backToLoginPage.bind(this);
         this.createAccount = this.createAccount.bind(this);
-        this.refreshState = this.refreshState.bind(this);
     }
     
     static navigationOptions = {
@@ -50,10 +51,6 @@ export default class CreateAccountScreen extends React.Component {
     };
 
     componentDidMount() {
-        this.refreshState();
-    }
-
-    refreshState() {
         this.setState({
             fullName: '',
             email: '',
@@ -61,6 +58,10 @@ export default class CreateAccountScreen extends React.Component {
             repeatPassword: '',
         });
     }
+
+    watcher = when(() => this.props.userStore.isSuccessCreateAccount === true, () => {
+        this.props.navigation.navigate('Login');
+    });
 
     backToLoginPage() {
         this.props.navigation.navigate('Login');
@@ -81,39 +82,12 @@ export default class CreateAccountScreen extends React.Component {
                 return Alert.alert('Passwords do not match');
             }
 
-            this.setState({
-                isShowSpinner: true,
+            this.props.userStore.createAccount({
+                email: this.state.email.toLowerCase(),
+                name: this.state.fullName,
+                password: this.state.password,
+                avatar: this.state.avatar
             });
-
-            const params = {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: this.state.email.toLowerCase(),
-                    name: this.state.fullName,
-                    password: this.state.password
-                }),
-            };
-
-            const response = await fetch(`${Config.SERVER_URL}/users/new`, params);
-            if (!response) {
-                throw response
-            }
-
-            const responseJson = await response.json();
-            this.setState({
-                isShowSpinner: false,
-            });
-            if (responseJson.message !== 'User already exist!') {
-                Alert.alert(responseJson.message);
-                this.refreshState();
-                return this.props.navigation.push('Login');
-            } else {
-                Alert.alert(responseJson.message);
-            }
         } catch (error) {
             Alert.alert(error)
         }
@@ -144,7 +118,7 @@ export default class CreateAccountScreen extends React.Component {
                 keyboardShouldPersistTaps='handled'
             >
                 <StatusBar barStyle='light-content' />
-                { this.state.isShowSpinner === true && <Spinner />}
+                { this.props.userStore.isLoader === true && <Spinner />}
                 <View>
                     <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 20}}>
                         { this.state.avatar === null ?
@@ -179,6 +153,8 @@ export default class CreateAccountScreen extends React.Component {
                         style={styles.textInput}
                         onChangeText={(fullName) => this.setState({fullName})}
                         value={this.state.fullName}
+                        returnKeyType={"next"}
+                        onSubmitEditing={() => { this.emailTextInput.focus(); }}
                     />
                     <TextInput
                         placeholder="E-mail"
@@ -186,6 +162,9 @@ export default class CreateAccountScreen extends React.Component {
                         style={styles.textInput}
                         onChangeText={(email) => this.setState({email})}
                         value={this.state.email}
+                        ref={(input) => { this.emailTextInput = input; }}
+                        returnKeyType={"next"}
+                        onSubmitEditing={() => { this.passwordTextInput.focus(); }}
                     />
                     <TextInput
                         secureTextEntry={true}
@@ -194,6 +173,9 @@ export default class CreateAccountScreen extends React.Component {
                         style={styles.textInput}
                         onChangeText={(password) => this.setState({password})}
                         value={this.state.password}
+                        ref={(input) => { this.passwordTextInput = input; }}
+                        returnKeyType={"next"}
+                        onSubmitEditing={() => { this.confirmPasswordTextInput.focus(); }}
                     />
                     <TextInput
                         secureTextEntry={true}
@@ -202,6 +184,9 @@ export default class CreateAccountScreen extends React.Component {
                         style={styles.textInput}
                         onChangeText={(repeatPassword) => this.setState({repeatPassword})}
                         value={this.state.repeatPassword}
+                        ref={(input) => { this.confirmPasswordTextInput = input; }}
+                        returnKeyType={"go"}
+                        onSubmitEditing={() => { this.createAccount() }}
                     />
                     <TouchableOpacity
                         style={styles.buttonBlock}

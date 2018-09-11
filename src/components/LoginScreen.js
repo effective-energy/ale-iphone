@@ -124,7 +124,7 @@ export default class LoginScreen extends React.Component {
 					</TouchableOpacity>
 
 					{
-						this.props.userStore.isLoader === true ?
+						this.props.userStore.isLoader ?
 							<ActivityIndicator size="large" color="#CCCCCC" style={{marginTop: 20}} />
 							: null
 					}

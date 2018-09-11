@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, StatusBar, TouchableOpacity } from 'react-native';import I18n from '../i18n/index';
+import { View, Text, StyleSheet, Dimensions, StatusBar, TouchableOpacity } from 'react-native';
+import I18n from '../i18n/index';
 import { CachedImage } from "react-native-img-cache";
 
 import langList from '../i18n/languagesList';
