@@ -5,6 +5,7 @@ import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
 import { when } from "mobx";
 import { CachedImage } from "react-native-img-cache";
+import Spinner from './layouts/Spinner';
 
 import BottomNavigator from './layouts/BottomNavigator';
 
@@ -21,7 +22,8 @@ export default class WalletDetailsScreen extends React.Component {
     constructor(props) {
         super(props);
 	    this.state = {
-            walletName: ''
+            walletName: '',
+            isShowSpinner: false
         };
 
         this.changePage = this.changePage.bind(this);
@@ -42,12 +44,18 @@ export default class WalletDetailsScreen extends React.Component {
     };
 
     watcher = when(() => this.props.walletsStore.isSuccessDeletedWallet === true, () => {
-        Alert.alert('Wallet successfully deleted')
+        this.setState({
+            isShowSpinner: false,
+        });
+        Alert.alert('Wallet successfully deleted');
         this.props.navigation.push('Wallets');
     });
 
     watcher = when(() => this.props.walletsStore.isEmptyWallets === true, () => {
-        Alert.alert('Wallet successfully deleted. You need to create a new wallet')
+        this.setState({
+            isShowSpinner: false,
+        });
+        Alert.alert('Wallet successfully deleted. You need to create a new wallet');
         this.props.navigation.push('NewWallet', {
             disableBackArrow: true
         });
@@ -85,6 +93,12 @@ export default class WalletDetailsScreen extends React.Component {
     }
 
     renameWallet(newWalletName) {
+        if (newWalletName === this.state.walletName) {
+            return Alert.alert('Write a new name for your wallet');
+        }
+        this.setState({
+            isShowSpinner: true,
+        });
         const { params } = this.props.navigation.state;
         ls.get('userToken').then((data) => {
             return fetch('https://ale-demo-4550.nodechef.com/wallet/rename', {
@@ -101,6 +115,9 @@ export default class WalletDetailsScreen extends React.Component {
             })
             .then((response) => response.json())
             .then((responseJson) => {
+                this.setState({
+                    isShowSpinner: false,
+                });
                 this.props.navigation.setParams({
                     walletData: {
                         name: newWalletName,
@@ -137,6 +154,9 @@ export default class WalletDetailsScreen extends React.Component {
         if (walletName !== params.walletData.name) {
             return Alert.alert('Incorrect wallet name');
         }
+        this.setState({
+            isShowSpinner: true,
+        });
         return this.props.walletsStore.deleteWallet(params.walletData.address);
     }
 
@@ -145,6 +165,7 @@ export default class WalletDetailsScreen extends React.Component {
         return (
             <View style={styles.pageContainer}>
                 <StatusBar barStyle='dark-content' />
+                { this.state.isShowSpinner === true && <Spinner />}
                 <View style={styles.walletInfoBlock}>
                     <View style={styles.walletInfoBlock_row}>
                         <Text style={styles.walletInfoBlock_row_balance_text}>

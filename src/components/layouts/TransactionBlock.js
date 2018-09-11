@@ -34,7 +34,12 @@ export default class TransactionBlock extends React.Component {
                         </View>
                         <View style={styles.transactionBlockInfo}>
                             <Text>{transactionType}</Text>
-                            <Moment element={Text} format="YYYY-MM-DD HH:mm">{el.timestamp}</Moment>
+                            <Moment
+                                element={Text}
+                                format="DD MMM in HH:mm"
+                            >
+                                {el.timestamp}
+                            </Moment>
                         </View>
                     </View>
                     <View>

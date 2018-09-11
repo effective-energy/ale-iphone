@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, StatusBar, ScrollView, RefreshControl, Text, Dimensions, ListView, Alert } from 'react-native';
 import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
+import isIphoneX from '../config/isIphoneX';
 
 import Config from '../config'
 
@@ -77,7 +78,7 @@ export default class SettingsScreen extends React.Component {
                 <StatusBar barStyle='dark-content' />
                 
                 <ScrollView
-                    contentInset={{bottom:80}}
+                    contentInset={{bottom: isIphoneX === true ? 104 : 80}}
                     automaticallyAdjustContentInsets={false}
                     refreshControl={
                         <RefreshControl
