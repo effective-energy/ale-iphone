@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert, AppRegistry, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Alert, AppRegistry, Button, TextInput, ScrollView } from 'react-native';
 
 export default class ImportwalletScreen extends React.Component {
     constructor(props) {
@@ -20,7 +20,10 @@ export default class ImportwalletScreen extends React.Component {
     };
     render() {
         return (
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#ffffff' }}>
+            <ScrollView
+                contentContainerStyle={styles.pageContainer}
+                keyboardShouldPersistTaps='handled'
+            >
                 <View style={{ marginTop: 20, flex: 1, alignItems: 'center' }}>
                     <Text>Enter your private Key</Text>
                     <View style={{ width: '90%', height: 150, padding: 16, opacity: 1 }}>
@@ -39,17 +42,23 @@ export default class ImportwalletScreen extends React.Component {
                           </View>
                     </View>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    backgroundColor: '#ffd24f',
-    borderRadius: 4,
-    padding: 10,
-    width: 300,
-    marginBottom: 20
-  }
+    pageContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#ffffff',
+    },
+    buttonContainer: {
+        backgroundColor: '#ffd24f',
+        borderRadius: 4,
+        padding: 10,
+        width: 300,
+        marginBottom: 20
+    }
 });

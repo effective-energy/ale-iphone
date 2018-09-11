@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, StatusBar, TextInput, Dimensions, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, TextInput, Dimensions, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
 import { when } from "mobx";
@@ -75,8 +75,9 @@ export default class ChangePasswordScreen extends React.Component {
 
     render() {
         return (
-            <View
-                style={styles.pageContainer}
+            <ScrollView
+                contentContainerStyle={styles.pageContainer}
+                keyboardShouldPersistTaps='handled'
             >
             	<StatusBar
                     barStyle='dark-content'
@@ -118,7 +119,7 @@ export default class ChangePasswordScreen extends React.Component {
                         </Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, StatusBar, TouchableOpacity, Alert, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, StatusBar, TouchableOpacity, Alert, TextInput, ScrollView } from 'react-native';
 import Image from 'react-native-remote-svg';
 import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
@@ -36,8 +36,6 @@ export default class RestoreWalletScreen extends React.Component {
         },
         headerTintColor: '#ffbb00',
     };
-
-    //erode version primary pelican purse corn work balance quick help survey roof
 
     async restoreWallet() {
         return this.props.walletsStore.restoreWallet(this.state.mnemonicPhrase);
@@ -84,7 +82,10 @@ export default class RestoreWalletScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.pageContainer}>
+            <ScrollView
+                contentContainerStyle={styles.pageContainer}
+                keyboardShouldPersistTaps='handled'
+            >
                 <StatusBar barStyle='light-content' />
                 <View style={{ marginTop: 30 }}>
                     <TextInput
@@ -106,8 +107,7 @@ export default class RestoreWalletScreen extends React.Component {
                         </Text>
                     </TouchableOpacity>
                 </View>
-
-            </View>
+            </ScrollView>
         );
     }
 }

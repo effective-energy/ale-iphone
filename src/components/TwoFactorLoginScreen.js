@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, Text, TextInput, Dimensions, Alert } from 'react-native';
+import { View, StyleSheet, StatusBar, TouchableOpacity, Text, TextInput, Dimensions, Alert, ScrollView } from 'react-native';
 import ls from 'react-native-local-storage';
 import Config from '../config';
 
@@ -68,7 +68,10 @@ export default class TwoFactorAuthScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.pageContainer}>
+            <ScrollView
+                contentContainerStyle={styles.pageContainer}
+                keyboardShouldPersistTaps='handled'
+            >
                 <StatusBar barStyle='light-content' />
                 <View>
                     <TextInput
@@ -88,7 +91,7 @@ export default class TwoFactorAuthScreen extends React.Component {
                         <Text style={styles.buttonContainer_text}>Enter key</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, Clipboard, TextInput } from 'react-native';
+import { View, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions } from 'react-native';
 import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
 import Pageloader from './layouts/Pageloader';

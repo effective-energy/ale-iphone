@@ -201,7 +201,10 @@ export default class TwoFactorAuthScreen extends React.Component {
         }
         if (this.state.isDisableTwoAuth) {
             return (
-                <View style={styles.pageContainer}>
+                <ScrollView
+                    contentContainerStyle={styles.pageContainer}
+                    keyboardShouldPersistTaps='handled'
+                >
                     <StatusBar barStyle='dark-content' />
                     <View style={styles.TwoFactorBlock}>
                         <TextInput
@@ -227,7 +230,7 @@ export default class TwoFactorAuthScreen extends React.Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-                </View>
+                </ScrollView>
             );
         }
         return (

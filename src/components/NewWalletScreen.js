@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, StatusBar, TouchableOpacity, Alert, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, StatusBar, TouchableOpacity, Alert, TextInput, ScrollView } from 'react-native';
 import Image from 'react-native-remote-svg';
 import isIphoneX from '../config/isIphoneX';
 import { CachedImage } from "react-native-img-cache";
@@ -53,8 +53,9 @@ export default class NewWalletScreen extends React.Component {
 
     render() {
         return (
-            <View
-                style={styles.pageContainer}
+            <ScrollView
+                contentContainerStyle={styles.pageContainer}
+                keyboardShouldPersistTaps='handled'
             >
                 <StatusBar barStyle='light-content' />
                 <View>
@@ -98,7 +99,7 @@ export default class NewWalletScreen extends React.Component {
                         </Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }
