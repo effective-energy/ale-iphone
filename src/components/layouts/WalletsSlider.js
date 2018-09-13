@@ -80,7 +80,7 @@ export default class WalletsSlider extends React.Component {
         return (
             <View>
                 <Carousel
-                    ref={c => this._slider1Ref = c}
+                    ref={c => this._sliderRef = c}
                     layout={'default'}
                     loop={false}
                     layoutCardOffset={50}

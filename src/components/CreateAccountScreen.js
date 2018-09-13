@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, StatusBar, TextInput, Dimensions, TouchableOpacity, Alert, ScrollView, Image } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
+import { StyleSheet, Text, View, StatusBar, TextInput, Dimensions, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import isIphoneX from '../config/isIphoneX';
 import { CachedImage } from "react-native-img-cache";
 import Spinner from './layouts/Spinner';
@@ -31,11 +30,7 @@ export default class CreateAccountScreen extends React.Component {
             email: '',
             password: '',
             repeatPassword: '',
-            avatar: null,
         };
-
-        this.backToLoginPage = this.backToLoginPage.bind(this);
-        this.createAccount = this.createAccount.bind(this);
     }
     
     static navigationOptions = {
@@ -85,30 +80,11 @@ export default class CreateAccountScreen extends React.Component {
             this.props.userStore.createAccount({
                 email: this.state.email.toLowerCase(),
                 name: this.state.fullName,
-                password: this.state.password,
-                avatar: this.state.avatar
+                password: this.state.password
             });
         } catch (error) {
             Alert.alert(error)
         }
-    }
-
-    uploadAvatar () {
-        let options = {
-            storageOptions: {
-                skipBackup: true,
-                path: 'images'
-            }
-        };
-        ImagePicker.showImagePicker(options, (response) => {
-            if (!response.error && !response.didCancel) {
-                this.setState({
-                    avatar: response.uri
-                });
-            } else if (response.error) {
-                Alert.alert('Error');
-            }
-        });
     }
 
     render() {
@@ -120,33 +96,6 @@ export default class CreateAccountScreen extends React.Component {
                 <StatusBar barStyle='light-content' />
                 { this.props.userStore.isLoader === true && <Spinner />}
                 <View>
-                    <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginBottom: 20}}>
-                        { this.state.avatar === null ?
-                            <TouchableOpacity
-                                onPress={this.uploadAvatar.bind(this)}
-                                style={{width: 40, height: 40, backgroundColor: '#556B98', borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
-                            >
-                                <CachedImage
-                                    source={require('../assets/images/icons/black_plus.png')}
-                                    style={{width: 20, height: 20}}
-                                />
-                            </TouchableOpacity>
-                            :
-                            <TouchableOpacity
-                                onPress={this.uploadAvatar.bind(this)}
-                                style={{width: 40, height: 40, backgroundColor: '#556B98', borderRadius: 5, display: 'flex', alignItems: 'center', justifyContent: 'center'}}
-                            >
-                                <Image
-                                    source={{uri: this.state.avatar}}
-                                    style={{width: 40, height: 40, borderRadius: 5}}
-                                    resizeMode='cover'
-                                />
-                            </TouchableOpacity>
-                        }
-                        <Text style={{color: '#455578', marginLeft: 10, fontSize: 16}}>
-                            Upload photo
-                        </Text>
-                    </View>
                     <TextInput
                         placeholder="Full name"
                         placeholderTextColor="#455578"
@@ -190,7 +139,7 @@ export default class CreateAccountScreen extends React.Component {
                     />
                     <TouchableOpacity
                         style={styles.buttonBlock}
-                        onPress={this.createAccount}
+                        onPress={this.createAccount.bind(this)}
                     >
                         <CachedImage
                             source={require('../assets/images/icons/plus.png')}
