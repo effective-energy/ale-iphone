@@ -49,8 +49,8 @@ export default class WalletsScreen extends React.Component {
         this.props.navigation.navigate(e);
     }
 
-    requestMoney(e) {
-        this.props.navigation.navigate('RequestMoney', { walletAddress: e });
+    receiveMoney(e) {
+        this.props.navigation.navigate('ReceiveMoney', { walletAddress: e });
     }
 
     sendMoney(e) {
@@ -99,7 +99,7 @@ export default class WalletsScreen extends React.Component {
                     <WalletsSlider
                         openWalletDetailsScreen={this.openWalletDetailsScreen.bind(this)}
                         walletsList={this.props.walletsStore.walletsList}
-                        requestMoney={this.requestMoney.bind(this)}
+                        receiveMoney={this.receiveMoney.bind(this)}
                         sendMoney={this.sendMoney.bind(this)}
                     />
                     <NewWalletBlock

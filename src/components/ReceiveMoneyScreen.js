@@ -11,7 +11,7 @@ let screenWidth = wp(80);
 
 import QRCode from 'react-native-qrcode-svg';
 
-export default class RequestMoneyScreen extends React.Component {
+export default class ReceiveMoneyScreen extends React.Component {
     constructor(props) {
         super(props);
 	    this.state = {
@@ -20,7 +20,7 @@ export default class RequestMoneyScreen extends React.Component {
     }
     
     static navigationOptions = {
-        title: 'Request money',
+        title: 'Receive money',
         headerTitleStyle: {
             color: '#000000'
         },

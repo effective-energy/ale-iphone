@@ -25,7 +25,7 @@ import RecoveryPhraseScreen from './src/components/RecoveryPhraseScreen';
 import TwoFactorAuthScreen from './src/components/TwoFactorAuthScreen';
 import WalletDetailsScreen from './src/components/WalletDetailsScreen';
 import ChangePasswordScreen from './src/components/ChangePasswordScreen';
-import RequestMoneyScreen from './src/components/RequestMoneyScreen';
+import ReceiveMoneyScreen from './src/components/ReceiveMoneyScreen';
 import SendMoneyScreen from './src/components/SendMoneyScreen';
 import WebViewScreen from './src/components/WebViewScreen';
 import InitialScreen from './src/components/InitialScreen';
@@ -48,7 +48,7 @@ const RootStack = createStackNavigator({
     Importwallet: { screen: ImportwalletScreen },
     Wallets: { screen: WalletsScreen },
     Settings: { screen: SettingsScreen },
-    RequestMoney: { screen: RequestMoneyScreen },
+    ReceiveMoney: { screen: ReceiveMoneyScreen },
     SendMoney: { screen: SendMoneyScreen },
     CreateAccount: { screen: CreateAccountScreen },
     RecoverAccount: { screen: RecoverAccountScreen },

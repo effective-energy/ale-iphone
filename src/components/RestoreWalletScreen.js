@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, StatusBar, TouchableOpacity, Alert, TextInput, ScrollView } from 'react-native';
-import Image from 'react-native-remote-svg';
+import { CachedImage } from "react-native-img-cache";
 import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
 
@@ -82,32 +82,38 @@ export default class RestoreWalletScreen extends React.Component {
 
     render() {
         return (
-            <ScrollView
-                contentContainerStyle={styles.pageContainer}
-                keyboardShouldPersistTaps='handled'
-            >
+            <View style={styles.pageContainer}>
                 <StatusBar barStyle='light-content' />
-                <View style={{ marginTop: 30 }}>
-                    <TextInput
-                        placeholder="Enter your mnemonic phrase"
-                        placeholderTextColor="#455578"
-                        style={styles.restore_input}
-                        onChangeText={(mnemonicPhrase) => this.setState({mnemonicPhrase})}
-                        value={this.state.mnemonicPhrase}
-                        
-                    />
-                    <TouchableOpacity
-                        onPress={this.restoreWallet}
-                        style={styles.restore_button}
-                    >
-                        <Text
-                            style={styles.restore_button_text}
+                <ScrollView
+                    keyboardShouldPersistTaps='handled'
+                >
+                    <StatusBar barStyle='light-content' />
+                    <View style={{ marginTop: 30 }}>
+                        <TextInput
+                            placeholder="Enter your mnemonic phrase"
+                            placeholderTextColor="#455578"
+                            style={styles.restore_input}
+                            onChangeText={(mnemonicPhrase) => this.setState({mnemonicPhrase})}
+                            value={this.state.mnemonicPhrase}
+                            
+                        />
+                        <TouchableOpacity
+                            onPress={this.restoreWallet}
+                            style={styles.restore_button}
                         >
-                            Restore wallet
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
+                            <CachedImage
+                                source={require('../assets/images/icons/restore-wallet.png')}
+                                style={styles.restore_button_icon}
+                            />
+                            <Text
+                                style={styles.restore_button_text}
+                            >
+                                Restore wallet
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
+            </View>
         );
     }
 }
@@ -135,11 +141,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffbb00',
         width: wp(80),
         padding: 10,
-        borderRadius: 15,
+        borderRadius: 10,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    restore_button_icon: {
+        width: 20,
+        height: 20,
+        marginRight: 10
     },
     restore_button_text: {
         color: '#000000',

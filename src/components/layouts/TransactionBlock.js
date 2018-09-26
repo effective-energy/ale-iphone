@@ -18,7 +18,7 @@ export default class TransactionBlock extends React.Component {
 
     render() {
         let transactions = this.props.data.map(function (el, i) {
-            let transactionType = this.props.activeWalletAddress === el.walletAddress ? 'SENT' : 'RECIEVED';
+            let transactionType = this.props.activeWalletAddress === el.walletAddress ? 'SENT' : 'RECEIVED';
             let transactionTypeBlockColor = this.props.activeWalletAddress === el.walletAddress ? '#091629' : '#FFBB00';
             let transactionTypeBlockImage = this.props.activeWalletAddress === el.walletAddress ? require('../../assets/images/icons/history-send.png') : require('../../assets/images/icons/history-request.png');
             let transactionTypeMoneySymbol = this.props.activeWalletAddress === el.walletAddress ? '-' : '+';

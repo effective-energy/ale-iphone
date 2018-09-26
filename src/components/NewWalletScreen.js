@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, StatusBar, TouchableOpacity, Alert, TextInput, ScrollView } from 'react-native';
-import Image from 'react-native-remote-svg';
 import isIphoneX from '../config/isIphoneX';
 import { CachedImage } from "react-native-img-cache";
 
@@ -53,53 +52,56 @@ export default class NewWalletScreen extends React.Component {
 
     render() {
         return (
-            <ScrollView
-                contentContainerStyle={styles.pageContainer}
-                keyboardShouldPersistTaps='handled'
-            >
+            <View style={styles.pageContainer}>
                 <StatusBar barStyle='light-content' />
-                <View>
-                    <TextInput
-                        placeholder="Wallet name"
-                        placeholderTextColor="#455578"
-                        style={styles.new_wallet_input}
-                        onChangeText={(newWalletName) => this.setState({newWalletName})}
-                        value={this.state.newWalletName}
-                    />
-                    <TouchableOpacity
-                        onPress={this.createNewWallet}
-                        style={styles.new_wallet_button}
-                    >
-                        <CachedImage
-                            source={require('../assets/images/icons/new-wallet.png')}
-                            style={styles.new_wallet_button_icon}
-                            resizeMode='contain'
-                        />
-                        <Text
-                            style={styles.new_wallet_button_text}
-                        >
-                            Create wallet
-                        </Text>
-                    </TouchableOpacity>
-                </View>
 
-                <View>
-                    <TouchableOpacity
-                        onPress={this.restoreWallet}
-                        style={styles.restore_wallet_block}
-                    >
-                        <CachedImage
-                            source={require('../assets/images/icons/restore-wallet.png')}
-                            style={styles.restore_wallet_block_icon}
+                <ScrollView
+                    keyboardShouldPersistTaps='handled'
+                    contentContainerStyle={{alignItems: 'center', justifyContent: 'space-between', flex: 1}}
+                >
+                    <View>
+                        <TextInput
+                            placeholder="Wallet name"
+                            placeholderTextColor="#455578"
+                            style={styles.new_wallet_input}
+                            onChangeText={(newWalletName) => this.setState({newWalletName})}
+                            value={this.state.newWalletName}
                         />
-                        <Text
-                            style={styles.restore_wallet_block_text}
+                        <TouchableOpacity
+                            onPress={this.createNewWallet}
+                            style={styles.new_wallet_button}
                         >
-                            Restore wallet
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-            </ScrollView>
+                            <CachedImage
+                                source={require('../assets/images/icons/new-wallet.png')}
+                                style={styles.new_wallet_button_icon}
+                                resizeMode='contain'
+                            />
+                            <Text
+                                style={styles.new_wallet_button_text}
+                            >
+                                Create wallet
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View>
+                        <TouchableOpacity
+                            onPress={this.restoreWallet}
+                            style={styles.restore_wallet_block}
+                        >
+                            <CachedImage
+                                source={require('../assets/images/icons/restore-wallet.png')}
+                                style={styles.restore_wallet_block_icon}
+                            />
+                            <Text
+                                style={styles.restore_wallet_block_text}
+                            >
+                                Restore wallet
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
+            </View>
         );
     }
 }
@@ -108,8 +110,6 @@ const styles = StyleSheet.create({
     pageContainer: {
         flex: 1,
         backgroundColor: '#08142F',
-        alignItems: 'center',
-        justifyContent: 'space-between',
         paddingTop: 20,
         paddingBottom: isIphoneX === true ? 50 : 20,
     },
@@ -146,7 +146,6 @@ const styles = StyleSheet.create({
     new_wallet_button_text: {
         color: '#f0b721',
         fontSize: 18,
-        fontWeight: 'bold',
         textAlign: 'center'
     },
     restore_wallet_block: {

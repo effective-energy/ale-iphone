@@ -58,7 +58,7 @@ export default class UserStore {
     	}
     }
 
-    @action async createAccount() {
+    @action async createAccount(data: Object) {
         try {
             this.isSuccessCreateAccount = false;
             this.isLoader = true;
