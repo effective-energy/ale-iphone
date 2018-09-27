@@ -106,7 +106,7 @@ export default class SettingsScreen extends React.Component {
                 </ScrollView>
                 <BottomNavigator
                     changePage={this.changePage}
-                    activePage="history"
+                    activePage="History"
                 />
             </View>
         );

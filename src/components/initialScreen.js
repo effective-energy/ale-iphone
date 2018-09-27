@@ -13,6 +13,7 @@ export default class InitialScreen extends React.Component {
 
     static navigationOptions = ({navigation}) => {
         return {
+            gesturesEnabled: false,
             header: null,
         };
     };

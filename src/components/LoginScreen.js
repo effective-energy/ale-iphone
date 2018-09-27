@@ -33,6 +33,7 @@ export default class LoginScreen extends React.Component {
 
     static navigationOptions = ({navigation}) => {
         return {
+            gesturesEnabled: false,
             header: null,
         };
     };

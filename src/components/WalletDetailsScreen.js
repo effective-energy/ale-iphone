@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, Text, Dimensions, AlertIOS, Alert } from 'react-native';
-import SVGImage from 'react-native-remote-svg';
 import ls from 'react-native-local-storage';
 import { observer, inject } from "mobx-react";
 import { when } from "mobx";

@@ -117,7 +117,7 @@ export default class NotificationsScreen extends React.Component {
                 </ScrollView>
                 <BottomNavigator
                     changePage={this.changePage}
-                    activePage="notifications"
+                    activePage="Notifications"
                 />
             </View>
         );

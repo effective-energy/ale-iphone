@@ -4,8 +4,9 @@ import { StyleSheet, Text, View, Alert, AppRegistry, Button, TextInput, ScrollVi
 export default class ImportwalletScreen extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { privateKey: '' };
-        this.importWallet = this.importWallet.bind(this);
+        this.state = {
+            privateKey: ''
+        };
     }
     
     importWallet() {
@@ -36,7 +37,7 @@ export default class ImportwalletScreen extends React.Component {
                         <View style={styles.buttonContainer}>
                             <Button
                                 title="Import"
-                                onPress={this.importWallet}
+                                onPress={this.importWallet.bind(this)}
                                 color="#34343e"
                               />
                           </View>

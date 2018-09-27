@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
-import SVGImage from 'react-native-remote-svg';
 import isIphoneX from '../../config/isIphoneX';
 import { CachedImage } from "react-native-img-cache";
 
@@ -8,28 +7,23 @@ export default class BottomNavigator extends React.Component {
 	constructor(props) {
         super(props);
 	    this.state = {
-            activeClass: this.props.activePage,
             tabs: [
                 {
                     icon: require('../../assets/images/navigation/bottom/wallet.png'),
                     activeIcon: require('../../assets/images/navigation/bottom/wallet-active.png'),
                     pageName: 'Wallets',
-                    activeClass: 'wallets'
                 }, {
                     icon: require('../../assets/images/navigation/bottom/history.png'),
                     activeIcon: require('../../assets/images/navigation/bottom/history-active.png'),
                     pageName: 'History',
-                    activeClass: 'history'
                 }, {
                     icon: require('../../assets/images/navigation/bottom/notifications.png'),
                     activeIcon: require('../../assets/images/navigation/bottom/notifications-active.png'),
                     pageName: 'Notifications',
-                    activeClass: 'notifications'
                 }, {
                     icon: require('../../assets/images/navigation/bottom/settings.png'),
                     activeIcon: require('../../assets/images/navigation/bottom/settings-active.png'),
                     pageName: 'Settings',
-                    activeClass: 'settings'
                 }
             ]
         };
@@ -37,7 +31,7 @@ export default class BottomNavigator extends React.Component {
 
     render() {
         let navigations = this.state.tabs.map(function (el, i) {
-            let icon = this.state.activeClass === el.activeClass ? el.activeIcon : el.icon;
+            let icon = this.props.activePages === el.pageName ? el.activeIcon : el.icon;
             return (
                 <TouchableOpacity
                     activeOpacity={0.9}
@@ -49,7 +43,7 @@ export default class BottomNavigator extends React.Component {
                         style={styles.itemImage}
                         source={icon}
                     />
-                    <Text style={[styles.itemTitle, this.state.activeClass === el.activeClass ? styles.itemTitleActive : styles.itemTitleDefault]}>
+                    <Text style={[styles.itemTitle, this.props.activePages === el.pageName ? styles.itemTitleActive : styles.itemTitleDefault]}>
                         {el.pageName}
                     </Text>
                 </TouchableOpacity>

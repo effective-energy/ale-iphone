@@ -108,7 +108,7 @@ export default class WalletsScreen extends React.Component {
                 </ScrollView>
                 <BottomNavigator
                     changePage={this.changePage.bind(this)}
-                    activePage="wallets"
+                    activePage="Wallets"
                 />
             </SafeAreaView>
         );

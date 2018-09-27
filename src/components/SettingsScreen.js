@@ -470,7 +470,7 @@ export default class SettingsScreen extends React.Component {
                 </ScrollView>
                 <BottomNavigator
                     changePage={this.changePage.bind(this)}
-                    activePage="settings"
+                    activePage="Settings"
                 />
             </View>
         );

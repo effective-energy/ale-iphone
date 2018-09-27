@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions, StatusBar, TextInput, Alert, TouchableOpacity, Modal, TouchableHighlight } from 'react-native';
 import ls from 'react-native-local-storage';
-import SVGImage from 'react-native-remote-svg';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Spinner from './layouts/Spinner';
 import { CachedImage } from "react-native-img-cache";
@@ -26,8 +25,6 @@ export default class SendMoneyScreen extends React.Component {
             modalVisible: false,
             isShowSpinner: false,
         };
-
-        this.sendMoney = this.sendMoney.bind(this);
     }
 
     static navigationOptions = ({navigation}) => {
@@ -145,6 +142,8 @@ export default class SendMoneyScreen extends React.Component {
                             style={styles.text_input}
                             onChangeText={(destinationAddress) => this.setState({destinationAddress})}
                             value={this.state.destinationAddress}
+                            returnKeyType={"go"}
+                            onSubmitEditing={() => { this.sendMoney() }}
                         />
                     </View>
 
@@ -174,7 +173,7 @@ export default class SendMoneyScreen extends React.Component {
                     </Modal>
 
                     <TouchableOpacity
-                        onPress={this.sendMoney}
+                        onPress={this.sendMoney.bind(this)}
                         style={{ backgroundColor: '#16203a', width: screenWidth, padding: 10, borderRadius: 10, display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}
                     >
                         <CachedImage
